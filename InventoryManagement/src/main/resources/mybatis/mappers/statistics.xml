@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Dao.StatisticsDao">
+
+
+<!-- 상품입고량 -->
+<update id="input"   parameterType="statisticsvo">
+	<![CDATA[
+			update  statistics
+					set input = input+#{input}
+					 where category = #{category}	
+	]]>
+</update>	
+
+
+<!-- 상품출고량-->
+<update id="export"   parameterType="statisticsvo">
+	<![CDATA[
+			update  statistics
+					set export = export+#{export}
+					 where category = #{category}	
+	]]>
+</update>	
+
+
+<!-- 상품반품량-->
+<update id="back"   parameterType="statisticsvo">
+	<![CDATA[
+			update  statistics
+					set back = back+#{back}
+					 where category = #{category}	
+	]]>
+</update>	
+
+
+<!-- 카테고리별 입고량(매입)통계-->
+<select id="inputNum"  resultType="statisticsvo">
+	<![CDATA[
+			select  
+			              category,input
+			from statistics
+
+	]]>
+</select>	
+
+
+<!-- 카테고리별 출고량(판매)통계-->
+<select id="exportNum"  resultType="statisticsvo">
+	<![CDATA[
+			select  
+			              category,export
+			from statistics
+
+	]]>
+</select>	
+
+
+<!-- 카테고리별 반품량통계-->
+<select id="backNum"  resultType="statisticsvo">
+	<![CDATA[
+			select  
+			              category,back
+			from statistics
+
+	]]>
+</select>
+
+
+<!-- 모든상품삭제 -->
+<delete id="goodsAllDelete">
+		<![CDATA[
+		    truncate statistics
+		]]>
+</delete>
+
+</mapper>

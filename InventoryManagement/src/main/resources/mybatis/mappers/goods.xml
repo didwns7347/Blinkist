@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.Dao.GoodsDao">
+
+
+<!-- 상품입고  -->
+<insert id="goodsImport">
+insert into goods(category,name,info,regtime,img)
+   values(#{category},#{name}, #{info}, now(),#{img})
+</insert>
+
+
+<!-- 상품리스트 -->
+<select id="goodsList"  parameterType="com.example.search.Search"  resultType="goodsvo">
+select         
+    number,category,name,regtime
+from(
+    select
+       number,category,name,regtime,
+       row_number() over(order by number DESC) as RNUM
+    from 
+        goods
+    where
+       1=1
+       <include refid="search"></include>
+)list
+where RNUM between #{rowStart} and #{rowEnd}
+</select>
+
+
+<!-- 게시물 총 갯수 -->
+<select id="listCount"  parameterType="com.example.search.Search"  resultType="int">
+ select 
+    count(number)
+ from 
+    goods
+where
+    1=1
+    <include refid="search"></include>
+   and  number > 0
+</select>
+
+
+<!-- 상품정보와 이미지가져오기 -->
+<select id="goodsInfo"   parameterType="int" resultType="goodsvo">
+select         
+   info,img,name
+from
+   goods
+   where
+    number = #{number}
+</select>
+
+
+<!-- 상품업데이트 -->
+<select id="goodsUpdate"   parameterType="goodsvo" >
+update
+       goods
+ set
+      name=#{name},
+      info = #{info},
+      img = #{img}
+ where
+     number = #{number}
+</select>
+
+
+<!-- 상품삭제 -->
+<delete id="goodsDelete"  parameterType="int">
+		<![CDATA[
+		    delete
+			from goods
+			 where number= #{number}
+		]]>
+</delete>
+
+
+<!-- 모든상품삭제 -->
+<delete id="goodsAllDelete"  >
+		<![CDATA[
+		    truncate goods
+		]]>
+</delete>
+
+
+<!-- 검색 -->
+<sql id="search">
+		<if test="searchType != null">
+			<if test="searchType == 'g'.toString()">AND name like CONCAT('%',#{keyword},'%')</if>
+			<if test="searchType == 'gc'.toString()">AND name like CONCAT('%',#{keyword},'%') or info like CONCAT('%',#{keyword},'%')</if>
+		</if>
+</sql>
+</mapper>

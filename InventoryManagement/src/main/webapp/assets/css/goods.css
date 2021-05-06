@@ -1,0 +1,170 @@
+@charset "EUC-KR";
+@import "includes.css";
+
+body {
+
+  padding-top: 70px;
+
+  padding-bottom: 30px;
+
+}
+
+
+#wrap{
+	
+    /* 웹에서 형식이 차이하는 넓이 */
+	width: 50%;
+	
+	/* 웹에서 형식을 중앙정렬 */
+	margin: auto auto;
+	
+	/* 웹에서 글자들을 중앙정렬 */
+	text-align: center;
+	
+	/* 형식안 태그들과 상하좌우 16px간격조절 */
+	padding: 16px;
+
+			
+    }
+
+    
+#h1{
+	
+   /* 제목 색깔 */	
+   color:#66FF66;
+   
+   margin-bottom:10px;
+   
+   font-size:40px;
+	
+   } 
+   
+
+.list-table {
+	
+	/* <h1>태그에서 40px 간격 조정 */
+	margin-top: 40px;
+	
+   }
+   
+  
+.list-table thead th{
+	
+	/*  상품 제목의 높이 */
+	height:30px;
+	
+	/* 상품 제목위 줄 */
+	border-top:2px solid #09C;
+	
+	/* 상품 제목아래 줄 */
+	border-bottom:1px solid #CCC;
+	
+	/* 상품 제목 굵기 */
+	font-weight:bold;
+	
+	/* 상품 제목 크기 */
+	font-size: 17px; 
+	 
+	/* 상하: 15px 좌우: 0px 간격 조정 -> 좌우는 이미 td마다 넓이를 지정해놔서 안해도 괜찮음 */
+	padding:20px 0;
+
+    }  
+    
+
+ #delete, #update{
+	
+   padding:10px 10px;
+   
+   } 
+   
+
+.list-table tbody td{
+	
+	/* 게시물 폰트사이즈 */
+	font-size: 20px;
+	
+	/*게시물의 넓이 */	
+	width:1000px;
+	
+	/*게시물의 높이 */
+	height:200px;
+
+    }  
+    
+
+.search{
+	
+   /* 웹에서 형식을 중앙정렬 정렬 */     
+   margin: auto auto;
+   
+   /* search글씨 웹에서 중앙정렬 */
+   text-align: center;
+   
+  
+  }
+  
+
+#searchType{
+	
+	/* select의 넓이 */
+	width:13%;
+	
+	/*select의 크기 */
+	padding:10px;
+	
+    }  
+ 	
+   
+#keyword{
+	
+	/* 검색창의 크기 10px */
+	padding: 10px;
+	
+	/* 검색창의 가로 크기 */
+	width: 20%;
+	
+    }
+
+
+#searchbutton{
+	
+   /* 검색버튼의 넓이 */	
+   width: 5%;
+  
+   /* 검색버튼의 크기 */
+   padding: 10px;
+  
+   /* 검색버튼의 배경색 */
+   background: #2196F3;
+  
+   /* 검색버튼의 색깔 */
+   color: white;
+  
+  /* 검색버튼의 테두리 */
+  border: 1px solid grey;
+
+  /* 검색버튼 마우스 커서 */
+  cursor: pointer;
+  
+  }
+  
+
+select[id="category"] {
+	
+	/* <select> 태그가 형식에서 차지하는 넓이  */
+	width: 50%;
+	
+	/* <select> 태그의 크기 상하:12px 좌우:20px */
+	padding: 7px 10px;
+	
+	/* <option> 태그 글자 중앙정렬  */
+	/* 두개 같이 적어야 center에 옴 */
+	text-align: center;
+	text-align-last: center;
+	
+	font-size:18px;
+	font-weight: bold;
+	
+	margin-bottom: 15px;
+	
+    }                           

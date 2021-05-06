@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.example.vo.UserVo"      alias="uservo"/>
+		<typeAlias type="com.example.vo.GoodsVo"  alias="goodsvo"/>
+		<typeAlias type="com.example.vo.ManagementVo"  alias="managementvo"/>
+		<typeAlias type="com.example.vo.StatisticsVo"  alias="statisticsvo"/>
+    </typeAliases>	
+	<mappers>
+		<mapper resource="mybatis/mappers/user.xml" />
+		<mapper resource="mybatis/mappers/goods.xml" />
+		<mapper resource="mybatis/mappers/management.xml" />
+		<mapper resource="mybatis/mappers/statistics.xml" />
+	</mappers>
+</configuration>
+
