@@ -1,4 +1,4 @@
-package com.markany.controller;
+package com.markany.blinkist.controller;
 
 
 
