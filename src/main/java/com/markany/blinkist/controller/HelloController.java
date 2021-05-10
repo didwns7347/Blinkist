@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.*;
 
 
 @Controller//String이나 ModelAndView객체반환
+
+
 public class HelloController {
 
 //메인화면

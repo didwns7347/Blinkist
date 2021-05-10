@@ -9,5 +9,7 @@ class BlinkistApplicationTests {
 	@Test
 	void contextLoads() {
 	}
+	
+	
 
 }
