@@ -192,7 +192,8 @@
 				</div>
 				<div class="header__right">
 					<div class="content">
-						<div class="header-content__section header-content__section--right"> <!----> <a href="/en/business" class="header-content__button header-link header-link--business header-link--main"><span>For business</span> <!----></a> <!----> <!----> <!----> <a href="/en/nc/login" class="header-content__link header-link header-link--login header-link--main js-open-login-popup"><span>Log in</span> <!----></a> <!----></div>
+						<div class="header-content__section header-content__section--right"> 
+						<div class="header-content__section header-content__section--left"><!----> <!----> <!----> <!----></div>
 							<a href="/en/business" class="header-content__button header-link header-link--business header-link--main"><span>For business</span> <!----></a>
 							<a href="/en/nc/login" class="header-content__link header-link header-link--login header-link--main js-open-login-popup"><span>Log in</span> <!----></a>
 							
