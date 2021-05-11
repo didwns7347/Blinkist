@@ -21,4 +21,5 @@ public class BookVoLombokTest {
 		vo.setTitle("hello");
 		Assertions.assertThat(vo.getTitle()).isEqualTo("hello");
 	}
+	
 }

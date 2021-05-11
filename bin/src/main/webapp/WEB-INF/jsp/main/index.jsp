@@ -1054,9 +1054,7 @@
 								<div class="auth-form__social-logins-row">
 									     <a href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin&response_type=code">
                                              <img width="223" src="${pageContext.request.contextPath }/assets/images/kakaoLogin.JPG" />
-                                         </a>
-                                         <a href="${url }"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-                                         	 
+                                         </a>	 
 								</div>
 							</div>
 
