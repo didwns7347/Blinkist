@@ -16,5 +16,5 @@ public class HelloController {
 @GetMapping(value = "/")
 public String hello(Model model) {
    
-   return "home";
+   return "main/index";
 }}
