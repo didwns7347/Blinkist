@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en">
 
@@ -1053,10 +1052,9 @@
 
 							<div class="auth-form__social-logins">
 								<div class="auth-form__social-logins-row">
-									     <a href="https://kauth.kakao.com/oauth/authorize
-                                             ?client_id=43af0ecd5ee53917f6ec8b05c026e768
-                                             &redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin
-                                             &response_type=code">로그인</a>	 
+									     <a href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin&response_type=code">
+                                             <img width="223" src="${pageContext.request.contextPath }/assets/images/kakaoLogin.JPG" />
+                                         </a>	 
 								</div>
 							</div>
 
