@@ -5,9 +5,9 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;
-
-
-
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Service;
 
 import com.github.scribejava.core.builder.ServiceBuilder;
@@ -99,5 +99,25 @@ public class NaverLoginService {
         Response response = request.send();
         return response.getBody();
     }
+	public String getUserEmail(String apiResult) throws ParseException {
+		String email="";
+		/** apiResult json 구조
+		{"resultcode":"00",
+		"message":"success",
+		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
+		**/
+
+		//String => JSON오브젝트로 변환
+		JSONParser parser = new JSONParser();
+		Object obj=parser.parse(apiResult);
+		JSONObject jsonObj=(JSONObject)obj;
+		
+		//파싱
+		JSONObject reseponse_obj=(JSONObject)jsonObj.get("response");
+		email=(String)reseponse_obj.get("email");
+		
+		
+		return email;
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
@@ -17,7 +18,7 @@ import com.markany.blinkist.service.NaverLoginService;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-	private String apiResult=null;
+	
 	@Autowired
 	private NaverLoginService naverLoginService;
 	
@@ -45,16 +46,18 @@ public class UserController {
 	
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
-			throws IOException {
+			throws IOException, ParseException {
 		System.out.println("여기는 callback");
-		OAuth2AccessToken oauthToken;
-        oauthToken = naverLoginService.getAccessToken(session, code, state);
+		
+		OAuth2AccessToken oauthToken = naverLoginService.getAccessToken(session, code, state);
         //로그인 사용자 정보를 읽어온다.
-	    apiResult = naverLoginService.getUserProfile(oauthToken);
+	    String apiResult = naverLoginService.getUserProfile(oauthToken);
+	    String email=naverLoginService.getUserEmail(apiResult);
 		model.addAttribute("result", apiResult);
-
+		model.addAttribute("email", email);
         /* 네이버 로그인 성공 페이지 View 호출 */
 		System.out.println(apiResult);
+		System.out.println("email= "+email);
 		return "redirect:/";
 	}
 
