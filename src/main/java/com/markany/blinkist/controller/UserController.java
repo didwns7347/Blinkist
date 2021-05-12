@@ -36,6 +36,12 @@ public class UserController {
 		return "redirect:/";
 
 	}
+	@RequestMapping("/login")
+	public String login(HttpSession session, Model model) {
+		String url=naverLoginService.getAuthorizationUrl(session);
+		model.addAttribute("url", url);
+		return "user/login";
+	}
 	
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)

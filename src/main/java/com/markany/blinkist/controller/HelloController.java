@@ -27,9 +27,9 @@ public class HelloController {
 	//메인화면
 	@GetMapping(value = "/")
 	public String hello(Model model, HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
-		HttpSession session1=request.getSession();
 		
-		String NaverauthURL=naverLoginService.getAuthorizationUrl(session1);
+		
+		String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
 		System.out.println(NaverauthURL);
 		model.addAttribute("url", NaverauthURL);
 		return "main/index";

@@ -27,9 +27,9 @@ public class NaverLoginService {
 	// redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback
 	// URL에 설정한 정보입니다.
 	// state: 애플리케이션이 생성한 상태 토큰
-	private final static String CLIENT_ID = "msHB7T_VVvI39HWX76ou";
-	private final static String CLIENT_SECRET = "KKC3oOlKNN";
-	private final static String REDIRECT_URI = "http://localhost:8080/user/callback";
+	private final static String CLIENT_ID = "67r6YRpXUPpQZj9iM4ig";
+	private final static String CLIENT_SECRET = "qPrqvXkT3N";
+	private final static String REDIRECT_URI = "http://localhost:8080/blinkist/user/callback";
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
@@ -43,10 +43,13 @@ public class NaverLoginService {
 		setSession(session, state);
 
 		/* Scribe에서 제공하는 인증 URL 생성 기능을 이용하여 네아로 인증 URL 생성 */
-		OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)
-				.callback(REDIRECT_URI).state(state) // 앞서 생성한 난수값을 인증 URL생성시 사용함
+		OAuth20Service oauthService = new ServiceBuilder()
+				.apiKey(CLIENT_ID)
+				.apiSecret(CLIENT_SECRET)
+				.callback(REDIRECT_URI)
+				.state(state) // 앞서 생성한 난수값을 인증 URL생성시 사용함
 				.build(NaverLoginApi.instance());
-
+		System.out.println(oauthService.getAuthorizationUrl());
 		return oauthService.getAuthorizationUrl();
 	}
 

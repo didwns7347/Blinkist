@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html class="no-js" xmlns:fb="http://ogp.me/ns/fb#" lang="en">
 
@@ -191,14 +192,24 @@
 				</div>
 				<div class="header__right">
 					<div class="content">
-						<div class="header-content__section header-content__section--right"> 
-						<div class="header-content__section header-content__section--left"><!----> <!----> <!----> <!----></div>
-							<a href="/en/business" class="header-content__button header-link header-link--business header-link--main"><span>For business</span> <!----></a>
-							<a href="/en/nc/login" class="header-content__link header-link header-link--login header-link--main js-open-login-popup"><span>Log in</span> <!----></a>
-							
+						<div
+							class="header-content__section header-content__section--right">
+							<div
+								class="header-content__section header-content__section--left">
+								<!---->
+								<!---->
+								<!---->
+								<!---->
+							</div>
+							<a href="/en/business"
+								class="header-content__button header-link header-link--business header-link--main"><span>For
+									business</span> <!----></a> <a href="/en/nc/login"
+								class="header-content__link header-link header-link--login header-link--main js-open-login-popup"><span>Log
+									in</span> <!----></a>
+
+						</div>
 					</div>
 				</div>
-			</div>
 	</header>
 
 
@@ -1048,15 +1059,21 @@
 								type="hidden" name="authenticity_token"
 								value="YVwp3sGjuYXVXK5+eEWzAZjj+xRgIEYfeRsXNkk/dEGD6gZhYoiG7v2tSa6XSyGNHONqiXhI++UfwymcT+0ASw==" />
 
-	
+
 
 							<div class="auth-form__social-logins">
 								<div class="auth-form__social-logins-row">
-									     <a href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin&response_type=code">
-                                             <img width="223" src="${pageContext.request.contextPath }/assets/images/kakaoLogin.JPG" />
-                                         </a>
-                                         <a href="${url }"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
-                                         	 
+									<a
+										href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin&response_type=code">
+										<img 
+										src="${pageContext.request.contextPath }/assets/images/kakaoLogin.JPG" />
+									</a>
+
+
+								</div>
+								<div class="auth-form__social-logins-row">
+									<a href="${url }"> <img  width="292" height="40"
+										src="${pageContext.request.contextPath }/assets/images/naverlogin.png" /></a>
 								</div>
 							</div>
 
