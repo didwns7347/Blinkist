@@ -10,7 +10,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <!-- Navigation -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 	<div class="container">
 		<a class="navbar-brand" href="${pageContext.request.contextPath }">대신해주세요</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
