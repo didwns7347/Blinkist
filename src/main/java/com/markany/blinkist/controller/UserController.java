@@ -2,8 +2,6 @@ package com.markany.blinkist.controller;
 
 import java.io.IOException;
 import java.util.HashMap;
-
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
@@ -24,7 +22,7 @@ public class UserController {
 	@Autowired
 	private NaverLoginService naverLoginService;
 	
-	@Inject
+	@Autowired
 	UserService userService;
 	
 
@@ -43,7 +41,7 @@ public class UserController {
 		UserVo user =  userService.findByEmail(email);
 		
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
-		if(user.getEmail()!=null) {
+		if(user!=null) {
 			
 			//session저장
 			HttpSession session = request.getSession();
@@ -54,17 +52,14 @@ public class UserController {
 		}else {	// 이메일이 없다면 회원가입시키기
 			
 	
-			return "/join";
+			return "user/join";
 			
 			
 		}
 	}
 	
 	
-	
-	
-	
-	
+	//네이버로그인연동
 	@RequestMapping("/login")
 	public String login(HttpSession session, Model model) {
 		String url=naverLoginService.getAuthorizationUrl(session);
@@ -88,11 +83,4 @@ public class UserController {
 		System.out.println("email= "+email);
 		return "redirect:/";
 	}
-
-
-
-	
-	
-	
-
 }
