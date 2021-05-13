@@ -29,7 +29,7 @@ public class UserController {
 
 	//카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
-	public String home(@RequestParam(value = "code", required = false) String code,HttpServletRequest request) throws Exception {
+	public String home(@RequestParam(value = "code", required = false) String code,HttpServletRequest request,Model model) throws Exception {
 
 		KakaoService service = new KakaoService();
 		String access_Token = service.getAccessToken(code);
@@ -46,13 +46,13 @@ public class UserController {
 			
 			//session저장
 			HttpSession session = request.getSession();
-			session.setAttribute("user", email);
+			session.setAttribute("authUser", email);
 			
 			return "redirect:/";
 			
 		}else {	// 이메일이 없다면 회원가입시키기
+			model.addAttribute("email",email);
 			
-	
 			return "user/join";
 			
 			
@@ -77,11 +77,24 @@ public class UserController {
         //로그인 사용자 정보를 읽어온다.
 	    String apiResult = naverLoginService.getUserProfile(oauthToken);
 	    String email=naverLoginService.getUserEmail(apiResult);
-		model.addAttribute("result", apiResult);
-		model.addAttribute("email", email);
-        /* 네이버 로그인 성공 페이지 View 호출 */
-		System.out.println(apiResult);
-		System.out.println("email= "+email);
+	    UserVo uservo = userService.findByEmail(email);
+	    if(uservo!=null) {
+	    	session.setAttribute("authUser", email);
+	    	return "redirect:/";
+	    }
+	    else {	// 이메일이 없다면 회원가입시키기
+			model.addAttribute("email",email);
+			
+			return "user/join";
+			
+			
+		}
+		
+	}
+	//회원가입 로직
+	@RequestMapping("/join")
+	public String join(UserVo uservo) {
+		userService.insert(uservo);
 		return "redirect:/";
 	}
 }

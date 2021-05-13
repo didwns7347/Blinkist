@@ -13,13 +13,18 @@ import com.markany.blinkist.dao.*;
 public class UserService {
 
 	@Autowired
-	private UserDAO user;
+	private UserDAO userDAO;
 	
 	public UserVo findByEmail(String email) {//이메일 중복확인
 		UserVo vo=new UserVo();
 		vo.setEmail(email);
 		// TODO Auto-generated method stub
-		return user.findByEmail(email);
+		return userDAO.findByEmail(email);
+		
+	}
+
+	public boolean insert(UserVo uservo) {
+		return userDAO.insert(uservo);
 		
 	}
 	

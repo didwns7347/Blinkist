@@ -45,6 +45,15 @@ public class UserRepository implements UserDAO {
 		
 		
 	}
+	//회원가입
+	@Override 
+	public boolean insert(UserVo uservo) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count=sqlSession.insert("userMapper.insert", uservo);
+		sqlSession.commit();
+		return count==1;
+	}
 
 
 
