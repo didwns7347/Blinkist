@@ -5,6 +5,6 @@ import com.markany.blinkist.vo.UserVo;
 
 public interface UserDAO {
 	
-	public UserVo find(String email); //이메일 중복확인
+	public UserVo findByEmail(String email); //이메일 중복확인
 
 }

@@ -32,7 +32,7 @@ public class HelloController {
 		String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
 		System.out.println(NaverauthURL);
 		model.addAttribute("url", NaverauthURL);
-		return "main/index";
+		return "main/test";
 	}
 
 }

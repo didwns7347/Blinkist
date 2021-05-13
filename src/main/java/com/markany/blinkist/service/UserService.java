@@ -19,7 +19,7 @@ public class UserService {
 		UserVo vo=new UserVo();
 		vo.setEmail(email);
 		// TODO Auto-generated method stub
-		return user.find(email);
+		return user.findByEmail(email);
 		
 	}
 	
