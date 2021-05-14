@@ -91,7 +91,9 @@ public class UserController {
 		}
 		
 	}
-	//회원가입 로직
+	
+	
+	//회원가입
 	@RequestMapping("/join")
 	public String join(UserVo uservo) {
 		userService.insert(uservo);

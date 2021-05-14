@@ -3,8 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="userMapper">
-
-
+	<!-- 회원가입 -->
+	<insert id="insert" parameterType="uservo">
+		<![CDATA[
+			insert 
+			into user
+			values(null, #{email}, #{password}, #{grade}, now(), null)
+		]]>
+	</insert>
+	
 	<!-- 이메일 중복확인 -->
 	<select id="findByEmail" parameterType="string" resultType="uservo">
 		<![CDATA[
@@ -13,6 +20,7 @@
 			where email = #{email}
 		]]>
 	</select>
+
 
 
 

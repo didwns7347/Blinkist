@@ -25,7 +25,7 @@
 						class="sr-only">(current)</span>
 				</a></li>
 				<c:choose>
-					<c:when test="${empty authUser }">
+					<c:when test="${empty authUsers }">
 						<li class="nav-item"><a id=login class="nav-link"
 							href="${pageContext.request.contextPath }/user/joinprimium">프리미엄
 								가입</a></li>
