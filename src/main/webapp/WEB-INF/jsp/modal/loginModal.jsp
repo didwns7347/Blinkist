@@ -20,7 +20,7 @@
 						</div>
 						<div class="social-login">
 							<a href="${url }"> <img class="naverlogin"
-								src="${pageContext.request.contextPath }/assets/images/naverlogin.png" /></a>
+								src="${pageContext.request.contextPath }/assets/images/naverLogin2.png" /></a>
 						</div>
 						
 						<input type="email" id="inputEmail" class="form-control"

@@ -99,4 +99,10 @@ public class UserController {
 		userService.insert(uservo);
 		return "redirect:/";
 	}
+	
+	@RequestMapping("/logout")
+	public String join(HttpSession session) {
+		session.removeAttribute("authUser");
+		return "redirect:/";
+	}
 }

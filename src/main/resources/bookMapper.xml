@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="bookMapper">
+
+	<select id="selectByTitleAuthor" parameterType="string"
+		resultType="HashMap">
+		<![CDATA[
+		select book.title, book.img_path,book.running_time,author.name 
+		from book, author
+		where book.author_no = author.author_no and 
+		book.title  LIKE concat( '%', #{keyword},'%') or 
+		author.name LIKE concat('%', #{keyword} ,'%');
+		]]>
+	</select>
+
+</mapper>

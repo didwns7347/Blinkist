@@ -4,7 +4,11 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="com.markany.blinkist.vo.UserVo" alias="uservo" />
+		<typeAlias type="com.markany.blinkist.vo.BookVo" alias="bookvo" />
+		
 	</typeAliases>
+	
+	
 
 	<environments default="dev">
 		<environment id="dev">
@@ -21,5 +25,6 @@
 
 	<mappers>
 		<mapper resource="userMapper.xml" />
+		<mapper resource="bookMapper.xml" />
 	</mappers>
 </configuration>

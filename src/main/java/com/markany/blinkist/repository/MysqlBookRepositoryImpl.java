@@ -1,20 +1,24 @@
-
 package com.markany.blinkist.repository;
 
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
-import com.markany.blinkist.dao.UserDAO;
-import com.markany.blinkist.vo.UserVo;
+import com.markany.blinkist.dao.BookRepository;
+import com.markany.blinkist.vo.BookVo;
 
 @Repository
-public class UserRepository implements UserDAO {
-
+public class MysqlBookRepositoryImpl implements BookRepository{
+	
 	private static SqlSessionFactory sqlMapper = null;
-
+	
 	public static SqlSessionFactory getInstance() {
 		if (sqlMapper == null) {
 			try {
@@ -28,28 +32,22 @@ public class UserRepository implements UserDAO {
 		}
 		return sqlMapper;
 	}
-
-	@Override // 이메일 중복확인
-	public UserVo findByEmail(String email) {
-
-		sqlMapper = getInstance();
-		SqlSession session = sqlMapper.openSession();
-
-		UserVo user = session.selectOne("userMapper.findByEmail", email);
-		session.close();
-
-		return user;
-
-	}
-
-	// 회원가입
-	@Override
-	public boolean insert(UserVo uservo) {
+	
+	@Override//검색기능 제목,작가
+	public List<HashMap<String, Object>> selectByTitleAuthor(String keyword) {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		int count = sqlSession.insert("userMapper.insert", uservo);
-		sqlSession.commit();
-		return count == 1;
+		List<HashMap<String,String>> list1 =new ArrayList<HashMap<String,String>>();
+		List<HashMap<String,Object>> list = sqlSession.selectList("bookMapper.selectByTitleAuthor", keyword);
+		for(HashMap<String,Object> map : list) {
+			for(String key:map.keySet()) {
+				System.out.println("키:"+key+" 값:"+map.get(key));
+				
+			}
+		}
+		
+		sqlSession.close();
+		return list;
 	}
 
 }
