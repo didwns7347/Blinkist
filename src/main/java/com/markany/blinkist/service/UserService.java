@@ -23,10 +23,32 @@ public class UserService {
 		
 	}
 
-	public boolean insert(UserVo uservo) {
+	public boolean insert(UserVo uservo) {//회원가입
 		return userDAO.insert(uservo);
 		
 	}
+	
+	
+	public UserVo selectbyUser(String email) {//회원정보가져오기
+		return userDAO.selectbyUser(email);
+		
+	}
+	
+	
+	public boolean updatePw(String email,String oldpassword,String newpassoword) {//비밀번호변경
+	
+		return userDAO.updatePw(email, oldpassword, newpassoword);
+		
+	}
+	
+	
+	public void deleteUser(String email) {
+		
+		userDAO.deleteUser(email);
+		
+	}
+	
+	
 	
 	
 	

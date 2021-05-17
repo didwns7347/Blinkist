@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AuthorVo {
-	private long author_no;
-	private String name;
+	private long author_no; 
+	private String name; 
 	private String introduce;
 }

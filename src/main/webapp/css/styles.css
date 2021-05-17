@@ -10268,3 +10268,57 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
+
+
+
+/* 메뉴들과 간격조절 */
+#Highlights{
+	
+	/* 오른쪽을 450px만큼 비우기 */
+	margin-right:450px;
+	
+}
+
+
+/* 회원가입폼 가운데정렬*/
+.Joincontainer{
+	
+   /* 웹에서 형식이 차이하는 넓이 */
+	width: 50%;
+	
+   /* 웹에서 형식을 중앙정렬 */
+	margin: auto auto;
+	
+	/* 웹에서 글자들을 중앙정렬 */
+	text-align: center;
+	
+}
+
+
+#wrap{
+	
+    /* 웹에서 형식이 차이하는 넓이 */
+	width: 30%;
+	
+	/* 웹에서 형식을 중앙정렬 */
+	margin: auto auto;
+	
+	/* 웹에서 글자들을 중앙정렬 */
+	text-align: center;
+	
+	/* 형식안 태그들과 상하좌우 16px간격조절 */
+	padding: 16px;
+
+			
+    }
+    
+
+input[type=text], input[type=password]{
+	
+   /* input 태그가 형식에서 차지하는 넓이  */	
+   width: 100%;
+  
+   /* type의 크기  상하:9px 좌우:20px */
+   padding: 9px 20px;
+     
+   }     
