@@ -10,4 +10,6 @@ public interface BookRepository {
 
 	List<HashMap<String, Object>>  selectByTitleAuthor(String keyword);
 
+	Map<Object, Object> selectByBook_no(long no);
+
 }

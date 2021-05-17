@@ -18,4 +18,10 @@ public class BookService {
 	public List<HashMap<String, Object>>  findByTitleAuthor(String keyword) {
 		return bookRepository.selectByTitleAuthor(keyword);
 	}
+	
+	//책 검색
+	public Map<Object, Object> findByNo(long no) {
+		// TODO Auto-generated method stub
+		return bookRepository.selectByBook_no(no);
+	}
 }

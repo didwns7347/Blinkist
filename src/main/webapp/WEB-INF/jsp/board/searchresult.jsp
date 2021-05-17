@@ -28,25 +28,32 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/css/blog-home.css"
 	rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 
 	<div class="container">
-		<h3>${keyword }에대한검색 결과</h3>
+		<h3>${keyword }에대한검색결과</h3>
 		<br />
-		<div class="row">
+		<div class="row" id="demo">
 			<c:forEach items="${list }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4">
 					<div class="card h-100">
-						<a href="#!"><img class="card-img-top" src="${list.img_path }"
-							alt="..." /></a>
+						<a
+							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"><img
+							class="card-img-top" src="${list.img_path }" alt="..." /></a>
 						<div class="card-body">
 							<h4 class="card-title">
-								<a href="#!">${list.title }</a>
+								<a
+									href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
 							</h4>
 							<h5>${list.name }</h5>
-							<p class="card-text">${list.running_time}</p>
+							<p class="card-text">
+								<i style='font-size: 20px' class='far'>&#xf017;</i>
+								${list.running_time}분
+							</p>
 						</div>
 						<div class="card-footer">
 							<small class="text-muted">★ ★ ★ ★ ☆</small>
@@ -160,8 +167,30 @@
 					</div>
 				</div>
 			</div>
-		</div>
 
+		</div>
+		<div class="row" id="do">
+		</div>
+		<div class="row">
+			<div class="col-md-4 mb-5"></div>
+			<div class="col-md-4 mb-5">
+				<button id="loadMore"  type="button" class="btn btn-outline-success btn-block">Load
+					More</button>
+			</div>
+			<div class="col-md-4 mb-5"></div>
+		</div>
+		
 	</div>
+	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	<script type="text/javascript">
+		document.getElementById("loadMore").addEventListener("click", DisplayDate);
+		function DisplayDate(){
+			var idx="${who}";
+			document.getElementById("do").innerHTML=Date();
+			document.getElementById("do").innerHTML+=idx;
+		}
+	
+	</script>
+	
 </body>
 </html>

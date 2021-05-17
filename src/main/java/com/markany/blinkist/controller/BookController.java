@@ -28,4 +28,12 @@ public class BookController {
 		model.addAttribute("keyword",keyword);
 		return "board/searchresult";
 	}
+	
+	//책 보여주기 기능
+	@RequestMapping("/viewbook")
+	public String viewBook(Model model, long no) {
+		Map<Object, Object> map = bookService.findByNo(no);
+		model.addAttribute("map", map);
+		return "board/viewbook";
+	}
 }
