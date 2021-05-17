@@ -37,15 +37,16 @@ public class MysqlBookRepositoryImpl implements BookRepository{
 	public List<HashMap<String, Object>> selectByTitleAuthor(String keyword) {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String,String>> list1 =new ArrayList<HashMap<String,String>>();
 		List<HashMap<String,Object>> list = sqlSession.selectList("bookMapper.selectByTitleAuthor", keyword);
+		//출력 코드
+		/*
 		for(HashMap<String,Object> map : list) {
 			for(String key:map.keySet()) {
 				System.out.println("키:"+key+" 값:"+map.get(key));
 				
 			}
 		}
-		
+		*/
 		sqlSession.close();
 		return list;
 	}
