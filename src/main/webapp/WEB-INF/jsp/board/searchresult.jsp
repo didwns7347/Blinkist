@@ -33,32 +33,33 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 
 	<div class="container">
-		<h3>${keyword }에대한 검색 결과</h3>
-		<br/>
+		<h3>${keyword }에대한검색 결과</h3>
+		<br />
 		<div class="row">
 			<c:forEach items="${list }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${list.img_path }" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">${list.title }</a>
-						</h4>
-						<h5>${list.name }</h5>
-						<p class="card-text">${list.running_time}</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
+					<div class="card h-100">
+						<a href="#!"><img class="card-img-top" src="${list.img_path }"
+							alt="..." /></a>
+						<div class="card-body">
+							<h4 class="card-title">
+								<a href="#!">${list.title }</a>
+							</h4>
+							<h5>${list.name }</h5>
+							<p class="card-text">${list.running_time}</p>
+						</div>
+						<div class="card-footer">
+							<small class="text-muted">★ ★ ★ ★ ☆</small>
+						</div>
 					</div>
 				</div>
-			</div>
 			</c:forEach>
-			
+
 			<div class="col-lg-4 col-md-6 mb-4">
 				<div class="card h-100">
 					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png" alt="..." /></a>
+						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
+						alt="..." /></a>
 					<div class="card-body">
 						<h4 class="card-title">
 							<a href="#!">Item One</a>
