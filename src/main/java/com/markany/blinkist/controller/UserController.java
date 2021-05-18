@@ -129,6 +129,7 @@ public class UserController {
 	}
 
 
+
 	//회원정보수정GET
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String getUpdate(HttpSession session,Model model) {
@@ -190,6 +191,13 @@ public class UserController {
         model.addAttribute("message", "회원탈퇴하였습니다.");
         
 	    return "redirect:/";
+	}
+
 	
+	@RequestMapping("/logout")
+	public String join(HttpSession session) {
+		session.removeAttribute("authUser");
+		return "redirect:/";
+
 	}
 }

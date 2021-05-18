@@ -13,7 +13,7 @@ import com.markany.blinkist.dao.*;
 public class UserService {
 
 	@Autowired
-	private UserDAO userDAO;
+	private UserRepository userDAO;
 	
 	public UserVo findByEmail(String email) {//이메일 중복확인
 		UserVo vo=new UserVo();

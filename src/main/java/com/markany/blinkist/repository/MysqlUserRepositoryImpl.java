@@ -1,7 +1,4 @@
-  
 package com.markany.blinkist.repository;
-
-
 
 import java.io.Reader;
 import java.util.HashMap;
@@ -12,16 +9,15 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
 
-import com.markany.blinkist.dao.UserDAO;
+import com.markany.blinkist.dao.UserRepository;
 import com.markany.blinkist.vo.UserVo;
 
-
 @Repository
-public class UserRepository implements UserDAO {
-	
-	
+public class MysqlUserRepositoryImpl implements UserRepository{
 	//mybatis와 연결
 	private static SqlSessionFactory sqlMapper = null;
+
+	
 	public static SqlSessionFactory getInstance() {
 		if (sqlMapper == null) {
 			try {
@@ -33,32 +29,35 @@ public class UserRepository implements UserDAO {
 				e.printStackTrace();
 			}
 		}
-		return sqlMapper;
-	}
-
-	
-	@Override//이메일 중복확인
-	public UserVo findByEmail(String email) {
 		
+		return sqlMapper;
+		
+	}
+	
+
+	@Override // 이메일 중복확인
+	public UserVo findByEmail(String email) {
+
 		sqlMapper = getInstance();
 		SqlSession session = sqlMapper.openSession();
-		
+
 		UserVo user = session.selectOne("userMapper.findByEmail", email);
 		session.close();
-			
+
 		return user;
-			
+
 	}
 
-	
-	@Override//회원가입
+
+	// 회원가입
+	@Override
 	public boolean insert(UserVo uservo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		int count=sqlSession.insert("userMapper.insert", uservo);
+		int count = sqlSession.insert("userMapper.insert", uservo);
 		sqlSession.commit();
-		
+
 		return count==1;
 		
 	}
@@ -95,6 +94,7 @@ public class UserRepository implements UserDAO {
 		
 	}
 	
+	
 	@Override//회원탈퇴
 	public void deleteUser(String email) {
 		
@@ -104,13 +104,4 @@ public class UserRepository implements UserDAO {
 		sqlSession.delete("userMapper.deleteUser", email);
 		sqlSession.commit();
 	}
-
-
-
-	
-
-	
-
-
-
 }
