@@ -10289,25 +10289,6 @@ form .row:first-child .floating-label-form-group {
 }
 
 
-
-
-
-
-/* 회원가입폼 가운데정렬*/
-.Joincontainer{
-	
-   /* 웹에서 형식이 차이하는 넓이 */
-	width: 50%;
-	
-   /* 웹에서 형식을 중앙정렬 */
-	margin: auto auto;
-	
-	/* 웹에서 글자들을 중앙정렬 */
-	text-align: center;
-	
-}
-
-
 #wrap{
 	
     /* 웹에서 형식이 차이하는 넓이 */
@@ -10326,12 +10307,3 @@ form .row:first-child .floating-label-form-group {
     }
     
 
-input[type=text], input[type=password]{
-	
-   /* input 태그가 형식에서 차지하는 넓이  */	
-   width: 100%;
-  
-   /* type의 크기  상하:9px 좌우:20px */
-   padding: 9px 20px;
-     
-   }     

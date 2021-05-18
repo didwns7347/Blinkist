@@ -44,7 +44,7 @@
   </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
+  <div class="tab-content mb-5">
     <div id="update" class="container tab-pane active"><br>
       <!-- 등급업데이트 -->
       <h4>회원님의 등급</h4>
@@ -92,7 +92,6 @@
 
 
 
-
 			<div id="menu1" class="container tab-pane fade"><br>
       <h3>Menu 1</h3>
       <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -103,6 +102,9 @@
     </div>
   </div>
 </div>
+ <!-- navigation include -->
+ <c:import url="/WEB-INF/jsp/include/footer.jsp" />
+ 
 <c:import url="/WEB-INF/jsp/modal/updateModal.jsp" />
 <c:import url="/WEB-INF/jsp/modal/deleteModal.jsp" />
 </body>
