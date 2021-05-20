@@ -14,6 +14,8 @@
 		author.name LIKE concat('%', #{keyword} ,'%');
 		]]>
 	</select>
+	
+	
 	<select id="selectByBook_no" parameterType="long"
 		resultType="HashMap">
 		<![CDATA[
@@ -23,5 +25,13 @@
 		book.book_no=#{no};
 		]]>
 	</select>
+	
+	
+	<!-- 책을 book table에 저장 -->
+	<insert id="insertBook" parameterType="bookvo">
+		<![CDATA[
+		insert into book values(null,#{title},0,0,#{buyLink},#{synopsis},#{category},"test",#{img_path},0,now(),#{author_no},#{subtitle})
+		]]>
+	</insert>
 
 </mapper>

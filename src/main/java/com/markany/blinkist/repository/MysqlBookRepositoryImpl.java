@@ -66,5 +66,16 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 
 		return map;
 	}
-
+	
+	
+	@Override//책을 book table에 저장
+	public void insertBook(BookVo vo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		sqlSession.insert("bookMapper.insertBook", vo);
+		sqlSession.commit();
+		
+	}
+	
 }

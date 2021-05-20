@@ -5,6 +5,7 @@
 	<typeAliases>
 		<typeAlias type="com.markany.blinkist.vo.UserVo" alias="uservo" />
 		<typeAlias type="com.markany.blinkist.vo.BookVo" alias="bookvo" />
+		<typeAlias type="com.markany.blinkist.vo.AuthorVo" alias="authorvo"/>
 		
 	</typeAliases>
 	
@@ -26,5 +27,6 @@
 	<mappers>
 		<mapper resource="userMapper.xml" />
 		<mapper resource="bookMapper.xml" />
+		<mapper resource="authorMapper.xml"/>
 	</mappers>
 </configuration>

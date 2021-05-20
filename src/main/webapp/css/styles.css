@@ -10287,23 +10287,3 @@ form .row:first-child .floating-label-form-group {
 .copyright {
   background-color: #1a252f;
 }
-
-
-#wrap{
-	
-    /* 웹에서 형식이 차이하는 넓이 */
-	width: 30%;
-	
-	/* 웹에서 형식을 중앙정렬 */
-	margin: auto auto;
-	
-	/* 웹에서 글자들을 중앙정렬 */
-	text-align: center;
-	
-	/* 형식안 태그들과 상하좌우 16px간격조절 */
-	padding: 16px;
-
-			
-    }
-    
-
