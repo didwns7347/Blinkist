@@ -6,10 +6,10 @@
 		<typeAlias type="com.markany.blinkist.vo.UserVo" alias="uservo" />
 		<typeAlias type="com.markany.blinkist.vo.BookVo" alias="bookvo" />
 		<typeAlias type="com.markany.blinkist.vo.LibraryVo" alias="libraryvo"/>
+		<typeAlias type="com.markany.blinkist.vo.AuthorVo" alias="authorvo"/>
 	</typeAliases>
 	
 	
-
 	<environments default="dev">
 		<environment id="dev">
 			<transactionManager type="JDBC" />
@@ -27,5 +27,8 @@
 		<mapper resource="userMapper.xml" />
 		<mapper resource="bookMapper.xml" />
 		<mapper resource="libraryMapper.xml"/>
+		<mapper resource="authorMapper.xml"/>
 	</mappers>
+	
+	
 </configuration>
