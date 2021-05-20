@@ -4,19 +4,25 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.markany.blinkist.service.BookService;
+import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.BookVo;
+import com.markany.blinkist.vo.UserVo;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
 	@Autowired
 	private BookService bookService;
+	@Autowired
+	private UserService userService;
 	
 	//책 검색기능 제목,작가
 	@RequestMapping("/search")
@@ -36,4 +42,8 @@ public class BookController {
 		model.addAttribute("map", map);
 		return "board/viewbook";
 	}
+	
+	
+	
+	
 }

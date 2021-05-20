@@ -24,4 +24,6 @@ public class BookService {
 		// TODO Auto-generated method stub
 		return bookRepository.selectByBook_no(no);
 	}
+
+	
 }

@@ -37,7 +37,6 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 
 	@Override // 이메일 중복확인
 	public UserVo findByEmail(String email) {
-
 		sqlMapper = getInstance();
 		SqlSession session = sqlMapper.openSession();
 

@@ -58,13 +58,16 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		SqlSession sqlSession = sqlMapper.openSession();
 		Map<Object, Object> map =sqlSession.selectOne("bookMapper.selectByBook_no", no);
 		sqlSession.close();
+		/*
 		System.out.println("---------------------------------------------------------");
 		for (Object key : map.keySet()) {
 			System.out.println("키:" + key + " 값:" + map.get(key));
 
 		}
-
+		*/
 		return map;
 	}
+
+	
 
 }

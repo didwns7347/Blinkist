@@ -12,4 +12,6 @@ public interface BookRepository {
 
 	Map<Object, Object> selectByBook_no(long no);
 
+
+
 }

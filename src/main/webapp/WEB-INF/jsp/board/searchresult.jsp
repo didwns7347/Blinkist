@@ -38,8 +38,10 @@
 		<h3>${keyword }에대한검색결과</h3>
 		<br />
 		<div class="row" id="demo">
+
+
 			<c:forEach items="${list }" var="list" varStatus="status">
-				<div class="col-lg-4 col-md-6 mb-4">
+				<div class="col-lg-4 col-md-6 mb-4" id="test0">
 					<div class="card h-100">
 						<a
 							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"><img
@@ -55,142 +57,97 @@
 								${list.running_time}분
 							</p>
 						</div>
-						<div class="card-footer">
-							<small class="text-muted">★ ★ ★ ★ ☆</small>
+						<div class="card-footer text-center" id="cardfooter">
+							<a
+								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+								Add Library</a>
 						</div>
 					</div>
 				</div>
 			</c:forEach>
 
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
+			<!-- test code -->
+			<c:forEach var="i" begin="1" end="100" step="1">
+				<c:if test="${i<=15 }">
+					<div class="col-lg-4 col-md-6 mb-4" id="test">
+						<div class="card h-100">
+							<a href="#!"><img class="card-img-top"
+								src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
+								alt="..." /></a>
+							<div class="card-body">
+								<h4 class="card-title">
+									<a href="#!">Item One</a>
+								</h4>
+								<h5>$24.99</h5>
+								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit. Amet numquam aspernatur!</p>
+							</div>
+							<div class="card-footer text-center" id="cardfooter">
+								<a
+									href="${pageContext.request.contextPath }/book/addlibrary?no=3">+
+									Add Library</a>
+							</div>
+						</div>
 					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
+				</c:if>
+				<c:if test="${i>15 }">
+					<div class="col-lg-4 col-md-6 mb-4" id="test${i }"
+						style="display: none">
+						<div class="card h-100">
+							<a href="#!"><img class="card-img-top"
+								src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
+								alt="..." /></a>
+							<div class="card-body">
+								<h4 class="card-title">
+									<a href="#!">Item One</a>
+								</h4>
+								<h5>$24.99</h5>
+								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
+									adipisicing elit. Amet numquam aspernatur!</p>
+							</div>
+							<div class="card-footer">
+								<small class="text-muted">★ ★ ★ ★ ☆</small>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="/blinkist/assets/coverimgs/Senna_0.jpg" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item Two</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit
-							amet.</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="https://via.placeholder.com/700x400" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item Three</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="https://via.placeholder.com/700x400" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item Four</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="https://via.placeholder.com/700x400" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item Five</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur! Lorem ipsum dolor sit
-							amet.</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-6 mb-4">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="https://via.placeholder.com/700x400" alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item Six</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
+				</c:if>
+			</c:forEach>
+
+
 
 		</div>
-		<div class="row" id="do">
-		</div>
+		<div class="row" id="do"></div>
 		<div class="row">
 			<div class="col-md-4 mb-5"></div>
 			<div class="col-md-4 mb-5">
-				<button id="loadMore"  type="button" class="btn btn-outline-success btn-block">Load
-					More</button>
+				<button id="loadMore" type="button"
+					class="btn btn-outline-success btn-block">Load More</button>
 			</div>
 			<div class="col-md-4 mb-5"></div>
 		</div>
-		
+
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	<script type="text/javascript">
-		document.getElementById("loadMore").addEventListener("click", DisplayDate);
-		function DisplayDate(){
-			var idx="${who}";
-			document.getElementById("do").innerHTML=Date();
-			document.getElementById("do").innerHTML+=idx;
+		var cnt = 1;
+		document.getElementById("loadMore").addEventListener("click",
+				DisplayDate);
+		function DisplayDate() {
+			cnt += 1
+			for (i = (cnt) * 15 + 1; i <= (cnt + 1) * 15; i++)
+				document.getElementById("test" + i).style.display = "block";
 		}
-	
 	</script>
-	
+	<script>
+		var myDiv = document.getElementById("cardfooter")
+		myDiv.addEventListener("mouseover", changeGreen);
+		myDiv.addEventListener("mouseout", changeWite);
+		function changeGreen() {
+			myDiv.style.backgroundColor = "#0365F2";
+		}
+		function changeWite() {
+			myDiv.style.backgroundColor = "white";
+		}
+	</script>
 </body>
 </html>

@@ -28,6 +28,9 @@
         }
     })
 </script>
-
+<script>
+    document.getElementById("loadMore").addEventListener("click",DisplayDate);
+    function
+</script>
 </body>
 </html>
