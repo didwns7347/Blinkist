@@ -106,7 +106,7 @@ public class livingCrawling {
 				 
 				
 			
-				/*책저장
+				//책저장
 				BookVo bookvo = new BookVo();
 				bookvo.setTitle(title);
 				bookvo.setBuyLink(buy_link);
@@ -120,7 +120,7 @@ public class livingCrawling {
 				bookvo.setSubtitle(subtitle);
 				
 				bookService.insertBook(bookvo);
-				*/
+				
 			}		  
 		}catch(IOException e) {
 

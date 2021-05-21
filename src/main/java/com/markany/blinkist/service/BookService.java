@@ -31,8 +31,12 @@ public class BookService {
 	
 	//책을 book table에 저장
 	public void insertBook(BookVo vo) {
-		
 		bookRepository.insertBook(vo);
+	}
+
+	//책을 추가된 날짜순으로 정렬
+	public List<HashMap<String, Object>> findAllOrderByDate() {
+		return bookRepository.selectAllOrderByDate();
 	}
 
 }

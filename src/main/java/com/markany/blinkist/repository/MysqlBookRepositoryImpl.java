@@ -80,5 +80,15 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		
 	}
 	
+	
+	//모든책을 추가된 날짜기준으로 정렬해서 가져오기
+	@Override
+	public List<HashMap<String, Object>> selectAllOrderByDate() {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate");
+		return list;
+	}
+	
 
 }

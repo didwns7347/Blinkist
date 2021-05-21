@@ -13,6 +13,8 @@ public interface BookRepository {
 	
 	public void insertBook(BookVo vo); //책을 book table에 저장
 
+	List<HashMap<String, Object>> selectAllOrderByDate();
+
 
 
 }

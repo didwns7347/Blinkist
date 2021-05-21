@@ -43,6 +43,16 @@ public class BookController {
 		return "board/viewbook";
 	}
 	
+	//recentrlyadded 보여주기 기능
+	@RequestMapping("/recentlyadded")
+	public String viewBook(Model model) {
+		List<HashMap<String, Object>>  list = bookService.findAllOrderByDate();
+		model.addAttribute("list", list);
+		return "board/recentlyadded";
+	}
+	
+	//populartitles 보여주기 기능
+	
 	
 	
 	

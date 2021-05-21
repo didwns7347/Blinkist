@@ -120,7 +120,7 @@ public class NovelCrawling {
 				bookvo.setSubtitle(subtitle);
 				
 				bookService.insertBook(bookvo);
-
+				
         }		  
 		}catch(IOException e) {
 
