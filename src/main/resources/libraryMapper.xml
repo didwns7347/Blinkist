@@ -3,6 +3,15 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="libraryMapper">
+	<select id="selectByAuthUser" parameterType="uservo"
+		resultType="HashMap">
+		select book.book_no, book.title, book.img_path,
+		book.running_time, author.name
+		from author, book
+		where book.author_no=author.author_no
+		and book.book_no IN ( select book_no from library where
+		user_no=#{user_no})
+	</select>
 	<insert id="insertVo" parameterType="libraryvo">
 		<![CDATA[
 			insert 

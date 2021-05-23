@@ -1,24 +1,32 @@
 package com.markany.blinkist.jsoup;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.context.support.GenericXmlApplicationContext;
 import com.markany.blinkist.service.AuthorService;
 import com.markany.blinkist.service.BookService;
+import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.vo.AuthorVo;
 import com.markany.blinkist.vo.BookVo;
+import com.markany.blinkist.vo.ContentVo;
 
 public class TeenagerCrawling {
 	
 	private BookService bookService;
+	private ContentService contentService;
 	
 	public static void main(String args[]) {
 		
 		TeenagerCrawling crawling = new TeenagerCrawling();
+		
 		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 		crawling.bookService = (BookService)ctx.getBean("bookService");
+		crawling.contentService = (ContentService)ctx.getBean("contentService");
+		
 		System.out.println("START========================================================");
 		crawling.Info();
 		
@@ -33,7 +41,7 @@ public class TeenagerCrawling {
 			Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001005").get();
 			Elements booklink = document1.select("ol>li");
 
-			int count = 1;
+			int count = 69;
 			for(int i=1; i<23; i++) {
 
 				if(i==4 || i==6 || i==7 || i==9 || i==12 || i==14 || i==15 || i==16||i==21)
@@ -67,19 +75,88 @@ public class TeenagerCrawling {
 				String introduce = bookInfo.select("#authorIntroContent>p").text();//작가소개
 				System.out.println("작가소개: "+introduce);
 
-				String synopsis = null;
+				String synopsis = bookInfo.select("#bookIntroContent>p").text();//시놉시스
+				System.out.println("시놉시스: "+synopsis);
+
+				 //콘텐츠내용
+				 ArrayList<String> content = new ArrayList<String>();
 				if(i==10) {
 
-					synopsis = bookInfo.select(".section").get(5).select("p").text();//시놉시스
-					System.out.println("시놉시스: "+synopsis);
+					 String[] content_List = bookInfo.select(".section").get(5).select("p").first().html().split("<br>");
 
-				}else {
+						int cnt=0;
+						if (null != content_List) {
+							for (String j : content_List) { 	 
+								if(j.length()<2) //줄바꿈이 들어가면 xxxx
+									continue;
+								if (j.contains("<b>")) //<b>태그가 들어가면 xxxx
+									if(j.contains("</b>"))
+										content.add(j.substring(j.indexOf('>')+1, j.lastIndexOf('<')));
+									else
+										content.add(j.substring(j.indexOf('>')+1));
+								else
+									content.add(j);
+
+								System.out.println("콘텐츠: "+content.get(cnt));
+								cnt++;
+
+							}
+						}
+					}
+					else {
+
+						String content_List = bookInfo.select(".section").get(4).select("p").first().html();
+
+						String[] test = content_List.split("<br>");
+
+						int cnt=0;
+						if (null != test) {
+							for (String j : test) {
+
+								if(j.length()<2) //줄바꿈이 들어가면 xxxx
+									continue;
+								if (j.contains("<b>")) //<b>태그가 들어가면 xxxx
+									if(j.contains("</b>"))
+										content.add(j.substring(j.indexOf('>')+1, j.lastIndexOf('<')));
+									else
+										content.add(j.substring(j.indexOf('>')+1));
+								else
+									content.add(j);
+
+								System.out.println("콘텐츠: "+content.get(cnt));
+								cnt++;
+
+							}
+						}
+					}
+
+					//챕터
+					ArrayList<String> chapter_title = new ArrayList<String>();
+
+					String[] chapter_titleList = bookInfo.select("#tableOfContentsContent>p").first().html().split("<br>");
+
+					if (null != chapter_titleList) {
+						for (String j : chapter_titleList) {
+
+							if(j.length()<2) //줄바꿈이 들어가면 xxxx
+								continue;
+							if (j.contains("<b>")) //<b>태그가 들어가면 xxxx
+								if(j.contains("</b>"))
+									chapter_title.add(j.substring(j.indexOf('>')+1, j.lastIndexOf('<')));
+								else
+									chapter_title.add(j.substring(j.indexOf('>')+1));
+							else
+								chapter_title.add(j);
 
 
-					synopsis = bookInfo.select(".section").get(4).select("p").text();//시놉시스
-					System.out.println("시놉시스: "+synopsis);	
+						}
+					}
 
-				}
+					int lim=Math.min(chapter_title.size(), content.size());
+					for(int k=0; k<lim; k++) {
+
+						System.out.println("챕터: "+chapter_title.get(k));
+					}
 
 				System.out.println("-----------------------------------------------------------");
 
@@ -99,10 +176,10 @@ public class TeenagerCrawling {
 				 vo.setIntroduce(introduce);//작가소개
 				 authorservice.insertAuthor(vo);
 
-				 ctx.close();*/
-				 
+				 ctx.close();
+				 */
 				
-				//책저장
+				/*책저장
 				BookVo bookvo = new BookVo();
 				bookvo.setTitle(title);
 				bookvo.setBuyLink(buy_link);
@@ -116,8 +193,24 @@ public class TeenagerCrawling {
 				bookvo.setSubtitle(subtitle);
 				
 				bookService.insertBook(bookvo);
+				*/
+				//
+				ContentVo contentvo = new ContentVo();
+				for(int k=0; k<lim; k++) {
 
-			}		  
+					contentvo.setChapter_title(chapter_title.get(k));
+					contentvo.setContent(content.get(k));
+
+					int maxNumber = contentService.selectMaxChapter_no();
+					contentvo.setChapter_no(maxNumber+1);
+
+					contentvo.setBook_no(count);
+
+					contentService.insertContent(contentvo);
+					
+				}	//
+				
+			}		
 		}catch(IOException e) {
 
 			e.printStackTrace();

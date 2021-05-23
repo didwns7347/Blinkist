@@ -1,7 +1,13 @@
 package com.markany.blinkist.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.jni.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +26,14 @@ public class LibraryController {
 	@Autowired
 	private UserService userService;
 
+	
+	
 	// 라이브러리 보여주기
 	@RequestMapping("/view")
 	public String viewLibrary(Model model, String authUser) {
+		UserVo userVo=userService.findByEmail(authUser);
+		List<HashMap<Object,Object>> booklist =libraryService.findByAuthUser(userVo);
+		model.addAttribute("list", booklist);
 		return "board/library";
 	}
 

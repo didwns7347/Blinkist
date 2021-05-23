@@ -42,7 +42,7 @@
 		<div class="row">
 			<div class="col-sm-8">
 				<h1 class="mb-4">${map.title }</h1>
-				<h3 class="mb-4">소제목</h3>
+				<h3 class="mb-4">${map.subtitle }</h3>
 				<h4 class="mb-4">${map.name }</h4>
 				<div class="row mb-4">
 					<div class="col-sm-5">

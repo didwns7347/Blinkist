@@ -54,7 +54,7 @@
 					<div class="card h-100">
 						<a
 							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"><img
-							class="card-img-top" src="${list.img_path }" alt="..." /></a>
+							class="card-img-top" src="${list.img_path }" alt="..."  width="282" height="282"/></a>
 						<div class="card-body">
 							<h4 class="card-title">
 								<a
@@ -75,53 +75,7 @@
 				</div>
 			</c:forEach>
 
-			<!-- test code -->
-			<c:forEach var="i" begin="1" end="100" step="1">
-				<c:if test="${i<=15 }">
-					<div class="col-lg-4 col-md-6 mb-4" id="test">
-						<div class="card h-100">
-							<a href="#!"><img class="card-img-top"
-								src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-								alt="..." /></a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#!">Item One</a>
-								</h4>
-								<h5>$24.99</h5>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Amet numquam aspernatur!</p>
-							</div>
-							<div class="card-footer text-center" id="cardfooter">
-								<a
-									href="${pageContext.request.contextPath }/book/addlibrary?no=3">+
-									Add Library</a>
-							</div>
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${i>15 }">
-					<div class="col-lg-4 col-md-6 mb-4" id="test${i }"
-						style="display: none">
-						<div class="card h-100">
-							<a href="#!"><img class="card-img-top"
-								src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-								alt="..." /></a>
-							<div class="card-body">
-								<h4 class="card-title">
-									<a href="#!">Item One</a>
-								</h4>
-								<h5>$24.99</h5>
-								<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-									adipisicing elit. Amet numquam aspernatur!</p>
-							</div>
-							<div class="card-footer">
-								<small class="text-muted">★ ★ ★ ★ ☆</small>
-							</div>
-						</div>
-					</div>
-				</c:if>
-			</c:forEach>
-
+		
 
 
 		</div>

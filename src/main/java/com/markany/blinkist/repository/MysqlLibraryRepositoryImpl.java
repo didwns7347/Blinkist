@@ -2,15 +2,18 @@ package com.markany.blinkist.repository;
 
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.tomcat.jni.Library;
 import org.springframework.stereotype.Repository;
 
 import com.markany.blinkist.dao.LibraryRepository;
 import com.markany.blinkist.vo.LibraryVo;
+import com.markany.blinkist.vo.UserVo;
 @Repository
 public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 	
@@ -53,6 +56,15 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		int count = sqlSession.insert("libraryMapper.insertVo", libraryVo);
 		sqlSession.commit();
 		return count==1;
+	}
+
+	@Override
+	public List<HashMap<Object, Object>> selectByAuthUser(UserVo userVo) {
+		sqlMapper = getInstance();
+		System.out.println(userVo.toString());
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<Object,Object>> list=sqlSession.selectList("libraryMapper.selectByAuthUser", userVo);
+		return list;
 	}
 
 }
