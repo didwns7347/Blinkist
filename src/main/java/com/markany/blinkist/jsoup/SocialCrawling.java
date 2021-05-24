@@ -195,6 +195,11 @@ public class SocialCrawling {
 					
 					bookService.insertBook(bookvo);
 					*/
+<<<<<<< HEAD
+=======
+					
+					
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 					//책의 콘텐츠저장
 					ContentVo contentvo = new ContentVo();
 

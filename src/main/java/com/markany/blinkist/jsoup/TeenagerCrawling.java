@@ -194,7 +194,12 @@ public class TeenagerCrawling {
 				
 				bookService.insertBook(bookvo);
 				*/
+<<<<<<< HEAD
 				//
+=======
+				
+				//책의 콘텐츠저장
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				ContentVo contentvo = new ContentVo();
 				for(int k=0; k<lim; k++) {
 

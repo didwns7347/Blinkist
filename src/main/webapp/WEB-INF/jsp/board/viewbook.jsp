@@ -34,6 +34,8 @@
         <!-- Google fonts-->
         <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
         <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+
+ <script type="text/javascript"  src="${pageContext.request.contextPath }/js/viewbook.js"></script>         
 </head>
 <body>
 	<!-- navigation include -->
@@ -61,8 +63,7 @@
 
 				<div class="row mb-4">
 					<div class="col-sm-3">
-						<a href="#" class="btn btn-outline-success" role="button">Add
-							to library</a>
+						<a href="javascript:void(0)" class="btn btn-outline-success" role="button" id="Add_Library">Add to library</a>
 					</div>
 					<div class="col-sm-3">
 						<a href="${map.buyLink }" class="btn btn-outline-primary" role="button"> Buy
@@ -73,6 +74,9 @@
 							to kindle</a>
 					</div>
 				</div>
+
+<input type="hidden" id="book_no" name="book_no" value="${map.book_no}"/>
+
 
 				<div class="row mb-4">
 					<div class="container">

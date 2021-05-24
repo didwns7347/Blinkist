@@ -166,6 +166,7 @@ public class livingCrawling {
 				GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 				AuthorService authorservice = (AuthorService)ctx.getBean("authorService");
 
+<<<<<<< HEAD
 				/*
 				 AuthorVo vo = new AuthorVo();
 				 if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
@@ -176,6 +177,21 @@ public class livingCrawling {
 				 authorservice.insertAuthor(vo);
 				 ctx.close();
 				*/
+=======
+				//작가저장
+				AuthorVo vo = new AuthorVo();
+				if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
+
+					continue;
+				}
+
+				vo.setName(name); //작가이름
+				vo.setIntroduce(introduce);//작가소개
+				authorservice.insertAuthor(vo);
+
+				ctx.close();
+               
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 
 
 				/*책저장
@@ -192,7 +208,11 @@ public class livingCrawling {
 				bookvo.setSubtitle(subtitle);
 
 				bookService.insertBook(bookvo);
+<<<<<<< HEAD
 				 */
+=======
+				
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 
 				//책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
@@ -204,7 +224,11 @@ public class livingCrawling {
 					contentvo.setBook_no(count);
 					contentService.insertContent(contentvo);
 					
+<<<<<<< HEAD
 				}
+=======
+				}*/
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 			}
 			}catch(IOException e) {
 

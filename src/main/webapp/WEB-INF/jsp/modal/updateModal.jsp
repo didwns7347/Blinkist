@@ -11,11 +11,11 @@
               <input type="password" class="form-control" id="oldpassword" name="oldpassword" placeholder="Enter email" required>
             </div>
             <div class="form-group">
-              <label for="password"><span class="glyphicon glyphicon-eye-open"></span>새로운비밀번호</label>
+              <label for="newpassword"><span class="glyphicon glyphicon-eye-open"></span>새로운비밀번호</label>
               <input type="password" class="form-control" id="newpassword" name="newpassword" placeholder="Enter password" required>
             </div>
             <div class="form-group">
-              <label for="password"><span class="glyphicon glyphicon-eye-open"></span>새로운비밀번호</label>
+              <label for="confirmpassword"><span class="glyphicon glyphicon-eye-open"></span>새로운비밀번호</label>
               <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" placeholder="Enter password" required>
               
                                                     <br/>

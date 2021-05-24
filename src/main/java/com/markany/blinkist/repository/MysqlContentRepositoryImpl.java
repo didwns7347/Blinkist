@@ -1,6 +1,7 @@
 package com.markany.blinkist.repository;
 
 import java.io.Reader;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.io.Resources;
@@ -42,13 +43,27 @@ public class MysqlContentRepositoryImpl implements ContentRepository{
 	
 	
 	@Override//가장 큰 CHAPTER번호가져오기 
-	public int selectMaxChapter_no() {
+	public int selectMaxChapter_no(){
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		int maxNumber = sqlSession.selectOne("contentMapper.selectMaxChapter_no");
+		sqlSession.close();
 		
 		return maxNumber;
+		
+	}
+	
+	
+	@Override//해당 책번호의 콘텐츠가져오기   
+	public List<ContentVo> selectContent(long book_no){
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<ContentVo> contentvo = sqlSession.selectList("contentMapper.selectContent",book_no);
+		sqlSession.close();
+		
+		return contentvo;
 		
 	}
 }

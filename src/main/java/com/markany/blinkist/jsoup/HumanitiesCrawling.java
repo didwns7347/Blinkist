@@ -200,7 +200,9 @@ public class HumanitiesCrawling {
 				*/
 				
 				
-				//
+
+				/*책의 콘텐츠저장
+
 				ContentVo contentvo = new ContentVo();
 				
 				for(int k=0; k<lim; k++) {
@@ -215,8 +217,12 @@ public class HumanitiesCrawling {
 					
 					contentService.insertContent(contentvo);
 					
+
 				}
 				
+
+				}*/
+
 			}		  
 		}catch(IOException e) {
 
