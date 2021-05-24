@@ -41,7 +41,7 @@ public class SocialCrawling {
 				Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001022").get();
 				Elements booklink = document1.select("ol>li");
 
-				int count = 1;
+				int count = 54;
 				for(int i=0; i<25; i++) {
 
 					if(i==1 || i==3 || i==7 || i==8 || i==9 || i==11 || i==15 || i==19 || i==20 || i==23)
@@ -195,8 +195,7 @@ public class SocialCrawling {
 					
 					bookService.insertBook(bookvo);
 					*/
-					
-					
+
 					//책의 콘텐츠저장
 					ContentVo contentvo = new ContentVo();
 
@@ -212,7 +211,7 @@ public class SocialCrawling {
 
 						contentService.insertContent(contentvo);
 						
-					}	
+					}
 				}
 			}catch(IOException e) {
 

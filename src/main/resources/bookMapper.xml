@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bookMapper">
-
+	<!--  검색 키워드에 일치하는지  -->
 	<select id="selectByTitleAuthor" parameterType="string"
 		resultType="HashMap">
 		<![CDATA[
@@ -15,7 +15,30 @@
 		]]>
 	</select>
 	
+	<!-- 날짜를 기준으로 리스트생성 -->
+	<select id="selectAllOrderByDate" 
+		resultType="HashMap">
+		<![CDATA[
+		select book.book_no, book.title, book.img_path, book.running_time, author.name 
+		from book, author
+		where book.author_no = author.author_no 
+		order by reg_date desc;	
+		]]>
+	</select>
+	<!-- 전체 조회수를 기준으로 리스트생성 -->
+	<select id="selectAllOrderByCount" 
+		resultType="HashMap">
+		<![CDATA[
+		select book.book_no, book.title, book.img_path, book.running_time, author.name 
+		from book, author
+		where book.author_no = author.author_no 
+		order by count desc
+		limit 6	
+		]]>
+	</select>
 	
+	
+	<!-- book_no로 책검색 -->
 	<select id="selectByBook_no" parameterType="long"
 		resultType="HashMap">
 		<![CDATA[
@@ -33,5 +56,12 @@
 		insert into book values(null,#{title},0,0,#{buyLink},#{synopsis},#{category},"test",#{img_path},0,now(),#{author_no},#{subtitle})
 		]]>
 	</insert>
+	
+	<!-- 라이브러리에 추가되면 count가 증가됨 -->
+	<update id="addCountByBook_no" parameterType="long">
+		<![CDATA[
+			update book set count=count+1 where book_no=#{book_no} 
+		]]>
+	</update>
 
 </mapper>

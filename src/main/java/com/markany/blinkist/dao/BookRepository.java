@@ -13,6 +13,12 @@ public interface BookRepository {
 	
 	public void insertBook(BookVo vo); //책을 book table에 저장
 
+	List<HashMap<String, Object>> selectAllOrderByDate();
+
+	boolean addCountByBook_no(long book_no);
+
+	List<HashMap<String, Object>> selectAllOrderByCount();
+
 
 
 }

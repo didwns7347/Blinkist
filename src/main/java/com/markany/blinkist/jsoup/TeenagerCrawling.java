@@ -41,7 +41,7 @@ public class TeenagerCrawling {
 			Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001005").get();
 			Elements booklink = document1.select("ol>li");
 
-			int count = 1;
+			int count = 69;
 			for(int i=1; i<23; i++) {
 
 				if(i==4 || i==6 || i==7 || i==9 || i==12 || i==14 || i==15 || i==16||i==21)
@@ -194,10 +194,12 @@ public class TeenagerCrawling {
 				
 				bookService.insertBook(bookvo);
 				*/
-				
-				//책의 콘텐츠저장
-				ContentVo contentvo = new ContentVo();
 
+				//책의 콘텐츠저장
+
+				//
+
+				ContentVo contentvo = new ContentVo();
 				for(int k=0; k<lim; k++) {
 
 					contentvo.setChapter_title(chapter_title.get(k));
@@ -211,7 +213,8 @@ public class TeenagerCrawling {
 					contentService.insertContent(contentvo);
 					
 				}	
-			}		  
+				
+			}		
 		}catch(IOException e) {
 
 			e.printStackTrace();

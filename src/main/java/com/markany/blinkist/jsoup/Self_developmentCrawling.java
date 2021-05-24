@@ -39,7 +39,7 @@ public class Self_developmentCrawling {
 			Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001026").get();
 			Elements booklink = document1.select("ol>li");
 
-			int count = 1;
+			int count = 36;
 			for(int i=1; i<25; i++) {
 
 				if(i==12 || i==15 || i==17 || i==18 || i==19 || i==22)
@@ -176,6 +176,7 @@ public class Self_developmentCrawling {
 
 				 ctx.close();
 				 */
+
 				 
 				 /*책저장
 					BookVo bookvo = new BookVo();
@@ -193,8 +194,28 @@ public class Self_developmentCrawling {
 					bookService.insertBook(bookvo);
 					*/
 				 
+
+				/*책저장
+				BookVo bookvo = new BookVo();
+				bookvo.setTitle(title);
+				bookvo.setBuyLink(buy_link);
+				bookvo.setSynopsis(synopsis);
+				bookvo.setCategory("자기개발");
+				bookvo.setImg_path(img_path);
+>>>>>>> refs/remotes/origin/mergeV0
 				
+<<<<<<< HEAD
 				/*책의 콘텐츠저장
+=======
+				long author_no = authorservice.selectAuthor(name);
+				bookvo.setAuthor_no(author_no);
+				
+				bookvo.setSubtitle(subtitle);
+				
+				bookService.insertBook(bookvo);
+				*/
+				//책의 콘텐츠저장
+
 				ContentVo contentvo = new ContentVo();
 
 				for(int k=0; k<lim; k++) {
@@ -208,8 +229,11 @@ public class Self_developmentCrawling {
 					contentvo.setBook_no(count);
 
 					contentService.insertContent(contentvo);
-					
-				}*/
+
+				
+
+				}//	
+
 			}	  
 		}catch(IOException e) {
 

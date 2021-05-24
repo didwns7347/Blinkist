@@ -1,7 +1,13 @@
 package com.markany.blinkist.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.tomcat.jni.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,10 +25,16 @@ public class LibraryController {
 	private LibraryService libraryService;
 	@Autowired
 	private UserService userService;
-
+	@Autowired
+	private BookService bookService;
+	
+	
 	// 라이브러리 보여주기
 	@RequestMapping("/view")
 	public String viewLibrary(Model model, String authUser) {
+		UserVo userVo=userService.findByEmail(authUser);
+		List<HashMap<Object,Object>> booklist =libraryService.findByAuthUser(userVo);
+		model.addAttribute("list", booklist);
 		return "board/library";
 	}
 
@@ -31,8 +43,9 @@ public class LibraryController {
 	public String addLibrary(HttpServletRequest request, long book_no, String authUser) {
 		// 이전페이지로 복귀하기 위해 이전페이지 url정보를 가죠오는 코드
 		String ref = request.getHeader("Referer");
-		System.out.println(book_no + authUser);
+		//System.out.println(book_no + authUser);
 		// bookService.addLibrary(no);
+		bookService.addCount(book_no);
 		UserVo userVo = userService.findByEmail(authUser);
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);

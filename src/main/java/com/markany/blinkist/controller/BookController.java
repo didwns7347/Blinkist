@@ -44,6 +44,26 @@ public class BookController {
 		return "board/viewbook";
 	}
 	
+	//recentrlyadded 보여주기 기능
+	@RequestMapping("/recentlyadded")
+	public String viewRecentBook(Model model) {
+		List<HashMap<String, Object>>  list = bookService.findAllOrderByDate();
+		model.addAttribute("list", list);
+		return "board/recentlyadded";
+	}
+	
+	//populartitles 보여주기 기능
+	@RequestMapping("/popular")
+	public String viewPopularBook(Model model) {
+		//총 조회수 로 6개
+		List<HashMap<String, Object>>  popularList = bookService.findAllOrderByCount();
+		//한달동안 가장 많이 읽은순 
+		//List<HashMap<String, Object>>  spotlightList = bookService.findAllOrderBySpotlight();
+		//최근 추가된 것 중 가장 많이 읽은순
+		//List<HashMap<String, Object>>  hotList = bookService.findAllOrderByHot();
+		return "board/populartitles";
+	}
+	
 	
 
 	

@@ -166,10 +166,9 @@ public class HumanitiesCrawling {
                 
 				GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 				AuthorService authorservice = (AuthorService)ctx.getBean("authorService");
-
-				 /*작가저장
+				 
+				/*작가저장
 				 AuthorVo authorvo = new AuthorVo();
-
 				 if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
 					 
 					 continue;
@@ -180,7 +179,7 @@ public class HumanitiesCrawling {
 				 authorservice.insertAuthor(authorvo);
                
 				 ctx.close();
-				 */
+				*/ 
 				
 			
 				/*책저장
@@ -197,10 +196,13 @@ public class HumanitiesCrawling {
 				bookvo.setSubtitle(subtitle);
 				
 				bookService.insertBook(bookvo);
+				
 				*/
 				
 				
+
 				/*책의 콘텐츠저장
+
 				ContentVo contentvo = new ContentVo();
 				
 				for(int k=0; k<lim; k++) {
@@ -215,7 +217,12 @@ public class HumanitiesCrawling {
 					
 					contentService.insertContent(contentvo);
 					
+
 				}*/
+
+				
+				
+
 			}		  
 		}catch(IOException e) {
 

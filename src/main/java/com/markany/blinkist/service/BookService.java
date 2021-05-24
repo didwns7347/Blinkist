@@ -31,8 +31,22 @@ public class BookService {
 	
 	//책을 book table에 저장
 	public void insertBook(BookVo vo) {
-		
 		bookRepository.insertBook(vo);
+	}
+
+	//책을 추가된 날짜순으로 정렬
+	public List<HashMap<String, Object>> findAllOrderByDate() {
+		return bookRepository.selectAllOrderByDate();
+	}
+
+	//라이브러리 추가시 카운트+1
+	public boolean addCount(long book_no) {
+		return bookRepository.addCountByBook_no(book_no);
+	}
+
+	//총 조회수로 책 골르기
+	public List<HashMap<String, Object>> findAllOrderByCount() {
+		return bookRepository.selectAllOrderByCount();
 	}
 
 }

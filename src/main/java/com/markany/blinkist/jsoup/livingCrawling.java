@@ -166,6 +166,7 @@ public class livingCrawling {
 				GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 				AuthorService authorservice = (AuthorService)ctx.getBean("authorService");
 
+
 				//작가저장
 				AuthorVo vo = new AuthorVo();
 				if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
@@ -179,6 +180,18 @@ public class livingCrawling {
 
 				ctx.close();
                
+
+				/*
+				 AuthorVo vo = new AuthorVo();
+				 if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
+					 continue;
+				 }
+				 vo.setName(name); //작가이름
+				 vo.setIntroduce(introduce);//작가소개
+				 authorservice.insertAuthor(vo);
+				 ctx.close();
+				*/
+
 
 
 				/*책저장
@@ -195,24 +208,24 @@ public class livingCrawling {
 				bookvo.setSubtitle(subtitle);
 
 				bookService.insertBook(bookvo);
-				
+
+				 */
+
 
 				//책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
-
 				for(int k=0; k<lim; k++) {
-
 					contentvo.setChapter_title(chapter_title.get(k));
 					contentvo.setContent(content.get(k));
-
 					int maxNumber = contentService.selectMaxChapter_no();
 					contentvo.setChapter_no(maxNumber+1);
-
 					contentvo.setBook_no(count);
-
 					contentService.insertContent(contentvo);
-					
-				}*/
+
+				}
+
+				
+
 			}
 			}catch(IOException e) {
 

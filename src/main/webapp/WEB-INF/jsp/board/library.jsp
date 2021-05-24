@@ -62,74 +62,42 @@
 						<br />
 						<div class="row">
 							<br>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<!-- img size 470x470 으로 고정 -->
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/bookcover.jpg"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">제목</a>
-										</h4>
-										<h5>작가</h5>
-										<p class="card-text">
-										<i style='font-size: 20px' class='far'>&#xf017;</i>   12-minuite read</p>
-										<div class="dropdown float-right">
-											<button type="button" class="btn btn-sm  "
-												data-toggle="dropdown">. . .</button>
-											<div class="dropdown-menu">
-												<a class="dropdown-item" href="#">Remove from library</a> <a
-													class="dropdown-item" href="#">Buy book</a> <a
-													class="dropdown-item" href="#">Send to Kindle</a>
+							<c:forEach items="${list }" var="list" varStatus="status">
+								<div class="col-lg-4 col-md-6 mb-4" id="test">
+									<div class="card h-100">
+										<!-- img size 470x470 으로 고정 -->
+										<a href="#!"><img class="card-img-top"
+											src="${list.img_path }" width="282" height="282" alt="..." /></a>
+										<div class="card-body">
+											<h4 class="card-title">
+												<a
+													href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+											</h4>
+											<h5>${list.name }</h5>
+											<p class="card-text">
+												<i style='font-size: 20px' class='far'>&#xf017;</i>
+												${list.running_time}분
+											</p>
+											<div class="dropdown float-right">
+												<button type="button" class="btn btn-sm  "
+													data-toggle="dropdown">. . .</button>
+												<div class="dropdown-menu">
+													<a class="dropdown-item" href="#">Remove from library</a> <a
+														class="dropdown-item" href="#">Buy book</a> <a
+														class="dropdown-item" href="#">Send to Kindle</a>
+												</div>
 											</div>
 										</div>
-									</div>
-									<div class="card-footer">
-										<!-- Blue -->
-										<div class="progress">
-											<div class="progress-bar bg-success" style="width: 10%"></div>
-										</div>
+										<div class="card-footer">
+											<!-- Blue -->
+											<div class="progress">
+												<div class="progress-bar bg-success" style="width: 10%"></div>
+											</div>
 
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">Item One</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">★ ★ ★ ★ ☆</small>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">Item One</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">★ ★ ★ ★ ☆</small>
-									</div>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 

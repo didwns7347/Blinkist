@@ -43,7 +43,7 @@ public class NovelCrawling {
 			 Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001044").get();
 			 Elements booklink = document1.select("ol>li");
 			 
-			 int count = 1;
+			 int count = 24;
         for(int i=0; i<19; i++) {
         	
         	if(i==1 || i==2 || i==3 || i==4 || i==10 || i==12 || i==14)
@@ -214,7 +214,7 @@ public class NovelCrawling {
 
 					contentService.insertContent(contentvo);
 					
-				}	
+				}//	
 			}	  
 		}catch(IOException e) {
 
