@@ -1,5 +1,6 @@
 package com.markany.blinkist.service;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.markany.blinkist.dao.ContentRepository;
@@ -23,6 +24,14 @@ public class ContentService {
 	public int selectMaxChapter_no() {
 		
 		return contentRepository.selectMaxChapter_no();
+		
+	}
+	
+	
+	//해당 책번호의 콘텐츠가져오기
+	public List<ContentVo> selectContent(long book_no){
+		
+		return contentRepository.selectContent(book_no);
 		
 	}
 }

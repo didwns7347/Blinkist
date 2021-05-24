@@ -176,10 +176,10 @@ public class TeenagerCrawling {
 				 vo.setIntroduce(introduce);//작가소개
 				 authorservice.insertAuthor(vo);
 
-				 ctx.close();*/
-				 
+				 ctx.close();
+				 */
 				
-				//책저장
+				/*책저장
 				BookVo bookvo = new BookVo();
 				bookvo.setTitle(title);
 				bookvo.setBuyLink(buy_link);
@@ -193,7 +193,9 @@ public class TeenagerCrawling {
 				bookvo.setSubtitle(subtitle);
 				
 				bookService.insertBook(bookvo);
+				*/
 				
+				//책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
 
 				for(int k=0; k<lim; k++) {

@@ -41,7 +41,7 @@ public class livingCrawling {
 			Document document1 = Jsoup.connect("https://book.naver.com/bestsell/bestseller_list.nhn?type=image&cp=yes24&cate=001001001").get();
 			Elements booklink = document1.select("ol>li");
 
-			int count = 1;
+			int count = 14;
 			for(int i=0; i<22; i++) {
 
 				if(i==2 || i==3 || i==4 || i==5 || i==7 || i==9 || i==10 || i==14 || i==15 || i==16 || i==18 || i==19)
@@ -166,22 +166,22 @@ public class livingCrawling {
 				GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 				AuthorService authorservice = (AuthorService)ctx.getBean("authorService");
 
-				/*
-				 AuthorVo vo = new AuthorVo();
-				 if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
+				//작가저장
+				AuthorVo vo = new AuthorVo();
+				if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
 
-					 continue;
-				 }
+					continue;
+				}
 
-				 vo.setName(name); //작가이름
-				 vo.setIntroduce(introduce);//작가소개
-				 authorservice.insertAuthor(vo);
+				vo.setName(name); //작가이름
+				vo.setIntroduce(introduce);//작가소개
+				authorservice.insertAuthor(vo);
 
-				 ctx.close();
-*/
+				ctx.close();
+               
 
 
-				//책저장
+				/*책저장
 				BookVo bookvo = new BookVo();
 				bookvo.setTitle(title);
 				bookvo.setBuyLink(buy_link);
@@ -195,9 +195,9 @@ public class livingCrawling {
 				bookvo.setSubtitle(subtitle);
 
 				bookService.insertBook(bookvo);
-				 
+				
 
-				/*책의 콘텐츠저장
+				//책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
 
 				for(int k=0; k<lim; k++) {
@@ -212,7 +212,7 @@ public class livingCrawling {
 
 					contentService.insertContent(contentvo);
 					
-				}*/	
+				}*/
 			}
 			}catch(IOException e) {
 

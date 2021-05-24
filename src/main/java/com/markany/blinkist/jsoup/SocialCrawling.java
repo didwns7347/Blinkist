@@ -180,7 +180,7 @@ public class SocialCrawling {
 					 ctx.close();
 					 */
 					
-					//책저장
+					/*책저장
 					BookVo bookvo = new BookVo();
 					bookvo.setTitle(title);
 					bookvo.setBuyLink(buy_link);
@@ -194,6 +194,8 @@ public class SocialCrawling {
 					bookvo.setSubtitle(subtitle);
 					
 					bookService.insertBook(bookvo);
+					*/
+					
 					
 					//책의 콘텐츠저장
 					ContentVo contentvo = new ContentVo();

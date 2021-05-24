@@ -176,8 +176,25 @@ public class Self_developmentCrawling {
 
 				 ctx.close();
 				 */
+				 
+				 /*책저장
+					BookVo bookvo = new BookVo();
+					bookvo.setTitle(title);
+					bookvo.setBuyLink(buy_link);
+					bookvo.setSynopsis(synopsis);
+					bookvo.setCategory("자기계발");
+					bookvo.setImg_path(img_path);
+					
+					long author_no = authorservice.selectAuthor(name);
+					bookvo.setAuthor_no(author_no);
+					
+					bookvo.setSubtitle(subtitle);
+					
+					bookService.insertBook(bookvo);
+					*/
+				 
 				
-				//책의 콘텐츠저장
+				/*책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
 
 				for(int k=0; k<lim; k++) {
@@ -192,7 +209,7 @@ public class Self_developmentCrawling {
 
 					contentService.insertContent(contentvo);
 					
-				}	
+				}*/
 			}	  
 		}catch(IOException e) {
 

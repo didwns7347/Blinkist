@@ -162,18 +162,18 @@ public class UserController {
 		String newpassword = (String)request.getParameter("newpassword");
 
 		boolean result = userService.updatePw(email, oldpassword, newpassword);
-
+		
 		if(result) {
-
+			
 			model.addAttribute("message", "비밀번호를 변경하였습니다.");
-			return "redirect:/";
-
+			
 		}else {
 
 			model.addAttribute("message", "기존비밀번호를 잘못입력하셨습니다.확인해주세요.");
-			return "redirect:/";
-
-		}		
+		
+		}
+		
+		return "redirect:/";
 	}
 	
 	
@@ -191,13 +191,16 @@ public class UserController {
         model.addAttribute("message", "회원탈퇴하였습니다.");
         
 	    return "redirect:/";
+	    
 	}
 
 	
 	@RequestMapping("/logout")
 	public String join(HttpSession session) {
+		
 		session.removeAttribute("authUser");
 		return "redirect:/";
+		
 
 	}
 }

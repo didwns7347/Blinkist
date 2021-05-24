@@ -18,6 +18,19 @@
 		SELECT IFNULL(max(chapter_no), 0) FROM content; 
 		]]>
 	</select>
+	
+	
+	<!-- 해당 책번호의 콘텐츠가져오기   -->
+	<select id="selectContent" parameterType="long" resultType="contentvo">
+	<![CDATA[
+		SELECT 
+		     content_no,chapter_title,content,chapter_no,voice_path,book_no
+		from 
+		     content
+		where
+		     book_no = #{book_no}
+		]]>
+	</select>
 
 
 </mapper>

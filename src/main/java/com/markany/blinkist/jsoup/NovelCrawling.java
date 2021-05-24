@@ -168,7 +168,7 @@ public class NovelCrawling {
 			 GenericXmlApplicationContext ctx = new GenericXmlApplicationContext("classpath*:applicationContext.xml");
 			 AuthorService authorservice = (AuthorService)ctx.getBean("authorService");
 
-				 //작가저장
+				 /*작가저장
 				 AuthorVo vo = new AuthorVo();
 				 if(authorservice.checkName(name)!=null) {//작가이름이 이미있다면
 					 
@@ -180,7 +180,7 @@ public class NovelCrawling {
 				 authorservice.insertAuthor(vo);
             
 				 ctx.close();
-				 
+				 */
 				
 			
 				/*책저장
