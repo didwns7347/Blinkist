@@ -15,7 +15,8 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<link href="${pageContext.request.contextPath }/css/blinkist.css"
+	rel="stylesheet" />
 
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
@@ -49,7 +50,8 @@
 				<ul class="navbar-nav naver-inverse">
 
 					<!-- 로그인을 했을때 -->
-					<li class="nav-item"><a class="nav-link">Explore</a></li>
+					<li class="nav-item"><a class="nav-link"
+						href="javascript:void(0)" onclick="openExplore()">Explore</a></li>
 					<li class="nav-item"><a class="nav-link"
 						href="${pageContext.request.contextPath }/library/view?authUser=${authUser}">My
 							Library</a></li>
@@ -96,5 +98,46 @@
 
 
 </nav>
+
+<div id="explore" class="overlay">
+	<a href="javascript:void(0)" class="closebtn" onclick="closeExplore()">&times;</a>
+	<div class="overlay-content container">
+		<div class="discover-menu__header">
+			<h4 class=discover-menu__headline>Explore by category</h4>
+			<ul class="discover-menu__header-links">
+				<li><a href="${pageContext.request.contextPath }/book/recentlyadded" class="discover-menuheader-link">See
+						recentrly added titles</a></li>
+				<li><a href="${pageContext.request.contextPath }/book/popular" class="discover-menu__header-link">See
+						popular titles</a></li>
+			</ul>
+		</div>
+		<ul class="discover-menu__categories">
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 인문학 </a></li>
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 건강/생활/요리 </a></li>
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 소설 </a></li>
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 자기개발 </a></li>
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 사회 </a></li>
+			<li class="discover-menu__category"><a href="#"
+				class="discover-menu__category-link"> 청소년 </a></li>
+		</ul>
+	</div>
+
+</div>
+
+<script>
+	function openExplore() {
+		document.getElementById("explore").style.height = "50%";
+	}
+
+	function closeExplore() {
+		document.getElementById("explore").style.height = "0%";
+	}
+</script>
+
 <c:import url="/WEB-INF/jsp/modal/loginModal.jsp" />
 <c:import url="/WEB-INF/jsp/modal/logoutModal.jsp" />

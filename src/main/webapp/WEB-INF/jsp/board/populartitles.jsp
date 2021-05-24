@@ -172,17 +172,7 @@
 		
 		
 		
-		
-		
-		<div class="row" id="do"></div>
-		<div class="row">
-			<div class="col-md-4 mb-5"></div>
-			<div class="col-md-4 mb-5">
-				<button id="loadMore" type="button"
-					class="btn btn-outline-success btn-block">Load More</button>
-			</div>
-			<div class="col-md-4 mb-5"></div>
-		</div>
+	
 
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />

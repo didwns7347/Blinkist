@@ -89,6 +89,23 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate");
 		return list;
 	}
+	//라이브러리 추가시 count +1 증가
+	@Override
+	public boolean addCountByBook_no(long book_no) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count=sqlSession.update("bookMapper.addCountByBook_no", book_no);
+		sqlSession.commit();
+		return count==1;
+	}
+	//전체 조회수로 정렬
+	@Override
+	public List<HashMap<String, Object>> selectAllOrderByCount() {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByCount");
+		return list;
+	}
 	
 
 }

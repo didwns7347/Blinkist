@@ -68,8 +68,8 @@
 								${list.running_time}분
 							</p>
 						</div>
-						<div class="card-footer text-center" name="cardfooter" >
-							<a
+						<div class="card-footer text-center"  >
+							<a name="cardfooter"
 								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
 								Add Library</a>
 						</div>
@@ -95,8 +95,8 @@
 								${list.running_time}분
 							</p>
 						</div>
-						<div class="card-footer text-center" name="cardfooter">
-							<a
+						<div class="card-footer text-center"   >
+							<a name="cardfooter"
 								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
 								Add Library</a>
 						</div>
@@ -132,14 +132,14 @@
 	
 		var divs = document.getElementsByName('cardfooter')
 		for(var i=0;i<divs.length;i++){
-			divs.item(i).addEventListener("mouseover", changeGreen);
-			divs.item(i).addEventListener("mouseout", changeWite);
+			divs.item(i).addEventListener("mouseover", changeGreen,false);
+			divs.item(i).addEventListener("mouseout", changeWite,false);
 		}
 		function changeGreen(e) {
-			e.target.style.backgroundColor = "#0365F2";
+			e.target.parentNode.style.backgroundColor = "#0365F2";
 		}
 		function changeWite(e) {
-			e.target.style.backgroundColor = "white";
+			e.target.parentNode.style.backgroundColor = "white";
 		}
 	
 	</script>
