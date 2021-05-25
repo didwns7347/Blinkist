@@ -39,10 +39,6 @@ public class BookService {
 		return bookRepository.selectAllOrderByDate();
 	}
 
-	//라이브러리 추가시 카운트+1
-	public boolean addCount(long book_no) {
-		return bookRepository.addCountByBook_no(book_no);
-	}
 
 	//총 조회수로 책 골르기
 	public List<HashMap<String, Object>> findAllOrderByCount() {

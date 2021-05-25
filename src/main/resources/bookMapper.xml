@@ -57,11 +57,5 @@
 		]]>
 	</insert>
 	
-	<!-- 라이브러리에 추가되면 count가 증가됨 -->
-	<update id="addCountByBook_no" parameterType="long">
-		<![CDATA[
-			update book set count=count+1 where book_no=#{book_no} 
-		]]>
-	</update>
 
 </mapper>

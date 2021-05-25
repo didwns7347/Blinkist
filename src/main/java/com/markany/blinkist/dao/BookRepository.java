@@ -15,8 +15,6 @@ public interface BookRepository {
 
 	List<HashMap<String, Object>> selectAllOrderByDate();
 
-	boolean addCountByBook_no(long book_no);
-
 	List<HashMap<String, Object>> selectAllOrderByCount();
 
 

@@ -42,7 +42,7 @@
 	  <div class="overlay-content">
 		 <c:forEach var="item" items="${Content}" varStatus="status">
 		   <p style="margin-left:15px;"><a href="#" id="${item.content}" class="chapter_title"><c:out value="${item.chapter_title}" /></a></p>
-		   <input type="hidden" id="${item.content}" class="chapter_title" value="${item.chapter_title}"/>
+		   
 		</c:forEach>
 	  </div>
   </div>
@@ -51,7 +51,7 @@
   <button class="w3-bar-item w3-button w3-xlarge" data-toggle="modal" data-target="#fontsize"><i class="fa fa-font"></i></button>
 </div>
 
-<div>
+
   <button class="w3-button w3-white w3-xxxlarge" onclick="w3_open()">&#9776;</button>
   <div class="container">
    <c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
@@ -64,16 +64,16 @@
    
                                    <hr/>                             
   </div>                                 
-</div>
 
 
+<!-- paging -->
 <nav aria-label="Page navigation example">
-  <ul class="pagination">
-    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-    <li class="page-item"><a class="page-link" href="#">1</a></li>
-    <li class="page-item"><a class="page-link" href="#">2</a></li>
-    <li class="page-item"><a class="page-link" href="#">3</a></li>
-    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  <ul class="pagination justify-content-center">
+	<c:forEach items="${Content}" varStatus="status" var="item">
+	  <li class="page-item" id="${status.count}">
+	     <a class="page-link" href="#" name="${item.chapter_title}" id="${item.content}">${status.count}</a>
+	  </li>
+	</c:forEach>
   </ul>
 </nav>
 
