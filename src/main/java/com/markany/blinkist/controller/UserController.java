@@ -194,13 +194,10 @@ public class UserController {
 	    
 	}
 
-	
+	//로그아웃
 	@RequestMapping("/logout")
 	public String join(HttpSession session) {
-		
 		session.removeAttribute("authUser");
 		return "redirect:/";
-		
-
 	}
 }

@@ -17,4 +17,6 @@ public interface LibraryRepository {
 
 	List<HashMap<Object, Object>> selectByAuthUser(UserVo userVo);
 
+	List<Long> selectByAuthUser(String email);
+
 }

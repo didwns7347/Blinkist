@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.markany.blinkist.service.BookService;
+import com.markany.blinkist.service.LibraryCountService;
 import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.LibraryVo;
@@ -26,7 +27,7 @@ public class LibraryController {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private BookService bookService;
+	private LibraryCountService libraryCountService;
 	
 	
 	// 라이브러리 보여주기
@@ -45,7 +46,7 @@ public class LibraryController {
 		String ref = request.getHeader("Referer");
 		//System.out.println(book_no + authUser);
 		// bookService.addLibrary(no);
-		bookService.addCount(book_no);
+		libraryCountService.addCount(book_no);
 		UserVo userVo = userService.findByEmail(authUser);
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);

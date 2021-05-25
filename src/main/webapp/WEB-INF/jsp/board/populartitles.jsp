@@ -48,41 +48,31 @@
 		<p>The community's most read titles</p>
 		<br />
 		<div class="row" id="demo">
-			<c:forEach var="i" begin="1" end="6" step="1">
-				<div class="col-lg-4 col-md-6 mb-4" id="test">
-					<div class="card h-100">
-						<!-- img size 470x470 으로 고정 -->
-						<a href="#!"><img class="card-img-top"
-							src="${pageContext.request.contextPath }/assets/coverimgs/bookcover.jpg"
-							alt="..." /></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a href="#!">제목</a>
-							</h4>
-							<h5>작가</h5>
-							<p class="card-text">
-								<i style='font-size: 20px' class='far'>&#xf017;</i> 12-minuite
-								read
-							</p>
-							<div class="dropdown float-right">
-								<button type="button" class="btn btn-sm  "
-									data-toggle="dropdown">. . .</button>
-								<div class="dropdown-menu">
-									<a class="dropdown-item" href="#">Remove from library</a> <a
-										class="dropdown-item" href="#">Buy book</a> <a
-										class="dropdown-item" href="#">Send to Kindle</a>
-								</div>
+			<c:forEach items="${popularList }" var="list" varStatus="status">
+				<!-- 처음 여섯개는 보이게 하기 -->
+					<div class="col-lg-4 col-md-6 mb-4" id="test">
+						<div class="card h-100">
+							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
+								class="card-img-top" src="${list.img_path }" width="122"
+								height="180" alt="..." /> <br /> </a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<a
+										href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+								</h6>
+								<h5>${list.name }</h5>
+								<p class="card-text">
+									<i style='font-size: 20px' class='far'>&#xf017;</i>
+									${list.running_time}분
+								</p>
 							</div>
-						</div>
-						<div class="card-footer">
-							<!-- Blue -->
-							<div class="progress">
-								<div class="progress-bar bg-success" style="width: 10%"></div>
+							<div class="card-footer text-center">
+								<a name="cardfooter"
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+									Add Library</a>
 							</div>
-
 						</div>
 					</div>
-				</div>
 			</c:forEach>
 		</div>
 		
