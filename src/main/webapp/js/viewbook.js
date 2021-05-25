@@ -5,17 +5,25 @@ $(document).ready(function () {
 	let test = false;
 
 $('#Add_Library').click(function(){
-    
+
     //버튼의 내용바꾸기
     if(test==false){
         document.getElementById("Add_Library").innerText = "Read now";
         test = true;
         
-    }
+        var book_no =  $('#book_no').val();//book_no가져오기
+        var allData = { "book_no": book_no};
+	    $.ajax({
+	
+		   url : "http://localhost:8080/blinkist/library/button_addlibrary",
+		   type : "post",
+		   data : allData,
+		   success : function(data) {
+
+		}});
         
-	else
+    }
+    else
 	    $("#Add_Library").attr("href", "http://localhost:8080/blinkist/content/readbook?book_no="+$('#book_no').val());//하이퍼링크 활성화
  }); 
  });
- 
-

@@ -20,26 +20,30 @@ $(document).ready(function() {
 
 	$("#small").click(function() {//작은사이즈로 변경
 		
-		$("div.container").css("font-size", "12px");
+		$("#chapter_title").css("font-size", "12px");
+		$("#p_content").css("font-size", "12px");
 		
 	});
 	
 	
     $("#large").click(function() {//large size로 변경
 		
-		$("div.container").css("font-size", "35px");
+		$("#chapter_title").css("font-size", "35px");
+		$("#p_content").css("font-size", "35px");
 	});
     
     
     $("#xlarge").click(function() {//large size로 변경
 		
-		$("div.container").css("font-size", "40px");
+		$("#chapter_title").css("font-size", "40px");
+		$("#p_content").css("font-size", "40px");
 	});
     
     
     $("#xxlarge").click(function() {//large size로 변경
 		
-		$("div.container").css("font-size", "50px");
+		$("#chapter_title").css("font-size", "50px");
+		$("#p_content").css("font-size", "50px");
 	});
 });
 </script>

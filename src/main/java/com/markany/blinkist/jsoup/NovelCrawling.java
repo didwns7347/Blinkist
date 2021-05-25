@@ -5,14 +5,12 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.context.support.GenericXmlApplicationContext;
-
 import com.markany.blinkist.service.AuthorService;
 import com.markany.blinkist.service.BookService;
 import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.vo.AuthorVo;
 import com.markany.blinkist.vo.BookVo;
 import com.markany.blinkist.vo.ContentVo;
-
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -214,7 +212,7 @@ public class NovelCrawling {
 
 					contentService.insertContent(contentvo);
 					
-				}//	
+				}
 			}	  
 		}catch(IOException e) {
 

@@ -40,7 +40,6 @@ public class BookService {
 	}
 
 
-
 	//총 조회수로 책 골르기
 	public List<HashMap<String, Object>> findAllOrderByCount() {
 		return bookRepository.selectAllOrderByCount();

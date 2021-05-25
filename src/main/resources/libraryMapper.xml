@@ -27,7 +27,7 @@
 		<![CDATA[
 			insert 
 			into library
-			values(#{user_no}, #{book_no}, 0,now())
+			values(#{user_no}, #{book_no}, 0,now(),0)
 		]]>
 	</insert>
 	
