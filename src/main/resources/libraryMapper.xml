@@ -3,6 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="libraryMapper">
+
+	<!--  해당 유저가 라이브러리에 소유한 책 정보 읽어오기 -->
 	<select id="selectByAuthUser" parameterType="uservo"
 		resultType="HashMap">
 		select book.book_no, book.title, book.img_path,
@@ -12,13 +14,24 @@
 		and book.book_no IN ( select book_no from library where
 		user_no=#{user_no})
 	</select>
+	
+	<select id="selectByEmail" parameterType="string"
+		resultType="long">
+		select book_no
+		from library
+		where user_no=(select user_no from user where email=#{email})
+	</select>
+	
+	<!-- 라이브러리에 추가하기 객체로 -->
 	<insert id="insertVo" parameterType="libraryvo">
 		<![CDATA[
 			insert 
 			into library
-			values(#{user_no}, #{book_no}, 0,now())
+			values(#{user_no}, #{book_no}, 0,now(),0)
 		]]>
 	</insert>
+	
+	<!-- 라이브러리에 추가하기 long파라미터로 -->
 	<insert id="insertMap" parameterType="HashMap">
 		<![CDATA[
 			insert 

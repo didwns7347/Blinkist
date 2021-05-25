@@ -35,7 +35,9 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		return sqlMapper;
 
 	}
-
+	
+	
+	//라이브러리 추가 코드
 	@Override
 	public boolean insert(long book_no, long user_no) {
 		sqlMapper = getInstance();
@@ -48,7 +50,9 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 
 		return count==1;
 	}
-
+	
+	
+	//라이브러리 추가 코드
 	@Override
 	public boolean insert(LibraryVo libraryVo) {
 		sqlMapper = getInstance();
@@ -58,12 +62,26 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		return count==1;
 	}
 
+	
+	//유저객체로 라이브러리 가져오기
 	@Override
 	public List<HashMap<Object, Object>> selectByAuthUser(UserVo userVo) {
 		sqlMapper = getInstance();
 		System.out.println(userVo.toString());
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<Object,Object>> list=sqlSession.selectList("libraryMapper.selectByAuthUser", userVo);
+		sqlSession.commit();
+		return list;
+	}
+	
+	
+	//email로 라이브러리 책no 가져오기
+	@Override
+	public List<Long> selectByAuthUser(String email) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<Long> list=sqlSession.selectList("libraryMapper.selectByEmail", email);
+		sqlSession.commit();
 		return list;
 	}
 

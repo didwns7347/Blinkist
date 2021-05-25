@@ -30,6 +30,7 @@
 		<mapper resource="libraryMapper.xml"/>
 		<mapper resource="authorMapper.xml"/>
 		<mapper resource="contentMapper.xml"/>
+		<mapper resource="libraryCountMapper.xml"/>
 	</mappers>
 	
 	

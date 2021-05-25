@@ -66,13 +66,15 @@
 								<div class="col-lg-4 col-md-6 mb-4" id="test">
 									<div class="card h-100">
 										<!-- img size 470x470 으로 고정 -->
-										<a href="#!"><img class="card-img-top"
-											src="${list.img_path }" width="282" height="282" alt="..." /></a>
+										<a href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}"  style="background-color:#e2ae5f7a;"><br/><img class="card-img-top"
+											src="${list.img_path }" width="122" height="180" alt="..." />
+											<br/>
+										</a>
 										<div class="card-body">
-											<h4 class="card-title">
+											<h6 class="card-title">
 												<a
-													href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
-											</h4>
+													href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
+											</h6>
 											<h5>${list.name }</h5>
 											<p class="card-text">
 												<i style='font-size: 20px' class='far'>&#xf017;</i>

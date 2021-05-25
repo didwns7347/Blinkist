@@ -32,8 +32,8 @@
 		select book.book_no, book.title, book.img_path, book.running_time, author.name 
 		from book, author
 		where book.author_no = author.author_no 
-		order by count desc;
-		Limit 6	
+		order by count desc
+		limit 6	
 		]]>
 	</select>
 	
@@ -57,11 +57,5 @@
 		]]>
 	</insert>
 	
-	<!-- 라이브러리에 추가되면 count가 증가됨 -->
-	<update id="addCountByBook_no" parameterType="long">
-		<![CDATA[
-			update book set count=count+1 where book_no=#{book_no} 
-		]]>
-	</update>
 
 </mapper>

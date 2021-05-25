@@ -218,10 +218,14 @@ public class HumanitiesCrawling {
 					contentService.insertContent(contentvo);
 					
 
+<<<<<<< HEAD
 				}
 				
 
+=======
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				}*/
+
 
 			}		  
 		}catch(IOException e) {

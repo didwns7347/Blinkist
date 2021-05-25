@@ -39,14 +39,31 @@ public class BookService {
 		return bookRepository.selectAllOrderByDate();
 	}
 
-	//라이브러리 추가시 카운트+1
-	public boolean addCount(long book_no) {
-		return bookRepository.addCountByBook_no(book_no);
-	}
 
 	//총 조회수로 책 골르기
 	public List<HashMap<String, Object>> findAllOrderByCount() {
 		return bookRepository.selectAllOrderByCount();
+	}
+
+	//라이브러리 목록 과 비교하여 라이브러리에있는 책이면 true 아니면 false값을 해쉬맵에 추가한다.
+	public List<HashMap<String, Object>> libraryCheck(List<HashMap<String, Object>> list, List<Long> libraryList) {
+		for(HashMap<String, Object> map:list) {
+			long book_no=(long) map.get("book_no");
+			boolean check=false;
+			for(Long libBook_no : libraryList) {
+				if(book_no==libBook_no) {
+					check=true;
+					break;
+				}
+			}
+			if(check) {
+				map.put("libCheck", true);
+			}
+			else {
+				map.put("libCheck", false);
+			}
+		}
+		return list;
 	}
 
 }
