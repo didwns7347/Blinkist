@@ -36,11 +36,14 @@ public class BookController {
 	
 	//책 검색기능 제목,작가
 	@RequestMapping("/search")
-	public String search(Model model, String keyword) {
+	public String search(Model model, String keyword,HttpSession session) {
 		//System.out.println(keyword);
 		List<HashMap<String, Object>>  list = bookService.findByTitleAuthor(keyword);
+		String email=(String) session.getAttribute("authUser");
+		List<Long> libraryList = libraryService.findByAuthUser(email);
+		List<HashMap<String, Object>> lastlist=bookService.libraryCheck(list,libraryList);
 		//System.out.println("됨??");
-		model.addAttribute("list", list);
+		model.addAttribute("list", lastlist);
 		model.addAttribute("keyword",keyword);
 		return "board/searchresult";
 	}
@@ -69,19 +72,30 @@ public class BookController {
 	
 	//populartitles 보여주기 기능
 	@RequestMapping("/popular")
-	public String viewPopularBook(Model model) {
+	public String viewPopularBook(Model model, HttpSession session) {
+		String email=(String) session.getAttribute("authUser");
+		List<Long> libraryList = libraryService.findByAuthUser(email);
 		//총 조회수 로 6개
 		List<HashMap<String, Object>>  popularList = bookService.findAllOrderByCount();
 		//한달동안 가장 많이 읽은순 
-		//List<HashMap<String, Object>>  spotlightList = bookService.findAllOrderBySpotlight();
+		List<HashMap<String, Object>>  spotlightList = bookService.findAllOrderBySpotlight();
 		//최근 추가된 것 중 가장 많이 읽은순
-		//List<HashMap<String, Object>>  hotList = bookService.findAllOrderByHot();
-		model.addAttribute("popularList", popularList);
+		List<HashMap<String, Object>>  hotList = bookService.findAllOrderByHot();
+		
+		model.addAttribute( "spotlightList",bookService.libraryCheck(spotlightList,libraryList));
+		model.addAttribute("popularList", bookService.libraryCheck(popularList,libraryList));
+		model.addAttribute("hotList", bookService.libraryCheck(hotList,libraryList));
 		return "board/populartitles";
 	}
 	
 	
-
+	//카테고리 별 책 보여주기 기능
+	@RequestMapping("/category")
+	public String viewPopularBook(Model model,String category) {
+		model.addAttribute("category", category);
+		return "board/categorybook";
+	}
+	
 	
 	
 	

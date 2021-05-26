@@ -87,6 +87,7 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate");
+		sqlSession.close();
 		return list;
 	}
 
@@ -96,6 +97,30 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByCount");
+		sqlSession.close();
+		return list;
+	}
+	
+	
+	//한달간 가장 많이 읽은 책 6개 고르기
+	@Override
+	public List<HashMap<String, Object>> selectOrderBySpotlight() {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderBySpotlight");
+		sqlSession.close();
+		return list;
+	}
+	
+	
+	//최근 한달안에 추가된 책중 인기 많은 거 고르기
+	@Override
+	public List<HashMap<String, Object>> selectOrderByHot() {
+		// TODO Auto-generated method stub
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderByRecentlryAddedHot");
+		sqlSession.close();
 		return list;
 	}
 	

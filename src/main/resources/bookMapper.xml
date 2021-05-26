@@ -3,7 +3,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bookMapper">
-	<!--  검색 키워드에 일치하는지  -->
+
+	<!-- 검색 키워드에 일치하는지 -->
 	<select id="selectByTitleAuthor" parameterType="string"
 		resultType="HashMap">
 		<![CDATA[
@@ -14,10 +15,9 @@
 		author.name LIKE concat('%', #{keyword} ,'%');
 		]]>
 	</select>
-	
+
 	<!-- 날짜를 기준으로 리스트생성 -->
-	<select id="selectAllOrderByDate" 
-		resultType="HashMap">
+	<select id="selectAllOrderByDate" resultType="HashMap">
 		<![CDATA[
 		select book.book_no, book.title, book.img_path, book.running_time, author.name 
 		from book, author
@@ -25,19 +25,45 @@
 		order by reg_date desc;	
 		]]>
 	</select>
+
 	<!-- 전체 조회수를 기준으로 리스트생성 -->
-	<select id="selectAllOrderByCount" 
-		resultType="HashMap">
+	<select id="selectAllOrderByCount" resultType="HashMap">
 		<![CDATA[
-		select book.book_no, book.title, book.img_path, book.running_time, author.name 
-		from book, author
-		where book.author_no = author.author_no 
-		order by count desc
-		limit 6	
+		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name ,count(library.user_no) as cnt
+		FROM book JOIN library
+		ON library.book_no=book.book_no
+		JOIN author
+		ON author.author_no=book.author_no
+		GROUP BY book_no ORDER BY cnt DESC LIMIT 6
+		]]>
+	</select>
+
+	<!-- 한달간 가장 많이 조회된 데이터 가져오기 -->
+	<select id="selectOrderBySpotlight" resultType="HashMap">
+		<![CDATA[
+			SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name ,count(library.user_no) as cnt
+			FROM book JOIN library
+			ON library.book_no=book.book_no
+			JOIN author
+			ON author.author_no=book.author_no
+			WHERE library.reg_date BETWEEN DATE_ADD(now(), INTERVAL-1 MONTH) AND now() 
+			GROUP BY book_no ORDER BY cnt DESC LIMIT 6;
 		]]>
 	</select>
 	
-	
+	<!-- 최근에 한달에 추가된 것중 인기 많은 순 -->
+	<select id="selectOrderByRecentlryAddedHot" resultType="HashMap">
+		<![CDATA[
+			SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name ,count(library.user_no) as cnt
+			FROM book JOIN library
+			ON library.book_no=book.book_no
+			JOIN author
+			ON author.author_no=book.author_no
+			WHERE book.reg_date BETWEEN DATE_ADD(now(), INTERVAL-1 MONTH) AND now() 
+			GROUP BY book_no ORDER BY cnt DESC LIMIT 6;
+		]]>
+	</select>
+
 	<!-- book_no로 책검색 -->
 	<select id="selectByBook_no" parameterType="long"
 		resultType="HashMap">
@@ -48,14 +74,14 @@
 		book.book_no=#{no};
 		]]>
 	</select>
-	
-	
+
+
 	<!-- 책을 book table에 저장 -->
 	<insert id="insertBook" parameterType="bookvo">
 		<![CDATA[
 		insert into book values(null,#{title},0,0,#{buyLink},#{synopsis},#{category},"test",#{img_path},0,now(),#{author_no},#{subtitle})
 		]]>
 	</insert>
-	
+
 
 </mapper>

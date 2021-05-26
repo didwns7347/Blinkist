@@ -66,4 +66,16 @@ public class BookService {
 		return list;
 	}
 
+
+	public List<HashMap<String, Object>> findAllOrderBySpotlight() {
+		// TODO Auto-generated method stub
+		return bookRepository.selectOrderBySpotlight();
+	}
+
+
+	public List<HashMap<String, Object>> findAllOrderByHot() {
+		// TODO Auto-generated method stub
+		return bookRepository.selectOrderByHot();
+	}
+
 }

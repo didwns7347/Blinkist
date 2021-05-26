@@ -112,17 +112,17 @@
 			</ul>
 		</div>
 		<ul class="discover-menu__categories">
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=인문학"
 				class="discover-menu__category-link"> 인문학 </a></li>
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=건강/생활/요리"
 				class="discover-menu__category-link"> 건강/생활/요리 </a></li>
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=소설"
 				class="discover-menu__category-link"> 소설 </a></li>
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=자기개발"
 				class="discover-menu__category-link"> 자기개발 </a></li>
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=사회"
 				class="discover-menu__category-link"> 사회 </a></li>
-			<li class="discover-menu__category"><a href="#"
+			<li class="discover-menu__category"><a href="${pageContext.request.contextPath }/book/category?category=청소년"
 				class="discover-menu__category-link"> 청소년 </a></li>
 		</ul>
 	</div>

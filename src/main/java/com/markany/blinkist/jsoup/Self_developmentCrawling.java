@@ -177,6 +177,16 @@ public class Self_developmentCrawling {
 				 ctx.close();
 				 */
 
+				/*책저장
+				BookVo bookvo = new BookVo();
+				bookvo.setTitle(title);
+				bookvo.setBuyLink(buy_link);
+				bookvo.setSynopsis(synopsis);
+				bookvo.setCategory("자기개발");
+				bookvo.setImg_path(img_path);
+
+
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				 
 				 /*책저장
 					BookVo bookvo = new BookVo();
@@ -193,7 +203,7 @@ public class Self_developmentCrawling {
 					
 					bookService.insertBook(bookvo);
 					*/
-				 
+
 
 				/*책저장
 				BookVo bookvo = new BookVo();
@@ -203,10 +213,14 @@ public class Self_developmentCrawling {
 				bookvo.setCategory("자기개발");
 				bookvo.setImg_path(img_path);
 >>>>>>> refs/remotes/origin/mergeV0
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
 				/*책의 콘텐츠저장
 =======
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				long author_no = authorservice.selectAuthor(name);
 				bookvo.setAuthor_no(author_no);
 				
@@ -216,6 +230,7 @@ public class Self_developmentCrawling {
 				*/
 				//책의 콘텐츠저장
 
+				/*책의 콘텐츠저장
 				ContentVo contentvo = new ContentVo();
 
 				for(int k=0; k<lim; k++) {
@@ -230,11 +245,15 @@ public class Self_developmentCrawling {
 
 					contentService.insertContent(contentvo);
 
+
 				
 
+>>>>>>> branch 'loginImg' of https://github.com/didwns7347/markany.git
 				}//	
 
-			}	  
+				}*/
+			}
+
 		}catch(IOException e) {
 
 			e.printStackTrace();

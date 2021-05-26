@@ -45,7 +45,6 @@ public class LibraryController {
 		
 		// 이전페이지로 복귀하기 위해 이전페이지 url정보를 가죠오는 코드
 		String ref = request.getHeader("Referer");
-
 		UserVo userVo = userService.findByEmail(authUser);	
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);
@@ -60,7 +59,6 @@ public class LibraryController {
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/button_addlibrary", method = RequestMethod.POST)
 	public boolean button_addlibarary(HttpSession session,@RequestParam(value="book_no") long book_no) {
-		
 		//세션에 저장된 회원의 이메일정보가져오기
 		String email = (String)session.getAttribute("authUser");
 		//이메일을 토대로 회원정보가져오기
