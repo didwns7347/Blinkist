@@ -43,64 +43,92 @@
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 
-	<div class="container">
+	<div class="container ">
 		<h3>${keyword }에대한검색결과</h3>
 		<br />
 		<div class="row" id="demo">
 
 
 			<c:forEach items="${list }" var="list" varStatus="status">
-				<div class="col-lg-4 col-md-6 mb-4" id="test0">
-					<div class="card h-100">
-						<a
-							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"><img
-							class="card-img-top" src="${list.img_path }" alt="..."  width="282" height="282"/></a>
-						<div class="card-body">
-							<h4 class="card-title">
-								<a
-									href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
-							</h4>
-							<h5>${list.name }</h5>
-							<p class="card-text">
-								<i style='font-size: 20px' class='far'>&#xf017;</i>
-								${list.running_time}분
-							</p>
-						</div>
-						<div class="card-footer text-center" id="cardfooter">
-							<a
-								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
-								Add Library</a>
+				<c:if test="${list.libCheck }">
+
+					<div class="col-lg-4 col-md-6 mb-4" id="test">
+						<div class="card h-100">
+							<!-- img size 470x470 으로 고정 -->
+							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
+								class="card-img-top" src="${list.img_path }" width="122"
+								height="180" alt="..." /> <br /> </a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<a
+										href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
+								</h6>
+								<h5>${list.name }</h5>
+								<p class="card-text">
+									<i style='font-size: 20px' class='far'>&#xf017;</i>
+									${list.running_time}분
+								</p>
+								<div class="dropdown float-right">
+									<button type="button" class="btn btn-sm  "
+										data-toggle="dropdown">. . .</button>
+									<div class="dropdown-menu">
+										<a class="dropdown-item" href="#">Remove from library</a> <a
+											class="dropdown-item" href="#">Buy book</a> <a
+											class="dropdown-item" href="#">Send to Kindle</a>
+									</div>
+								</div>
+							</div>
+							<div class="card-footer">
+								<!-- Blue -->
+								<div class="progress">
+									<div class="progress-bar bg-success" style="width: 10%"></div>
+								</div>
+
+							</div>
 						</div>
 					</div>
-				</div>
+
+				</c:if>
+
+				<!-- 라이브러리에 없는 책일 경우 false -->
+				<c:if test="${not list.libCheck }">
+
+					<div class="col-lg-4 col-md-6 mb-4" id="test">
+						<div class="card h-100">
+							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
+								class="card-img-top" src="${list.img_path }" width="122"
+								height="180" alt="..." /> <br /> </a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<a
+										href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+								</h6>
+								<h5>${list.name }</h5>
+								<p class="card-text">
+									<i style='font-size: 20px' class='far'>&#xf017;</i>
+									${list.running_time}분
+								</p>
+							</div>
+							<div class="card-footer text-center">
+								<a name="cardfooter"
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+									Add Library</a>
+							</div>
+						</div>
+					</div>
+
+				</c:if>
 			</c:forEach>
 
-		
+
 
 
 		</div>
-		<div class="row" id="do"></div>
-		<div class="row">
-			<div class="col-md-4 mb-5"></div>
-			<div class="col-md-4 mb-5">
-				<button id="loadMore" type="button"
-					class="btn btn-outline-success btn-block">Load More</button>
-			</div>
-			<div class="col-md-4 mb-5"></div>
-		</div>
-
+		<br/>
+		<br/>
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	<script type="text/javascript">
-		var cnt = 1;
-		document.getElementById("loadMore").addEventListener("click",
-				DisplayDate);
-		function DisplayDate() {
-			cnt += 1
-			for (i = (cnt) * 15 + 1; i <= (cnt + 1) * 15; i++)
-				document.getElementById("test" + i).style.display = "block";
-		}
-	</script>
+
 	<script>
 		var myDiv = document.getElementById("cardfooter")
 		myDiv.addEventListener("mouseover", changeGreen);

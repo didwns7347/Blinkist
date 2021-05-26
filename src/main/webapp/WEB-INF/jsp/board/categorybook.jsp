@@ -42,10 +42,12 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
-
+	
 	<div class="container">
-		<h3>Popular Books</h3>
-		<p>The community's most read titles</p>
+		<h1>${category }</h1>
+		<input class="form-control" id="myInput" type="text" placeholder="Search..">
+		<br/>
+		<h3>인기순</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${popularList }" var="list" varStatus="status">
@@ -118,8 +120,7 @@
 			</c:forEach>
 		</div>
 
-		<h3>Spotlight</h3>
-		<p>Our handpiced favorites this month</p>
+		<h3>최근 추가된 책</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${spotlightList }" var="list" varStatus="status">
@@ -192,8 +193,8 @@
 			</c:forEach>
 		</div>
 
-		<h3>Recently added</h3>
-		<p>Hot off the press</p>
+		<h3>오디오 포함</h3>
+	
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${hotList }" var="list" varStatus="status">
@@ -264,6 +265,15 @@
 
 				</c:if>
 			</c:forEach>
+		</div>
+		<div class="row" id="do"></div>
+		<div class="row">
+			<div class="col-md-4 mb-5"></div>
+			<div class="col-md-4 mb-5">
+				<button id="loadMore" type="button"
+					class="btn btn-outline-success btn-block">카테고리에 포함된 모든 책 보기</button>
+			</div>
+			<div class="col-md-4 mb-5"></div>
 		</div>
 
 

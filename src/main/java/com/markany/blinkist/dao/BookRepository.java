@@ -17,6 +17,10 @@ public interface BookRepository {
 
 	List<HashMap<String, Object>> selectAllOrderByCount();
 
+	List<HashMap<String, Object>> selectOrderBySpotlight();
+
+	List<HashMap<String, Object>> selectOrderByHot();
+
 
 
 }

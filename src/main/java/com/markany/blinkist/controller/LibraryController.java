@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.markany.blinkist.service.LibraryCountService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,8 +24,7 @@ public class LibraryController {
 	private LibraryService libraryService;
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private LibraryCountService libraryCountService;
+	
 	
 	
 
@@ -49,7 +47,6 @@ public class LibraryController {
 
 		//System.out.println(book_no + authUser);
 		// bookService.addLibrary(no);
-		libraryCountService.addCount(book_no);
 		UserVo userVo = userService.findByEmail(authUser);	
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);
