@@ -4,24 +4,27 @@
 
 <mapper namespace="libraryMapper">
 
-	<!--  해당 유저가 라이브러리에 소유한 책 정보 읽어오기 -->
+	<!-- 해당 유저가 라이브러리에 소유한 책 정보 읽어오기 -->
 	<select id="selectByAuthUser" parameterType="uservo"
 		resultType="HashMap">
 		select book.book_no, book.title, book.img_path,
 		book.running_time, author.name
 		from author, book
-		where book.author_no=author.author_no
-		and book.book_no IN ( select book_no from library where
+		where
+		book.author_no=author.author_no
+		and book.book_no IN ( select book_no
+		from library where
 		user_no=#{user_no})
 	</select>
-	
+
 	<select id="selectByEmail" parameterType="string"
 		resultType="long">
 		select book_no
 		from library
-		where user_no=(select user_no from user where email=#{email})
+		where user_no=(select user_no
+		from user where email=#{email})
 	</select>
-	
+
 	<!-- 라이브러리에 추가하기 객체로 -->
 	<insert id="insertVo" parameterType="libraryvo">
 		<![CDATA[
@@ -30,7 +33,7 @@
 			values(#{user_no}, #{book_no}, 0,now(),0)
 		]]>
 	</insert>
-	
+
 	<!-- 라이브러리에 추가하기 long파라미터로 -->
 	<insert id="insertMap" parameterType="HashMap">
 		<![CDATA[
@@ -39,5 +42,34 @@
 			values(#{user_no}, #{book_no}, 0,now())
 		]]>
 	</insert>
+	
+	
+	<!-- progress값확인 -->
+	<select id="check_progress" parameterType="libraryvo" resultType="long">
+	   <![CDATA[
+	      select progress
+	      from library
+	      where user_no = #{user_no} and book_no =#{book_no}
+	   ]]>
+	</select>
 
+
+	<!-- progress업데이트 -->
+	<update id="update_progress" parameterType="libraryvo">
+	  <![CDATA[
+	       UPDATE library
+	       SET progress = #{progress}
+	       WHERE user_no = #{user_no} and book_no = #{book_no}
+	]]>
+	</update>
+	
+	
+	<!-- fin_check업데이트 -->
+	<update id="update_fincheck" parameterType="libraryvo">
+	  <![CDATA[
+	       UPDATE library
+	       SET fin_check = 1
+	       WHERE user_no = #{user_no} and book_no = #{book_no}
+	]]>
+	</update>
 </mapper>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import com.markany.blinkist.service.LibraryCountService;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,20 +22,20 @@ public class LibraryController {
 	
 	@Autowired
 	private LibraryService libraryService;
+	
 	@Autowired
 	private UserService userService;
-	@Autowired
-	private LibraryCountService libraryCountService;
 	
 	
-
 	// 라이브러리 보여주기
 	@RequestMapping("/view")
 	public String viewLibrary(Model model, String authUser) {
+		
 		UserVo userVo=userService.findByEmail(authUser);
 		List<HashMap<Object,Object>> booklist =libraryService.findByAuthUser(userVo);
 		model.addAttribute("list", booklist);
 		return "board/library";
+		
 	}
 
 	
@@ -47,9 +46,6 @@ public class LibraryController {
 		// 이전페이지로 복귀하기 위해 이전페이지 url정보를 가죠오는 코드
 		String ref = request.getHeader("Referer");
 
-		//System.out.println(book_no + authUser);
-		// bookService.addLibrary(no);
-		libraryCountService.addCount(book_no);
 		UserVo userVo = userService.findByEmail(authUser);	
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);
@@ -57,6 +53,7 @@ public class LibraryController {
 	
 		libraryService.addLibrary(libraryVo);
 		return "redirect:" + ref;
+		
 	}
 	
 
@@ -77,6 +74,38 @@ public class LibraryController {
 		libraryService.addLibrary(libraryVo);
 		
 		return true;
+		
+	}
+	
+	
+	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
+	@RequestMapping(value = "/update_progress", method = RequestMethod.POST)
+	public boolean update_progress(HttpSession session,@RequestParam(value="progress") long progress, @RequestParam(value="book_no") long book_no) {
+		
+		
+		//세션에 저장된 회원의 이메일정보가져오기
+		String email = (String)session.getAttribute("authUser");
+		//이메일을 토대로 회원정보가져오기
+		UserVo userVo = userService.findByEmail(email);
+		
+		LibraryVo libraryVo = new LibraryVo();
+		
+		libraryVo.setUser_no(userVo.getUser_no());
+		libraryVo.setBook_no(book_no);
+		libraryVo.setProgress(progress);
+		
+		//progress업데이트
+		libraryService.update_progress(libraryVo);
+		
+		// progress가 100이면 fin_check 1로 업데이트
+		if(progress==100) {
+			
+			libraryService.update_fincheck(libraryVo);
+
+		}
+
+		return true;
+		
 	}
 	
 	

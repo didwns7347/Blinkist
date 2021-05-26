@@ -17,18 +17,23 @@ import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.BookVo;
+import com.markany.blinkist.vo.LibraryVo;
 import com.markany.blinkist.vo.UserVo;
 
 @Controller
 @RequestMapping("/book")
 public class BookController {
+	
 	@Autowired
 	private BookService bookService;
+	
 	@Autowired
 	private LibraryService libraryService;
+	
 	@Autowired
 	private UserService userService;
 		
+	
 	//책 검색기능 제목,작가
 	@RequestMapping("/search")
 	public String search(Model model, String keyword) {
@@ -43,10 +48,12 @@ public class BookController {
 	
 	//책 보여주기 기능
 	@RequestMapping("/viewbook")
-	public String viewBook(Model model, long no) {
+	public String viewBook(HttpSession session,Model model, long no) {
+		
 		Map<Object, Object> map = bookService.findByNo(no);
-		model.addAttribute("map", map);
+		
 		return "board/viewbook";
+		
 	}
 	
 	//recentrlyadded 보여주기 기능

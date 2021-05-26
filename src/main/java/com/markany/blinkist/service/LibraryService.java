@@ -38,6 +38,30 @@ public class LibraryService {
 	//이메일로 라이브러리 읽어오기
 	public List<Long> findByAuthUser(String email) {
 		return libraryRepository.selectByAuthUser(email);
+		
 	}
-
+	
+	
+	//progress값확인
+	public long check_progress(LibraryVo libraryVo) {
+		
+		return libraryRepository.check_progress(libraryVo);
+		
+	}
+	
+	
+	//progress업데이트
+	public boolean update_progress(LibraryVo libraryVo) {
+		
+		return libraryRepository.update_progress(libraryVo);
+		
+	}
+	
+	
+	//fin_check업데이트
+	public boolean update_fincheck(LibraryVo libraryVo) {
+		
+		return libraryRepository.update_fincheck(libraryVo);
+		
+	}
 }

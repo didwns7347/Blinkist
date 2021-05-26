@@ -31,11 +31,17 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
+<c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
+   <input type="hidden" id="book_no" value="${item.book_no}"/>
+</c:forEach> 
+
+<!-- 기존의 progress -->
+<input type="hidden" id="existing_progress" value="${progress}"/>
 	
 <!-- side bar -->	
 <div class="w3-sidebar w3-bar-block w3-animate-left" style="display:none" id="Sidebar">
   <button class="w3-bar-item w3-button w3-xlarge" onclick="w3_close()">Close &times;</button>
-  <a href="${pageContext.request.contextPath }" class="w3-bar-item w3-button w3-xlarge"><i class="fa fa-home"></i></a>
+  <a href="${pageContext.request.contextPath }" class="w3-bar-item w3-button w3-xlarge" id="home"><i class="fa fa-home"></i></a>
 
   <div id="myNav" class="overlay">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -77,6 +83,9 @@
   </ul>
 </nav>
 
+
+<!-- progress -->
+<input type="hidden" id="progress" name="progress" value=""/>
 
 <!-- audio -->
 <audio controls preload="metadata" style="position: absolute; bottom: 0;">

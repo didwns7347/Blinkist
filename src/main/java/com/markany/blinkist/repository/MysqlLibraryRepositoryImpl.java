@@ -70,7 +70,7 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		System.out.println(userVo.toString());
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<Object,Object>> list=sqlSession.selectList("libraryMapper.selectByAuthUser", userVo);
-		sqlSession.commit();
+		sqlSession.close();
 		return list;
 	}
 	
@@ -81,8 +81,46 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<Long> list=sqlSession.selectList("libraryMapper.selectByEmail", email);
-		sqlSession.commit();
+		sqlSession.close();
 		return list;
 	}
+	
+	
+	@Override//progress값확인
+	public long check_progress(LibraryVo libraryVo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		long progress =sqlSession.selectOne("libraryMapper.check_progress", libraryVo);
+		sqlSession.close();
+		return progress;
+		
+	}
+	
+	
+	@Override//progress업데이트
+	public boolean update_progress(LibraryVo libraryVo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count = sqlSession.update("libraryMapper.update_progress", libraryVo);
+		sqlSession.commit();
+		return count==1;
+	
+	}
+	
+	
+	@Override//fin_check업데이트
+	public boolean update_fincheck(LibraryVo libraryVo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count = sqlSession.update("libraryMapper.update_fincheck", libraryVo);
+		sqlSession.commit();
+		return count==1;
+	
+	}
+	
+	
 
 }

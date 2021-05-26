@@ -8,4 +8,5 @@ public class LibraryVo {
 	private long book_no;
 	private boolean fin_check;
 	private String reg_date;
+	private long progress;
 }
