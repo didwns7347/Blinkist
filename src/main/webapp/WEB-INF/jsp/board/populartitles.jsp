@@ -283,15 +283,18 @@
 		}
 	</script>
 	<script>
-		var myDiv = document.getElementById("cardfooter")
-		myDiv.addEventListener("mouseover", changeGreen);
-		myDiv.addEventListener("mouseout", changeWite);
-		function changeGreen() {
-			myDiv.style.backgroundColor = "#0365F2";
+		var divs = document.getElementsByName('cardfooter')
+		for (var i = 0; i < divs.length; i++) {
+			divs.item(i).addEventListener("mouseover", changeGreen, false);
+			divs.item(i).addEventListener("mouseout", changeWite, false);
 		}
-		function changeWite() {
-			myDiv.style.backgroundColor = "white";
+		function changeGreen(e) {
+			e.target.parentNode.style.backgroundColor = "#0365F2";
+		}
+		function changeWite(e) {
+			e.target.parentNode.style.backgroundColor = "white";
 		}
 	</script>
+
 </body>
 </html>

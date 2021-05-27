@@ -2,6 +2,7 @@ package com.markany.blinkist.controller;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
 import com.markany.blinkist.service.BookService;
 import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.service.LibraryService;
@@ -23,81 +28,117 @@ import com.markany.blinkist.vo.UserVo;
 @Controller
 @RequestMapping("/book")
 public class BookController {
-	
+
 	@Autowired
 	private BookService bookService;
-	
+
 	@Autowired
 	private LibraryService libraryService;
-	
-	@Autowired
-	private UserService userService;
-		
-	
-	//책 검색기능 제목,작가
+
+
+	// 책 검색기능 제목,작가
 	@RequestMapping("/search")
-	public String search(Model model, String keyword,HttpSession session) {
-		//System.out.println(keyword);
-		List<HashMap<String, Object>>  list = bookService.findByTitleAuthor(keyword);
-		String email=(String) session.getAttribute("authUser");
+	public String search(Model model, String keyword, HttpSession session) {
+		// System.out.println(keyword);
+		List<HashMap<String, Object>> list = bookService.findByTitleAuthor(keyword);
+		String email = (String) session.getAttribute("authUser");
 		List<Long> libraryList = libraryService.findByAuthUser(email);
-		List<HashMap<String, Object>> lastlist=bookService.libraryCheck(list,libraryList);
-		//System.out.println("됨??");
+		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
+		// System.out.println("됨??");
 		model.addAttribute("list", lastlist);
-		model.addAttribute("keyword",keyword);
+		model.addAttribute("keyword", keyword);
 		return "board/searchresult";
 	}
-	
-	
-	//책 보여주기 기능
+
+	// 책 보여주기 기능 book_no
 	@RequestMapping("/viewbook")
-	public String viewBook(HttpSession session,Model model, long no) {
-		
+	public String viewBook(HttpSession session, Model model, long no) {
 		Map<Object, Object> map = bookService.findByNo(no);
-		
+		model.addAttribute("map",map );
 		return "board/viewbook";
-		
+
+	}
+	//책 보여주기기능 title,category,ahthor_name
+	@RequestMapping("/viewbookinfo")
+	public String viewBook(HttpSession session,Model model, String info, String category) {
+		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
+		model.addAttribute("map",map );
+		return "board/viewbook";
 	}
 	
-	//recentrlyadded 보여주기 기능
+
+	// recentrlyadded 보여주기 기능
 	@RequestMapping("/recentlyadded")
-	public String viewRecentBook(Model model,HttpSession session) {
-		List<HashMap<String, Object>>  list = bookService.findAllOrderByDate();
-		String email=(String) session.getAttribute("authUser");
+	public String viewRecentBook(Model model, HttpSession session) {
+		List<HashMap<String, Object>> list = bookService.findAllOrderByDate();
+		String email = (String) session.getAttribute("authUser");
 		List<Long> libraryList = libraryService.findByAuthUser(email);
-		List<HashMap<String, Object>> lastlist=bookService.libraryCheck(list,libraryList);
+		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
 		model.addAttribute("list", lastlist);
 		return "board/recentlyadded";
 	}
-	
-	//populartitles 보여주기 기능
+
+	// populartitles 보여주기 기능
 	@RequestMapping("/popular")
 	public String viewPopularBook(Model model, HttpSession session) {
-		String email=(String) session.getAttribute("authUser");
+		String email = (String) session.getAttribute("authUser");
 		List<Long> libraryList = libraryService.findByAuthUser(email);
-		//총 조회수 로 6개
-		List<HashMap<String, Object>>  popularList = bookService.findAllOrderByCount();
-		//한달동안 가장 많이 읽은순 
-		List<HashMap<String, Object>>  spotlightList = bookService.findAllOrderBySpotlight();
-		//최근 추가된 것 중 가장 많이 읽은순
-		List<HashMap<String, Object>>  hotList = bookService.findAllOrderByHot();
-		
-		model.addAttribute( "spotlightList",bookService.libraryCheck(spotlightList,libraryList));
-		model.addAttribute("popularList", bookService.libraryCheck(popularList,libraryList));
-		model.addAttribute("hotList", bookService.libraryCheck(hotList,libraryList));
+		// 총 조회수 로 6개
+		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount();
+		// 한달동안 가장 많이 읽은순
+		List<HashMap<String, Object>> spotlightList = bookService.findAllOrderBySpotlight();
+		// 최근 추가된 것 중 가장 많이 읽은순
+		List<HashMap<String, Object>> hotList = bookService.findAllOrderByHot();
+
+		model.addAttribute("spotlightList", bookService.libraryCheck(spotlightList, libraryList));
+		model.addAttribute("popularList", bookService.libraryCheck(popularList, libraryList));
+		model.addAttribute("hotList", bookService.libraryCheck(hotList, libraryList));
 		return "board/populartitles";
 	}
-	
-	
-	//카테고리 별 책 보여주기 기능
+
+	// 카테고리 별 책 보여주기 기능
 	@RequestMapping("/category")
-	public String viewPopularBook(Model model,String category) {
+	public String viewPopularBook(Model model, String category,  HttpSession session) {
+		String email = (String) session.getAttribute("authUser");
+		List<Long> libraryList = libraryService.findByAuthUser(email);
+		//트랜드 
+		List<HashMap<String, Object>> trendList = bookService.findAllCategoryOrderByCount(category);
+		//최신
+		List<HashMap<String, Object>> recentList = bookService.findAllCategoryOrderByDate(category);
+		//오디오 포함된 
+		List<HashMap<String, Object>> audioList = bookService.findAllCategoryIncludeAudio(category);
+		
+		
+		model.addAttribute("trendList",bookService.libraryCheck(trendList, libraryList));
+		model.addAttribute("recentList",bookService.libraryCheck(recentList, libraryList));
+		model.addAttribute("audioList",bookService.libraryCheck(audioList, libraryList));
 		model.addAttribute("category", category);
 		return "board/categorybook";
 	}
 	
 	
+	//카테고리 페이지 검색 기능 ajax 디비에 접근
+	@RequestMapping(value = "/json", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
+	@ResponseBody
+	public String json(Locale locale, Model model, String category) {
+		List<HashMap<String,String>> array=bookService.findAllCategory(category);
+		//String[] array = { "김치 볶음밥", "신라면", "진라면", "라볶이", "팥빙수", "너구리", "삼양라면", "안성탕면", "불닭볶음면", "짜왕", "라면사리" };
+		/*for(HashMap<String,String> map : array) {
+			System.out.println(map.get("title")+" by " +map.get("name"));
+		}*/
+		Gson gson = new Gson();
+		return gson.toJson(array);// ["김치 볶음밥","신라면","진라면","라볶이","팥빙수","너구리","삼양라면","안성탕면","불닭볶음면","짜왕","라면사리"]
+	}
 	
+	//해당 카테고리 모든 책 보여주는 페이지로 이동하는 ...
+	@RequestMapping("/allcategorybook")
+	public String viewAllCategoryBook(Model model, String category) {
+		System.out.println(category);
+		HashMap<String,List<String>> map=bookService.findAllCategoryToDictionary(category);
+		model.addAttribute("map", map);
+		model.addAttribute("category", category);
+		return "board/viewcategoryallbook";
+	}
 	
-	
+
 }

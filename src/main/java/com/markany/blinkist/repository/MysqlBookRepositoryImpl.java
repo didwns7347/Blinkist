@@ -124,5 +124,59 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		return list;
 	}
 	
+	
+	//해당 카테고리에 포함되는 모든책 가져오기
+	@Override
+	public List<HashMap<String,String>> selectAllCategory(String category) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String,String>> list = sqlSession.selectList("bookMapper.selectAllCategory", category);
+		sqlSession.close();
+		return list;
+	}
+	
+	//트랜드 블링크 책 가져오기
+	@Override
+	public List<HashMap<String, Object>> selectAllCategoryOrderByCount(String category) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryOrderByCount",category);
+		sqlSession.close();
+		return list;
+	}
+	//카테고리 최신 추가된 책 6권
+	@Override
+	public List<HashMap<String, Object>> selectAllCategoryOrderByDate(String category) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryOrderByDate",category);
+		sqlSession.close();
+		return list;
+	}
+	
+	//오디오가 포함된 책 가져오기
+	@Override
+	public List<HashMap<String, Object>> selectAllCategoryIncludeAudio(String category) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryIncludeAudio",category);
+		sqlSession.close();
+		return list;
+	}
+
+	//작가이름 책제목 카테고리로 가져오기
+	@Override
+	public Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category) {
+		HashMap<String,String> map=new HashMap<String,String>();
+		map.put("authorName", authorName);
+		map.put("title", title);
+		map.put("category", category);
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		Map<Object, Object> res=sqlSession.selectOne("bookMapper.selectByTitleAuthorCategory", map);
+		sqlSession.close();
+		return res;
+	}
+	
 
 }

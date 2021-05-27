@@ -55,7 +55,7 @@
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<!-- img size 470x470 으로 고정 -->
-							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
+							<a href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
 								class="card-img-top" src="${list.img_path }" width="122"
 								height="180" alt="..." /> <br /> </a>
 							<div class="card-body">
@@ -95,7 +95,7 @@
 
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
-							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
+							<a href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
 								class="card-img-top" src="${list.img_path }" width="122"
 								height="180" alt="..." /> <br /> </a>
 							<div class="card-body">

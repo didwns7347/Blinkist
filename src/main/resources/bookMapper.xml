@@ -25,6 +25,50 @@
 		order by reg_date desc;	
 		]]>
 	</select>
+	
+	<!-- 카테고리 트렌드 책 6개 가져오기 selectAllCategoryOrderByCount -->
+	<select id="selectAllCategoryOrderByCount"  parameterType="string" resultType="HashMap">
+		<![CDATA[
+		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name ,count(library.user_no) as cnt
+		FROM book JOIN library
+		ON library.book_no=book.book_no
+		JOIN author
+		ON author.author_no=book.author_no
+		WHERE book.category=#{category}
+		GROUP BY book_no ORDER BY cnt DESC LIMIT 6
+		]]>
+	</select>
+	<!--  카테고리 최신 추가된 책 6권 selectAllCategoryOrderByDate -->
+	<select id="selectAllCategoryOrderByDate"  parameterType="string" resultType="HashMap">
+		<![CDATA[
+		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name 
+		FROM book JOIN author
+		ON author.author_no=book.author_no
+		WHERE book.category=#{category}
+		ORDER BY book.reg_date DESC LIMIT 6
+		]]>
+	</select>
+	<!-- 카테고리에 포함된 오디오가 있는 책 6권  selectAllCategoryIncludeAudio-->
+	<select id="selectAllCategoryIncludeAudio"  parameterType="string" resultType="HashMap">
+		<![CDATA[
+		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name 
+		FROM book JOIN author
+		ON author.author_no=book.author_no
+		WHERE book.category=#{category} and Audio_check=0
+		ORDER BY title LIMIT 6
+		]]>
+	</select>
+	
+	<!-- 카테고리에 해당하는 모든 책 가져오기 -->
+	<select id="selectAllCategory" parameterType="string" resultType="HashMap">
+		<![CDATA[
+			select book.book_no, book.title, author.name
+			from book, author
+			where book.author_no=author.author_no
+			and book.category=#{category}
+			order by book.title;
+		]]>
+	</select>
 
 	<!-- 전체 조회수를 기준으로 리스트생성 -->
 	<select id="selectAllOrderByCount" resultType="HashMap">
@@ -74,7 +118,17 @@
 		book.book_no=#{no};
 		]]>
 	</select>
-
+	
+	<!-- 제목,작가이름 , category로 검색 selectByTitleAuthorCategory-->
+	<select id="selectByTitleAuthorCategory" parameterType="HashMap"
+		resultType="HashMap">
+		<![CDATA[
+		select *
+		from book, author
+		where book.author_no = author.author_no and 
+		book.title=#{title} and book.category=#{category} and author.name=#{authorName};
+		]]>
+	</select>
 
 	<!-- 책을 book table에 저장 -->
 	<insert id="insertBook" parameterType="bookvo">

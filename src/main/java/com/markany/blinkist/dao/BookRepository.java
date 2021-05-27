@@ -21,6 +21,16 @@ public interface BookRepository {
 
 	List<HashMap<String, Object>> selectOrderByHot();
 
+	List<HashMap<String, String>> selectAllCategory(String category);
+
+	List<HashMap<String, Object>> selectAllCategoryOrderByCount(String category);
+
+	List<HashMap<String, Object>> selectAllCategoryOrderByDate(String category);
+
+	List<HashMap<String, Object>> selectAllCategoryIncludeAudio(String category);
+
+	Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category);
+
 
 
 }
