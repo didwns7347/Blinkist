@@ -80,7 +80,7 @@ public class HumanitiesCrawling {
 				//콘텐츠내용
 				ArrayList<String> content = new ArrayList<String>();
 			
-				if(i==17  || i==20) {
+				if(i==17  || i==20 || i==1) {
 					
 					String[] content_List = bookInfo.select(".section").get(4).select("p").first().html().split("<br>");
 					
@@ -179,8 +179,8 @@ public class HumanitiesCrawling {
 				 authorservice.insertAuthor(authorvo);
                
 				 ctx.close();
-				*/ 
 				
+				*/
 			
 				/*책저장
 				BookVo bookvo = new BookVo();

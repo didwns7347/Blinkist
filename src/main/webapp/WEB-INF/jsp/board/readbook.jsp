@@ -31,9 +31,9 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 </head>
 <body>
-<c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
-   <input type="hidden" id="book_no" value="${item.book_no}"/>
-</c:forEach> 
+   <!-- 책번호 -->
+   <input type="hidden" id="book_no" value="${book_no}"/>
+
 
 <!-- 기존의 progress -->
 <input type="hidden" id="existing_progress" value="${progress}"/>
@@ -43,12 +43,11 @@
   <button class="w3-bar-item w3-button w3-xlarge" onclick="w3_close()">Close &times;</button>
   <a href="${pageContext.request.contextPath }" class="w3-bar-item w3-button w3-xlarge" id="home"><i class="fa fa-home"></i></a>
 
-  <div id="myNav" class="overlay">
+  <div id="chapter" class="overlay">
 	<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
 	  <div class="overlay-content">
 		 <c:forEach var="item" items="${Content}" varStatus="status">
-		   <p style="margin-left:15px;"><a href="#" id="${item.content}" class="chapter_title"><c:out value="${item.chapter_title}" /></a></p>
-		   
+		   <p style="margin-left:15px;" id="${status.count}" class="${item.content_no}"><a href="#" id="${item.content}" name="${item.content_no}" class="chapter_title"><c:out value="${item.chapter_title}"/></a></p>   
 		</c:forEach>
 	  </div>
   </div>
@@ -61,22 +60,31 @@
   <button class="w3-button w3-white w3-xxxlarge" onclick="w3_open()">&#9776;</button>
   <div class="container">
    <c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
-       <h1 id="chapter_title">${item.chapter_title}</h1>
+       <h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
    
                                     <hr/>
                                     
-       <p id="p_content">${item.content}</p>                            
+       <p id="p_content" class="">${item.content}</p>                            
    </c:forEach>      
    
                                    <hr/>                             
-  </div>                                 
+  </div>
+
+<!-- Highlights메뉴 -->  
+<ul class="contextmenu">
+  <li><a class="addHilight" href="#"><i class="fas fa-highlighter fa-2x" style="color:green"></i></a></li>
+</ul>                                 
+
+
+<!-- hilight에 넣을 문자열들 -->
+<div id="hilight" style="display: none;"></div>
 
 
 <!-- paging -->
 <nav aria-label="Page navigation example">
   <ul class="pagination justify-content-center">
 	<c:forEach items="${Content}" varStatus="status" var="item">
-	  <li class="page-item" id="${status.count}">
+	  <li class="page-item" id="${status.count}" name="${item.content_no}">
 	     <a class="page-link" href="#" name="${item.chapter_title}" id="${item.content}">${status.count}</a>
 	  </li>
 	</c:forEach>
@@ -92,7 +100,8 @@
   <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
 </audio>
 
-<c:import url="/WEB-INF/jsp/modal/fontsizeModal.jsp" /> 
+<c:import url="/WEB-INF/jsp/modal/fontsizeModal.jsp" />
+
 </body>
 </html> 
 	

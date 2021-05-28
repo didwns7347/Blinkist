@@ -1,9 +1,12 @@
 package com.markany.blinkist.vo;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
 public class HilightVo {
+	
 	private long hilight_no;
 	private long book_no;
 	private String content;

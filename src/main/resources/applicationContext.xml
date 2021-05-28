@@ -10,8 +10,8 @@
 	<!-- inventory DB를 사용하기 위한 코드 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/blinkist?characterEncoding=utf8&amp;serverTimezone=UTC" />
-		<property name="username" value="root" />
+		<property name="url" value="jdbc:mysql://125.130.243.105:3306/blinkist?characterEncoding=utf8&amp;serverTimezone=UTC" />
+		<property name="username" value="blinkist" />
 		<property name="password" value="1234" />
 	</bean>
 

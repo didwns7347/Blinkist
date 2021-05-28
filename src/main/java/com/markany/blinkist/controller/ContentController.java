@@ -46,6 +46,7 @@ public class ContentController {
 		
         model.addAttribute("Content", contentvo);
 		model.addAttribute("progress", progress);
+		model.addAttribute("book_no",book_no);
 		
 		return "board/readbook";
 		

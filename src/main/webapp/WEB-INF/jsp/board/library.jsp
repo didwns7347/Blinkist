@@ -51,117 +51,110 @@
 			<div class="container">
 				<ul class="nav nav-pills" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
-						data-toggle="pill" href="#home">Currently reading</a></li>
+						data-toggle="pill" href="#menu1">Currently reading</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="pill"
-						href="#menu1"> Finished </a></li>
+						href="#menu2"> Finished </a></li>
 
 				</ul>
 
+				<!-- menu1은 아직읽고 있는 책이 나오게 -->
 				<div class="tab-content">
-					<div id="home" class="container tab-pane active">
+					<div id="menu1" class="container tab-pane active">
 						<br />
 						<div class="row">
 							<br>
 							<c:forEach items="${list }" var="list" varStatus="status">
-								<div class="col-lg-4 col-md-6 mb-4" id="test">
-									<div class="card h-100">
-										<!-- img size 470x470 으로 고정 -->
-										<a href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}"  style="background-color:#e2ae5f7a;"><br/><img class="card-img-top"
-											src="${list.img_path }" width="122" height="180" alt="..." />
-											<br/>
-										</a>
-										<div class="card-body">
-											<h6 class="card-title">
-												<a
-													href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
-											</h6>
-											<h5>${list.name }</h5>
-											<p class="card-text">
-												<i style='font-size: 20px' class='far'>&#xf017;</i>
-												${list.running_time}분
-											</p>
-											<div class="dropdown float-right">
-												<button type="button" class="btn btn-sm  "
-													data-toggle="dropdown">. . .</button>
-												<div class="dropdown-menu">
-													<a class="dropdown-item" href="#">Remove from library</a> <a
-														class="dropdown-item" href="#">Buy book</a> <a
-														class="dropdown-item" href="#">Send to Kindle</a>
+								<c:if test="${list.progress != 100}">
+									<div class="col-lg-4 col-md-6 mb-4" id="test">
+										<div class="card h-100">
+											<!-- img size 470x470 으로 고정 -->
+											<a
+												href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}"
+												style="background-color: #e2ae5f7a;"><br />
+											<img class="card-img-top" src="${list.img_path }" width="122"
+												height="180" alt="..." /> <br /> </a>
+											<div class="card-body">
+												<h6 class="card-title">
+													<a
+														href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
+												</h6>
+												<h5>${list.name }</h5>
+												<p class="card-text">
+													<i style='font-size: 20px' class='far'>&#xf017;</i>
+													${list.running_time}분
+												</p>
+												<div class="dropdown float-right">
+													<button type="button" class="btn btn-sm  "
+														data-toggle="dropdown">. . .</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="#">Remove from library</a>
+														<a class="dropdown-item" href="#">Buy book</a> <a
+															class="dropdown-item" href="#">Send to Kindle</a>
+													</div>
+												</div>
+											</div>
+											<div>
+												<!-- Blue -->
+												<div class="progress">
+													<div class="progress-bar" role="progressbar"
+														aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+														style="width:${list.progress}%">${list.progress}%</div>
 												</div>
 											</div>
 										</div>
-										<div class="card-footer">
-											<!-- Blue -->
-											<div class="progress">
-												<div class="progress-bar bg-success" style="width: 10%"></div>
-											</div>
-
-										</div>
 									</div>
-								</div>
+								</c:if>
 							</c:forEach>
 						</div>
 					</div>
 
-
-					<div id="menu1" class="container tab-pane fade">
-						<br>
+                    <!-- menu2는 아직 읽고있는 책이 나오게 -->
+					<div id="menu2" class="container tab-pane fade">
+						<br />
 						<div class="row">
 							<br>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">Item One</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Amet numquam aspernatur!</p>
+							<c:forEach items="${list }" var="list" varStatus="status">
+								<c:if test="${list.progress == 100}">
+									<div class="col-lg-4 col-md-6 mb-4" id="test">
+										<div class="card h-100">
+											<!-- img size 470x470 으로 고정 -->
+											<a
+												href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}"
+												style="background-color: #e2ae5f7a;"><br />
+											<img class="card-img-top" src="${list.img_path }" width="122"
+												height="180" alt="..." /> <br /> </a>
+											<div class="card-body">
+												<h6 class="card-title">
+													<a
+														href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
+												</h6>
+												<h5>${list.name }</h5>
+												<p class="card-text">
+													<i style='font-size: 20px' class='far'>&#xf017;</i>
+													${list.running_time}분
+												</p>
+												<div class="dropdown float-right">
+													<button type="button" class="btn btn-sm  "
+														data-toggle="dropdown">. . .</button>
+													<div class="dropdown-menu">
+														<a class="dropdown-item" href="#">Remove from library</a>
+														<a class="dropdown-item" href="#">Buy book</a> <a
+															class="dropdown-item" href="#">Send to Kindle</a>
+													</div>
+												</div>
+											</div>
+											<div>
+												<!-- Blue -->
+												<div class="progress">
+													<div class="progress-bar" role="progressbar"
+														aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+														style="width:${list.progress}%">${list.progress}%</div>
+												</div>
+											</div>
+										</div>
 									</div>
-									<div class="card-footer">
-										<small class="text-muted">★ ★ ★ ★ ☆</small>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">Item One</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">★ ★ ★ ★ ☆</small>
-									</div>
-								</div>
-							</div>
-							<div class="col-lg-4 col-md-6 mb-4" id="test">
-								<div class="card h-100">
-									<a href="#!"><img class="card-img-top"
-										src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-										alt="..." /></a>
-									<div class="card-body">
-										<h4 class="card-title">
-											<a href="#!">Item One</a>
-										</h4>
-										<h5>$24.99</h5>
-										<p class="card-text">Lorem ipsum dolor sit amet,
-											consectetur adipisicing elit. Amet numquam aspernatur!</p>
-									</div>
-									<div class="card-footer">
-										<small class="text-muted">★ ★ ★ ★ ☆</small>
-									</div>
-								</div>
-							</div>
+								</c:if>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

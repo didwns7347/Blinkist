@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="hilightMapper">
+
+
+	<!-- 하이라이트저장 -->
+	<insert id="insertHilight" parameterType="hilightvo">
+		<![CDATA[
+		insert into hilight values(null,#{book_no},#{content},#{user_no},now(),#{content_no})
+		]]>
+	</insert>
+	
+	
+	<!-- 사용자의 하이라이트내용들을 제목정렬순으로가져오기 -->
+	<select id="selectHilightbyTitle" parameterType="long" resultType="HashMap">
+	  <![CDATA[
+	    select book.title,hilight.content,DATE_FORMAT(hilight.reg_date,'%Y-%m-%d %H:%i:%s') as reg_date,content.chapter_title,content.chapter_no
+        from book,hilight,content
+        where book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no
+        order by book.title asc
+	  ]]>
+	</select>
+	
+	
+	<!-- 사용자의 하이라이트내용들을 제목정렬으로가져오기 -->
+    <select id="selectHilightbyDate" parameterType="hilightvo" resultType="HashMap">
+	  <![CDATA[
+	          select book.title,hilight.content,TIMESTAMPDIFF(HOUR, #{reg_date}, now()) as reg_date ,content.chapter_title,content.chapter_no
+	          from book,hilight,content
+	          where user_no=#{user_no} and book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no  and hilight.reg_date=#{reg_date}
+	  ]]>
+	</select>
+
+</mapper>

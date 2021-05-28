@@ -52,6 +52,9 @@ public class BookController {
 		
 		Map<Object, Object> map = bookService.findByNo(no);
 		
+		model.addAttribute("map", map);
+		
+		
 		return "board/viewbook";
 		
 	}

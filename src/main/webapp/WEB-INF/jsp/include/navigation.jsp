@@ -56,7 +56,7 @@
 						href="${pageContext.request.contextPath }/library/view?authUser=${authUser}">My
 							Library</a></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath }/board/myboard?writer=">Highlights</a></li>
+						href="${pageContext.request.contextPath }/hilight/hilight?authUser=${authUser}">Highlights</a></li>
 
 					<!-- 검색 -->
 					<li class="nav-item">

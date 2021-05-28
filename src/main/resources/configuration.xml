@@ -8,6 +8,7 @@
 		<typeAlias type="com.markany.blinkist.vo.LibraryVo" alias="libraryvo"/>
 		<typeAlias type="com.markany.blinkist.vo.AuthorVo" alias="authorvo"/>
 		<typeAlias type="com.markany.blinkist.vo.ContentVo" alias="contentvo"/>
+		<typeAlias type="com.markany.blinkist.vo.HilightVo" alias="hilightvo"/>
 	</typeAliases>
 	
 	
@@ -16,8 +17,8 @@
 			<transactionManager type="JDBC" />
 			<dataSource type="POOLED">
 				<property name="driver" value="com.mysql.cj.jdbc.Driver" />
-				<property name="url" value="jdbc:mysql://localhost:3306/blinkist?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
-				<property name="username" value="root" />
+				<property name="url" value="jdbc:mysql://125.130.243.105:3306/blinkist?characterEncoding=UTF-8&amp;serverTimezone=UTC" />
+				<property name="username" value="blinkist" />
 				<property name="password" value="1234" />
 			</dataSource>
 		</environment>
@@ -30,7 +31,7 @@
 		<mapper resource="libraryMapper.xml"/>
 		<mapper resource="authorMapper.xml"/>
 		<mapper resource="contentMapper.xml"/>
-		<mapper resource="libraryCountMapper.xml"/>
+		<mapper resource="hilightMapper.xml"/>
 	</mappers>
 	
 	
