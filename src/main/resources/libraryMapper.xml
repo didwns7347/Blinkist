@@ -8,13 +8,13 @@
 	<select id="selectByAuthUser" parameterType="uservo"
 		resultType="HashMap">
 		select book.book_no, book.title, book.img_path,
-		book.running_time, author.name,book.buyLink
-		from author, book
+		book.running_time, author.name, library.progress,book.buyLink
+		from author, book,library
 		where
 		book.author_no=author.author_no
 		and book.book_no IN ( select book_no
 		from library where
-		user_no=#{user_no})
+		user_no=#{user_no}) and library.book_no = book.book_no and user_no=#{user_no}
 	</select>
 
 	<select id="selectByEmail" parameterType="string"

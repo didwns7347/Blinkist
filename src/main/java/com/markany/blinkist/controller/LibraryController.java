@@ -108,7 +108,7 @@ public class LibraryController {
 		//progress업데이트
 		libraryService.update_progress(libraryVo);
 		
-		// progress가 100이면 fin_check 1로 업데이트
+		//progress가 100이면 fin_check 1로 업데이트
 		if(progress==100) {
 			
 			libraryService.update_fincheck(libraryVo);

@@ -12,82 +12,44 @@ function w3_close() {
 
 //chapter 열고 닫기
 function openNav() {
-  document.getElementById("myNav").style.width = "30%";
+  document.getElementById("chapter").style.width = "30%";
 }
 
 function closeNav() {
-  document.getElementById("myNav").style.width = "0%";
+  document.getElementById("chapter").style.width = "0%";
 }
 
 
-//content내용변경
-$(document).ready(function () {
-
-$('.chapter_title').click(function(){
-
-    //a태그의 text값가져오기
-    var chapter = $(this).text();
-    
-    //p태그 "chapter_title"값교체
-	$("#chapter_title").text(chapter);
-    
-    	
-	//a태그의 id값(content)가져오기
-	var content = $(this).attr('id');
-		
-	//p태그 content값교제 
-	$("#p_content").text(content);
-	
- }); 
- });
- 
- 
-//paging
- $(document).ready(function () {
- 
-   $('.page-link').click(function(){
-
-     //해당페이지의 name값(chapter_title)가져오기
-     var chapter = $(this).attr('name');
-        
-     //해당페이지의 id값(content)가져오기
-     var content = $(this).attr('id');
-     
-     //p태그 "chapter_title"값교체
-	 $("#chapter_title").text(chapter);
-	 
-	 //p태그 content값교제 
-	 $("#p_content").text(content);
-	 
-	  //해당번호를 가져오기 
-      var this_pagenum = $(this).text();
-                  
-   });
- });
- 
- 
- //progress
+//책을 처음읽을때의 progress
 $(document).ready(function () {
 
    //책의 전체페이지수 구하기
-   var chapter_total = $("li").length;
-
+   var chapter_total = $(".page-item").length;
+   
+   
    //책을 읽으면 첫번째 페이지는 읽은것!
    var first_read = parseInt(1/chapter_total*100);
    
+   //첫페이지의 content가져오기
+   var content_no = $('#chapter_title').attr('class');
+	
+   //p_content class값교체 
+   $("#p_content").addClass(content_no);
    
-   //기존 progress보다 큰값이면 (즉 기존의 progress가 0 이면)
-   if($('#existing_progress').val() < first_read){
+ 
+   //책을 처음읽을때의 progress(즉 기존의 progress가 0 이면)
+   if($('#existing_progress').val()==0){
    
-      //progree tag에 값넣기
+      //progress tag에 값넣기
       $('#progress').val(first_read);
       
      //progress갱신
      var progress =  $('#progress').val();//progress값가져오기
-   
+     
      var book_no = $('#book_no').val();//book_no값가져오기
-        
+             
      var allData = { "progress": progress, "book_no" : book_no};
+     
      $.ajax({
 	
 	    url : "http://localhost:8080/blinkist/library/update_progress",
@@ -96,13 +58,103 @@ $(document).ready(function () {
 	    success : function(data) {
 
 	}});
-   }
+ }
+ });
+
+
+//chapter메뉴에서 chapter선택할때
+$(document).ready(function () {
+   $('.chapter_title').click(function(){
+
+//1.chapter 메뉴에서의 content내용변경
+
+     //a태그의 text값가져오기
+     var chapter = $(this).text();
+     //p태그 "chapter_title"값교체
+	 $("#chapter_title").text(chapter);
+     
+    	
+	 //a태그의 id값(content)가져오기
+	 var content = $(this).attr('id');	
+	 //p태그 content값교체 
+	 $("#p_content").text(content);
+	
+	
+	 //a태그의 name값(content_no)가져오기
+	 var content_no = $(this).attr('name');
+	
+	 //p태그 class값교체 
+	 $( '#p_content' ).removeAttr( 'class' );
+	 $("#p_content").addClass(content_no);
+	 
+
+//2.progress바꾸기
    
-    
-   $('.page-link').click(function(){
-   
+      //책의 전체페이지수 구하기
+      var chapter_total = $(".page-item").length;
+
      //해당페이지번호 가져오기
+     var this_pagenum = $(this).closest('p').attr('id');
+
+     //중간 페이지를 건너뛰어도 중간페이지도 읽은걸로!
+     var page_read = parseInt(this_pagenum/chapter_total*100);
+     
+     //이전 번호를 눌러도 큰 번호가 들어가도록
+     if($('#progress').val()<page_read){
+     
+        //progress tag에 값넣기
+        $('#progress').val(page_read);
+        
+     }   
+	
+     var book_no = $('#book_no').val();//book_no값가져오기
+        
+     var progress = $('#progress').val(); //progress값가져오기
+                
+     var allData = { "progress": progress, "book_no" : book_no};
+         
+     $.ajax({
+	
+	        url : "http://localhost:8080/blinkist/library/update_progress",
+            type : "post",
+            data : allData,
+	        success : function(data) {
+
+	 }});   
+ });
+}); 
+ 
+ 
+//paging에서 chapter선택할때
+ $(document).ready(function () {
+   $('.page-link').click(function(){
+
+//1. 내용변경
+     //해당페이지의 name값(chapter_title)가져오기
+     var chapter = $(this).attr('name');
+     //p태그 "chapter_title"값교체
+	 $("#chapter_title").text(chapter);
+   
+     //해당페이지의 id값(content)가져오기
+     var content = $(this).attr('id');
+	 //p태그 content값교체
+	 $("#p_content").text(content);
+	 
+	 //해당페이지의 content_no구하기
+	 var content_no = $(this).parents("li").attr('name');
+
+	 //p태그 class값교체 
+	 $( '#p_content' ).removeAttr( 'class' );
+	 $("#p_content").addClass(content_no);
+	 
+
+//2.paging progress갱신    	 
+
+	 //해당페이지번호 가져오기
      var this_pagenum = $(this).text();
+     
+     //전체페이지
+     var chapter_total = $("li.page-item").length;
      
      //중간 페이지를 건너뛰어도 중간페이지도 읽은걸로!
      var page_read = parseInt(this_pagenum/chapter_total*100);
@@ -114,16 +166,18 @@ $(document).ready(function () {
         $('#progress').val(page_read);
      
      }
-     
+
      //기존 progress보다 큰값이면 (즉 기존의 progress가 0 이면)
      if($('#existing_progress').val() < page_read){
      
      //progress갱신
      var progress =  $('#progress').val();//progress값가져오기
    
-   var book_no = $('#book_no').val();//book_no값가져오기
+     var book_no = $('#book_no').val();//book_no값가져오기
         
-   var allData = { "progress": progress, "book_no" : book_no};
+     var allData = { "progress": progress, "book_no" : book_no};
+  
+   
    $.ajax({
 	
 	  url : "http://localhost:8080/blinkist/library/update_progress",
@@ -131,6 +185,177 @@ $(document).ready(function () {
       data : allData,
 	  success : function(data) {
 
-	}});}   
+	}
+	});
+	}                   
    });
-   });
+ });
+ 
+    
+//첫페이지가 아닌읽은페이지에서 시작하도록 설정
+$(document).ready(function () {
+
+  //만약 progress가 0이 아닐때만
+  if($('#existing_progress').val()>0){
+  
+  //책의 전체페이지수 구하기
+  var chapter_total = $("li.page-item").length;
+  
+    
+  //기존 progress값구하기
+  var existing_progress = $('#existing_progress').val();
+       
+  //지금까지 읽은페이지수 구하기
+  var existing_paging = Math.round(existing_progress/100*chapter_total);
+  
+
+  //지금까지 읽은페이지의 a태그 구하기
+  var existing_paging_a = $('.page-link').get(existing_paging-1);
+    
+  //해당페이지의 chapter_title가져오기
+  var chapter = $(existing_paging_a).attr('name');
+  
+  //해당페이지의 id값(content)가져오기
+  var content = $(existing_paging_a).attr('id');
+  
+        
+  //p태그 "chapter_title"값교체
+  $("#chapter_title").text(chapter);
+	 
+  //p태그 content값교제 
+  $("#p_content").text(content);
+  
+	 
+   //해당페이지의 content_no구하기
+   var content_no = $(existing_paging_a).parents("li").attr('name');
+
+   //p태그 class값교체 
+   $( '#p_content' ).removeAttr( 'class' );
+   $("#p_content").addClass(content_no);
+	 
+
+ }
+});
+ 
+ 
+//텍스트 마우스로 긁기(Highlight)
+function selectText(){
+    
+   var selectionText = "";
+   
+   if(document.getSelection){
+     
+     selectionText = document.getSelection();
+     
+   }else if(document.selection){
+   
+     selectionText = document.selection.createRange().text();
+     }
+     return selectionText;
+     }
+     
+document.onmouseup = function(){
+
+     document.getElementById("hilight").innerHTML = selectText();  
+                  
+}
+    
+
+//Hightlight메뉴 나오게하기
+$(document).ready(function(){
+
+  //Show contextmenu:
+  $(document).contextmenu(function(e){
+  
+    //Get window size:
+    var winWidth = $(document).width();
+    var winHeight = $(document).height();
+    
+    //Get pointer position:
+    var posX = e.pageX;
+    var posY = e.pageY;
+    
+    //Get contextmenu size:
+    var menuWidth = $(".contextmenu").width();
+    var menuHeight = $(".contextmenu").height();
+    
+    //Security margin:
+    var secMargin = 10;
+    
+    //Prevent page overflow:
+    if(posX + menuWidth + secMargin >= winWidth && posY + menuHeight + secMargin >= winHeight){
+    
+      //Case 1: right-bottom overflow:
+      posLeft = posX - menuWidth - secMargin + "px";
+      posTop = posY - menuHeight - secMargin + "px";
+      
+    }
+    else if(posX + menuWidth + secMargin >= winWidth){
+    
+      //Case 2: right overflow:
+      posLeft = posX - menuWidth - secMargin + "px";
+      posTop = posY + secMargin + "px";
+      
+    }
+    else if(posY + menuHeight + secMargin >= winHeight){
+    
+      //Case 3: bottom overflow:
+      posLeft = posX + secMargin + "px";
+      posTop = posY - menuHeight - secMargin + "px";
+      
+    }
+    else {
+    
+      //Case 4: default values:
+      posLeft = posX + secMargin + "px";
+      posTop = posY + secMargin + "px";
+      
+    };
+    
+    //Display contextmenu:
+    
+    $(".contextmenu").css({
+    
+      "left": posLeft,
+      "top": posTop
+      
+    }).show();
+    
+    //Prevent browser default contextmenu.
+    return false;
+    
+  });
+  
+  //Hide contextmenu:
+  $(document).click(function(){
+  
+    $(".contextmenu").hide();
+  });
+});
+
+
+//hilight저장
+$(document).ready(function(){
+     $('.addHilight').click(function(){
+     
+          console.log("클릭1");
+ 
+          var book_no = $('#book_no').val();//book_no값가져오기
+          
+          var content = $('#hilight').text();//hilight에 저장할 content가져오기
+             
+          var content_no = $('#p_content').attr('class');//content번호가져오기
+          
+          var allData = { "book_no": book_no, "content": content, "content_no": content_no};
+          
+$.ajax({
+	
+	      url : "http://localhost:8080/blinkist/hilight/addHilight",
+          type : "post",
+          data : allData,
+	      success : function(data) {
+
+	}
+	});
+});
+});

@@ -1,0 +1,93 @@
+@charset "EUC-KR";
+
+
+hr{
+	
+	/* hr태그 배경색 */
+	background-color: #33FF33;
+		
+}
+
+
+#Sort{
+	
+	/* Sort메뉴는 비활성화 */
+	pointer-events: none;
+    cursor: default;
+	
+}
+
+
+.nav-link{
+	
+	
+	/* 메뉴의 글씨굵기 */
+	font-weight: bold; 
+	
+	/* 메뉴 글씨컬러 */
+	color: #666666;
+	
+}
+
+
+#h5{
+	
+	/* 책 제목 글씨굵기 */
+	font-weight: bolder; 
+	
+	/* 챕터제목과의 간격조정 */
+	margin-bottom:25px;
+	
+	/* 하이라이트들과 간격조정 */
+	margin-top:35px;
+	
+}
+
+
+#chapter{
+	
+	/* 챕터번호 굵기 */
+	font-weight: bolder; 
+	
+	/* 챕터번호 글자색 */
+	color: #3366FF;
+	
+	/* 글자크기 */
+	font-size:20px;
+	
+}
+
+
+#chapter_title{
+	
+	/* 글자크기 */
+	font-size:20px;
+	
+}
+
+
+.card{
+	
+	/*content상자의 크기 */
+	width:400px;
+	
+	
+}
+
+
+#Date_title{
+	
+	/* 폰트컬러 */
+	color: #999999;
+	
+	/* 챕터번호 굵기 */
+	font-weight: bolder; 
+	
+    /* 챕터제목과의 간격조정 */
+	margin-bottom:15px;
+	
+	/* 하이라이트들과 간격조정 */
+	margin-top:30px;
+	
+	
+}
