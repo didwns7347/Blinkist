@@ -17,7 +17,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link href="${pageContext.request.contextPath }/css/blinkist.css"
 	rel="stylesheet" />
-
+<link href="${pageContext.request.contextPath }/css/searchbar.css"
+	rel="stylesheet" />
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
@@ -62,12 +63,13 @@
 					<li class="nav-item">
 						<form class="form-inline"
 							action="${pageContext.request.contextPath }/book/search">
+							
+							 <input type="text" name="keyword" placeholder="제목,작가">
+							 <!--  
 							<input class="form-control mr-sm-2" type="search"
 								placeholder="제목,작가" aria-label="Search" id="keyword"
-								name="keyword" />
-							<button class="btn-image" type="submit">
-								<i class="fa fa-search"></i>
-							</button>
+								name="keyword" />-->
+
 						</form>
 					</li>
 				</ul>

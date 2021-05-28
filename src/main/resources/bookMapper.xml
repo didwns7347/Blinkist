@@ -29,7 +29,7 @@
 	<!-- 카테고리 트렌드 책 6개 가져오기 selectAllCategoryOrderByCount -->
 	<select id="selectAllCategoryOrderByCount"  parameterType="string" resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name ,count(library.user_no) as cnt
+		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name ,count(library.user_no) as cnt
 		FROM book JOIN library
 		ON library.book_no=book.book_no
 		JOIN author
@@ -41,7 +41,7 @@
 	<!--  카테고리 최신 추가된 책 6권 selectAllCategoryOrderByDate -->
 	<select id="selectAllCategoryOrderByDate"  parameterType="string" resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name 
+		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
 		FROM book JOIN author
 		ON author.author_no=book.author_no
 		WHERE book.category=#{category}
@@ -51,7 +51,7 @@
 	<!-- 카테고리에 포함된 오디오가 있는 책 6권  selectAllCategoryIncludeAudio-->
 	<select id="selectAllCategoryIncludeAudio"  parameterType="string" resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_Time, author.name 
+		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
 		FROM book JOIN author
 		ON author.author_no=book.author_no
 		WHERE book.category=#{category} and Audio_check=0

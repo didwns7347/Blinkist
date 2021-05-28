@@ -23,4 +23,6 @@ public interface LibraryRepository {
 	public boolean update_progress(LibraryVo libraryVo);//progress업데이트
 	
 	public boolean update_fincheck(LibraryVo libraryVo);//fin_check업데이트
+
+	boolean deleteLibrary(LibraryVo libraryVo);
 }

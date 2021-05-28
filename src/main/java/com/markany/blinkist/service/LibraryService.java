@@ -64,4 +64,10 @@ public class LibraryService {
 		return libraryRepository.update_fincheck(libraryVo);
 		
 	}
+
+
+	public boolean removeLibrary(LibraryVo libraryVo) {
+		return libraryRepository.deleteLibrary(libraryVo);
+		
+	}
 }

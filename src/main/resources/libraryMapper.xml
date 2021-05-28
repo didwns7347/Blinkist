@@ -8,7 +8,7 @@
 	<select id="selectByAuthUser" parameterType="uservo"
 		resultType="HashMap">
 		select book.book_no, book.title, book.img_path,
-		book.running_time, author.name
+		book.running_time, author.name,book.buyLink
 		from author, book
 		where
 		book.author_no=author.author_no
@@ -43,6 +43,12 @@
 		]]>
 	</insert>
 	
+	<!-- 라이브러리 삭제하기 객체로 deleteLibrary -->
+	<delete id="deleteLibrary" parameterType="libraryvo">
+		<![CDATA[
+			delete from library where user_no=#{user_no} and book_no=#{book_no}
+		]]>
+	</delete>
 	
 	<!-- progress값확인 -->
 	<select id="check_progress" parameterType="libraryvo" resultType="long">

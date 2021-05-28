@@ -121,6 +121,16 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 	
 	}
 	
+	//라이브러리 삭제하기
+	@Override
+	public boolean deleteLibrary(LibraryVo libraryVo) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count=sqlSession.update("libraryMapper.deleteLibrary", libraryVo);
+		sqlSession.commit();
+		return count==1;
+	}
+	
 	
 
 }

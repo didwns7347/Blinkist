@@ -58,7 +58,7 @@
 		<br />
 		<!-- body 부분 -->
 
-		<input class="form-control" id="searchInput" type="text"
+		<input class="form-control" id="searchInput" type="search"
 			name="${category }" placeholder="Search.."> <br />
 		<br />
 

@@ -44,3 +44,6 @@ a#mya {
 	line-height: 2rem;
 	text-decoration: none;
 }
+a#mya:hover{
+	 color: #2CE080;
+}

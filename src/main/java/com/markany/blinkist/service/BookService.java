@@ -49,6 +49,7 @@ public class BookService {
 	//라이브러리 목록 과 비교하여 라이브러리에있는 책이면 true 아니면 false값을 해쉬맵에 추가한다.
 	public List<HashMap<String, Object>> libraryCheck(List<HashMap<String, Object>> list, List<Long> libraryList) {
 		for(HashMap<String, Object> map:list) {
+			System.out.println(map.get("running_time"));
 			long book_no=(long) map.get("book_no");
 			boolean check=false;
 			for(Long libBook_no : libraryList) {

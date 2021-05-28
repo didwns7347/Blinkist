@@ -46,34 +46,32 @@
 	<div class=container>
 		<h1>${category }</h1>
 		<h3>All Books</h3>
-		<br/>
-		<br/>
-		<input class="form-control" id="myInput" type="text" placeholder="Search..">
-		<br/><br/>
-			<c:forEach items="${map}" var="map" varStatus="status">
-				<div class="later-book-list" id="myDIV" style=" border-bottom: 0.0625rem solid #BAC8CE;">
-					<div class="letter-book-list__letter">
+		<br /> <br /> <input class="form-control" id="myInput" type="search"
+			placeholder="Search.."> <br /> <br />
+		<c:forEach items="${map}" var="map" varStatus="status">
+			<div class="later-book-list" id="myDIV"
+				style="border-bottom: 0.0625rem solid #BAC8CE;">
+				<div class="letter-book-list__letter">
 					<p>${map.key}</p>
-					</div>
-					<div class="letter-book-list__count">
-					<p>${ fn:length(map.value)}책</p>
-					</div>
-					
-					<c:forEach items="${map.value}" var="list" varStatus="status">
-						<div class="letter-book-list__items">
-						<a class="latter-book-list__item" id="mya"
-						href="${pageContext.request.contextPath }/book/viewbookinfo?info=${list}&category=${category}">
-						${list}</a>
-					
-						</div>
-					</c:forEach>
-					<br />
 				</div>
-			</c:forEach>
+				<div class="letter-book-list__count">
+					<p id="bookcnt">책 ${ fn:length(map.value)}권</p>
+				</div>
+
+				<c:forEach items="${map.value}" var="list" varStatus="status">
+					<div class="letter-book-list__items">
+						<a class="latter-book-list__item" id="mya"
+							href="${pageContext.request.contextPath }/book/viewbookinfo?info=${list}&category=${category}">
+							${list} </a>
+					</div>
+				</c:forEach>
+				<br />
+			</div>
+		</c:forEach>
 
 	</div>
-	<br/>
-	<br/>
+	<br />
+	<br />
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 </body>
 
@@ -90,7 +88,7 @@
 						"keyup",
 						function() {
 							var value = $(this).val().toLowerCase();
-							$("#myDIV a").filter(
+							$("#myDIV ,#bookcnt,#mya").filter(
 									function() {
 										$(this).toggle(
 												$(this).text().toLowerCase()

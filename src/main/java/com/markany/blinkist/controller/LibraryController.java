@@ -55,6 +55,19 @@ public class LibraryController {
 		
 	}
 	
+	
+	//라이브러리 삭제 하기
+	@RequestMapping("/removelibrary")
+	public String removeLibrary(HttpServletRequest request, long book_no, String authUser) {
+		String ref = request.getHeader("Referer");
+		UserVo userVo = userService.findByEmail(authUser);	
+		LibraryVo libraryVo = new LibraryVo();
+		libraryVo.setBook_no(book_no);
+		libraryVo.setUser_no(userVo.getUser_no());
+		libraryService.removeLibrary(libraryVo);
+		return "redirect:" + ref;
+	}
+	
 
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/button_addlibrary", method = RequestMethod.POST)
