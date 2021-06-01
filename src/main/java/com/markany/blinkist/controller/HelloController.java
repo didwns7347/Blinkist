@@ -13,16 +13,16 @@ import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import com.markany.blinkist.service.BookService;
 import com.markany.blinkist.service.NaverLoginService;
 
 @Controller // String이나 ModelAndView객체반환
 
 public class HelloController {
-	private String CLIENT_ID = "msHB7T_VVvI39HWX76ou"; // 애플리케이션 클라이언트 아이디값";
-	private String CLI_SECRET = "KKC3oOlKNN"; // 애플리케이션 클라이언트 시크릿값";
-	
 	@Autowired
 	private NaverLoginService naverLoginService;
+	@Autowired
+	private BookService bookService;
 
 	//메인화면
 	@GetMapping(value = "/")
@@ -30,9 +30,26 @@ public class HelloController {
 		
 		
 		String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
+		model.addAttribute("humanlist",bookService.findAllCategoryOrderByCount("인문학"));
+		model.addAttribute("lifelist",bookService.findAllCategoryOrderByCount("건강/생활/요리"));
+		model.addAttribute("novellist",bookService.findAllCategoryOrderByCount("소설"));
+		model.addAttribute("selfdevlist",bookService.findAllCategoryOrderByCount("자기개발"));
+		model.addAttribute("sociallist",bookService.findAllCategoryOrderByCount("사회"));
+		model.addAttribute("teenagelist",bookService.findAllCategoryOrderByCount("청소년"));
+		
 		//System.out.println(NaverauthURL);
 		model.addAttribute("url", NaverauthURL);
 		return "main/test";
 	}
+	@GetMapping(value = "/main")
+	public String hello2(Model model, HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
+		
+		
+		//String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
+		//System.out.println(NaverauthURL);
+		//model.addAttribute("url", NaverauthURL);
+		return "main/main";
+	}
+
 
 }
