@@ -26,17 +26,25 @@ $(document).ready(function () {
    //책의 전체페이지수 구하기
    var chapter_total = $(".page-item").length;
    
-   
    //책을 읽으면 첫번째 페이지는 읽은것!
    var first_read = parseInt(1/chapter_total*100);
    
-   //첫페이지의 content가져오기
+   //첫페이지의 chapter_title가져오기
+   var chapter_title = $('#chapter_title').text();
+   
+   //p_content name값교체
+   $("#p_content").attr("name",chapter_title);
+   
+   //첫페이지의 content_no가져오기
    var content_no = $('#chapter_title').attr('class');
 	
    //p_content class값교체 
    $("#p_content").addClass(content_no);
+      
+   //첫번째 페이지 active
+   $('li#1.page-item').addClass('active');
    
- 
+   
    //책을 처음읽을때의 progress(즉 기존의 progress가 0 이면)
    if($('#existing_progress').val()==0){
    
@@ -80,6 +88,13 @@ $(document).ready(function () {
 	 $("#p_content").text(content);
 	
 	
+	 //페이지의 chapter_title가져오기
+     var chapter_title = $('#chapter_title').text();
+   
+     //p_content name값교체
+     $("#p_content").attr("name",chapter_title);
+   
+	
 	 //a태그의 name값(content_no)가져오기
 	 var content_no = $(this).attr('name');
 	
@@ -87,7 +102,7 @@ $(document).ready(function () {
 	 $( '#p_content' ).removeAttr( 'class' );
 	 $("#p_content").addClass(content_no);
 	 
-
+		
 //2.progress바꾸기
    
       //책의 전체페이지수 구하기
@@ -120,8 +135,49 @@ $(document).ready(function () {
             data : allData,
 	        success : function(data) {
 
-	 }});   
- });
+	 }});
+
+	 
+//3. active변경하기
+   
+   //class값으로 active를 가지고있는 태그 active제거
+   $('li[class$=active]').removeClass( 'active' );
+      
+   //해당 챕터페이지로 active넘겨주기 
+   $('li#'+this_pagenum+'.page-item').addClass('active');
+
+
+//4. 해당chapter의 hilight가져오기
+   
+    var hilight_chapter = $('p[id='+content_no+']').length;
+   
+		
+    //배열 생성
+    var hilightArr = new Array(hilight_chapter);
+	//배열에 값 주입
+	for(var i=0; i<hilight_chapter; i++){                          
+			
+		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+	    
+	     //hilight들을 노란색으로 표시
+	     var keyword = hilightArr[i];
+	     
+	     var options = {
+	     
+	        "className" : "highlight"
+	        
+	     }
+	     
+
+         $('#p_content').markRanges([{
+         
+              start: $('#p_content').text().indexOf(keyword),
+              length: keyword.length
+         
+         }],options);
+           
+    }
+});
 }); 
  
  
@@ -130,15 +186,24 @@ $(document).ready(function () {
    $('.page-link').click(function(){
 
 //1. 내용변경
+
      //해당페이지의 name값(chapter_title)가져오기
      var chapter = $(this).attr('name');
      //p태그 "chapter_title"값교체
 	 $("#chapter_title").text(chapter);
+
    
      //해당페이지의 id값(content)가져오기
      var content = $(this).attr('id');
 	 //p태그 content값교체
 	 $("#p_content").text(content);
+	 
+	 
+	 //페이지의 chapter_title가져오기
+     var chapter_title = $('#chapter_title').text();   
+     //p_content name값교체
+     $("#p_content").attr("name",chapter_title);
+	 
 	 
 	 //해당페이지의 content_no구하기
 	 var content_no = $(this).parents("li").attr('name');
@@ -187,7 +252,45 @@ $(document).ready(function () {
 
 	}
 	});
-	}                   
+	}
+	
+//3. active변경하기
+   
+   //class값으로 active를 가지고있는 태그 active제거
+   $('li[class$=active]').removeClass( 'active' );
+      
+   //해당 챕터페이지로 active넘겨주기 
+   $('li#'+this_pagenum+'.page-item').addClass('active');	         
+   
+   
+ //4. 해당chapter의 hilight가져오기
+   
+    var hilight_chapter = $('p[id='+content_no+']').length;
+   
+		
+    //배열 생성
+    var hilightArr = new Array(hilight_chapter);
+	//배열에 값 주입
+	for(var i=0; i<hilight_chapter; i++){                          
+			
+		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+	    
+	     //hilight들을 노란색으로 표시
+	       var keyword = hilightArr[i];
+	     
+	     var options = {
+	     
+	        "className" : "highlight"
+	        
+	     }
+	     
+          $('#p_content').markRanges([{
+         
+              start: $('#p_content').text().indexOf(keyword),
+              length: keyword.length
+         
+         }],options);     
+    }	    
    });
  });
  
@@ -232,8 +335,42 @@ $(document).ready(function () {
    //p태그 class값교체 
    $( '#p_content' ).removeAttr( 'class' );
    $("#p_content").addClass(content_no);
-	 
-
+   
+   //class값으로 active를 가지고있는 태그 active제거
+   $('li[class$=active]').removeClass( 'active' );
+      
+   //해당 챕터페이지로 active넘겨주기 
+   $('li#'+existing_paging+'.page-item').addClass('active');
+   
+   
+  //4. 해당chapter의 hilight가져오기
+   
+    var hilight_chapter = $('p[id='+content_no+']').length;
+   
+		
+    //배열 생성
+    var hilightArr = new Array(hilight_chapter);
+	//배열에 값 주입
+	for(var i=0; i<hilight_chapter; i++){                          
+			
+		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+	    
+	     //hilight들을 노란색으로 표시
+	       var keyword = hilightArr[i];
+	     
+	     var options = {
+	     
+	        "className" : "highlight"
+	        
+	     }
+	     
+          $('#p_content').markRanges([{
+         
+              start: $('#p_content').text().indexOf(keyword),
+              length: keyword.length
+         
+         }],options);     
+    }	    
  }
 });
  
@@ -338,16 +475,42 @@ $(document).ready(function(){
 $(document).ready(function(){
      $('.addHilight').click(function(){
      
-          console.log("클릭1");
- 
           var book_no = $('#book_no').val();//book_no값가져오기
           
           var content = $('#hilight').text();//hilight에 저장할 content가져오기
-             
+          
           var content_no = $('#p_content').attr('class');//content번호가져오기
-          
-          var allData = { "book_no": book_no, "content": content, "content_no": content_no};
-          
+       
+      if(content.length==0){//hilight에 저장할 텍스트가 없으면
+ 
+		    swal("Error", "저장할 텍스트를 선택해주세요.", "error");
+		    return;
+		
+	   }
+	   
+	   //이미 저장된 문자열이라면
+	   
+	   //해당chapter의 hilight가져오기
+       var hilight_chapter = $('p[id='+content_no+']').length;
+   
+       //배열 생성
+       var hilightArr = new Array(hilight_chapter);
+	  //배열에 값 주입
+	  for(var i=0; i<hilight_chapter; i++){                          
+			
+		   hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+		   
+		   if(hilightArr[i]==content){//이미 하이라이트에 있는값이라면
+	        
+	       //경고창...
+	       swal("error", "이미 저장된 문자열입니다.", "error"); 
+	       return;
+              
+	   }
+	 } 
+                          
+    var allData = { "book_no": book_no, "content": content, "content_no": content_no};
+                    
 $.ajax({
 	
 	      url : "http://localhost:8080/blinkist/hilight/addHilight",
@@ -355,6 +518,13 @@ $.ajax({
           data : allData,
 	      success : function(data) {
 
+                    swal("success", "Hilight에 추가하였습니다.", "success");
+                    
+                     $('.swal-button').click(function(){//팝업창의 ok버튼을 클릭할시
+                               
+                               location.reload();          
+                                                 
+          });                          
 	}
 	});
 });

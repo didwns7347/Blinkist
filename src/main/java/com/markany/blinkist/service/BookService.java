@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.markany.blinkist.dao.BookRepository;
 import com.markany.blinkist.vo.BookVo;
 
@@ -19,7 +17,9 @@ public class BookService {
 	
 	//검색기능 제목,작가
 	public List<HashMap<String, Object>>  findByTitleAuthor(String keyword) {
+		
 		return bookRepository.selectByTitleAuthor(keyword);
+		
 	}
 	
 	
@@ -49,8 +49,9 @@ public class BookService {
 	//라이브러리 목록 과 비교하여 라이브러리에있는 책이면 true 아니면 false값을 해쉬맵에 추가한다.
 	public List<HashMap<String, Object>> libraryCheck(List<HashMap<String, Object>> list, List<Long> libraryList) {
 		for(HashMap<String, Object> map:list) {
-			System.out.println(map.get("running_time"));
+			//System.out.println(map.get("running_time"));
 			long book_no=(long) map.get("book_no");
+			
 			boolean check=false;
 			for(Long libBook_no : libraryList) {
 				if(book_no==libBook_no) {
@@ -181,6 +182,33 @@ public class BookService {
 		String title=information[0];
 		String authorName=information[1];
 		return bookRepository.selectByTitleAuthorCategory(title,authorName,category);
+	}
+
+
+	public List<HashMap<String, Object>> libraryCheckSearch(List<HashMap<String, Object>> list,
+			List<HashMap<String, Object>> libraryList) {
+		for(HashMap<String, Object> map:list) {
+			//System.out.println(map.get("running_time"));
+			long book_no=(long) map.get("book_no");
+			
+			boolean check=false;
+			long progress=0;
+			for(HashMap<String, Object> libBook_no : libraryList) {
+				if(book_no==(Long)libBook_no.get("book_no")) {
+					progress=(Long)libBook_no.get("progress");
+					check=true;
+					break;
+				}
+			}
+			if(check) {
+				map.put("libCheck", true);
+				map.put("progress", progress);
+			}
+			else {
+				map.put("libCheck", false);
+			}
+		}
+		return list;
 	}
 
 }

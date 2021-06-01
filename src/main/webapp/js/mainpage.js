@@ -42,3 +42,4 @@ function dayFunction() {
 	document.getElementById("freeday").innerHTML = free.getMonth() + 1
 		+ "월 " + free.getDate() + "일";
 }
+

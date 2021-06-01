@@ -39,17 +39,7 @@ public class HelloController {
 		
 		//System.out.println(NaverauthURL);
 		model.addAttribute("url", NaverauthURL);
-		return "main/test";
-	}
-	@GetMapping(value = "/main")
-	public String hello2(Model model, HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
-		
-		
-		//String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
-		//System.out.println(NaverauthURL);
-		//model.addAttribute("url", NaverauthURL);
 		return "main/main";
 	}
-
 
 }

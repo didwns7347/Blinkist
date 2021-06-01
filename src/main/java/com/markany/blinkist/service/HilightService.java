@@ -37,4 +37,20 @@ public class HilightService {
 		return hilightRepository.selectHilightbyDate(vo);
 		
 	}
+	
+	
+	//사용자가 구독한 책에서 저장한 hilight내용가져오기
+	public List<HilightVo> selectHilightContent(HilightVo vo){
+		
+		return hilightRepository.selectHilightContent(vo);
+		
+	}
+	
+	
+	// 하이라이트 삭제하기
+	public void deleteHilight(long hilight_no) {
+		
+		hilightRepository.deleteHilight(hilight_no);
+		
+	}
 }

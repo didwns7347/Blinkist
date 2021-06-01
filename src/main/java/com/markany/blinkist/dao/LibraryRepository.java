@@ -25,4 +25,6 @@ public interface LibraryRepository {
 	public boolean update_fincheck(LibraryVo libraryVo);//fin_check업데이트
 
 	boolean deleteLibrary(LibraryVo libraryVo);
+
+	List<HashMap<String, Object>> selectProgressByAuthUser(String email);
 }

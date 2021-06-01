@@ -10490,3 +10490,15 @@ q {font-style: italic;}
 	}
 	
 }
+
+.nav-link{
+	
+	
+	/* 메뉴의 글씨굵기 */
+	font-weight: bold; 
+	
+	/* 메뉴 글씨컬러 */
+	color: #666666;
+	
+}
+

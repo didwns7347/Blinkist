@@ -16,7 +16,8 @@
 		from library where
 		user_no=#{user_no}) and library.book_no = book.book_no and user_no=#{user_no}
 	</select>
-
+	
+	<!-- selectProgressByAuthUser 유저이메일로 책번호 가져오기 -->
 	<select id="selectByEmail" parameterType="string"
 		resultType="long">
 		select book_no
@@ -24,7 +25,14 @@
 		where user_no=(select user_no
 		from user where email=#{email})
 	</select>
-
+	<!-- selectProgressByAuthUser 유저이메일로 프로그래스, 책번호 가져오기 -->
+	<select id="selectProgressByAuthUser" parameterType="string"
+		resultType="HashMap">
+		select book_no,progress
+		from library
+		where user_no=(select user_no
+		from user where email=#{email})
+	</select>
 	<!-- 라이브러리에 추가하기 객체로 -->
 	<insert id="insertVo" parameterType="libraryvo">
 		<![CDATA[

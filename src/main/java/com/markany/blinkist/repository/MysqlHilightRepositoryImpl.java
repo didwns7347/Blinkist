@@ -67,7 +67,27 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 	}
 	
 	
+	@Override//사용자가 구독한 책에서 저장한 hilight내용가져오기
+	public List<HilightVo> selectHilightContent(HilightVo vo){
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HilightVo> list = sqlSession.selectList("hilightMapper.selectHilightContent", vo);
+		
+		sqlSession.close();
+		return list;
+		
+	}
 	
 	
-
+	@Override// 하이라이트 삭제하기
+	public void deleteHilight(long hilight_no) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		sqlSession.delete("hilightMapper.deleteHilight", hilight_no);
+		
+		sqlSession.commit();
+		
+	}
 }

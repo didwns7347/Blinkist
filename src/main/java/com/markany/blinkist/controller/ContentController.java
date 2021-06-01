@@ -7,9 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.markany.blinkist.service.ContentService;
+import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.ContentVo;
+import com.markany.blinkist.vo.HilightVo;
 import com.markany.blinkist.vo.LibraryVo;
 import com.markany.blinkist.vo.UserVo;
 
@@ -25,6 +27,9 @@ public class ContentController {
 	
 	@Autowired
 	private LibraryService libraryService;
+	
+	@Autowired
+	private HilightService hilightService;
 	
 	
 	@RequestMapping(value="/readbook")
@@ -44,9 +49,16 @@ public class ContentController {
 		
 		List<ContentVo> contentvo = contentService.selectContent(book_no);
 		
+		
+		HilightVo hilightvo = new HilightVo();
+		hilightvo.setBook_no(book_no);
+		hilightvo.setUser_no(userVo.getUser_no());
+		List<HilightVo> hilightContent = hilightService.selectHilightContent(hilightvo);
+		
         model.addAttribute("Content", contentvo);
 		model.addAttribute("progress", progress);
 		model.addAttribute("book_no",book_no);
+		model.addAttribute("hilightContent", hilightContent);
 		
 		return "board/readbook";
 		

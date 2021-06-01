@@ -3,11 +3,14 @@ package com.markany.blinkist.dao;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.markany.blinkist.vo.BookVo;
 
 public interface BookRepository {
 
-	List<HashMap<String, Object>>  selectByTitleAuthor(String keyword);
+	public List<HashMap<String, Object>>  selectByTitleAuthor(String keyword);
 
 	Map<Object, Object> selectByBook_no(long no);
 	

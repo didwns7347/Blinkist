@@ -110,3 +110,11 @@ width:100%;
 .contextmenu li:hover a {
   color: #FFFFFF;
 }
+
+
+/* 하이라이트 css추가*/
+.highlight { 
+	
+	background-color: yellow 
+	
+}

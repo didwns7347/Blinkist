@@ -84,6 +84,15 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlSession.close();
 		return list;
 	}
+	//이메일로 라이브러리책 번호,프로그래스 읽어오기
+	@Override
+	public List<HashMap<String, Object>> selectProgressByAuthUser(String email) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list=sqlSession.selectList("libraryMapper.selectProgressByAuthUser", email);
+		sqlSession.close();
+		return list;
+	}
 	
 	
 	@Override//progress값확인
@@ -130,6 +139,8 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlSession.commit();
 		return count==1;
 	}
+
+
 	
 	
 

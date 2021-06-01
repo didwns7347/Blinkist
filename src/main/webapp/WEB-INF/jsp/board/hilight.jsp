@@ -23,6 +23,7 @@
 <link href="${pageContext.request.contextPath }/css/hilight.css" rel="stylesheet" type="text/css">     
 <!-- jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/hilight.js"></script>
 <!-- bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -52,9 +53,20 @@
           <div id="Bybook" class="container tab-pane active">
             <c:forEach var="item" items="${Titlehilight}" varStatus="status">
             
-              <!-- 책이름 -->
-              <h5 id="h5">${item.title}</h5>
-                                 
+              <div class="row">
+                 <!-- 책이름 -->
+                 <div class="col-4">
+                    <h5 id="h5">${item.title}</h5>
+                 </div>
+
+                 <!-- 삭제버튼 -->              
+                 <div class="col-4">
+                    <button type="button" class="btn btn-outline-primary" id="Delete_Chapter" name="${item.hilight_no}">Delete</button>
+                 </div>
+             </div>
+              
+                 <div class="col-4"></div> 
+                                  
               <!-- 챕터제목 -->                   
               <span id="chapter">chapter: </span><span id="chapter_title">${item.chapter_title}</span>
                
@@ -77,9 +89,19 @@
               <!-- 책을 라이브러라에 저장한지 24시간이상 즉 하루이상이면 -->
               <c:if test="${item.reg_date>=24}">
                
-                <!-- 경과는 일로 나온다. -->
-                <h5 id="h5"><fmt:parseNumber var="Day" value="${item.reg_date/24}" integerOnly="true" />${Day} days ago</h5>
-                
+                <div class="row">
+                   <div class="col-4">
+                  <!-- 경과는 일로 나온다. -->
+                  <h5 id="h5"><fmt:parseNumber var="Day" value="${item.reg_date/24}" integerOnly="true" />${Day} days ago</h5>
+                   </div>
+                <!-- 삭제버튼 -->              
+                 <div class="col-4">
+                    <button type="button" class="btn btn-outline-primary" id="Delete_Date" name="${item.hilight_no}">Delete</button>
+                 </div>
+               </div>   
+                 
+               <div class="col-4"></div>
+                  
                 <!-- 책의 제목 -->
                 <h6 id="Date_title">${item.title}</h6>
                 
@@ -98,9 +120,19 @@
              </c:if>
 
                <!-- 책을 라이브러라에 저장한지 24시간이하 즉 오늘저장한거면면 -->
-                <!-- 경과는 일로 나온다. -->
-                <h5 id="h5">about ${item.reg_date} hours</h5>
-                
+                <div class="row">
+                   <div class="col-4">
+                    <!-- 경과는 일로 나온다. -->
+                    <h5 id="h5">about ${item.reg_date} hours</h5>
+                   </div>
+                   <!-- 삭제버튼 -->              
+                 <div class="col-4">
+                    <button type="button" class="btn btn-outline-primary" id="Delete_Date" name="${item.hilight_no}">Delete</button>
+                 </div>
+               </div>   
+               
+                <div class="col-4"></div>
+                   
                 <!-- 책의 제목 -->
                 <h6 id="Date_title">${item.title}</h6>
                 
@@ -122,5 +154,7 @@
 
 <!-- navigation include -->
 <c:import url="/WEB-INF/jsp/include/footer.jsp" />	
+<!-- 팝업창  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>        
 </body>
 </html>
