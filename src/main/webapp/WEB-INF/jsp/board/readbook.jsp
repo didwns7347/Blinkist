@@ -19,16 +19,17 @@
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/css/blog-home.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath }/css/readbook.css" rel="stylesheet" type="text/css">      
+<link href="${pageContext.request.contextPath }/css/readbook.css" rel="stylesheet" type="text/css">   
 <!-- jquery -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 <!-- bootstrap -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <!-- w3 school -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<!-- mark.js 추가하기 -->
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
 </head>
 <body>
    <!-- 책번호 -->
@@ -64,11 +65,17 @@
    
                                     <hr/>
                                     
-       <p id="p_content" class="">${item.content}</p>                            
+       <p id="p_content" class="" name="">${item.content}</p>                            
    </c:forEach>      
    
                                    <hr/>                             
   </div>
+
+
+<!-- 사용자가 hilight에 저장한텍스트 -->  
+  <c:forEach var="item" items="${hilightContent}" varStatus="status">
+     <p class="hilightContent" id="${item.content_no}" style="display: none;">${item.content}</p>                                
+  </c:forEach> 
 
 <!-- Highlights메뉴 -->  
 <ul class="contextmenu">
@@ -103,6 +110,8 @@
 <c:import url="/WEB-INF/jsp/modal/fontsizeModal.jsp" />
 
 </body>
-<script type="text/javascript"  src="${pageContext.request.contextPath }/js/readbook.js"></script>  
+<script type="text/javascript"  src="${pageContext.request.contextPath }/js/readbook.js"></script> 
+<!-- 팝업창  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>        
 </html> 
 	

@@ -7,7 +7,7 @@
 	<!-- 검색 키워드에 일치하는지 -->
 	<select id="selectByTitleAuthor" parameterType="string"
 		resultType="HashMap">
-		<![CDATA[
+			<![CDATA[
 		select book.book_no, book.title, book.img_path, book.running_time, author.name 
 		from book, author
 		where book.author_no = author.author_no and 

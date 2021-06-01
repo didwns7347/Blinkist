@@ -10,26 +10,44 @@
 		insert into hilight values(null,#{book_no},#{content},#{user_no},now(),#{content_no})
 		]]>
 	</insert>
-	
-	
+
+
 	<!-- 사용자의 하이라이트내용들을 제목정렬순으로가져오기 -->
 	<select id="selectHilightbyTitle" parameterType="long" resultType="HashMap">
 	  <![CDATA[
-	    select book.title,hilight.content,DATE_FORMAT(hilight.reg_date,'%Y-%m-%d %H:%i:%s') as reg_date,content.chapter_title,content.chapter_no
+	    select book.title,hilight.content,DATE_FORMAT(hilight.reg_date,'%Y-%m-%d %H:%i:%s') as reg_date,content.chapter_title,content.chapter_no,hilight.hilight_no
         from book,hilight,content
         where book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no
         order by book.title asc
 	  ]]>
 	</select>
-	
-	
-	<!-- 사용자의 하이라이트내용들을 제목정렬으로가져오기 -->
-    <select id="selectHilightbyDate" parameterType="hilightvo" resultType="HashMap">
+
+
+	<!-- 사용자의 하이라이트내용들을 날짜정렬으로가져오기 -->
+	<select id="selectHilightbyDate" parameterType="hilightvo" resultType="HashMap">
 	  <![CDATA[
-	          select book.title,hilight.content,TIMESTAMPDIFF(HOUR, #{reg_date}, now()) as reg_date ,content.chapter_title,content.chapter_no
+	          select book.title,hilight.content,TIMESTAMPDIFF(HOUR, #{reg_date}, now()) as reg_date ,content.chapter_title,content.chapter_no,hilight.hilight_no
 	          from book,hilight,content
 	          where user_no=#{user_no} and book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no  and hilight.reg_date=#{reg_date}
 	  ]]>
 	</select>
 
+
+	<!-- 사용자가 구독한 책에서 저장한 hilight내용가져오기 -->
+	<select id="selectHilightContent" parameterType="hilightvo" resultType="hilightvo">
+	  <![CDATA[
+	  select content,content_no
+      from hilight
+      where book_no=#{book_no} and user_no=#{user_no};	
+       ]]>
+	</select>
+	
+	
+	<!-- 하이라이트 삭제하기 -->
+	<delete id="deleteHilight" parameterType="long">
+	  delete
+	    from hilight
+	  where
+	    hilight_no = #{hilight_no}
+	</delete>
 </mapper>

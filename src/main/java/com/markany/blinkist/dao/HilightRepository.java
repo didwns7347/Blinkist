@@ -11,5 +11,9 @@ public interface HilightRepository {
 	public List<HashMap<String, Object>> selectHilightbyTitle(long user_no);//사용자의 하이라이트내용들을 제목정렬순으로가져오기
 	
 	public List<HashMap<String, Object>> selectHilightbyDate(HilightVo vo);//사용자의 하이라이트내용들을 오래된날짜정렬순으로가져오기
+	
+	public List<HilightVo> selectHilightContent(HilightVo vo);//사용자가 구독한 책에서 저장한 hilight내용가져오기
+	
+	public void deleteHilight(long hilight_no);// 하이라이트 삭제하기
 
 }

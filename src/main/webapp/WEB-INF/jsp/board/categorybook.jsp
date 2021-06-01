@@ -59,8 +59,7 @@
 		<!-- body 부분 -->
 
 		<input class="form-control" id="searchInput" type="search"
-			name="${category }" placeholder="Search.."> <br />
-		<br />
+			name="${category }" placeholder="Search.."> <br /> <br />
 
 		<h3>트렌드</h3>
 		<br />
@@ -95,12 +94,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
-								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
-								</div>
-
+							<!-- Blue -->
+							<div class="progress" style="height: 50px;">
+								<div class="progress-bar" role="progressbar" aria-valuenow="25"
+									aria-valuemin="0" aria-valuemax="100"
+									style="width:${list.progress}%; height:50px">${list.progress}%</div>
 							</div>
 						</div>
 					</div>
@@ -168,12 +166,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
-								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
-								</div>
-
+							<!-- Blue -->
+							<div class="progress" style="height: 50px;">
+								<div class="progress-bar" role="progressbar" aria-valuenow="25"
+									aria-valuemin="0" aria-valuemax="100"
+									style="width:${list.progress}%; height:50px">${list.progress}%</div>
 							</div>
 						</div>
 					</div>
@@ -241,12 +238,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
-								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
-								</div>
-
+							<!-- Blue -->
+							<div class="progress" style="height: 50px;">
+								<div class="progress-bar" role="progressbar" aria-valuenow="25"
+									aria-valuemin="0" aria-valuemax="100"
+									style="width:${list.progress}%; height:50px">${list.progress}%</div>
 							</div>
 						</div>
 					</div>
@@ -286,11 +282,12 @@
 		<div class="row">
 			<div class="col-md-4 mb-5"></div>
 			<div class="col-md-4 mb-5">
-				<form action="${pageContext.request.contextPath }/book/allcategorybook">
-				<input type="hidden" value="${category}" name="category"/>
-				<button id="loadMore" type="submit"
-					class="btn btn-outline-success btn-block">카테고리에 포함된 모든 책
-					보기</button>
+				<form
+					action="${pageContext.request.contextPath }/book/allcategorybook">
+					<input type="hidden" value="${category}" name="category" />
+					<button id="loadMore" type="submit"
+						class="btn btn-outline-success btn-block">카테고리에 포함된 모든 책
+						보기</button>
 				</form>
 			</div>
 			<div class="col-md-4 mb-5"></div>

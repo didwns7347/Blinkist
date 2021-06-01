@@ -70,4 +70,9 @@ public class LibraryService {
 		return libraryRepository.deleteLibrary(libraryVo);
 		
 	}
+
+	//email로 라이브러리 찾기
+	public List<HashMap<String, Object>> findNoProgressByAuthUser(String email) {
+		return libraryRepository.selectProgressByAuthUser(email);
+	}
 }

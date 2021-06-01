@@ -1,4 +1,3 @@
-
 package com.markany.blinkist.controller;
 
 import java.io.IOException;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.markany.blinkist.service.KakaoService;
 import com.markany.blinkist.service.NaverLoginService;
@@ -29,7 +29,7 @@ public class UserController {
 
 	//카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
-	public String home(@RequestParam(value = "code", required = false) String code,HttpServletRequest request,Model model) throws Exception {
+	public String home(@RequestParam(value = "code", required = false) String code,HttpServletRequest request,Model model,RedirectAttributes rttr,HttpSession session) throws Exception {
 
 		KakaoService service = new KakaoService();
 		String access_Token = service.getAccessToken(code);
@@ -44,9 +44,9 @@ public class UserController {
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if(user!=null) {
 
-			//session저장
-			HttpSession session = request.getSession();
 			session.setAttribute("authUser", email);
+			
+			rttr.addFlashAttribute("Success","안녕하세요. Blinkist에 오신걸환영합니다.");
 
 			return "redirect:/";
 
@@ -63,15 +63,17 @@ public class UserController {
 	//네이버로그인연동페이지
 	@RequestMapping("/login")
 	public String login(HttpSession session, Model model) {
+		
 		String url=naverLoginService.getAuthorizationUrl(session);
 		model.addAttribute("url", url);
 		return "user/login";
+		
 	}
 
 
 	//네이버연동처리
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws IOException, ParseException {
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,RedirectAttributes rttr) throws IOException, ParseException {
 
 		OAuth2AccessToken oauthToken = naverLoginService.getAccessToken(session, code, state);
 
@@ -89,25 +91,27 @@ public class UserController {
 
 			//session저장
 			session.setAttribute("authUser", email);
+			
+			rttr.addFlashAttribute("Success","안녕하세요. Blinkist에 오신걸환영합니다.");
+			
 			return "redirect:/";
 
 		}
 		else {	// 이메일이 없다면 회원가입시키기
 			model.addAttribute("email",email);
 
-
 			return "user/join";
 
 		}
-
 	}
 	
 	
 	//로그아웃
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public String logout(HttpSession session) {
+	public String logout(HttpSession session,RedirectAttributes rttr) {
 		
 		session.removeAttribute("authUser");
+		rttr.addFlashAttribute("Success","로그아웃하였습니다. 안녕히가세요.");
 		
 		return "redirect:/";
 		
@@ -117,13 +121,15 @@ public class UserController {
 
 	//회원가입
 	@RequestMapping("/join")
-	public String join(UserVo uservo,HttpSession session) {
+	public String join(UserVo uservo,HttpSession session,RedirectAttributes rttr) {
 		
 		//회원가입
 		userService.insert(uservo);
 		
 		//세션에 회원의 이메일저장
 		session.setAttribute("authUser", uservo.getEmail());
+		
+		rttr.addFlashAttribute("Success","회원가입을 하였습니다.");
 		
 		return "redirect:/";
 	}
@@ -149,7 +155,7 @@ public class UserController {
 
 	//회원정보수정POST
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String postUpdate(HttpSession session,Model model,HttpServletRequest request) {
+	public String postUpdate(HttpSession session,Model model,HttpServletRequest request,RedirectAttributes rttr) {
 
 
 		//회원의 이메일 가져오기
@@ -165,21 +171,21 @@ public class UserController {
 		
 		if(result) {
 			
-			model.addAttribute("message", "비밀번호를 변경하였습니다.");
+			rttr.addFlashAttribute("Success", "회원정보를 수정하였습니다.");
+			return "redirect:/";
 			
 		}else {
 
-			model.addAttribute("message", "기존비밀번호를 잘못입력하셨습니다.확인해주세요.");
+			rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
+			return "redirect:/";
 		
 		}
-		
-		return "redirect:/";
 	}
 	
 	
 	//회원탈퇴
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String postDelete(HttpSession session,Model model) {
+	public String postDelete(HttpSession session,Model model,RedirectAttributes rttr) {
 
 		//회원의 이메일 가져오기
 		String email = (String)session.getAttribute("authUser");
@@ -188,7 +194,7 @@ public class UserController {
         
         session.removeAttribute("authUser");
 			
-        model.addAttribute("message", "회원탈퇴하였습니다.");
+        rttr.addFlashAttribute("Success", "회원탈퇴하였습니다.");
         
 	    return "redirect:/";
 	    
@@ -196,8 +202,11 @@ public class UserController {
 
 	//로그아웃
 	@RequestMapping("/logout")
-	public String join(HttpSession session) {
+	public String join(HttpSession session,RedirectAttributes rttr) {
 		session.removeAttribute("authUser");
+		
+	    rttr.addFlashAttribute("Success", "로그아웃하였습니다.");
+	    
 		return "redirect:/";
 	}
 }

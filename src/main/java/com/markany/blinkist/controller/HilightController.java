@@ -106,4 +106,15 @@ public class HilightController {
 
 		return true;
 	}
+	
+	
+	// 하이라이트 삭제하기
+	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
+	@RequestMapping(value = "/deleteHilight", method = RequestMethod.POST)
+	public boolean DeleteHilight(@RequestParam(value="hilight_no") long hilight_no){
+
+		hilightService.deleteHilight(hilight_no);  
+
+		return true;
+	}
 }

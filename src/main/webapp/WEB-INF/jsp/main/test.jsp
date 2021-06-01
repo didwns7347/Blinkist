@@ -30,7 +30,6 @@
     	<!-- navigation include -->
         <c:import url="/WEB-INF/jsp/include/navigation.jsp" />
         
-                ${message }   
         <!-- Masthead-->
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">
@@ -45,7 +44,7 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+                <p class="masthead-subheading font-weight-light mb-0"> Graphic Artist - Web Designer - Illustrator</p>
             </div>
         </header>
         <!-- Portfolio Section-->
@@ -463,6 +462,28 @@
         <script src="assets/mail/contact_me.js"></script>
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>   
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>               
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
+    
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<!-- 팝업창  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>            
+<script>
+$(function() {
+	
+	var SuccessMessage = "<c:out value="${Success}" />";
+	var ErrorMessage = "<c:out value="${Error}" />";
+	
+	
+	if (SuccessMessage != "") {//메세지가 있으면
+	
+		swal("success", SuccessMessage, "success");
+		
+	}else if(ErrorMessage !=""){
+		
+		swal("Error", ErrorMessage, "error");
+		
+	}
+})
+</script>          
 </body>
 </html>

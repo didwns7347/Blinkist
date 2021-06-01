@@ -55,7 +55,9 @@
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<!-- img size 470x470 으로 고정 -->
-							<a href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
+							<a
+								href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}"
+								style="background-color: #e2ae5f7a;"><br /> <img
 								class="card-img-top" src="${list.img_path }" width="122"
 								height="180" alt="..." /> <br /> </a>
 							<div class="card-body">
@@ -78,16 +80,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
-								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
-								</div>
-
+							<!-- Blue -->
+							<div class="progress" style="height:50px;">
+								<div class="progress-bar" role="progressbar" aria-valuenow="25"
+									aria-valuemin="0" aria-valuemax="100"
+									style="width:${list.progress}%; height:50px">${list.progress}%</div>
 							</div>
-						</div>
 					</div>
-
+					</div>
 				</c:if>
 
 				<!-- 라이브러리에 없는 책일 경우 false -->
@@ -95,7 +95,9 @@
 
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
-							<a href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
+							<a
+								href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"
+								style="background-color: #e2ae5f7a;"><br /> <img
 								class="card-img-top" src="${list.img_path }" width="122"
 								height="180" alt="..." /> <br /> </a>
 							<div class="card-body">
@@ -124,21 +126,22 @@
 
 
 		</div>
-		<br/>
-		<br/>
+		<br /> <br />
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 
 	<script>
-		var myDiv = document.getElementById("cardfooter")
-		myDiv.addEventListener("mouseover", changeGreen);
-		myDiv.addEventListener("mouseout", changeWite);
-		function changeGreen() {
-			myDiv.style.backgroundColor = "#0365F2";
-		}
-		function changeWite() {
-			myDiv.style.backgroundColor = "white";
-		}
+	var divs = document.getElementsByName('cardfooter')
+	for (var i = 0; i < divs.length; i++) {
+		divs.item(i).addEventListener("mouseover", changeGreen, false);
+		divs.item(i).addEventListener("mouseout", changeWite, false);
+	}
+	function changeGreen(e) {
+		e.target.parentNode.style.backgroundColor = "#0365F2";
+	}
+	function changeWite(e) {
+		e.target.parentNode.style.backgroundColor = "white";
+	}
 	</script>
 </body>
 </html>
