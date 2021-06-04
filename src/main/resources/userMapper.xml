@@ -8,7 +8,7 @@
 		<![CDATA[
 			insert 
 			into user
-			values(null, #{email}, #{password}, #{grade}, now(), null, null)
+			values(null, #{email}, #{password}, #{grade}, now(), null, null,null)
 		]]>
 	</insert>
 
@@ -28,7 +28,7 @@
 	<select id="selectbyUser" parameterType="string"
 		resultType="uservo">
 		<![CDATA[
-			select email,grade,primium_date
+			select email,grade,primium_date,finish_date,payment_method
 			  from user
 			where email = #{email}
 		]]>
@@ -52,7 +52,7 @@
 		<![CDATA[
 			update user
 			 set 
-			   grade=#{grade},primium_date=now()
+			   grade=#{grade},primium_date=#{primium_date},finish_date=#{finish_date},payment_method=#{payment_method}
 			 where
 			  email=#{email}
 		]]>
@@ -64,7 +64,7 @@
 		<![CDATA[
 			update user
 			 set 
-			   grade=#{grade},primium_date=null
+			   grade=#{grade},primium_date=null,finish_date=#{finish_date}=null,payment_method=null
 			 where
 			  email=#{email}
 		]]>

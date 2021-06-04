@@ -10,4 +10,6 @@ public class UserVo {
 	private Grade grade=Grade.basic;
 	private String reg_date;
 	private String primium_date;
+	private String finish_date;
+	private Payment_method payment_method = null;
 }

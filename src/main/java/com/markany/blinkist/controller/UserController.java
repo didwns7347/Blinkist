@@ -3,6 +3,7 @@ package com.markany.blinkist.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +21,7 @@ import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
+import com.markany.blinkist.vo.Payment_method;
 import com.markany.blinkist.vo.UserVo;
 
 @Controller
@@ -69,9 +71,9 @@ public class UserController {
 				try {
 
 					Date Primium_date = sdf.parse(user.getPrimium_date());
-					Date now_time = new Date();
+					Date finish_date = sdf.parse(user.getFinish_date());
 
-					if (Primium_date.before(now_time)) {// primium_date가 현재시간을 지났다면
+					if (Primium_date.before(finish_date)) {// primium_date가 만료일을 지났다면
 
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						rttr.addFlashAttribute("passes", "passes");
@@ -139,6 +141,7 @@ public class UserController {
 		if (user != null) {
 
 			session.setAttribute("authUser", email);
+
 			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
 
 			// premium가입날이 지났는지 확인
@@ -150,16 +153,16 @@ public class UserController {
 				try {
 
 					Date Primium_date = sdf.parse(user.getPrimium_date());
-					Date now_time = new Date();
+					Date finish_date = sdf.parse(user.getFinish_date());
 
-					if (Primium_date.before(now_time)) {// primium_date가 현재시간을 지났다면
+					if (Primium_date.before(finish_date)) {// primium_date가 만료일을 지났다면
 
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						model.addAttribute("passes", "passes");
 
 						// 3. 회원의 등급과 premium_date날짜를 바꿔준다.
 						UserVo uservo = new UserVo();
-						
+
 						uservo.setEmail(email);
 						uservo.setGrade(Grade.basic);
 						uservo.setPrimium_date(null);
@@ -190,27 +193,12 @@ public class UserController {
 		}
 	}
 
-	/*
-	 * // 로그아웃
-	 * 
-	 * @RequestMapping(value = "/logout", method = RequestMethod.POST) public String
-	 * logout(HttpSession session, RedirectAttributes rttr) {
-	 * 
-	 * session.removeAttribute("authUser"); rttr.addFlashAttribute("Success",
-	 * "로그아웃하였습니다. 안녕히가세요.");
-	 * 
-	 * return "redirect:/";
-	 * 
-	 * }
-	 */
-
 	// 회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVo uservo, HttpSession session, RedirectAttributes rttr) {
 		System.out.println("dkdkdkdkdkdkdkdkkdkdkdkdk");
 		// 회원가입
 		userService.insert(uservo);
-
 
 		rttr.addFlashAttribute("Success", "회원가입을 하였습니다.");
 
@@ -219,7 +207,6 @@ public class UserController {
 
 	// 스프링 시큐리티로 회원가입폼으로 보내기
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
-
 	public String join() {
 		return "user/join";
 	}
@@ -231,17 +218,40 @@ public class UserController {
 	}
 
 	// 회원정보수정GET
-
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String getUpdate(Principal principal, Model model) {
-
 		// 세션에 저장된 회원의 이메일정보가져오기
 		String email = principal.getName();
-		System.out.println("email="+email+"\nPrinciple="+principal.toString());
+		System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
 		// 이메일을 토대로 회원의 정보가져오기
 		UserVo uservo = userService.selectbyUser(email);
 
 		model.addAttribute("uservo", uservo);
+
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+		try {
+			System.out.println(uservo.getFinish_date());
+			Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
+			Date EndDate = new Date();// 현재날짜
+
+			// 구독끝나는날짜-현재날짜 /(24*60*60*1000)
+			long diffDay = (startDate.getTime() - EndDate.getTime()) / (24 * 60 * 60 * 1000);
+
+			if (uservo.getGrade().equals(Grade.monthP)) {// 월구독자라면
+
+				model.addAttribute("refund", diffDay * 530);
+
+			} else if (uservo.getGrade().equals(Grade.yearP)) {// 연간구독자라면
+
+				model.addAttribute("refund", diffDay * 270);
+
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+
+		}
 
 		return "user/update";
 
@@ -249,17 +259,17 @@ public class UserController {
 
 	// 회원정보수정POST
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
-	public String postUpdate(HttpSession session, Model model, HttpServletRequest request, RedirectAttributes rttr) {
+	public String postUpdate(Principal authUser, Model model, HttpServletRequest request, RedirectAttributes rttr) {
 
 		// 회원의 이메일 가져오기
-		String email = (String) session.getAttribute("authUser");
+		String email = authUser.getName();
 
 		// 기존의 비밀번호가져오기
 		String oldpassword = (String) request.getParameter("oldpassword");
 
 		// 새로운 비밀번호가져오기
 		String newpassword = (String) request.getParameter("newpassword");
-		
+
 		boolean result = userService.updatePw(email, oldpassword, newpassword);
 
 		if (result) {
@@ -278,11 +288,16 @@ public class UserController {
 	// 회원등급수정
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
-	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade) {
+	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade,
+			@RequestParam(value = "payment_method") String payment_method) {
 
 		UserVo uservo = new UserVo();
 		uservo.setEmail(email);
 
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+
+		// 등급나누기
 		if (grade.equals("basic")) {
 
 			uservo.setGrade(Grade.basic);
@@ -290,16 +305,56 @@ public class UserController {
 		} else if (grade.equals("monthP")) {
 
 			uservo.setGrade(Grade.monthP);
+			uservo.setPrimium_date(sdf.format(cal.getTime()));
+
+			cal.add(Calendar.MONTH, 1);
+
+			uservo.setFinish_date(sdf.format(cal.getTime()));
 
 		} else if (grade.equals("yearP")) {
 
 			uservo.setGrade(Grade.yearP);
+			uservo.setPrimium_date(sdf.format(cal.getTime()));
+
+			cal.add(Calendar.YEAR, 1);
+
+			uservo.setFinish_date(sdf.format(cal.getTime()));
+
+		}
+
+		// 결제수단
+		if (payment_method.equals("카카오페이")) {
+
+			uservo.setPayment_method(Payment_method.카카오페이);
+
+		} else if (payment_method.equals("페이코")) {
+
+			uservo.setPayment_method(Payment_method.페이코);
 
 		}
 
 		userService.updategrade(uservo);
 
 	}
+
+	// 구독취소
+	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
+	@RequestMapping(value = "/primiumDelete", method = RequestMethod.POST)
+	public void primiumDelete(Principal authUser) {
+
+		// 회원의 이메일 가져오기
+		String email = authUser.getName();
+
+		UserVo uservo = new UserVo();
+
+		uservo.setEmail(email);
+		uservo.setGrade(Grade.basic);
+
+		userService.updategrade(uservo);
+
+	}
+
+	
 
 	// 회원탈퇴
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)

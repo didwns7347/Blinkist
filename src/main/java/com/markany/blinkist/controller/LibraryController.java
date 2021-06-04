@@ -71,7 +71,7 @@ public class LibraryController {
 
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/button_addlibrary", method = RequestMethod.POST)
-	public boolean button_addlibarary(@RequestParam(value="book_no") long book_no, @RequestParam(value="authUser") Principal authUser) {
+	public boolean button_addlibarary(@RequestParam(value="book_no") long book_no,  Principal authUser) {
 		//세션에 저장된 회원의 이메일정보가져오기
 		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
