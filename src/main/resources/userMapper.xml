@@ -8,7 +8,7 @@
 		<![CDATA[
 			insert 
 			into user
-			values(null, #{email}, #{password}, #{grade}, now(), null)
+			values(null, #{email}, #{password}, #{grade}, now(), null, null)
 		]]>
 	</insert>
 
@@ -17,7 +17,7 @@
 	<select id="findByEmail" parameterType="string"
 		resultType="uservo">
 		<![CDATA[
-			select email,user_no,password,grade
+			select email,user_no,password,grade,primium_date
 			  from user
 			where email = #{email}
 		]]>
@@ -28,7 +28,7 @@
 	<select id="selectbyUser" parameterType="string"
 		resultType="uservo">
 		<![CDATA[
-			select email,grade
+			select email,grade,primium_date
 			  from user
 			where email = #{email}
 		]]>
@@ -43,6 +43,30 @@
 			   password=#{newpassword}
 			 where
 			  email=#{email} and password=#{oldpassword}
+		]]>
+	</update>
+	
+	
+	<!-- 회원등급수정 -->
+	<update id="updategrade" parameterType="uservo">
+		<![CDATA[
+			update user
+			 set 
+			   grade=#{grade},primium_date=now()
+			 where
+			  email=#{email}
+		]]>
+	</update>
+	
+	
+	<!-- primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다. -->
+		<update id="PassPrimium" parameterType="uservo">
+		<![CDATA[
+			update user
+			 set 
+			   grade=#{grade},primium_date=null
+			 where
+			  email=#{email}
 		]]>
 	</update>
 

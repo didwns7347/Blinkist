@@ -13,6 +13,10 @@ public interface UserRepository {
 	
 	public boolean updatePw(String email,String oldpassword,String newpassword);//비밀번호변경
 	
+	public boolean updategrade(UserVo uservo);//회원등급변경
+	
+	public boolean PassPrimium(UserVo uservo);//primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다.
+	
 	public void deleteUser(String email);//회원탈퇴
 
 }

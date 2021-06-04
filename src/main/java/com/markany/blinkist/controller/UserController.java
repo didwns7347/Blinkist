@@ -1,6 +1,9 @@
 package com.markany.blinkist.controller;
 
 import java.io.IOException;
+import java.security.Principal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,7 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
+import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.KakaoService;
+import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
@@ -27,11 +32,17 @@ public class UserController {
 	@Autowired
 	UserService userService;
 
+	@Autowired
+	private HilightService hilightService;
+
+	@Autowired
+	private LibraryService libraryService;
+
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
 	public String home(@RequestParam(value = "code", required = false) String code, HttpServletRequest request,
 			Model model, RedirectAttributes rttr, HttpSession session) throws Exception {
-	
+
 		KakaoService service = new KakaoService();
 		String access_Token = service.getAccessToken(code);
 		HashMap<String, Object> userInfo = service.getUserInfo(access_Token);
@@ -41,7 +52,7 @@ public class UserController {
 
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
-		System.out.println("kakaologin START");
+
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
 
@@ -49,7 +60,45 @@ public class UserController {
 
 			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
 
-			return "redirect:/";
+			// premium가입날이 지났는지 확인
+			// 1. premium을 가입했는지 확인한다.
+			if (user.getPrimium_date() != null) {// premium을 가입했다면
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+				try {
+
+					Date Primium_date = sdf.parse(user.getPrimium_date());
+					Date now_time = new Date();
+
+					if (Primium_date.before(now_time)) {// primium_date가 현재시간을 지났다면
+
+						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
+						rttr.addFlashAttribute("passes", "passes");
+
+						// 3. 회원의 등급과 premium_date날짜를 바꿔준다.
+						UserVo uservo = new UserVo();
+
+						uservo.setEmail(email);
+						uservo.setGrade(Grade.basic);
+						uservo.setPrimium_date(null);
+
+						userService.PassPrimium(uservo);
+
+					}
+				} catch (Exception e) {
+
+					e.printStackTrace();
+
+				}
+
+				return "redirect:/";
+
+			} else {// premium가입을 안했다면
+
+				return "redirect:/";
+
+			}
 
 		} else { // 이메일이 없다면 회원가입시키기
 
@@ -74,7 +123,7 @@ public class UserController {
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
 			RedirectAttributes rttr) throws IOException, ParseException {
-			
+
 		OAuth2AccessToken oauthToken = naverLoginService.getAccessToken(session, code, state);
 
 		// 로그인 사용자 정보를 읽어온다.
@@ -84,19 +133,56 @@ public class UserController {
 		String email = naverLoginService.getUserEmail(apiResult);
 
 		// user table에 헤당 이메일이 있는지 확인
-		UserVo uservo = userService.findByEmail(email);
-		System.out.println("NAVER LOGIN START");
+		UserVo user = userService.findByEmail(email);
+
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
-		if (uservo != null) {
+		if (user != null) {
 
-			// session저장
 			session.setAttribute("authUser", email);
-
 			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
 
-			return "redirect:/";
+			// premium가입날이 지났는지 확인
+			// 1. premium을 가입했는지 확인한다.
+			if (user.getPrimium_date() != null) {// premium을 가입했다면
+
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+				try {
+
+					Date Primium_date = sdf.parse(user.getPrimium_date());
+					Date now_time = new Date();
+
+					if (Primium_date.before(now_time)) {// primium_date가 현재시간을 지났다면
+
+						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
+						model.addAttribute("passes", "passes");
+
+						// 3. 회원의 등급과 premium_date날짜를 바꿔준다.
+						UserVo uservo = new UserVo();
+						
+						uservo.setEmail(email);
+						uservo.setGrade(Grade.basic);
+						uservo.setPrimium_date(null);
+
+						userService.PassPrimium(uservo);
+
+					}
+				} catch (Exception e) {
+
+					e.printStackTrace();
+
+				}
+
+				return "redirect:/";
+
+			} else {// premium가입을 안했다면
+
+				return "redirect:/";
+
+			}
 
 		} else { // 이메일이 없다면 회원가입시키기
+
 			model.addAttribute("email", email);
 
 			return "user/join";
@@ -104,16 +190,19 @@ public class UserController {
 		}
 	}
 
-	// 로그아웃
-	@RequestMapping(value = "/logout", method = RequestMethod.POST)
-	public String logout(HttpSession session, RedirectAttributes rttr) {
-
-		session.removeAttribute("authUser");
-		rttr.addFlashAttribute("Success", "로그아웃하였습니다. 안녕히가세요.");
-
-		return "redirect:/";
-
-	}
+	/*
+	 * // 로그아웃
+	 * 
+	 * @RequestMapping(value = "/logout", method = RequestMethod.POST) public String
+	 * logout(HttpSession session, RedirectAttributes rttr) {
+	 * 
+	 * session.removeAttribute("authUser"); rttr.addFlashAttribute("Success",
+	 * "로그아웃하였습니다. 안녕히가세요.");
+	 * 
+	 * return "redirect:/";
+	 * 
+	 * }
+	 */
 
 	// 회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
@@ -122,18 +211,15 @@ public class UserController {
 		// 회원가입
 		userService.insert(uservo);
 
-		// 세션에 회원의 이메일저장
-		session.setAttribute("authUser", uservo.getEmail());
 
 		rttr.addFlashAttribute("Success", "회원가입을 하였습니다.");
 
 		return "redirect:/";
 	}
-	
-
 
 	// 스프링 시큐리티로 회원가입폼으로 보내기
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
+
 	public String join() {
 		return "user/join";
 	}
@@ -145,12 +231,13 @@ public class UserController {
 	}
 
 	// 회원정보수정GET
+
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String getUpdate(HttpSession session, Model model) {
+	public String getUpdate(Principal principal, Model model) {
 
 		// 세션에 저장된 회원의 이메일정보가져오기
-		String email = (String) session.getAttribute("authUser");
-
+		String email = principal.getName();
+		System.out.println("email="+email+"\nPrinciple="+principal.toString());
 		// 이메일을 토대로 회원의 정보가져오기
 		UserVo uservo = userService.selectbyUser(email);
 
@@ -172,7 +259,7 @@ public class UserController {
 
 		// 새로운 비밀번호가져오기
 		String newpassword = (String) request.getParameter("newpassword");
-
+		
 		boolean result = userService.updatePw(email, oldpassword, newpassword);
 
 		if (result) {
@@ -188,11 +275,30 @@ public class UserController {
 		}
 	}
 
-	// 회원인유저 이메일 페스워드로 비비교하고 로그인 + 권한 부여
-	@RequestMapping(value = "/auth", method = RequestMethod.POST)
-	public String auth(UserVo user) {
-		System.out.println("HELLO AUTH PRINT ");
-		return "redirect:/";
+	// 회원등급수정
+	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
+	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
+	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade) {
+
+		UserVo uservo = new UserVo();
+		uservo.setEmail(email);
+
+		if (grade.equals("basic")) {
+
+			uservo.setGrade(Grade.basic);
+
+		} else if (grade.equals("monthP")) {
+
+			uservo.setGrade(Grade.monthP);
+
+		} else if (grade.equals("yearP")) {
+
+			uservo.setGrade(Grade.yearP);
+
+		}
+
+		userService.updategrade(uservo);
+
 	}
 
 	// 회원탈퇴
@@ -202,6 +308,16 @@ public class UserController {
 		// 회원의 이메일 가져오기
 		String email = (String) session.getAttribute("authUser");
 
+		// 이메일을 토대로 회원정보가져오기
+		UserVo userVo = userService.findByEmail(email);
+
+		// hilight모두삭제
+		hilightService.deleteAllHilight(userVo.getUser_no());
+
+		// library모두삭제
+		libraryService.deleteAllLibrary(userVo.getUser_no());
+
+		// 회원탈퇴
 		userService.deleteUser(email);
 
 		session.removeAttribute("authUser");
@@ -210,15 +326,5 @@ public class UserController {
 
 		return "redirect:/";
 
-	}
-
-	// 로그아웃
-	@RequestMapping("/logout")
-	public String join(HttpSession session, RedirectAttributes rttr) {
-		session.removeAttribute("authUser");
-
-		rttr.addFlashAttribute("Success", "로그아웃하였습니다.");
-
-		return "redirect:/";
 	}
 }

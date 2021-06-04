@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,10 +32,10 @@ public class HilightController {
 
 	//하이라이트메뉴
 	@RequestMapping(value = "/hilight", method = RequestMethod.GET)
-	public String hilightList(HttpSession session,Model model){
+	public String hilightList(String authUser,Model model){
 
 		//세션에 저장된 회원의 이메일정보가져오기
-		String email = (String)session.getAttribute("authUser");
+		String email = authUser;
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		
@@ -86,12 +86,11 @@ public class HilightController {
 	// 하이라이트 추가하기
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/addHilight", method = RequestMethod.POST)
-	public boolean addLibrary(HttpSession session,@RequestParam(value="book_no") long book_no,@RequestParam(value="content") String content,
-			@RequestParam(value="content_no") long content_no)
+	public boolean addLibrary(@RequestParam(value="book_no") long book_no,@RequestParam(value="content") String content,
+			@RequestParam(value="content_no") long content_no, @RequestParam(value="authUser") String authUser )
 	{
 
-		//세션에 저장된 회원의 이메일정보가져오기
-		String email = (String)session.getAttribute("authUser");
+		String email = authUser;
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 

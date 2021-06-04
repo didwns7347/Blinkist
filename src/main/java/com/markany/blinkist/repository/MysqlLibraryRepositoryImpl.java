@@ -141,7 +141,14 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 	}
 
 
-	
-	
+	//회원의 모든 라이브러리지우기
+	public void deleteAllLibrary(long user_no) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		sqlSession.update("libraryMapper.deleteAllLibrary", user_no);
+		sqlSession.commit();
+				
+	}
 
 }

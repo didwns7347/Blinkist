@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
+	<s:authentication property="principal" var="authUser"/> 
 	<div class="mb-5"></div>
 	<div class="container">
 
@@ -88,7 +90,7 @@
 														data-toggle="dropdown">. . .</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item"
-															href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser}&book_no=${list.book_no}">
+															href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">
 															Remove from library</a> <a class="dropdown-item"
 															href="${list.buyLink }">Buy book</a> <a
 															class="dropdown-item" href="#">Send to Kindle</a>
@@ -140,7 +142,7 @@
 														data-toggle="dropdown">. . .</button>
 													<div class="dropdown-menu">
 														<a class="dropdown-item"
-															href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser}&book_no=${list.book_no}">
+															href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">
 															Remove from library</a> <a class="dropdown-item"
 															href="${list.buyLink }">Buy book</a> <a
 															class="dropdown-item" href="#">Send to Kindle</a>

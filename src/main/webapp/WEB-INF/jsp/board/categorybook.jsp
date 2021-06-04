@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,7 +53,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
-
+	<s:authentication property="principal" var="authUser"/> 
 	<div class="container">
 		<h1 id="category">${category}</h1>
 		<br />
@@ -123,7 +124,7 @@
 							</div>
 							<div class="card-footer text-center">
 								<a name="cardfooter"
-									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
 									Add Library</a>
 							</div>
 						</div>
@@ -195,7 +196,7 @@
 							</div>
 							<div class="card-footer text-center">
 								<a name="cardfooter"
-									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
 									Add Library</a>
 							</div>
 						</div>
@@ -267,7 +268,7 @@
 							</div>
 							<div class="card-footer text-center">
 								<a name="cardfooter"
-									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser}">+
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
 									Add Library</a>
 							</div>
 						</div>
@@ -313,7 +314,6 @@
 			e.target.parentNode.style.backgroundColor = "white";
 		}
 	</script>
-
 </body>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>

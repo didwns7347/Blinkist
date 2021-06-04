@@ -12,7 +12,7 @@ $('#Add_Library').click(function(){
         test = true;
         
         var book_no =  $('#book_no').val();//book_no가져오기
-        
+  
         var allData = { "book_no": book_no};
 	    $.ajax({
 	

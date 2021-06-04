@@ -1,9 +1,9 @@
 package com.markany.blinkist.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -71,9 +71,9 @@ public class LibraryController {
 
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/button_addlibrary", method = RequestMethod.POST)
-	public boolean button_addlibarary(HttpSession session,@RequestParam(value="book_no") long book_no) {
+	public boolean button_addlibarary(@RequestParam(value="book_no") long book_no, @RequestParam(value="authUser") Principal authUser) {
 		//세션에 저장된 회원의 이메일정보가져오기
-		String email = (String)session.getAttribute("authUser");
+		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		
@@ -91,11 +91,11 @@ public class LibraryController {
 	
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/update_progress", method = RequestMethod.POST)
-	public boolean update_progress(HttpSession session,@RequestParam(value="progress") long progress, @RequestParam(value="book_no") long book_no) {
+	public boolean update_progress(@RequestParam(value="progress") long progress, @RequestParam(value="book_no") long book_no, Principal authUser) {
 		
 		
 		//세션에 저장된 회원의 이메일정보가져오기
-		String email = (String)session.getAttribute("authUser");
+		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		

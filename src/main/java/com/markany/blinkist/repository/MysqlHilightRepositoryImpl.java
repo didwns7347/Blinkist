@@ -90,4 +90,16 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlSession.commit();
 		
 	}
+	
+	
+	@Override//회원의 하이라이트 모두삭제
+	public void deleteAllHilight(long user_no) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		sqlSession.delete("hilightMapper.deleteAllHilight", user_no);
+		
+		sqlSession.commit();
+		
+	}
 }

@@ -86,4 +86,16 @@
 	       WHERE user_no = #{user_no} and book_no = #{book_no}
 	]]>
 	</update>
+	
+	
+	<!-- 회원의 모든 라이브러리지우기 -->
+	<delete id="deleteAllLibrary" parameterType="long">
+	  <![CDATA[
+	       delete
+	         from library
+	       where
+	         user_no = #{user_no}
+	
+	  ]]>
+	</delete>
 </mapper>

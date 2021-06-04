@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,9 +33,11 @@
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
 </head>
 <body>
+	<s:authentication property="principal" var="authUser"/> 
    <!-- 책번호 -->
    <input type="hidden" id="book_no" value="${book_no}"/>
-
+	<!-- 사용자 email -->
+	<input type="hidden" id="authUser" value="${authUser.username }"/>
 
 <!-- 기존의 progress -->
 <input type="hidden" id="existing_progress" value="${progress}"/>
@@ -62,10 +65,10 @@
   <div class="container">
    <c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
        <h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
-   
-                                    <hr/>
-                                    
-       <p id="p_content" class="" name="">${item.content}</p>                            
+
+                                    <hr/> 
+                                                         
+         <p id="p_content" class="" name="">${item.content}</p>                         
    </c:forEach>      
    
                                    <hr/>                             

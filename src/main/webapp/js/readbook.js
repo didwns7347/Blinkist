@@ -55,6 +55,7 @@ $(document).ready(function () {
      var progress =  $('#progress').val();//progress값가져오기
      
      var book_no = $('#book_no').val();//book_no값가져오기
+     
              
      var allData = { "progress": progress, "book_no" : book_no};
      
@@ -480,6 +481,8 @@ $(document).ready(function(){
           var content = $('#hilight').text();//hilight에 저장할 content가져오기
           
           var content_no = $('#p_content').attr('class');//content번호가져오기
+          
+          var authUser= $('#authUser').val();
        
       if(content.length==0){//hilight에 저장할 텍스트가 없으면
  
@@ -509,7 +512,7 @@ $(document).ready(function(){
 	   }
 	 } 
                           
-    var allData = { "book_no": book_no, "content": content, "content_no": content_no};
+    var allData = { "book_no": book_no, "content": content, "content_no": content_no, "authUser":authUser};
                     
 $.ajax({
 	
@@ -522,10 +525,11 @@ $.ajax({
                     
                      $('.swal-button').click(function(){//팝업창의 ok버튼을 클릭할시
                                
-                               location.reload();          
-                                                 
-          });                          
+                               document.location.reload();
+                                              
+                     });                                             
 	}
 	});
+	      
 });
 });

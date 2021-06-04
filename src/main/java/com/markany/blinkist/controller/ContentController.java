@@ -1,7 +1,8 @@
 package com.markany.blinkist.controller;
 
+import java.security.Principal;
 import java.util.List;
-import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,10 +34,10 @@ public class ContentController {
 	
 	
 	@RequestMapping(value="/readbook")
-	public String view(HttpSession session,long book_no,Model model){
+	public String view(long book_no, Principal authUser, Model model){
 		
 		//세션에 저장된 회원의 이메일정보가져오기
-		String email = (String)session.getAttribute("authUser");
+		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		

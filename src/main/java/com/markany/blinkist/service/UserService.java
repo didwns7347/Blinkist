@@ -15,7 +15,7 @@ import com.markany.blinkist.vo.UserVo;
 import com.markany.blinkist.dao.*;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userDAO;
@@ -27,7 +27,7 @@ public class UserService implements UserDetailsService{
 		return userDAO.findByEmail(email);
 
 	}
-	
+
 	public boolean insert(UserVo uservo) {// 회원가입
 		// 비밀번호 암호화
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -42,39 +42,53 @@ public class UserService implements UserDetailsService{
 	}
 
 	public boolean updatePw(String email, String oldpassword, String newpassoword) {// 비밀번호변경
-
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		oldpassword=passwordEncoder.encode(oldpassword);
 		return userDAO.updatePw(email, oldpassword, newpassoword);
 
 	}
 
-	public void deleteUser(String email) {
+	public void deleteUser(String email) {// 회원탈퇴
 
 		userDAO.deleteUser(email);
 
 	}
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		//최종적으로 리턴해야할 객체
+		// 최종적으로 리턴해야할 객체
 		UserDetailsVo userDetails = new UserDetailsVo();
-		
-		//사용자 정보 select
+
+		// 사용자 정보 select
 		UserVo vo = userDAO.findByEmail(email);
-		
-		//사용자 정보가 없으면 null처리
-		if(vo==null) {
-			System.out.println("널널 널널 널ㄴ런ㄹ널널널너런러너런러너런러널너런러널너런러널너런러 email="+email);
+
+		// 사용자 정보가 없으면 null처리
+		if (vo == null) {
+			System.out.println("널널 널널 널ㄴ런ㄹ널널널너런러너런러너런러널너런러널너런러널너런러 email=" + email);
 			return null;
 		}
-		//System.out.println(vo.toString());
-		//System.out.println(vo.toString());
+		// System.out.println(vo.toString());
+		// System.out.println(vo.toString());
 		userDetails.setEmail(vo.getEmail());
 		userDetails.setPassword(vo.getPassword());
-		List<String> authorities=new ArrayList<String>();
+		List<String> authorities = new ArrayList<String>();
 		authorities.add(vo.getGrade().toString());
 		userDetails.setAuthorities(authorities);
-		//System.out.println("USERDETAILS====================="+userDetails.toString());
+		// System.out.println("USERDETAILS====================="+userDetails.toString());
 		return userDetails;
-		
+
+	}
+
+	public boolean updategrade(UserVo uservo) {// 회원등급변경
+
+		return userDAO.updategrade(uservo);
+
+	}
+
+	public boolean PassPrimium(UserVo uservo) {// primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다.
+
+		return userDAO.PassPrimium(uservo);
+
 	}
 
 }

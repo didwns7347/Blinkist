@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -74,9 +75,9 @@
 							to kindle</a>
 					</div>
 				</div>
-
+<s:authentication property="principal" var="authUser"/>
 <input type="hidden" id="book_no" name="book_no" value="${map.book_no}"/>
-
+<input type="hidden" id="authUser" name="authUser" value="${authUser.username }"/>
 
 				<div class="row mb-4">
 					<div class="container">

@@ -1,10 +1,10 @@
 package com.markany.blinkist.controller;
 
+import java.security.Principal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +29,10 @@ public class BookController {
 
 	// 책 검색기능 제목,작가
 	@RequestMapping("/search")
-	public String search(Model model, String keyword, HttpSession session) {
+	public String search(Model model, String keyword, Principal authUser) {
 		
 		List<HashMap<String, Object>> list = bookService.findByTitleAuthor(keyword);
-		String email = (String) session.getAttribute("authUser");
+		String email = authUser.getName();
 		List<HashMap<String,Object>> libraryList = libraryService.findNoProgressByAuthUser(email);
 		List<HashMap<String, Object>> lastlist = bookService.libraryCheckSearch(list, libraryList);
 
@@ -45,7 +45,7 @@ public class BookController {
 	
 	// 책 보여주기 기능 book_no
 	@RequestMapping("/viewbook")
-	public String viewBook(HttpSession session, Model model, long no) {
+	public String viewBook( Model model, long no) {
 		
 		Map<Object, Object> map = bookService.findByNo(no);
 		model.addAttribute("map",map );
@@ -56,7 +56,7 @@ public class BookController {
 	
 	//책 보여주기기능 title,category,ahthor_name
 	@RequestMapping("/viewbookinfo")
-	public String viewBook(HttpSession session,Model model, String info, String category) {
+	public String viewBook(Model model, String info, String category) {
 		
 		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
 		model.addAttribute("map",map );
@@ -67,10 +67,10 @@ public class BookController {
 
 	// recentrlyadded 보여주기 기능
 	@RequestMapping("/recentlyadded")
-	public String viewRecentBook(Model model, HttpSession session) {
+	public String viewRecentBook(Model model, Principal principal) {
 		
 		List<HashMap<String, Object>> list = bookService.findAllOrderByDate();
-		String email = (String) session.getAttribute("authUser");
+		String email = principal.getName();
 		List<Long> libraryList = libraryService.findByAuthUser(email);
 		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
 		model.addAttribute("list", lastlist);
@@ -80,9 +80,9 @@ public class BookController {
 
 	// populartitles 보여주기 기능
 	@RequestMapping("/popular")
-	public String viewPopularBook(Model model, HttpSession session) {
+	public String viewPopularBook(Model model, Principal principal) {
 		
-		String email = (String) session.getAttribute("authUser");
+		String email = principal.getName();
 		List<Long> libraryList = libraryService.findByAuthUser(email);
 		// 총 조회수 로 6개
 		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount();
@@ -101,9 +101,9 @@ public class BookController {
 	
 	// 카테고리 별 책 보여주기 기능
 	@RequestMapping("/category")
-	public String viewPopularBook(Model model, String category,  HttpSession session) {
+	public String viewPopularBook(Model model, String category, Principal principal ) {
 		
-		String email = (String) session.getAttribute("authUser");
+		String email = principal.getName();
 		List<HashMap<String, Object>> libraryList = libraryService.findNoProgressByAuthUser(email);
 		//트랜드 
 		List<HashMap<String, Object>> trendList = bookService.findAllCategoryOrderByCount(category);

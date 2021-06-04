@@ -68,12 +68,6 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 
 
-
-
-	<!-- navigation include -->
-	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
-
-	${message }
 	<!-- MAIN SECTION-->
 	<header class="masthead bg-primary text-white text-center">
 		<div class="container d-flex align-items-center flex-column">
@@ -92,7 +86,7 @@
 			</div>
 			<!-- Masthead Subheading-->
 			<p class="masthead-subheading font-weight-light mb-0">언제 어디서나
-				블링키스트로 독서해 보세요</p>
+				블링키스트로 독서해 보세요</p>  
 		</div>
 	</header>
 
@@ -290,6 +284,7 @@
 
 		</div>
 	</div>
+
 
 	<!-- 궁금해 섹션 -->
 	<div class="slideshow-container" style="background-color: #babaef">
@@ -508,10 +503,18 @@
 
 			var SuccessMessage = "<c:out value="${Success}" />";
 			var ErrorMessage = "<c:out value="${Error}" />";
+			var PassPrimium = "<c:out value="${passes}" />";
 
 			if (SuccessMessage != "") {//메세지가 있으면
 
+			  if(PassPrimium ==''){
+				  
 				swal("success", SuccessMessage, "success");
+				
+			  }else{//primium_date가 현재시간을 지났다면 로그인경고창대신 구독메세지창 띄우기
+				  
+				  swal("info", "primium구독날짜가 지났습니다. 갱신해주세요.", "info");
+			  }
 
 			} else if (ErrorMessage != "") {
 

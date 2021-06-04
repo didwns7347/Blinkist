@@ -53,4 +53,12 @@ public class HilightService {
 		hilightRepository.deleteHilight(hilight_no);
 		
 	}
+	
+	
+	//회원의 하이라이트 모두삭제
+	public void deleteAllHilight(long user_no) {
+		
+		hilightRepository.deleteAllHilight(user_no);
+		
+	}
 }

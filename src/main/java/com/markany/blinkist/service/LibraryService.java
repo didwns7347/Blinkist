@@ -73,6 +73,16 @@ public class LibraryService {
 
 	//email로 라이브러리 찾기
 	public List<HashMap<String, Object>> findNoProgressByAuthUser(String email) {
+		
 		return libraryRepository.selectProgressByAuthUser(email);
+		
+	}
+	
+	
+	//회원의 모든 라이브러리지우기
+	public void deleteAllLibrary(long user_no) {
+		
+		libraryRepository.deleteAllLibrary(user_no);
+		
 	}
 }

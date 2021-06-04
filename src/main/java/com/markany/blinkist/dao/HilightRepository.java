@@ -15,5 +15,7 @@ public interface HilightRepository {
 	public List<HilightVo> selectHilightContent(HilightVo vo);//사용자가 구독한 책에서 저장한 hilight내용가져오기
 	
 	public void deleteHilight(long hilight_no);// 하이라이트 삭제하기
+	
+	public void deleteAllHilight(long user_no); //회원의 하이라이트 모두삭제
 
 }
