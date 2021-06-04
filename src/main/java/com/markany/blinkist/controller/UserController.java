@@ -2,6 +2,7 @@ package com.markany.blinkist.controller;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
+import com.markany.blinkist.vo.Payment_method;
 import com.markany.blinkist.vo.UserVo;
 
 @Controller
@@ -64,13 +66,13 @@ public class UserController {
 	      if(user.getPrimium_date()!=null) {//premium을 가입했다면
 	    	  
 	    	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    	  
-	    	  try {	
-	    		  
-	    		  Date Primium_date = sdf.parse(user.getPrimium_date());
-	    		  Date now_time = new Date();
-	    		  
-	    		  if(Primium_date.before(now_time)){//primium_date가 현재시간을 지났다면
+
+				try {	
+
+				  Date Primium_date = sdf.parse(user.getPrimium_date());
+                  Date finish_date =sdf.parse(user.getFinish_date());
+				  
+	    		  if(Primium_date.before(finish_date)){//primium_date가 만료일을 지났다면
 	    			  
 	    			  //2.팝업창을 띄우기위한 데이터를 하나보내준다.
 	    			  rttr.addFlashAttribute("passes","passes"); 
@@ -150,10 +152,10 @@ public class UserController {
 
 				try {	
 
-					Date Primium_date = sdf.parse(user.getPrimium_date());
-					Date now_time = new Date();
-
-					if(Primium_date.before(now_time)){//primium_date가 현재시간을 지났다면
+				  Date Primium_date = sdf.parse(user.getPrimium_date());
+                  Date finish_date =sdf.parse(user.getFinish_date());
+				  
+	    		  if(Primium_date.before(finish_date)){//primium_date가 만료일을 지났다면
 
 						//2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						model.addAttribute("passes","passes"); 
@@ -232,7 +234,33 @@ public class UserController {
 		UserVo uservo = userService.selectbyUser(email);
 
 		model.addAttribute("uservo", uservo);
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+		try {	
+
+          Date startDate = sdf.parse(uservo.getFinish_date());//구독끝나는날짜
+          Date EndDate = new Date();//현재날짜
+		  
+          // 구독끝나는날짜-현재날짜 /(24*60*60*1000) 
+          long diffDay = (startDate.getTime() - EndDate.getTime()) / (24*60*60*1000);
+
+		if(uservo.getGrade().equals(Grade.monthP)) {//월구독자라면
+			
+			model.addAttribute("refund", diffDay*530);
+			
+		}else if(uservo.getGrade().equals(Grade.yearP)) {//연간구독자라면
+			
+			model.addAttribute("refund", diffDay*275);
+			
+			
+		}
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			
+		}
+		
 		return "user/update";
 
 	}
@@ -271,11 +299,15 @@ public class UserController {
 	// 회원등급수정
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
-	public void updateGrade(@RequestParam(value="email") String email,@RequestParam(value="grade") String grade){
+	public void updateGrade(@RequestParam(value="email") String email,@RequestParam(value="grade") String grade,@RequestParam(value="payment_method") String payment_method){
 		
 		UserVo uservo = new UserVo();
 		uservo.setEmail(email);
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar cal = Calendar.getInstance();
+		
+		//등급나누기
 		if(grade.equals("basic")) {
 			
 			uservo.setGrade(Grade.basic);
@@ -283,15 +315,54 @@ public class UserController {
 		}else if(grade.equals("monthP")) {
 			
 			uservo.setGrade(Grade.monthP);
+			uservo.setPrimium_date(sdf.format(cal.getTime()));
+			
+			cal.add(Calendar.MONTH, 1);
+			
+			uservo.setFinish_date(sdf.format(cal.getTime()));
 			
 		}else if(grade.equals("yearP")) {
 			
 			uservo.setGrade(Grade.yearP);
+			uservo.setPrimium_date(sdf.format(cal.getTime()));
+			
+			cal.add(Calendar.YEAR, 1);
+			
+			uservo.setFinish_date(sdf.format(cal.getTime()));
+			
+		}
+		
+		//결제수단
+		if(payment_method.equals("카카오페이")) {
+			
+			uservo.setPayment_method(Payment_method.카카오페이);
+			
+		}else if(payment_method.equals("페이코")) {
+			
+			uservo.setPayment_method(Payment_method.페이코);
 			
 		}
 				
 		userService.updategrade(uservo);
 				
+	}
+	
+	
+	// 구독취소
+	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
+	@RequestMapping(value = "/primiumDelete", method = RequestMethod.POST)
+	public void primiumDelete(HttpSession session){
+
+		//회원의 이메일 가져오기
+	    String email = (String)session.getAttribute("authUser");
+		
+		UserVo uservo = new UserVo();
+		
+		uservo.setEmail(email);
+		uservo.setGrade(Grade.basic);
+
+		userService.updategrade(uservo);
+
 	}
 	
 	
@@ -331,12 +402,5 @@ public class UserController {
 	    rttr.addFlashAttribute("Success", "로그아웃하였습니다.");
 	    
 		return "redirect:/";
-	}
-	
-	
-	@RequestMapping("/test")
-	public String test() {
-
-		return "user/test";
 	}
 }

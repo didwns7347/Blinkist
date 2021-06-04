@@ -41,29 +41,3 @@ $(function() {
 
 		}
 	});}); 
-	
-
-//primium_date계산
-   $(document).ready(function() {
-   
-     var grade = $('#grade').text();//회원의 등급구하기
-     var primium_date = new Date($('#StartLine').text()); //프리미엄가입날구하기
-            
-    
-     if(grade=='회원님의 등급: monthP'){//월구독자라면
-     
-              primium_date.setMonth(primium_date.getMonth()+1); //다음달구하기
-                            
-              new Date(primium_date).toLocaleString();
-              
-              $('#primium_date').text('Your subscription will renew on ' + new Date(primium_date).toLocaleString());
-              
-     
-     }else if(grade=='회원님의 등급: yearP'){//다음해구하기
-     
-              primium_date.setFullYear(primium_date.getFullYear() + 1);
-              
-              $('#primium_date').text('Your subscription will renew on ' + new Date(primium_date).toLocaleString());
-     
-     } 
-   });

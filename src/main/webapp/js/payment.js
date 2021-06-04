@@ -34,7 +34,7 @@ $(document).ready(function() {
                  url: "http://localhost:8080/blinkist/user/updateGrade", 
                  data: {
                  
-                        "email": email,"grade": grade
+                        "email": email, "grade": grade, "payment_method": "카카오페이"
                         
                     },
                 });
@@ -98,7 +98,7 @@ $(document).ready(function() {
                  url: "http://localhost:8080/blinkist/user/updateGrade", 
                  data: {
                  
-                        "email": email,"grade": grade
+                        "email": email,"grade": grade, "payment_method": "페이코"
                         
                     },
                 });
