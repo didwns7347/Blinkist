@@ -1,6 +1,7 @@
 package com.markany.blinkist.controller;
 
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,10 +33,10 @@ public class HilightController {
 
 	//하이라이트메뉴
 	@RequestMapping(value = "/hilight", method = RequestMethod.GET)
-	public String hilightList(String authUser,Model model){
+	public String hilightList(Principal authUser,Model model){
 
 		//세션에 저장된 회원의 이메일정보가져오기
-		String email = authUser;
+		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		
@@ -87,10 +88,10 @@ public class HilightController {
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/addHilight", method = RequestMethod.POST)
 	public boolean addLibrary(@RequestParam(value="book_no") long book_no,@RequestParam(value="content") String content,
-			@RequestParam(value="content_no") long content_no, @RequestParam(value="authUser") String authUser )
+			@RequestParam(value="content_no") long content_no, Principal authUser )
 	{
 
-		String email = authUser;
+		String email = authUser.getName();
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 

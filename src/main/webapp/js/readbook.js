@@ -482,7 +482,7 @@ $(document).ready(function(){
           
           var content_no = $('#p_content').attr('class');//content번호가져오기
           
-          var authUser= $('#authUser').val();
+          
        
       if(content.length==0){//hilight에 저장할 텍스트가 없으면
  
@@ -512,7 +512,7 @@ $(document).ready(function(){
 	   }
 	 } 
                           
-    var allData = { "book_no": book_no, "content": content, "content_no": content_no, "authUser":authUser};
+    var allData = { "book_no": book_no, "content": content, "content_no": content_no};
                     
 $.ajax({
 	
