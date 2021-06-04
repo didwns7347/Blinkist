@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <!-- The Modal -->
 <div class="modal" id="myModal">
 	<div class="modal-dialog">
@@ -5,7 +9,8 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<div id="logreg-forms">
-					<form class="form-signin">
+					<c:url value="/loginprocess" var="loginUrl"/>
+					<form class="form-signin" action="${loginUrl }" method="post">
 						<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">
 							LOGIN</h1>
 						<div class="social-login">		
@@ -20,9 +25,10 @@
 								src="${pageContext.request.contextPath }/assets/images/naverLogin2.png" /></a>
 						</div>
 						
-						<input type="email" id="inputEmail" class="form-control"
-							placeholder="Email address" required="" autofocus=""> <input
-							type="password" id="inputPassword" class="form-control"
+						<input type="email" id="inputEmail" name="email" class="form-control"
+							placeholder="Email address" required="" autofocus=""> 
+						<input
+							type="password" id="inputPassword" name="password" class="form-control"
 							placeholder="Password" required="">
 
 						<button class="btn btn-success btn-block" type="submit">
@@ -31,10 +37,10 @@
 						<a href="#" id="forgot_pswd">Forgot password?</a>
 						<hr>
 						<!-- <p>Don't have an account!</p>  -->
-						<button class="btn btn-primary btn-block" type="button"
-							id="btn-signup">
+						<a class="btn btn-primary btn-block" type="button"
+							id="btn-signup" href="${pageContext.request.contextPath}/user/injoin">
 							<i class="fas fa-user-plus"></i> Sign up New Account
-						</button>
+						</a>
 					</form>
 					<br>
 

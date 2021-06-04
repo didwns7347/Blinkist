@@ -3,6 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -96,6 +98,8 @@
 
 	<!-- SLIDE SECTION -->
 	<div class="slideshow-container">
+		<p>principal : <sec:authentication property="principal" /></p>
+
 		<br /> <br />
 		<h2
 			class="page-section-heading text-center text-uppercase text-secondary mb-0"
@@ -279,8 +283,10 @@
 					</c:forEach>
 				</div>
 			</div>
-			<a class="prev" onclick="plusSlides(-1)">❮</a> <a class="next"
-				onclick="plusSlides(1)">❯</a>
+			<a class="prev" onclick="plusSlides(-1)">❮</a> 
+			<div align="right" style="padding-right:47px">
+			<a class="next" onclick="plusSlides(1)">❯</a>
+			</div>
 
 		</div>
 	</div>

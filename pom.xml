@@ -19,7 +19,7 @@
 		<java.version>11</java.version>
 	</properties>
 	<dependencies>
-
+	
 		<!-- Jsoup -->
 		<dependency>
 			<groupId>org.jsoup</groupId>
@@ -78,17 +78,36 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-	<!-- Jsoup -->
-	<dependency>
-		<groupId>org.jsoup</groupId>
-		<artifactId>jsoup</artifactId>
-		<version>1.10.2</version>
-	</dependency>
+
+		<!-- Jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.10.2</version>
+		</dependency>
+
+		<!-- SPRING SECURITY -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- SPRING SECURITY JSP LIBRARY CODE -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

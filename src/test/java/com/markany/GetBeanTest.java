@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
+import com.markany.blinkist.vo.Grade;
 import com.markany.blinkist.vo.UserVo;
 public class GetBeanTest {
 	ApplicationContext ac= new GenericXmlApplicationContext("applicationContext.xml");
@@ -38,6 +39,12 @@ public class GetBeanTest {
 		System.out.println(str1.matches("[나-닣]"));
 		char c = "개".charAt(0);
 		System.out.println(c);
+	}
+	
+	@Test
+	@DisplayName("ENUM STRING TEST")
+	void enumToString() {
+		System.out.println(Grade.basic.toString());
 	}
 
 }

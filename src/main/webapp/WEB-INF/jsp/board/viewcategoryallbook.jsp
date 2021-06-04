@@ -82,6 +82,7 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+	//myInput테그 입력값과 책제목,작가와 비교해 포함되지 않는 책정보는 사라지게함
 	$(document).ready(
 			function() {
 				$("#myInput").on(

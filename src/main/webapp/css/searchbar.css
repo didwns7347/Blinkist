@@ -1,5 +1,5 @@
 @charset "UTF-8";
-input[type=text] {
+input#search {
   width: 20px;
   box-sizing: border-box;
   border: 0px solid #ccc;

@@ -10436,9 +10436,9 @@ form .row:first-child .floating-label-form-group {
 /* Position the "next button" to the right */
 .next {
   position: absolute;
-  right: 408px;
   border-radius: 3px 0 0 3px;
 }
+
 
 /* On hover, add a black background color with a little bit see-through */
 .prev:hover, .next:hover {
