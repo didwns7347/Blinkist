@@ -522,10 +522,11 @@ $.ajax({
                     
                      $('.swal-button').click(function(){//팝업창의 ok버튼을 클릭할시
                                
-                               location.reload();          
-                                                 
-          });                          
+                               document.location.reload();
+                                              
+                     });                                             
 	}
 	});
+	      
 });
 });

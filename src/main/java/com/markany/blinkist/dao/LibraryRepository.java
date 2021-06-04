@@ -27,4 +27,7 @@ public interface LibraryRepository {
 	boolean deleteLibrary(LibraryVo libraryVo);
 
 	List<HashMap<String, Object>> selectProgressByAuthUser(String email);
+	
+	public void deleteAllLibrary(long user_no);//회원의 모든 라이브러리지우기
+	
 }

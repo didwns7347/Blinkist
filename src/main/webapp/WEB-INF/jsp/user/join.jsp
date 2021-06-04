@@ -46,7 +46,7 @@
 				<form role="form" autocomplete="off"
 					action="${pageContext.request.contextPath }/user/join" method=post>
 					<div class="form-group">
-						<label for="email">이메일 주소</label> <input type="text"
+						<label for="email">이메일 주소</label> <input type="email"
 							class="form-control" name="email" id="email" value="${email}"
 							readonly>
 					</div>

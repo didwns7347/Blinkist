@@ -81,7 +81,7 @@
 
 					<li class="nav-item"></li>
 					<li class="nav-item"><a class="nav-link"
-						href="${pageContext.request.contextPath }/apply/result?userno=">Upgrade
+						href="${pageContext.request.contextPath}/user/update">Upgrade
 							to Premium</a></li>
 					<li class="dropdown">
 						<button type="button" class="btn dropdown-toggle"

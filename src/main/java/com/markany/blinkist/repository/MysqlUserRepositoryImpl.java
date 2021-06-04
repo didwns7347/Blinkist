@@ -94,6 +94,34 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 	}
 	
 	
+	@Override//회원등급변경
+	public boolean updategrade(UserVo uservo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		
+		int count=sqlSession.update("userMapper.updategrade", uservo);
+		sqlSession.commit();
+		
+		return count==1;
+		
+	}
+	
+	
+	@Override//primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다.
+	public boolean PassPrimium(UserVo uservo) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		
+		int count=sqlSession.update("userMapper.PassPrimium", uservo);
+		sqlSession.commit();
+		
+		return count==1;
+		
+	}
+	
+	
 	@Override//회원탈퇴
 	public void deleteUser(String email) {
 		

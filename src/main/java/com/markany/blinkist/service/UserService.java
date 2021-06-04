@@ -42,7 +42,21 @@ public class UserService {
 	}
 	
 	
-	public void deleteUser(String email) {
+	public boolean updategrade(UserVo uservo) {//회원등급변경
+		
+		return userDAO.updategrade(uservo);
+		
+	}
+	
+	
+	public boolean PassPrimium(UserVo uservo) {//primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다.
+		
+		return userDAO.PassPrimium(uservo);
+		
+	}
+	
+	
+	public void deleteUser(String email) {//회원탈퇴
 		
 		userDAO.deleteUser(email);
 		

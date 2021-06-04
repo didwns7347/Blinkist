@@ -50,4 +50,14 @@
 	  where
 	    hilight_no = #{hilight_no}
 	</delete>
+	
+	
+	<!-- 회원의 하이라이트 모두삭제 -->
+	<delete id="deleteAllHilight" parameterType="long">
+	  delete
+	   from hilight
+	  where
+	   user_no = #{user_no}
+	
+	</delete>
 </mapper>

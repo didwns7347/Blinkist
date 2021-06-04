@@ -62,10 +62,10 @@
   <div class="container">
    <c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
        <h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
-   
-                                    <hr/>
-                                    
-       <p id="p_content" class="" name="">${item.content}</p>                            
+
+                                    <hr/> 
+                                                         
+         <p id="p_content" class="" name="">${item.content}</p>                         
    </c:forEach>      
    
                                    <hr/>                             
