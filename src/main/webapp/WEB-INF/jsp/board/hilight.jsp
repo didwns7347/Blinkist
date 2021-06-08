@@ -77,7 +77,7 @@
 						<!-- 삭제버튼 -->
 						<div class="col-4">
 							<button type="button" class="btn btn-outline-primary"
-								id="Delete_Chapter" name="${item.hilight_no}">Delete</button>
+								name="${item.hilight_no}">Delete</button>
 						</div>
 					</div>
 

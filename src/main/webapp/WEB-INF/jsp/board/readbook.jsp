@@ -67,7 +67,7 @@
        <h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
 
                                     <hr/> 
-                                                         
+                              
          <p id="p_content" class="" name="">${item.content}</p>                         
    </c:forEach>      
    
@@ -95,7 +95,7 @@
   <ul class="pagination justify-content-center">
 	<c:forEach items="${Content}" varStatus="status" var="item">
 	  <li class="page-item" id="${status.count}" name="${item.content_no}">
-	     <a class="page-link" href="#" name="${item.chapter_title}" id="${item.content}">${status.count}</a>
+	     <a class="page-link" href="#" name="${item.chapter_title}" id="${item.content}" >${status.count}</a>
 	  </li>
 	</c:forEach>
   </ul>

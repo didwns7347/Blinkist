@@ -50,6 +50,9 @@ public class ContentController {
 		
 		List<ContentVo> contentvo = contentService.selectContent(book_no);
 		
+		for(ContentVo vo:contentvo) {
+			vo.setContent(vo.getContent().replaceAll("\\\"",""));
+		}
 		
 		HilightVo hilightvo = new HilightVo();
 		hilightvo.setBook_no(book_no);
@@ -64,8 +67,4 @@ public class ContentController {
 		return "board/readbook";
 		
 	}
-	
-	
-
-
 }

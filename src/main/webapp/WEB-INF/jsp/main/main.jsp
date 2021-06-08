@@ -334,7 +334,7 @@
 				취소하면 요금이 청구되지 않으므로 걱정하지 마십시오.</h3>
 			<br />
 
-			<form action="${pageContext.request.contextPath }/user/premiumyear">
+			<form action="${pageContext.request.contextPath }/user/upgradepremium">
 				<button id="goprimiun" type="submit"
 					class="btn btn-outline-success btn-block">무료로 시작하러 가기</button>
 			</form>

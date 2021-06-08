@@ -14,7 +14,7 @@ $(document).ready(function () {
 	          
 	          $('.swal-button').click(function(){//팝업창 ok눌렀을때
                      
-                           location.reload();
+                           window.location.href=data;
                  });
 
 }});

@@ -2,8 +2,9 @@
 
 //제목 hilight삭제
    $(document).ready(function() {
-$('#Delete_Chapter').click(function(){
+$('.btn').click(function(){
 	
+	console.log("반응");
 	
     var hilight_no =  $(this).attr('name');//hilight_no가져오기
         

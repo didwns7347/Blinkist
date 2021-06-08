@@ -7,7 +7,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class BlinkistApplication {
 
 	public static void main(String[] args) {
+		
 		SpringApplication.run(BlinkistApplication.class, args);
+		
 	}
 
 }
