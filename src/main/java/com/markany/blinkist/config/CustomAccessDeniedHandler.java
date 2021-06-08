@@ -49,7 +49,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 		}
 		
 		if(basicCheck) {
-			response.sendRedirect(request.getContextPath()+"/error/basicerror");
+			response.sendRedirect(request.getContextPath()+"/user/upgradepremium");
 		}
 		
 		else if(PrimiumCheck) {

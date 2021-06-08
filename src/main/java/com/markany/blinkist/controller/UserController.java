@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.markany.blinkist.service.HilightService;
@@ -231,6 +232,19 @@ public class UserController {
 	public String inJoin() {
 		return "user/injoin";
 	}
+	
+	
+	//프리미엄가입
+	@RequestMapping(value = "/upgradepremium", method = RequestMethod.GET)
+	public String getupgradepremium(Principal principal, Model model) {
+		
+		String email = principal.getName();
+		
+		model.addAttribute("email", email);
+		
+		return "user/upgradepremium";
+		
+	}
 
 	// 회원정보수정GET
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
@@ -247,6 +261,8 @@ public class UserController {
 
 		try {
 			System.out.println(uservo.getFinish_date());
+			
+			if((uservo.getFinish_date()!=null)){
 			Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
 			Date EndDate = new Date();// 현재날짜
 
@@ -262,7 +278,7 @@ public class UserController {
 				model.addAttribute("refund", diffDay * 270);
 
 			}
-		} catch (Exception e) {
+		}} catch (Exception e) {
 
 			e.printStackTrace();
 
@@ -354,7 +370,7 @@ public class UserController {
 	// 구독취소
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/primiumDelete", method = RequestMethod.POST)
-	public void primiumDelete(Principal authUser) {
+	public String primiumDelete(Principal authUser) {
 
 		// 회원의 이메일 가져오기
 		String email = authUser.getName();
@@ -365,6 +381,8 @@ public class UserController {
 		uservo.setGrade(Grade.basic);
 
 		userService.updategrade(uservo);
+				
+		return "/blinkist/logout";
 
 	}
 

@@ -55,6 +55,12 @@ public class ContentController {
 			vo.setContent(vo.getContent().replaceAll("\\\"","&ldquo;"));
 			//System.out.println(vo.toString());
 		}
+
+		for(ContentVo vo:contentvo) {
+			vo.setContent(vo.getContent().replaceAll("\\\"",""));
+		}
+		
+
 		HilightVo hilightvo = new HilightVo();
 		hilightvo.setBook_no(book_no);
 		hilightvo.setUser_no(userVo.getUser_no());
@@ -68,8 +74,4 @@ public class ContentController {
 		return "board/readbook";
 		
 	}
-	
-	
-
-
 }

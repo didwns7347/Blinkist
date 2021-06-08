@@ -26,13 +26,7 @@
 <link
 	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
 	rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/blog-home.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath }/css/hilight.css"
-	rel="stylesheet" type="text/css">
+
 <!-- jquery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -45,14 +39,24 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="${pageContext.request.contextPath }/css/styles.css"
+	rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/css/blog-home.css"
+	rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/hilight.css"
+	rel="stylesheet" type="text/css">
 </head>
+
 <body>
 	<!-- navigation include -->
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 
+	<div class="container">
 		<div class="container">
-		<div class="container"><h1>Highlights</h1></div>
-		<hr/>
+			<h1>Highlights</h1>
+		</div>
+		<hr />
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item"><a class="nav-link" id="Sort"
@@ -178,11 +182,11 @@
 				</c:forEach>
 			</div>
 		</div>
-		</div>
+	</div>
 
-		<!-- navigation include -->
-		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-		<!-- 팝업창  -->
-		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+	<!-- navigation include -->
+	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	<!-- 팝업창  -->
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

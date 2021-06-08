@@ -102,7 +102,6 @@
 							<button class="dropdown-item" data-toggle="modal" type="submit">로그아웃
 							</button>
 						</form>
-
 					</div>
 				</li>
 			</ul>

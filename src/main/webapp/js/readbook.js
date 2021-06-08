@@ -23,6 +23,7 @@ function closeNav() {
 //책을 처음읽을때의 progress
 $(document).ready(function () {
 
+
    //책의 전체페이지수 구하기
    var chapter_total = $(".page-item").length;
    
