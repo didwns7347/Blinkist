@@ -24,10 +24,10 @@ public class HilightService {
 	
 		
 	//사용자의 하이라이트내용들을 제목정렬순으로가져오기
-	public List<HashMap<String, Object>> selectHilightbyTitle(long user_no){
+	public List<HashMap<String, Object>> selectHilightbyTitle(long user_no){	
 		
 		return hilightRepository.selectHilightbyTitle(user_no);
-		
+	
 	}
 	
 	
@@ -59,6 +59,12 @@ public class HilightService {
 	public void deleteAllHilight(long user_no) {
 		
 		hilightRepository.deleteAllHilight(user_no);
+		
+	}
+
+	//라이브러리 삭제시 해당 도서 하이라이트 삭제
+	public void deleteLibraryHilihgt(HilightVo hilightVo) {
+		hilightRepository.deleteLibraryHilight(hilightVo);
 		
 	}
 }

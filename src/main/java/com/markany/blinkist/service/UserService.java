@@ -43,8 +43,13 @@ public class UserService implements UserDetailsService {
 
 	public boolean updatePw(String email, String oldpassword, String newpassoword) {// 비밀번호변경
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-		oldpassword=passwordEncoder.encode(oldpassword);
-		return userDAO.updatePw(email, oldpassword, newpassoword);
+		UserVo userVo=this.findByEmail(email);
+		if(passwordEncoder.matches(oldpassword, userVo.getPassword())) {
+			userDAO.updatePw(userVo.getUser_no(), passwordEncoder.encode(newpassoword));
+			return true;
+		}
+		return false;
+		
 
 	}
 

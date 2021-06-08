@@ -3,15 +3,20 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-
+import com.markany.blinkist.service.ContentService;
+import com.markany.blinkist.service.UserService;
+import com.markany.blinkist.vo.ContentVo;
 import com.markany.blinkist.vo.Grade;
 import com.markany.blinkist.vo.UserVo;
+
 
 public class GetBeanTest {
 	ApplicationContext ac= new GenericXmlApplicationContext("applicationContext.xml");
@@ -66,6 +71,28 @@ public class GetBeanTest {
 		Date date=sdf.parse(datestr);
 		System.out.println(datestr);
 		System.out.println(date);
+	}
+	
+	@Test
+	@DisplayName("비밀번호 비교하기")
+	void pwTest() {
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		UserService us=ac.getBean(UserService.class);
+		UserVo vo=us.findByEmail("15gg@test.com");
+		org.junit.Assert.assertTrue(passwordEncoder.matches("1234", vo.getPassword()));
+	}
+	
+	@Test
+	@DisplayName("content DB Test")
+	void contentDBTest() {
+		ContentService cs=ac.getBean(ContentService.class);
+		cs.selectContent(83);
+		List<ContentVo> list = cs.selectContent(83);
+		for(ContentVo vo : list) {
+			//System.out.println(vo.getContent().replaceAll("\n","<br/>"));
+			vo.setContent(vo.getContent().replaceAll("\n","<br/>"));
+			System.out.println(vo.toString());
+		}
 	}
 
 }

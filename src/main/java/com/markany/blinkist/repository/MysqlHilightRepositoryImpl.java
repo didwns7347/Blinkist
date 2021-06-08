@@ -102,4 +102,15 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlSession.commit();
 		
 	}
+
+	
+	@Override//라이브러리 삭제시 해당 책의 하이라이트도 삭제
+	public void deleteLibraryHilight(HilightVo hilightVo) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		sqlSession.delete("hilightMapper.deleteLibraryHilight", hilightVo);
+		
+		sqlSession.commit();
+		
+	}
 }

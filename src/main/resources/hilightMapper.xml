@@ -58,6 +58,14 @@
 	   from hilight
 	  where
 	   user_no = #{user_no}
+	</delete>
 	
+	<!-- 라이브러리 삭제시 하이라이트도 모두 삭제 deleteLibraryHilight-->
+	<delete id="deleteLibraryHilight" parameterType="hilightvo">
+	  delete
+	   from hilight
+	  where
+	   user_no = #{user_no} and
+	   book_no = #{book_no}
 	</delete>
 </mapper>

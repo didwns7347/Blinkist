@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
@@ -54,14 +56,18 @@ public class UserController {
 
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
-
+		
+		Map<String,Object> map = new HashMap<String, Object>();
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
 
 			session.setAttribute("authUser", email);
-
+			map.put("email", user.getEmail());
+			map.put("password", user.getPassword());
+			
 			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
-
+			rttr.addFlashAttribute("vo", map);
+			
 			// premium가입날이 지났는지 확인
 			// 1. premium을 가입했는지 확인한다.
 			if (user.getPrimium_date() != null) {// premium을 가입했다면
@@ -94,11 +100,11 @@ public class UserController {
 
 				}
 
-				return "redirect:/";
+				return "redirect:/loginprocess";
 
 			} else {// premium가입을 안했다면
 
-				return "redirect:/";
+				return "redirect:/loginprocess";
 
 			}
 
@@ -136,11 +142,15 @@ public class UserController {
 
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
+		
 
+		Map<String,Object> map = new HashMap<String, Object>();
+		
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
-
-			session.setAttribute("authUser", email);
+			map.put("email", email);
+			map.put("password", user.getPassword());
+			//session.setAttribute("authUser", email);
 
 			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
 
@@ -176,11 +186,11 @@ public class UserController {
 
 				}
 
-				return "redirect:/";
+				return "redirect:/loginprocess";
 
 			} else {// premium가입을 안했다면
 
-				return "redirect:/";
+				return "redirect:/loginprocess";
 
 			}
 
@@ -195,9 +205,14 @@ public class UserController {
 
 	// 회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String join(UserVo uservo, HttpSession session, RedirectAttributes rttr) {
+	public String join(UserVo uservo, HttpServletRequest request, RedirectAttributes rttr, Model model) {
 		System.out.println("dkdkdkdkdkdkdkdkkdkdkdkdk");
 		// 회원가입
+		if(userService.selectbyUser(uservo.getEmail())!=null)
+		{
+			rttr.addFlashAttribute("Fail", "이미존재하는 회원입니다.");
+			return "redirect:"+ request.getHeader("Referer");
+		}
 		userService.insert(uservo);
 
 		rttr.addFlashAttribute("Success", "회원가입을 하였습니다.");
@@ -273,12 +288,11 @@ public class UserController {
 		boolean result = userService.updatePw(email, oldpassword, newpassword);
 
 		if (result) {
-
 			rttr.addFlashAttribute("Success", "회원정보를 수정하였습니다.");
 			return "redirect:/";
 
 		} else {
-
+			//String ref = request.getHeader("Referer");
 			rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
 			return "redirect:/";
 

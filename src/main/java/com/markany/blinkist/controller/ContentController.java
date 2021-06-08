@@ -50,7 +50,11 @@ public class ContentController {
 		
 		List<ContentVo> contentvo = contentService.selectContent(book_no);
 		
-		
+		for(ContentVo vo : contentvo) {
+			//System.out.println(vo.getContent().replaceAll("\n","<br/>"));
+			vo.setContent(vo.getContent().replaceAll("\\\"","&ldquo;"));
+			//System.out.println(vo.toString());
+		}
 		HilightVo hilightvo = new HilightVo();
 		hilightvo.setBook_no(book_no);
 		hilightvo.setUser_no(userVo.getUser_no());

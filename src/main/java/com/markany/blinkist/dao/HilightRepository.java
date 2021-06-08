@@ -18,4 +18,6 @@ public interface HilightRepository {
 	
 	public void deleteAllHilight(long user_no); //회원의 하이라이트 모두삭제
 
+	public void deleteLibraryHilight(HilightVo hilightVo);
+
 }

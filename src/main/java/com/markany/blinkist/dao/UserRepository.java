@@ -11,7 +11,7 @@ public interface UserRepository {
 	
 	public UserVo selectbyUser(String email); //회원정보가져오기
 	
-	public boolean updatePw(String email,String oldpassword,String newpassword);//비밀번호변경
+	public boolean updatePw(Long user_no,String newpassword);//비밀번호변경
 	
 	public boolean updategrade(UserVo uservo);//회원등급변경
 	

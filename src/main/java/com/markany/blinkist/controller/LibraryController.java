@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.UserService;
+import com.markany.blinkist.vo.HilightVo;
 import com.markany.blinkist.vo.LibraryVo;
 import com.markany.blinkist.vo.UserVo;
 
@@ -26,6 +29,8 @@ public class LibraryController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private HilightService hilightService;
 	
 	// 라이브러리 보여주기
 	@RequestMapping("/view")
@@ -64,6 +69,12 @@ public class LibraryController {
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setBook_no(book_no);
 		libraryVo.setUser_no(userVo.getUser_no());
+		
+		HilightVo hilightVo = new HilightVo();
+		hilightVo.setBook_no(book_no);
+		hilightVo.setUser_no(userVo.getUser_no());
+		
+		hilightService.deleteLibraryHilihgt(hilightVo);
 		libraryService.removeLibrary(libraryVo);
 		return "redirect:" + ref;
 	}

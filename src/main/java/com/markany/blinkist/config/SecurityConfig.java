@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import com.markany.blinkist.service.UserDetailServiceCustom;
@@ -26,7 +27,8 @@ import lombok.extern.java.Log;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserService userDetailServiceCustom;
-
+	
+	private AccessDeniedHandler adh=new CustomAccessDeniedHandler();
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		
@@ -39,7 +41,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                .anyRequest().authenticated()
                .and()
            .exceptionHandling()
-           		.accessDeniedPage("/error/accessfail")
+           		//.accessDeniedPage("/WEB-INF/jsp/error/fail.jsp")
+           		.accessDeniedHandler(adh)
            		.and()
            .formLogin()
                .loginPage("/user/login")

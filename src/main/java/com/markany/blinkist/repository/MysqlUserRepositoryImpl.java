@@ -76,14 +76,14 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 	}
 
 	
+
 	@Override//비밀번호변경
-	public boolean updatePw(String email,String oldpassword,String newpassoword) {
+	public boolean updatePw(Long user_no,String newpassoword) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		HashMap<String,String> map = new HashMap<String,String>();
-		map.put("email",email);
-		map.put("oldpassword", oldpassword);
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		map.put("user_no",user_no);
 		map.put("newpassword", newpassoword);
 		
 		int count=sqlSession.update("userMapper.updatePw", map);

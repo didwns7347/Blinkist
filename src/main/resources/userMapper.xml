@@ -42,7 +42,7 @@
 			 set 
 			   password=#{newpassword}
 			 where
-			  email=#{email} and password=#{oldpassword}
+			 user_no=#{user_no}
 		]]>
 	</update>
 	

@@ -67,8 +67,9 @@
        <h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
 
                                     <hr/> 
-                                                         
-         <p id="p_content" class="" name="">${item.content}</p>                         
+           
+            
+           <p id="p_content" class="" name="">${item.content}</p>               
    </c:forEach>      
    
                                    <hr/>                             
