@@ -104,6 +104,9 @@ $(document).ready(function () {
 	 $( '#p_content' ).removeAttr( 'class' );
 	 $("#p_content").addClass(content_no);
 	 
+	 //번역버튼들 name교체
+	 $('#korea').attr("name",content_no);
+	 $('#english').attr("name",content_no);
 		
 //2.progress바꾸기
    
@@ -151,7 +154,7 @@ $(document).ready(function () {
 
 //4. 해당chapter의 hilight가져오기
    
-    var hilight_chapter = $('p[id='+content_no+']').length;
+    var hilight_chapter = $('input[id='+content_no+']').length;
    
 		
     //배열 생성
@@ -159,7 +162,7 @@ $(document).ready(function () {
 	//배열에 값 주입
 	for(var i=0; i<hilight_chapter; i++){                          
 			
-		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+		 hilightArr[i] = $('input[id='+content_no+']').eq(i).val();
 	    
 	     //hilight들을 노란색으로 표시
 	     var keyword = hilightArr[i];
@@ -214,6 +217,10 @@ $(document).ready(function () {
 	 $( '#p_content' ).removeAttr( 'class' );
 	 $("#p_content").addClass(content_no);
 	 
+	  //번역버튼들 name교체
+	 $('#korea').attr("name",content_no);
+	 $('#english').attr("name",content_no);
+	 
 
 //2.paging progress갱신    	 
 
@@ -267,7 +274,7 @@ $(document).ready(function () {
    
  //4. 해당chapter의 hilight가져오기
    
-    var hilight_chapter = $('p[id='+content_no+']').length;
+    var hilight_chapter = $('input[id='+content_no+']').length;
    
 		
     //배열 생성
@@ -275,7 +282,7 @@ $(document).ready(function () {
 	//배열에 값 주입
 	for(var i=0; i<hilight_chapter; i++){                          
 			
-		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+		 hilightArr[i] = $('input[id='+content_no+']').eq(i).val();
 	    
 	     //hilight들을 노란색으로 표시
 	       var keyword = hilightArr[i];
@@ -338,6 +345,10 @@ $(document).ready(function () {
    $( '#p_content' ).removeAttr( 'class' );
    $("#p_content").addClass(content_no);
    
+   //번역버튼들 name교체
+   $('#korea').attr("name",content_no);
+   $('#english').attr("name",content_no);
+   
    //class값으로 active를 가지고있는 태그 active제거
    $('li[class$=active]').removeClass( 'active' );
       
@@ -347,15 +358,15 @@ $(document).ready(function () {
    
   //4. 해당chapter의 hilight가져오기
    
-    var hilight_chapter = $('p[id='+content_no+']').length;
-   
+    var hilight_chapter = $('input[id='+content_no+']').length;
+  
 		
     //배열 생성
     var hilightArr = new Array(hilight_chapter);
 	//배열에 값 주입
 	for(var i=0; i<hilight_chapter; i++){                          
 			
-		 hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+		 hilightArr[i] = $('input[id='+content_no+']').eq(i).val();
 	    
 	     //hilight들을 노란색으로 표시
 	       var keyword = hilightArr[i];
@@ -495,14 +506,14 @@ $(document).ready(function(){
 	   //이미 저장된 문자열이라면
 	   
 	   //해당chapter의 hilight가져오기
-       var hilight_chapter = $('p[id='+content_no+']').length;
+       var hilight_chapter = $('input[id='+content_no+']').length;
    
        //배열 생성
        var hilightArr = new Array(hilight_chapter);
 	  //배열에 값 주입
 	  for(var i=0; i<hilight_chapter; i++){                          
 			
-		   hilightArr[i] = $('p[id='+content_no+']').eq(i).text();
+		   hilightArr[i] = $('input[id='+content_no+']').eq(i).val();
 		   
 		   if(hilightArr[i]==content){//이미 하이라이트에 있는값이라면
 	        
@@ -534,3 +545,72 @@ $.ajax({
 	      
 });
 });
+
+
+
+$(function() {
+	
+	//영어로 번역
+	$("#english").click(function(){
+			
+		var chapter = $("#chapter_title").text();//chapter가져오기
+		
+		var content = $("#p_content").text();//content가져오기
+		
+		$.ajax({
+				url:"http://localhost:8080/blinkist/content/english",
+				type:"get",
+				dataType:"json",
+				data:{"chapter":chapter, "content":content},
+				
+				success:function(v){
+					
+					var english_chapter = JSON.parse(v[0]); //JSON 문자열을 객체로 변환
+					var english_content = JSON.parse(v[1]); //JSON 문자열을 객체로 변환
+					 
+					$("#chapter_title").text(english_chapter.message.result.translatedText);
+					$("#p_content").text(english_content.message.result.translatedText);
+					
+
+				}
+             });
+             });
+
+	//한글로 번역
+	$("#korea").click(function(){
+			
+		var chapter = $("#chapter_title").text();//chapter가져오기
+		
+		var content = $("#p_content").text();//content가져오기
+		
+		$.ajax({
+				url:"http://localhost:8080/blinkist/content/korea",
+				type:"get",
+				dataType:"json",
+				data:{"chapter":chapter, "content":content},
+				
+				success:function(v){
+					
+					var korean_chapter = JSON.parse(v[0]); //JSON 문자열을 객체로 변환
+					var korean_content = JSON.parse(v[1]); //JSON 문자열을 객체로 변환
+					 
+					$("#chapter_title").text(korean_chapter .message.result.translatedText);
+					$("#p_content").text(korean_content.message.result.translatedText);
+					
+
+				}
+             });
+             });
+
+
+
+
+
+
+
+
+
+
+
+	    		
+	});
