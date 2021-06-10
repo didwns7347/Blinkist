@@ -1,12 +1,21 @@
 package com.markany.blinkist.controller;
 
 import java.security.Principal;
-import java.util.List;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.google.gson.Gson;
+import com.markany.blinkist.repository.TranslationImpl;
 import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.LibraryService;
@@ -14,6 +23,7 @@ import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.ContentVo;
 import com.markany.blinkist.vo.HilightVo;
 import com.markany.blinkist.vo.LibraryVo;
+import com.markany.blinkist.vo.TranslationVo;
 import com.markany.blinkist.vo.UserVo;
 
 @Controller
@@ -72,6 +82,58 @@ public class ContentController {
 		model.addAttribute("hilightContent", hilightContent);
 		
 		return "board/readbook";
+		
+	}
+	
+	
+	//영어로번역
+	@ResponseBody
+	@RequestMapping("/english")
+	public ArrayList<String> english(@RequestParam(value = "chapter")String chapter,@RequestParam(value = "content")String content) throws ParseException{
+
+		TranslationImpl translation = new TranslationImpl();
+		
+		TranslationVo translationvo = new TranslationVo();
+		
+		translationvo.setKorean(chapter);
+	
+	    String english_chapter = translation.getEnglish(chapter);
+	    
+
+		translationvo.setKorean(content);
+		String english_content = translation.getEnglish(content);
+	
+		ArrayList<String> book = new ArrayList<String>();
+		
+		book.add(english_chapter);
+		book.add(english_content);
+		
+		return book;
+		
+	}
+	
+	
+	//한국어로번역
+	@ResponseBody
+	@RequestMapping("/korea")
+	public ArrayList<String> korea(@RequestParam(value = "chapter")String chapter,@RequestParam(value = "content")String content) throws ParseException{
+
+		TranslationImpl translation = new TranslationImpl();
+		
+		TranslationVo translationvo = new TranslationVo();
+		
+		translationvo.setEnglish(chapter);
+	    String korea_chapter = translation.getKorean(chapter);
+	    
+		translationvo.setEnglish(content);
+		String korea_content = translation.getKorean(content);
+		
+		ArrayList<String> book = new ArrayList<String>();
+		
+		book.add(korea_chapter);
+		book.add(korea_content);
+		
+		return book;
 		
 	}
 }

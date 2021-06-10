@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
            .authorizeRequests()
                .antMatchers("/","/loginprocess","/user/injoin","user/kakaoLogin", "user/callback","/user/join", "/css/**", "/js/**", "/assets/**", "/lib/**").permitAll()
-               .antMatchers("/library/**", "/hilight/**", "/content/**", "/book/**").hasAnyAuthority("monthP","yearP")
+               .antMatchers("/library/**","/content/**", "/hilight/**", "/content/**", "/book/**").hasAnyAuthority("monthP","yearP")
                .anyRequest().authenticated()
                .and()
            .exceptionHandling()

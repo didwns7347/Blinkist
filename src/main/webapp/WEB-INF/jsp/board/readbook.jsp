@@ -35,6 +35,9 @@
 <!-- jquery -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>	
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>		
 <!-- bootstrap -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
@@ -42,11 +45,15 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	
 <!-- w3 school -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 <!-- mark.js 추가하기 -->
 <script
 	src='https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js'></script>
+	
 </head>
 <body>
 	<s:authentication property="principal" var="authUser" />
@@ -92,13 +99,16 @@
 
 
 	<button class="w3-button w3-white w3-xxxlarge" onclick="w3_open()">&#9776;</button>
-	<div class="container">
+	<div class="container" id="Book_Content">
 		<!-- audio -->
 
-		<c:forEach var="item" items="${Content}" varStatus="status" begin="0"
-			end="0">
-			<h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1>
-
+		<c:forEach var="item" items="${Content}" varStatus="status" begin="0" end="0">
+		
+		 <div class="row">
+			 <div class="col-md-8"><h1 id="chapter_title" class="${item.content_no}">${item.chapter_title}</h1></div>
+             <div class="col-md-4"><input type="button" class="btn btn-outline-primary btn-lg" id="korea" value="한국어" name="">
+		                           <input type="button" class="btn btn-outline-primary btn-lg" id="english" value="영어" name=""></div>
+		</div>
 			<hr />
 
 			<p id="p_content" class="" name="">${item.content}</p>
@@ -112,8 +122,8 @@
 
 	<!-- 사용자가 hilight에 저장한텍스트 -->
 	<c:forEach var="item" items="${hilightContent}" varStatus="status">
-		<p class="hilightContent" id="${item.content_no}"
-			style="display: none;">${item.content}</p>
+		<input type="hidden" class="hilightContent" id="${item.content_no}"
+			value="${item.content}"/>
 	</c:forEach>
 
 	<!-- Highlights메뉴 -->
@@ -162,4 +172,5 @@
 	src="${pageContext.request.contextPath }/js/readbook.js"></script>
 <!-- 팝업창  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </html>
