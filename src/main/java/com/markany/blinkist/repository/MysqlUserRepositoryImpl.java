@@ -123,12 +123,13 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 	
 	
 	@Override//회원탈퇴
-	public void deleteUser(String email) {
-		
+	public boolean deleteUser(String email) {
+		int count;
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		
-		sqlSession.delete("userMapper.deleteUser", email);
+		count =sqlSession.delete("userMapper.deleteUser", email);
 		sqlSession.commit();
+		return count>=1;
 	}
 }

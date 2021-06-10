@@ -45,9 +45,10 @@
 			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<h2 align="center">로그인</h2>
+				
 				<c:url value="/loginprocess" var="loginUrl"/>
-				<form role="form" autocomplete="off"
-					action="${loginUrl }" method=post>
+				<form role="form" autocomplete="off" action="${loginUrl }" method=post>
+					<c:if test="${empty userVo }">
 					<div class="form-group">
 						<label for="email">이메일 주소</label> <input type="text"
 							class="form-control" name="email" id="email" 
@@ -65,6 +66,24 @@
 						</button>
 					</div>
 					<br/><br/>
+					</c:if>
+						
+					<c:if test="${not empty userVo }">
+					<div class="form-group">
+						<label for="email">이메일 주소</label> 
+							<input type="text" class="form-control" value="${userVo.email } " name="email" id="email" readonly >
+					</div>
+					<div class="form-group">
+						<label for="password">비밀번호</label>
+						 <input type="password" class="form-control" value="${userVo.password }" name="password" id="password" placeholder="비밀번호를 입력해주세요" required>
+					</div>
+				
+					<div class="form-group text-right">
+						<button type="submit" id="submit" class="btn btn-primary">
+						로그인<i class="fa fa-check spaceLeft"></i>
+						</button>
+					</div>
+					</c:if>
 				</form>
 
 			</div>

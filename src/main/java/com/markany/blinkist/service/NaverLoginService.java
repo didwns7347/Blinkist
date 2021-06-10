@@ -106,7 +106,7 @@ public class NaverLoginService {
 		"message":"success",
 		"response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M","email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
 		**/
-
+		System.out.println(apiResult);
 		//String => JSON오브젝트로 변환
 		JSONParser parser = new JSONParser();
 		Object obj=parser.parse(apiResult);

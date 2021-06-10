@@ -10,10 +10,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.AccessDeniedHandler;
-
-
-
-
 import com.markany.blinkist.service.UserService;
 
 @Configuration
@@ -21,16 +17,17 @@ import com.markany.blinkist.service.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserService userDetailServiceCustom;
-	
 	private AccessDeniedHandler adh=new CustomAccessDeniedHandler();
+	
+	
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
 		
 		http.csrf().disable();
-		
 		http
            .authorizeRequests()
-               .antMatchers("/","/loginprocess","/user/injoin","user/kakaoLogin", "user/callback","/user/join", "/css/**", "/js/**", "/assets/**", "/lib/**").permitAll()
+           	
+               .antMatchers("/","/loginprocess","/user/injoin","/user/kakaoLogin", "/user/callback/**","/user/join", "/css/**", "/js/**", "/assets/**", "/lib/**").permitAll()
                .antMatchers("/library/**", "/hilight/**", "/content/**", "/book/**").hasAnyAuthority("monthP","yearP")
                .anyRequest().authenticated()
                .and()
@@ -48,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
            .logout()
            		.logoutSuccessUrl("/")
            		.permitAll();
+
      }
 
 	@Override
