@@ -1,6 +1,7 @@
 package com.markany.blinkist.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -209,6 +210,49 @@ public class BookService {
 			}
 		}
 		return list;
+	}
+
+	//라이브러리를 분석해 사용자가 다음으로 읽을책 3권 추천해주기
+	public List<HashMap<Object, Object>> recommendBooks(long no,String email) {
+		Long idx=0l;
+		Long checkIdx=0l;
+		HashMap<Long, Long> count = new HashMap<Long,Long>();
+		List<HashMap<Object, Object>> logList = bookRepository.selectLibraryLog(email);
+		for(HashMap<Object,Object> log:logList) {
+			Long user_no=null;
+			if(checkIdx+1==idx && user_no==(Long)log.get("user_no") ) {
+				if(count.containsKey((Long)log.get("book_no")))
+					count.put((Long)log.get("book_no"), count.get((Long)log.get("book_no"))+1);
+				else {
+					count.put((Long)log.get("book_no"), 1l);
+				}
+			}	
+			
+			if((Long)log.get("book_no")==no) {
+				user_no=(Long)log.get("user_no");
+				checkIdx=idx;
+			}
+			idx+=1l;
+		}
+		List<Long> keySetList = new ArrayList<>(count.keySet());
+		System.out.println("내림차순 정렬");
+		Collections.sort(keySetList, (o1, o2) -> (count.get(o2).compareTo(count.get(o1))));
+		List<HashMap<Object, Object>> res=new ArrayList<HashMap<Object, Object>>();
+		int cnt=0;
+		for(Long key:keySetList) {
+			System.out.println("key:"+key+" / value: "+count.get(key));
+			if(cnt==3) {
+				break;
+			}
+			for(HashMap<Object, Object> log : logList) {
+				if((Long)log.get("book_no")==key) {
+					res.add(log);
+					break;
+				}
+			}
+			cnt++;
+		}
+		return res;
 	}
 
 }

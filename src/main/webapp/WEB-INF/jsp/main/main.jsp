@@ -368,15 +368,15 @@
 			<!-- Portfolio Grid Items-->
 			<div class="row justify-content-center">
 				<!-- Portfolio Item 1-->
-				<div class="col-md-6 col-lg-4 mb-5 justify-content-center"">
-					<a
-						href="${pageContext.request.contextPath }/book/category?category=인문학"">
-						<br /> <img class="img-fluid" src="assets/images/humanity.jpg"
+				<div class="col-md-6 col-lg-4 mb-5 category" >
+					<a 
+						href="${pageContext.request.contextPath }/book/category?category=인문학">
+						<br /> <img class="img-fluid" src="assets/images/humanity.jpg" 
 						alt="..." /> <br />
 					</a>
 				</div>
 				<!-- Portfolio Item 2-->
-				<div class="col-md-6 col-lg-4 mb-5 ">
+				<div class="col-md-6 col-lg-4 mb-5 category">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=건강/생활/요리">
 						<br /> <img class="img-fluid" src="assets/images/life.jpg"
@@ -384,7 +384,7 @@
 					</a>
 				</div>
 				<!-- Portfolio Item 3-->
-				<div class="col-md-6 col-lg-4 mb-5">
+				<div class="col-md-6 col-lg-4 mb-5 category">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=소설">
 						<br /> <img class="img-fluid" src="assets/images/novel.jpg"
@@ -392,7 +392,7 @@
 					</a>
 				</div>
 				<!-- Portfolio Item 4-->
-				<div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+				<div class="col-md-6 col-lg-4 mb-5 mb-lg-0 category">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=자기개발">
 						<br /> <img class="img-fluid" src="assets/images/selfdev.jpg"
@@ -400,7 +400,7 @@
 					</a>
 				</div>
 				<!-- Portfolio Item 5-->
-				<div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+				<div class="col-md-6 col-lg-4 mb-5 mb-md-0 category">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=사회">
 						<br /> <img class="img-fluid" src="assets/images/social.jpg"
@@ -408,7 +408,7 @@
 					</a>
 				</div>
 				<!-- Portfolio Item 6-->
-				<div class="col-md-6 col-lg-4">
+				<div class="col-md-6 col-lg-4 category">
 
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=청소년">
@@ -461,8 +461,8 @@
 			<!-- About Section Button-->
 			<div class="text-center mt-4">
 				<a class="btn btn-xl btn-outline-light"
-					href="https://startbootstrap.com/theme/freelancer/"> <i
-					class="fas fa-download mr-2"></i>START Free TRIAL!
+					href="${pageContext.request.contextPath }/user/upgradepremium"> <i
+					class="fas fa-credit-card mr-2"></i>프리미엄 가입하기
 				</a>
 			</div>
 		</div>

@@ -25,9 +25,10 @@
 		order by reg_date desc;	
 		]]>
 	</select>
-	
+
 	<!-- 카테고리 트렌드 책 6개 가져오기 selectAllCategoryOrderByCount -->
-	<select id="selectAllCategoryOrderByCount"  parameterType="string" resultType="HashMap">
+	<select id="selectAllCategoryOrderByCount"
+		parameterType="string" resultType="HashMap">
 		<![CDATA[
 		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name ,count(library.user_no) as cnt
 		FROM book JOIN library
@@ -38,8 +39,9 @@
 		GROUP BY book_no ORDER BY cnt DESC LIMIT 6
 		]]>
 	</select>
-	<!--  카테고리 최신 추가된 책 6권 selectAllCategoryOrderByDate -->
-	<select id="selectAllCategoryOrderByDate"  parameterType="string" resultType="HashMap">
+	<!-- 카테고리 최신 추가된 책 6권 selectAllCategoryOrderByDate -->
+	<select id="selectAllCategoryOrderByDate" parameterType="string"
+		resultType="HashMap">
 		<![CDATA[
 		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
 		FROM book JOIN author
@@ -48,8 +50,9 @@
 		ORDER BY book.reg_date DESC LIMIT 6
 		]]>
 	</select>
-	<!-- 카테고리에 포함된 오디오가 있는 책 6권  selectAllCategoryIncludeAudio-->
-	<select id="selectAllCategoryIncludeAudio"  parameterType="string" resultType="HashMap">
+	<!-- 카테고리에 포함된 오디오가 있는 책 6권 selectAllCategoryIncludeAudio -->
+	<select id="selectAllCategoryIncludeAudio"
+		parameterType="string" resultType="HashMap">
 		<![CDATA[
 		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
 		FROM book JOIN author
@@ -58,9 +61,10 @@
 		ORDER BY title LIMIT 6
 		]]>
 	</select>
-	
+
 	<!-- 카테고리에 해당하는 모든 책 가져오기 -->
-	<select id="selectAllCategory" parameterType="string" resultType="HashMap">
+	<select id="selectAllCategory" parameterType="string"
+		resultType="HashMap">
 		<![CDATA[
 			select book.book_no, book.title, author.name
 			from book, author
@@ -94,7 +98,7 @@
 			GROUP BY book_no ORDER BY cnt DESC LIMIT 6;
 		]]>
 	</select>
-	
+
 	<!-- 최근에 한달에 추가된 것중 인기 많은 순 -->
 	<select id="selectOrderByRecentlryAddedHot" resultType="HashMap">
 		<![CDATA[
@@ -118,8 +122,20 @@
 		book.book_no=#{no};
 		]]>
 	</select>
-	
-	<!-- 제목,작가이름 , category로 검색 selectByTitleAuthorCategory-->
+	<!-- 라이브러리 기록 가져오기 selectLibraryLog -->
+	<select id="selectLibraryLog"  parameterType="string" resultType="HashMap" >
+		<![CDATA[
+			select library.user_no, book.title,  library.book_no, book.img_path, book.running_time, author.name
+			from book,author,library,user
+			where book.author_no=author.author_no and
+			user.user_no=library.user_no and
+			book.book_no=library.book_no and 
+			book.book_no not in (select book_no from library where email=#{email})
+			order by library.user_no, library.reg_date;  
+		]]>
+	</select>
+
+	<!-- 제목,작가이름 , category로 검색 selectByTitleAuthorCategory -->
 	<select id="selectByTitleAuthorCategory" parameterType="HashMap"
 		resultType="HashMap">
 		<![CDATA[

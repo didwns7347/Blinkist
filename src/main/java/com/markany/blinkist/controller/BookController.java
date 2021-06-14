@@ -26,7 +26,7 @@ public class BookController {
 	@Autowired
 	private LibraryService libraryService;
 
-
+	
 	// 책 검색기능 제목,작가
 	@RequestMapping("/search")
 	public String search(Model model, String keyword, Principal authUser) {
@@ -45,10 +45,12 @@ public class BookController {
 	
 	// 책 보여주기 기능 book_no
 	@RequestMapping("/viewbook")
-	public String viewBook( Model model, long no) {
-		
+	public String viewBook( Model model, long no,Principal authUser) {
+		String email=authUser.getName();
 		Map<Object, Object> map = bookService.findByNo(no);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(no,email);
 		model.addAttribute("map",map );
+		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		return "board/viewbook";
 
 	}
@@ -56,10 +58,12 @@ public class BookController {
 	
 	//책 보여주기기능 title,category,ahthor_name
 	@RequestMapping("/viewbookinfo")
-	public String viewBook(Model model, String info, String category) {
-		
+	public String viewBook(Model model, String info, String category,Principal authUser) {
+		String email=authUser.getName();
 		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),email);
 		model.addAttribute("map",map );
+		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		return "board/viewbook";
 		
 	}
@@ -144,6 +148,8 @@ public class BookController {
 		return "board/viewcategoryallbook";
 		
 	}
+	
+	//그책을 읽은사람들이 다음 도서로 선정된 책을 사용자에게 도서를 추천해주기
 	
 
 }

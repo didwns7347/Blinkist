@@ -10504,3 +10504,8 @@ q {font-style: italic;}
 #olcontainer{
 	overflow:auto;
 }
+
+
+.category{
+	text-align:center;
+}

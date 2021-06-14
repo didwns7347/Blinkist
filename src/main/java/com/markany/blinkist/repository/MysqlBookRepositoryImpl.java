@@ -175,6 +175,15 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		sqlSession.close();
 		return res;
 	}
+
+	@Override
+	public List<HashMap<Object, Object>> selectLibraryLog(String email) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<Object, Object>> log=sqlSession.selectList("bookMapper.selectLibraryLog",email);
+		sqlSession.close();
+		return log;
+	}
 	
 
 }

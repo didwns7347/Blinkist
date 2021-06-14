@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -7,21 +8,29 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Blinkist: Big ideas in small packages</title>
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+	crossorigin="anonymous"></script>
 <!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+	rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/blog-home.css" rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+<link href="${pageContext.request.contextPath }/css/styles.css"
+	rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/css/blog-home.css"
+	rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'
+	crossorigin='anonymous'></script>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script
@@ -30,13 +39,18 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- <!-- Font Awesome icons (free version)-->
-        <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
-        <!-- Google fonts-->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
-        <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
+	crossorigin="anonymous"></script>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+	rel="stylesheet" type="text/css" />
+<link
+	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
+	rel="stylesheet" type="text/css" />
 
- <script type="text/javascript"  src="${pageContext.request.contextPath }/js/viewbook.js"></script>         
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/viewbook.js"></script>
 </head>
 <body>
 	<!-- navigation include -->
@@ -49,14 +63,15 @@
 				<h4 class="mb-4">${map.name }</h4>
 				<div class="row mb-4">
 					<div class="col-sm-5">
-						<i style='font-size: 15px' class='far'>&#xf017;</i> ${map.running_Time}-minute read
+						<i style='font-size: 15px' class='far'>&#xf017;</i>
+						${map.running_Time}-minute read
 					</div>
 					<div class="col-sm-5">
-						<i class="fas fa-headphones"></i> 
-							<c:if test="${map.audio_Check eq true}">
+						<i class="fas fa-headphones"></i>
+						<c:if test="${map.audio_Check eq true}">
 								Audio available
 							</c:if>
-							<c:if test="${map.audio_Check ne true}">
+						<c:if test="${map.audio_Check ne true}">
 								Audio unavailable
 							</c:if>
 					</div>
@@ -64,20 +79,22 @@
 
 				<div class="row mb-4">
 					<div class="col-sm-3">
-						<a href="javascript:void(0)" class="btn btn-outline-success" role="button" id="Add_Library">Add to library</a>
+						<a href="javascript:void(0)" class="btn btn-outline-success"
+							role="button" id="Add_Library">Add to library</a>
 					</div>
 					<div class="col-sm-3">
-						<a href="${map.buyLink }" class="btn btn-outline-primary" role="button"> Buy
-							Book </a>
+						<a href="${map.buyLink }" class="btn btn-outline-primary"
+							role="button"> Buy Book </a>
 					</div>
 					<div class="col-sm-3">
 						<a href="#" class="btn btn-outline-light text-dark" role="button">Send
 							to kindle</a>
 					</div>
 				</div>
-<s:authentication property="principal" var="authUser"/>
-<input type="hidden" id="book_no" name="book_no" value="${map.book_no}"/>
-<input type="hidden" id="authUser" name="authUser" value="${authUser.username }"/>
+				<s:authentication property="principal" var="authUser" />
+				<input type="hidden" id="book_no" name="book_no"
+					value="${map.book_no}" /> <input type="hidden" id="authUser"
+					name="authUser" value="${authUser.username }" />
 
 				<div class="row mb-4">
 					<div class="container">
@@ -109,80 +126,44 @@
 				</div>
 
 			</div>
-			<div class="col-sm-4" >
+			<div class="col-sm-4">
 				<div class="row mb-4">
 					<img class="img-fluid mx-auto d-block img-thumbnail"
-						src="${map.img_path}"
-						alt="Chania" width="460" height="345">
+						src="${map.img_path}" alt="Chania" width="460" height="345">
 				</div>
 
 
 
 			</div>
 		</div>
-
-		<div class="row mb-4" >
+		<div class="row mb-4">
 			<div class="col-sm-12">
 				<h2 class="mb-4">추천작</h2>
 			</div>
-
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
+			<c:forEach items="${recommendBooksByLog }" var="list" varStatus="status">
+				<div class="col-lg-4 col-md-6 mb-4" id="test">
+					<div class="card h-100">
+						<a
+							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"
+							style="background-color: #e2ae5f7a;"><br /> <img
+							class="card-img-top" src="${list.img_path }" width="122"
+							height="180" alt="..." /> <br /> </a>
+						<div class="card-body">
+							<h6 class="card-title">
+								<a
+									href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+							</h6>
+							<h5>${list.name }</h5>
+							<p class="card-text">
+								<i style='font-size: 20px' class='far'>&#xf017;</i>
+								${list.running_time}분
+							</p>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-
-
+			</c:forEach>
 		</div>
+
 
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />

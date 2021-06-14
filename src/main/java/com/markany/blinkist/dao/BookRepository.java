@@ -34,6 +34,8 @@ public interface BookRepository {
 
 	Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category);
 
+	public List<HashMap<Object, Object>> selectLibraryLog(String email);
+
 
 
 }
