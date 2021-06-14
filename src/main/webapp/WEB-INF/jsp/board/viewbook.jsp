@@ -123,67 +123,34 @@
 
 		<div class="row mb-4" >
 			<div class="col-sm-12">
-				<h2 class="mb-4">추천작</h2>
+				<h2 class="mb-4">회원이 가장 많이 라이브러리에 추가한 카테고리에 따른 추천작</h2>
 			</div>
-
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
+         <c:forEach items="${trandBook }" var="list" varStatus="status">
+			<div class="col-lg-4 col-md-6 mb-4" id="test">
+						<div class="card h-100">
+							<a href="#" style="background-color: #e2ae5f7a;"><br /> <img
+								class="card-img-top" src="${list.img_path }" width="122"
+								height="180" alt="..." /> <br /> </a>
+							<div class="card-body">
+								<h6 class="card-title">
+									<a
+										href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+								</h6>
+								<h5>${list.name }</h5>
+								<p class="card-text">
+									<i style='font-size: 20px' class='far'>&#xf017;</i>
+									${list.running_time}분
+								</p>
+							</div>
+							<div class="card-footer text-center">
+								<a name="cardfooter"
+									href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
+									Add Library</a>
+							</div>
+						</div>
 			</div>
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-5 mb-3">
-				<div class="card h-100">
-					<a href="#!"><img class="card-img-top"
-						src="${pageContext.request.contextPath }/assets/coverimgs/jjang9.png"
-						alt="..." /></a>
-					<div class="card-body">
-						<h4 class="card-title">
-							<a href="#!">Item One</a>
-						</h4>
-						<h5>$24.99</h5>
-						<p class="card-text">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit. Amet numquam aspernatur!</p>
-					</div>
-					<div class="card-footer">
-						<small class="text-muted">★ ★ ★ ★ ☆</small>
-					</div>
-				</div>
-			</div>
-
-
+		 </c:forEach>	
 		</div>
-
 	</div>
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 

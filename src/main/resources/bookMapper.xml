@@ -136,6 +136,28 @@
 		insert into book values(null,#{title},0,0,#{buyLink},#{synopsis},#{category},"test",#{img_path},0,now(),#{author_no},#{subtitle})
 		]]>
 	</insert>
-
-
+	
+	
+	<!-- 회원이 가장 많이 구독한 카테고리 찾기  -->
+    <select id="maxCategory" parameterType="long" resultType="String">
+       <![CDATA[
+           select max( book.category)
+           from book,library
+           where book.book_no=library.book_no and user_no=#{user_no};
+		]]>
+    </select>
+    
+    
+    <!-- 회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기 -->
+        <select id="customtrandBook" parameterType="HashMap" resultType="HashMap">
+       <![CDATA[
+          SELECT book.title, book.book_no, book.img_path, book.running_time, author.name ,count(library.user_no) as cnt
+		  FROM book JOIN library
+		  ON library.book_no=book.book_no
+		  JOIN author
+		  ON author.author_no=book.author_no
+		  WHERE book.category=#{category} and book.book_no NOT IN (select book_no from library where user_no=#{user_no})
+		  GROUP BY book_no ORDER BY cnt DESC LIMIT 3;
+		]]>
+    </select>
 </mapper>

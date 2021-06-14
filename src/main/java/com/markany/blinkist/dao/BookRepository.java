@@ -33,7 +33,10 @@ public interface BookRepository {
 	List<HashMap<String, Object>> selectAllCategoryIncludeAudio(String category);
 
 	Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category);
-
+	
+	public String maxCategory(long user_no);//회원이 가장 많이 구독한 카테고리 찾기
+	
+	public List<HashMap<Object, Object>> customtrandBook(String category,long user_no);//회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기
 
 
 }
