@@ -185,5 +185,35 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		return log;
 	}
 	
+	
+	//회원이 가장 많이 구독한 카테고리 찾기
+	@Override
+	public String maxCategory(long user_no) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		String category = sqlSession.selectOne("bookMapper.maxCategory",user_no);
+		sqlSession.close();
+		return category;
+		
+	}
+	
+	
+	//회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기
+	@Override
+	public List<HashMap<Object, Object>> customtrandBook(String category,long user_no){
+		
+		HashMap<Object,Object> map=new HashMap<Object,Object>();
+		map.put("category", category);
+		map.put("user_no", user_no);
+
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<Object, Object>> res=sqlSession.selectList("bookMapper.customtrandBook", map);
+		sqlSession.close();
+		return res;
+		
+	}
+	
 
 }

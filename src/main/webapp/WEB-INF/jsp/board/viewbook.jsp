@@ -138,9 +138,10 @@
 		</div>
 		<div class="row mb-4">
 			<div class="col-sm-12">
-				<h2 class="mb-4">추천작</h2>
+				<h2 class="mb-4">이책을본 사람들이 많이 본 책</h2>
 			</div>
-			<c:forEach items="${recommendBooksByLog }" var="list" varStatus="status">
+			<c:forEach items="${recommendBooksByLog }" var="list"
+				varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4" id="test">
 					<div class="card h-100">
 						<a
@@ -162,7 +163,36 @@
 					</div>
 				</div>
 			</c:forEach>
+			<div class="col-sm-12">
+				<h2 class="mb-4">회원이 가장 많이 라이브러리에 추가한 카테고리에 따른 추천작</h2>
+			</div>
+			<c:forEach items="${trandBook }" var="list" varStatus="status">
+				<div class="col-lg-4 col-md-6 mb-4" id="test">
+					<div class="card h-100">
+						<a href="#" style="background-color: #e2ae5f7a;"><br /> <img
+							class="card-img-top" src="${list.img_path }" width="122"
+							height="180" alt="..." /> <br /> </a>
+						<div class="card-body">
+							<h6 class="card-title">
+								<a
+									href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}">${list.title }</a>
+							</h6>
+							<h5>${list.name }</h5>
+							<p class="card-text">
+								<i style='font-size: 20px' class='far'>&#xf017;</i>
+								${list.running_time}분
+							</p>
+						</div>
+						<div class="card-footer text-center">
+							<a name="cardfooter"
+								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
+								Add Library</a>
+						</div>
+					</div>
+				</div>
+			</c:forEach>
 		</div>
+
 
 
 	</div>
