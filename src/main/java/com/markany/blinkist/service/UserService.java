@@ -53,10 +53,8 @@ public class UserService implements UserDetailsService {
 
 	}
 
-	public void deleteUser(String email) {// 회원탈퇴
-
-		userDAO.deleteUser(email);
-
+	public boolean deleteUser(String email) {// 회원탈퇴
+		return userDAO.deleteUser(email);
 	}
 
 	@Override

@@ -17,6 +17,6 @@ public interface UserRepository {
 	
 	public boolean PassPrimium(UserVo uservo);//primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다.
 	
-	public void deleteUser(String email);//회원탈퇴
+	public boolean deleteUser(String email);//회원탈퇴
 
 }

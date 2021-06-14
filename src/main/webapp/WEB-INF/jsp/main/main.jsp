@@ -368,7 +368,7 @@
 			<!-- Portfolio Grid Items-->
 			<div class="row justify-content-center">
 				<!-- Portfolio Item 1-->
-				<div class="col-md-6 col-lg-4 mb-5">
+				<div class="col-md-6 col-lg-4 mb-5 justify-content-center"">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=인문학"">
 						<br /> <img class="img-fluid" src="assets/images/humanity.jpg"
@@ -376,7 +376,7 @@
 					</a>
 				</div>
 				<!-- Portfolio Item 2-->
-				<div class="col-md-6 col-lg-4 mb-5">
+				<div class="col-md-6 col-lg-4 mb-5 ">
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=건강/생활/요리">
 						<br /> <img class="img-fluid" src="assets/images/life.jpg"

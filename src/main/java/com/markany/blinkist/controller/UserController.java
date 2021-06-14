@@ -3,15 +3,23 @@ package com.markany.blinkist.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,8 +33,9 @@ import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
 import com.markany.blinkist.vo.Payment_method;
+import com.markany.blinkist.vo.UserDetailsVo;
 import com.markany.blinkist.vo.UserVo;
-
+import org.springframework.security.core.userdetails.User;
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -58,16 +67,14 @@ public class UserController {
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
 		
-		Map<String,Object> map = new HashMap<String, Object>();
-		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
+		
 		if (user != null) {
-
-			session.setAttribute("authUser", email);
-			map.put("email", user.getEmail());
-			map.put("password", user.getPassword());
+			List<GrantedAuthority> roles = new ArrayList<>();
+			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
+			User secUser =new User(user.getEmail(),"",roles);
+			Authentication auth = new UsernamePasswordAuthenticationToken(secUser, null, roles);
+			SecurityContextHolder.getContext().setAuthentication(auth);
 			
-			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
-			rttr.addFlashAttribute("vo", map);
 			
 			// premium가입날이 지났는지 확인
 			// 1. premium을 가입했는지 확인한다.
@@ -77,11 +84,11 @@ public class UserController {
 
 				try {
 
-					Date Primium_date = sdf.parse(user.getPrimium_date());
+					//Date Primium_date = sdf.parse(user.getPrimium_date());
 					Date finish_date = sdf.parse(user.getFinish_date());
-
-					if (Primium_date.before(finish_date)) {// primium_date가 만료일을 지났다면
-
+					Date now =new Date();
+					if (!now.before(finish_date)) {// primium_date가 만료일을 지났다면
+						
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						rttr.addFlashAttribute("passes", "passes");
 
@@ -101,11 +108,11 @@ public class UserController {
 
 				}
 
-				return "redirect:/loginprocess";
+				return "redirect:/";
 
 			} else {// premium가입을 안했다면
 
-				return "redirect:/loginprocess";
+				return "redirect:/";
 
 			}
 
@@ -145,16 +152,15 @@ public class UserController {
 		UserVo user = userService.findByEmail(email);
 		
 
-		Map<String,Object> map = new HashMap<String, Object>();
 		
+	
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
-			map.put("email", email);
-			map.put("password", user.getPassword());
-			//session.setAttribute("authUser", email);
-
-			rttr.addFlashAttribute("Success", "안녕하세요. Blinkist에 오신걸환영합니다.");
-
+			List<GrantedAuthority> roles = new ArrayList<>();
+			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
+			User secUser =new User(user.getEmail(),"",roles);
+			Authentication auth = new UsernamePasswordAuthenticationToken(secUser, null, roles);
+			SecurityContextHolder.getContext().setAuthentication(auth);
 			// premium가입날이 지났는지 확인
 			// 1. premium을 가입했는지 확인한다.
 			if (user.getPrimium_date() != null) {// premium을 가입했다면
@@ -163,10 +169,10 @@ public class UserController {
 
 				try {
 
-					Date Primium_date = sdf.parse(user.getPrimium_date());
 					Date finish_date = sdf.parse(user.getFinish_date());
+					Date now =new Date();
 
-					if (Primium_date.before(finish_date)) {// primium_date가 만료일을 지났다면
+					if (!now.before(finish_date)) {// primium_date가 만료일을 지났다면
 
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						model.addAttribute("passes", "passes");
@@ -187,11 +193,11 @@ public class UserController {
 
 				}
 
-				return "redirect:/loginprocess";
+				return "redirect:/";
 
 			} else {// premium가입을 안했다면
 
-				return "redirect:/loginprocess";
+				return "redirect:/";
 
 			}
 
@@ -251,7 +257,7 @@ public class UserController {
 	public String getUpdate(Principal principal, Model model) {
 		// 세션에 저장된 회원의 이메일정보가져오기
 		String email = principal.getName();
-		System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
+		//System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
 		// 이메일을 토대로 회원의 정보가져오기
 		UserVo uservo = userService.selectbyUser(email);
 
@@ -260,7 +266,7 @@ public class UserController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
-			System.out.println(uservo.getFinish_date());
+			System.out.println("???"+uservo.getFinish_date());
 			
 			if((uservo.getFinish_date()!=null)){
 			Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
@@ -320,7 +326,7 @@ public class UserController {
 	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
 	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade,
 			@RequestParam(value = "payment_method") String payment_method) {
-
+		System.out.println("upgrade Start     "+email);
 		UserVo uservo = new UserVo();
 		uservo.setEmail(email);
 
@@ -390,10 +396,10 @@ public class UserController {
 
 	// 회원탈퇴
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
-	public String postDelete(HttpSession session, Model model, RedirectAttributes rttr) {
+	public String postDelete(Principal authUser, Model model, RedirectAttributes rttr) {
 
 		// 회원의 이메일 가져오기
-		String email = (String) session.getAttribute("authUser");
+		String email = authUser.getName();
 
 		// 이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
@@ -405,12 +411,17 @@ public class UserController {
 		libraryService.deleteAllLibrary(userVo.getUser_no());
 
 		// 회원탈퇴
-		userService.deleteUser(email);
-
-		session.removeAttribute("authUser");
-
-		rttr.addFlashAttribute("Success", "회원탈퇴하였습니다.");
-
+		boolean deleteCheck=userService.deleteUser(email);
+		if(deleteCheck) {
+			rttr.addFlashAttribute("Success", "회원탈퇴하였습니다.");
+			SecurityContextHolder.clearContext();
+			
+		}
+		else {
+			rttr.addFlashAttribute("Error", "회원탈퇴에 실패했습니다 관리자에게 문의하세요");
+		}
+	
+		
 		return "redirect:/";
 
 	}

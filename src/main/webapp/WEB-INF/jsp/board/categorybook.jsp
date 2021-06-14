@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +20,13 @@
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
 	crossorigin="anonymous"></script>
-
+<!-- 설정 드랍 다운에 필요한 스크립트 코드임 -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 <!-- Google fonts-->
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
@@ -29,9 +35,7 @@
 	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
 	rel="stylesheet" type="text/css" />
 
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css"
-	rel="stylesheet" />
+
 <link href="${pageContext.request.contextPath }/css/blog-home.css"
 	rel="stylesheet">
 
@@ -45,7 +49,9 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'
 	crossorigin='anonymous'></script>
 
-
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="${pageContext.request.contextPath }/css/styles.css"
+	rel="stylesheet" />
 <!-- bootstrap -->
 
 <script type="text/javascript"
@@ -53,7 +59,7 @@
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
-	<s:authentication property="principal" var="authUser"/> 
+	<s:authentication property="principal" var="authUser" />
 	<div class="container">
 		<h1 id="category">${category}</h1>
 		<br />

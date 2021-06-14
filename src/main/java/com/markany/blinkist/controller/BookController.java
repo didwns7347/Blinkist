@@ -146,7 +146,7 @@ public class BookController {
 		
 		List<HashMap<String,String>> array=bookService.findAllCategory(category);
 		Gson gson = new Gson();
-		return gson.toJson(array);
+		return gson.toJson(array); 
 
 	}
 	

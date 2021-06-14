@@ -94,5 +94,26 @@ public class GetBeanTest {
 			System.out.println(vo.toString());
 		}
 	}
+	
+	@Test
+	@DisplayName("primium date test")
+	void primiumDateCheckTest() throws ParseException {
+		UserService userService=ac.getBean(UserService.class);
+		UserVo user= userService.findByEmail("0604test@test.com");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date Primium_date = sdf.parse(user.getPrimium_date());
+		Date finish_date = sdf.parse(user.getFinish_date());
+		Date now = new Date();
+		System.out.println("now:"+now);
+		System.out.println("fin:"+finish_date);
+		System.out.println(now.before(finish_date));
+		if (now.before(finish_date)) {
+			System.out.println("버그버그");
+		}
+		else {
+			
+		}
+
+	}
 
 }

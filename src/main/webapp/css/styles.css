@@ -10348,16 +10348,16 @@ form .row:first-child .floating-label-form-group {
   right: 45px;
   font-size: 60px;
 }
-
+/*
 @media screen and (max-height: 450px) {
   .overlay {overflow-y: auto;}
-  .overlay a {font-size: 20px}
   .overlay .closebtn {
   font-size: 40px;
   top: 15px;
   right: 35px;
   }
-}
+}*/
+
 @media (min-width: 768px){
 .header-menu--discover .header-menu__menu-wrapper {
     margin-top: 0;}
@@ -10484,16 +10484,14 @@ q {font-style: italic;}
 	border:solid 1px gray;
 }
 
-@media screen and(max-width:990){
-	#explore{
-		display:none;
+@media(max-width: 990px){
+	#explorehidden #exploreA{
+		display:none
 	}
-	
 }
 
+
 .nav-link{
-	
-	
 	/* 메뉴의 글씨굵기 */
 	font-weight: bold; 
 	
@@ -10502,3 +10500,7 @@ q {font-style: italic;}
 	
 }
 
+
+#olcontainer{
+	overflow:auto;
+}

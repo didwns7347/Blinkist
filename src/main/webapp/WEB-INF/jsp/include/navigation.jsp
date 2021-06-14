@@ -57,7 +57,7 @@
 			<ul class="navbar-nav naver-inverse">
 
 				<!-- 로그인을 했을때 -->
-				<li class="nav-item"><a class="nav-link"
+				<li id="explorehidden" class="nav-item"><a id="exploreA"class="nav-link"
 					href="javascript:void(0)" onclick="openExplore()">Explore</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath }/library/view?authUser=${authUser.username}">My
@@ -115,8 +115,8 @@
 <s:authorize access="isAuthenticated()">
 	<s:authentication property="principal" var="authUser"/> 
 	<div id="explore" class="overlay">
-		<a href="javascript:void(0)" class="closebtn" onclick="closeExplore()">&times;</a>
-		<div class="overlay-content container">
+		
+		<div class="overlay-content container" id="olcontainer">
 			<div class="discover-menu__header">
 				<h4 class=discover-menu__headline>Explore by category</h4>
 				<ul class="discover-menu__header-links">
@@ -126,7 +126,11 @@
 					<li><a
 						href="${pageContext.request.contextPath }/book/popular"
 						class="discover-menu__header-link">See popular titles</a></li>
+					
+						
 				</ul>
+				<a href="javascript:void(0)" class="closebtn" onclick="closeExplore()">&times;</a>
+					
 			</div>
 			<ul class="discover-menu__categories">
 				<li class="discover-menu__category"><a
@@ -154,7 +158,7 @@
 </s:authorize>
 <script>
 	function openExplore() {
-		document.getElementById("explore").style.height = "50%";
+		document.getElementById("explore").style.height = "424px";
 	}
 
 	function closeExplore() {
