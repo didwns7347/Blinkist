@@ -65,10 +65,6 @@ public class BookController {
 		
 		model.addAttribute("map",map );
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
-
-		
-		
-		
 		model.addAttribute("trandBook", trandBook);
 		return "board/viewbook";
 
