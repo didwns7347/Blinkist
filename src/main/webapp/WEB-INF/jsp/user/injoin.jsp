@@ -48,24 +48,24 @@
 						<strong>이미가입된 이메일 입니다.</strong>
 					</div>
 				</c:if>
-				<form role="form" autocomplete="off"
-					action="${pageContext.request.contextPath }/user/join" method=post>
+				<form  autocomplete="off"
+					action="${pageContext.request.contextPath }/user/join" method=post onsubmit="return submitCheck();">
 					<div class="form-group">
 						<label for="email">이메일 주소</label> <input type="text"
 							class="form-control" name="email" id="email"
-							placeholder="이메일을 입력해 주세요" required>
+							placeholder="이메일을 입력해 주세요" >
+						<button id="sendMail" type="button">인증</button>
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label> <input type="password"
 							class="form-control" name="password" id="password"
-							placeholder="비밀번호를 입력해주세요" required>
+							placeholder="비밀번호를 입력해주세요" >
 					</div>
 					<div class="form-group">
 						<label for="PasswordCheck">비밀번호 확인</label> <input type="password"
 							class="form-control" id="PasswordCheck"
-							placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요" required>
+							placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요" >
 					</div>
-
 
 					<div id="same"
 						style="color: blue; font-weight: bold; text-align: center;">등록하실
@@ -133,6 +133,38 @@
 				}
 			});
 		});
+		
+		//이메일 보내기
+		$("#sendMail").click(function() {// 메일 입력 유효성 검사
+			var mail = $("#email").val(); //사용자의 이메일 입력값. 
+			console.log(mail)
+			if (mail == "") {
+				alert("메일 주소가 입력되지 않았습니다.");
+			} else {
+				$.ajax({
+					type : 'post',
+					url : '/blinkist/user/CheckMail',
+					data : {
+						mail:mail
+						},
+					dataType :'json',
+
+				});
+				alert("인증번호가 전송되었습니다.") 
+				isCertification=true; //추후 인증 여부를 알기위한 값
+			}
+		});
+		
+		//이메일 인증 체크
+		$("#submit").click(function submitCheck(){
+			if(isCertification==false){
+				alert("메일 인증이 완료되지 않았습니다.")
+			}
+			else{
+				true;
+			}
+		});
+	 
 	</script>
 </body>
 </html>

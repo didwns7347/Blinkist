@@ -251,9 +251,9 @@ public class BookService {
 	}
 
 	// 회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기
-	public List<HashMap<Object, Object>> customtrandBook(String category, long user_no) {
+	public List<HashMap<Object, Object>> customtrandBook(String category, long user_no, Long book_no) {
 
-		return bookRepository.customtrandBook(category, user_no);
+		return bookRepository.customtrandBook(category, user_no,book_no);
 
 	}
 }

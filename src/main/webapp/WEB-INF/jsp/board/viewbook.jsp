@@ -31,8 +31,7 @@
 	rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'
 	crossorigin='anonymous'></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -140,8 +139,7 @@
 			<div class="col-sm-12">
 				<h2 class="mb-4">이책을본 사람들이 많이 본 책</h2>
 			</div>
-			<c:forEach items="${recommendBooksByLog }" var="list"
-				varStatus="status">
+			<c:forEach items="${recommendBooksByLog }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4" id="test">
 					<div class="card h-100">
 						<a
@@ -169,7 +167,9 @@
 			<c:forEach items="${trandBook }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4" id="test">
 					<div class="card h-100">
-						<a href="#" style="background-color: #e2ae5f7a;"><br /> <img
+						<a
+							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"
+							style="background-color: #e2ae5f7a;"><br /> <img
 							class="card-img-top" src="${list.img_path }" width="122"
 							height="180" alt="..." /> <br /> </a>
 						<div class="card-body">
@@ -182,11 +182,6 @@
 								<i style='font-size: 20px' class='far'>&#xf017;</i>
 								${list.running_time}분
 							</p>
-						</div>
-						<div class="card-footer text-center">
-							<a name="cardfooter"
-								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
-								Add Library</a>
 						</div>
 					</div>
 				</div>

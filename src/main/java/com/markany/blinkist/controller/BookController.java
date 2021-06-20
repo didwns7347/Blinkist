@@ -51,9 +51,10 @@ public class BookController {
 	// 책 보여주기 기능 book_no
 	@RequestMapping("/viewbook")
 	public String viewBook( Model model, long no,Principal principal) {
+		
 		// 회원의 이메일정보가져오기
 		String email = principal.getName();
-
+		
 		// 이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		// 카테고리 가져오기
@@ -61,7 +62,7 @@ public class BookController {
 
 		Map<Object, Object> map = bookService.findByNo(no);
 		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(no,email);
-		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
+		List<HashMap<Object, Object>> trandBook=bookService.customtrandBook(category, userVo.getUser_no(),(Long)map.get("book_no"));
 		
 		model.addAttribute("map",map );
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);

@@ -9,11 +9,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +40,7 @@ import com.markany.blinkist.vo.Payment_method;
 import com.markany.blinkist.vo.UserDetailsVo;
 import com.markany.blinkist.vo.UserVo;
 import org.springframework.security.core.userdetails.User;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -51,6 +56,9 @@ public class UserController {
 
 	@Autowired
 	private LibraryService libraryService;
+	
+	@Autowired
+	private JavaMailSenderImpl javaMailSender;
 
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
@@ -66,16 +74,14 @@ public class UserController {
 
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
-		
-		
+
 		if (user != null) {
 			List<GrantedAuthority> roles = new ArrayList<>();
 			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
-			User secUser =new User(user.getEmail(),"",roles);
+			User secUser = new User(user.getEmail(), "", roles);
 			Authentication auth = new UsernamePasswordAuthenticationToken(secUser, null, roles);
 			SecurityContextHolder.getContext().setAuthentication(auth);
-			
-			
+
 			// premium가입날이 지났는지 확인
 			// 1. premium을 가입했는지 확인한다.
 			if (user.getPrimium_date() != null) {// premium을 가입했다면
@@ -84,11 +90,11 @@ public class UserController {
 
 				try {
 
-					//Date Primium_date = sdf.parse(user.getPrimium_date());
+					// Date Primium_date = sdf.parse(user.getPrimium_date());
 					Date finish_date = sdf.parse(user.getFinish_date());
-					Date now =new Date();
+					Date now = new Date();
 					if (!now.before(finish_date)) {// primium_date가 만료일을 지났다면
-						
+
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
 						rttr.addFlashAttribute("passes", "passes");
 
@@ -150,15 +156,12 @@ public class UserController {
 
 		// user table에 헤당 이메일이 있는지 확인
 		UserVo user = userService.findByEmail(email);
-		
 
-		
-	
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
 			List<GrantedAuthority> roles = new ArrayList<>();
 			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
-			User secUser =new User(user.getEmail(),"",roles);
+			User secUser = new User(user.getEmail(), "", roles);
 			Authentication auth = new UsernamePasswordAuthenticationToken(secUser, null, roles);
 			SecurityContextHolder.getContext().setAuthentication(auth);
 			// premium가입날이 지났는지 확인
@@ -170,7 +173,7 @@ public class UserController {
 				try {
 
 					Date finish_date = sdf.parse(user.getFinish_date());
-					Date now =new Date();
+					Date now = new Date();
 
 					if (!now.before(finish_date)) {// primium_date가 만료일을 지났다면
 
@@ -215,10 +218,9 @@ public class UserController {
 	public String join(UserVo uservo, HttpServletRequest request, RedirectAttributes rttr, Model model) {
 		System.out.println("dkdkdkdkdkdkdkdkkdkdkdkdk");
 		// 회원가입
-		if(userService.selectbyUser(uservo.getEmail())!=null)
-		{
+		if (userService.selectbyUser(uservo.getEmail()) != null) {
 			rttr.addFlashAttribute("Fail", "이미존재하는 회원입니다.");
-			return "redirect:"+ request.getHeader("Referer");
+			return "redirect:" + request.getHeader("Referer");
 		}
 		userService.insert(uservo);
 
@@ -238,18 +240,17 @@ public class UserController {
 	public String inJoin() {
 		return "user/injoin";
 	}
-	
-	
-	//프리미엄가입
+
+	// 프리미엄가입
 	@RequestMapping(value = "/upgradepremium", method = RequestMethod.GET)
 	public String getupgradepremium(Principal principal, Model model) {
-		
+
 		String email = principal.getName();
-		
+
 		model.addAttribute("email", email);
-		
+
 		return "user/upgradepremium";
-		
+
 	}
 
 	// 회원정보수정GET
@@ -257,7 +258,7 @@ public class UserController {
 	public String getUpdate(Principal principal, Model model) {
 		// 세션에 저장된 회원의 이메일정보가져오기
 		String email = principal.getName();
-		//System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
+		// System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
 		// 이메일을 토대로 회원의 정보가져오기
 		UserVo uservo = userService.selectbyUser(email);
 
@@ -266,25 +267,26 @@ public class UserController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
-			System.out.println("???"+uservo.getFinish_date());
-			
-			if((uservo.getFinish_date()!=null)){
-			Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
-			Date EndDate = new Date();// 현재날짜
+			System.out.println("???" + uservo.getFinish_date());
 
-			// 구독끝나는날짜-현재날짜 /(24*60*60*1000)
-			long diffDay = (startDate.getTime() - EndDate.getTime()) / (24 * 60 * 60 * 1000);
+			if ((uservo.getFinish_date() != null)) {
+				Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
+				Date EndDate = new Date();// 현재날짜
 
-			if (uservo.getGrade().equals(Grade.monthP)) {// 월구독자라면
+				// 구독끝나는날짜-현재날짜 /(24*60*60*1000)
+				long diffDay = (startDate.getTime() - EndDate.getTime()) / (24 * 60 * 60 * 1000);
 
-				model.addAttribute("refund", diffDay * 530);
+				if (uservo.getGrade().equals(Grade.monthP)) {// 월구독자라면
 
-			} else if (uservo.getGrade().equals(Grade.yearP)) {// 연간구독자라면
+					model.addAttribute("refund", diffDay * 530);
 
-				model.addAttribute("refund", diffDay * 270);
+				} else if (uservo.getGrade().equals(Grade.yearP)) {// 연간구독자라면
 
+					model.addAttribute("refund", diffDay * 270);
+
+				}
 			}
-		}} catch (Exception e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 
@@ -314,7 +316,7 @@ public class UserController {
 			return "redirect:/";
 
 		} else {
-			//String ref = request.getHeader("Referer");
+			// String ref = request.getHeader("Referer");
 			rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
 			return "redirect:/";
 
@@ -326,7 +328,7 @@ public class UserController {
 	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
 	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade,
 			@RequestParam(value = "payment_method") String payment_method) {
-		System.out.println("upgrade Start     "+email);
+		System.out.println("upgrade Start     " + email);
 		UserVo uservo = new UserVo();
 		uservo.setEmail(email);
 
@@ -387,12 +389,10 @@ public class UserController {
 		uservo.setGrade(Grade.basic);
 
 		userService.updategrade(uservo);
-				
+
 		return "/blinkist/logout";
 
 	}
-
-	
 
 	// 회원탈퇴
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
@@ -411,18 +411,39 @@ public class UserController {
 		libraryService.deleteAllLibrary(userVo.getUser_no());
 
 		// 회원탈퇴
-		boolean deleteCheck=userService.deleteUser(email);
-		if(deleteCheck) {
+		boolean deleteCheck = userService.deleteUser(email);
+		if (deleteCheck) {
 			rttr.addFlashAttribute("Success", "회원탈퇴하였습니다.");
 			SecurityContextHolder.clearContext();
-			
-		}
-		else {
+
+		} else {
 			rttr.addFlashAttribute("Error", "회원탈퇴에 실패했습니다 관리자에게 문의하세요");
 		}
-	
-		
+
 		return "redirect:/";
 
 	}
+
+	// 이메일 인증
+	@PostMapping("CheckMail") // AJAX와 URL을 매핑시켜줌
+	@ResponseBody // AJAX후 값을 리턴하기위해 작성
+	public void SendMail(String mail) {
+		System.out.println(mail);
+		Random random = new Random(); // 난수 생성을 위한 랜덤 클래스
+		String key = ""; // 인증번호
+
+		SimpleMailMessage message = new SimpleMailMessage();
+		message.setTo(mail); // 스크립트에서 보낸 메일을 받을 사용자 이메일 주소
+		// 입력 키를 위한 코드
+		for (int i = 0; i < 3; i++) {
+			int index = random.nextInt(25) + 65; // A~Z까지 랜덤 알파벳 생성
+			key += (char) index;
+		}
+		int numIndex = random.nextInt(9999) + 1000; // 4자리 랜덤 정수를 생성
+		key += numIndex;
+		message.setSubject("인증번호 입력을 위한 메일 전송");
+		message.setText("인증 번호 : " + key);
+		javaMailSender.send(message);
+	}
+
 }
