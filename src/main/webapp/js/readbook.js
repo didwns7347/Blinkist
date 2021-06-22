@@ -135,14 +135,14 @@ $(document).ready(function () {
          
      $.ajax({
 	
-	        url : "http://localhost:8080/blinkist/library/update_progress",
+	        url : "/blinkist/library/update_progress",
             type : "post",
             data : allData,
 	        success : function(data) {
 
 	 }});
-
 	 
+	      	 
 //3. active변경하기
    
    //class값으로 active를 가지고있는 태그 active제거
@@ -181,7 +181,7 @@ $(document).ready(function () {
          
          }],options);
            
-    }
+    }    
 });
 }); 
  
@@ -600,17 +600,9 @@ $(function() {
 
 				}
              });
-             });
-
-
-
-
-
-
-
-
-
-
-
-	    		
+             }); 		
 	});
+	
+	
+
+	

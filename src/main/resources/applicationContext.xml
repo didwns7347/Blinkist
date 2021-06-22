@@ -12,12 +12,12 @@
 	<!-- inventory DB를 사용하기 위한 코드 -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://dbserver:3306/blinkist?characterEncoding=utf8&amp;serverTimezone=UTC" />
-		<property name="username" value="blinkist" />
-		<property name="password" value="1234" />
+		<property name="url" value="jdbc:mysql://localhost:3306/blinkist?characterEncoding=utf8&amp;serverTimezone=UTC" />
+		<property name="username" value="root" />
+		<property name="password" value="akzmdosl" />
 	</bean>
 
-
+	
 	<!-- MyBatis SqlSessionFactoryBean -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />

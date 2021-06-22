@@ -50,6 +50,7 @@
 <!-- w3 school -->
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10">
 
 <!-- mark.js 추가하기 -->
 <script
