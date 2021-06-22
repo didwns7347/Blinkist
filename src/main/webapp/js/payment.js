@@ -31,7 +31,7 @@ $(document).ready(function() {
               $.ajax({
               
                  type: "post", 
-                 url: "http://localhost:8080/blinkist/user/updateGrade", 
+                 url: "/blinkist/user/updateGrade", 
                  data: {
                  
                         "email": email, "grade": grade, "payment_method": "카카오페이"

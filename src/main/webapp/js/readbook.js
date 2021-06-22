@@ -62,7 +62,7 @@ $(document).ready(function () {
      
      $.ajax({
 	
-	    url : "http://localhost:8080/blinkist/library/update_progress",
+	    url : "/blinkist/library/update_progress",
         type : "post",
         data : allData,
 	    success : function(data) {
@@ -254,7 +254,7 @@ $(document).ready(function () {
    
    $.ajax({
 	
-	  url : "http://localhost:8080/blinkist/library/update_progress",
+	  url : "/blinkist/library/update_progress",
       type : "post",
       data : allData,
 	  success : function(data) {
@@ -528,7 +528,7 @@ $(document).ready(function(){
                     
 $.ajax({
 	
-	      url : "http://localhost:8080/blinkist/hilight/addHilight",
+	      url : "/blinkist/hilight/addHilight",
           type : "post",
           data : allData,
 	      success : function(data) {
@@ -558,7 +558,7 @@ $(function() {
 		var content = $("#p_content").text();//content가져오기
 		
 		$.ajax({
-				url:"http://localhost:8080/blinkist/content/english",
+				url:"/blinkist/content/english",
 				type:"get",
 				dataType:"json",
 				data:{"chapter":chapter, "content":content},
@@ -584,7 +584,7 @@ $(function() {
 		var content = $("#p_content").text();//content가져오기
 		
 		$.ajax({
-				url:"http://localhost:8080/blinkist/content/korea",
+				url:"/blinkist/content/korea",
 				type:"get",
 				dataType:"json",
 				data:{"chapter":chapter, "content":content},

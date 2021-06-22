@@ -11,7 +11,7 @@ $('.btn').click(function(){
         var allData = { "hilight_no": hilight_no};
 	    $.ajax({
 	
-		   url : "http://localhost:8080/blinkist/hilight/deleteHilight",
+		   url : "/blinkist/hilight/deleteHilight",
 		   type : "post",
 		   data : allData,
 		   success : function(data) {
@@ -38,7 +38,7 @@ $('#Delete_Date').click(function(){
 	
 	$.ajax({
 	
-		   url : "http://localhost:8080/blinkist/hilight/deleteHilight",
+		   url : "/blinkist/hilight/deleteHilight",
 		   type : "post",
 		   data : allData,
 		   success : function(data) {

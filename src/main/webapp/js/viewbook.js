@@ -16,7 +16,7 @@ $('#Add_Library').click(function(){
         var allData = { "book_no": book_no};
 	    $.ajax({
 	
-		   url : "http://localhost:8080/blinkist/library/button_addlibrary",
+		   url : "/blinkist/library/button_addlibrary",
 		   type : "post",
 		   data : allData,
 		   success : function(data) {
@@ -25,6 +25,6 @@ $('#Add_Library').click(function(){
         
     }
     else
-	    $("#Add_Library").attr("href", "http://localhost:8080/blinkist/content/readbook?book_no="+$('#book_no').val());//하이퍼링크 활성화
+	    $("#Add_Library").attr("href", "http://3.139.21.42:8080/blinkist/content/readbook?book_no="+$('#book_no').val());//하이퍼링크 활성화
  }); 
  });

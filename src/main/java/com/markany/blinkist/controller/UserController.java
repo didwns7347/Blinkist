@@ -8,8 +8,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
@@ -19,11 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.*;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.markany.blinkist.service.HilightService;
@@ -33,9 +29,10 @@ import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
 import com.markany.blinkist.vo.Payment_method;
-import com.markany.blinkist.vo.UserDetailsVo;
 import com.markany.blinkist.vo.UserVo;
 import org.springframework.security.core.userdetails.User;
+
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -54,8 +51,7 @@ public class UserController {
 
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
-	public String home(@RequestParam(value = "code", required = false) String code, HttpServletRequest request,
-			Model model, RedirectAttributes rttr, HttpSession session) throws Exception {
+	public String home(@RequestParam(value = "code", required = false) String code, HttpServletRequest request, Model model, RedirectAttributes rttr, HttpSession session) throws Exception {
 
 		KakaoService service = new KakaoService();
 		String access_Token = service.getAccessToken(code);
@@ -69,6 +65,8 @@ public class UserController {
 		
 		
 		if (user != null) {
+			
+			//시큐리티 로그인 처리
 			List<GrantedAuthority> roles = new ArrayList<>();
 			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
 			User secUser =new User(user.getEmail(),"",roles);
@@ -87,6 +85,7 @@ public class UserController {
 					//Date Primium_date = sdf.parse(user.getPrimium_date());
 					Date finish_date = sdf.parse(user.getFinish_date());
 					Date now =new Date();
+					
 					if (!now.before(finish_date)) {// primium_date가 만료일을 지났다면
 						
 						// 2.팝업창을 띄우기위한 데이터를 하나보내준다.
@@ -115,7 +114,6 @@ public class UserController {
 				return "redirect:/";
 
 			}
-
 		} else { // 이메일이 없다면 회원가입시키기
 
 			model.addAttribute("email", email);
@@ -125,20 +123,23 @@ public class UserController {
 		}
 	}
 
+	
 	// 네이버로그인연동페이지
 	@RequestMapping("/login")
 	public String login(HttpSession session, Model model) {
 
 		String url = naverLoginService.getAuthorizationUrl(session);
+		
 		model.addAttribute("url", url);
+		
 		return "user/login";
 
 	}
 
+	
 	// 네이버연동처리
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
-	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session,
-			RedirectAttributes rttr) throws IOException, ParseException {
+	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session, RedirectAttributes rttr) throws IOException, ParseException {
 
 		OAuth2AccessToken oauthToken = naverLoginService.getAccessToken(session, code, state);
 
@@ -152,15 +153,16 @@ public class UserController {
 		UserVo user = userService.findByEmail(email);
 		
 
-		
-	
 		// 이메일이 있다면 로그인후 볼수 있는 view 보여주기
 		if (user != null) {
+			
+			//시큐리티 로그인처리
 			List<GrantedAuthority> roles = new ArrayList<>();
 			roles.add(new SimpleGrantedAuthority(user.getGrade().toString()));
 			User secUser =new User(user.getEmail(),"",roles);
 			Authentication auth = new UsernamePasswordAuthenticationToken(secUser, null, roles);
 			SecurityContextHolder.getContext().setAuthentication(auth);
+			
 			// premium가입날이 지났는지 확인
 			// 1. premium을 가입했는지 확인한다.
 			if (user.getPrimium_date() != null) {// premium을 가입했다면
@@ -200,7 +202,6 @@ public class UserController {
 				return "redirect:/";
 
 			}
-
 		} else { // 이메일이 없다면 회원가입시키기
 
 			model.addAttribute("email", email);
@@ -209,6 +210,9 @@ public class UserController {
 
 		}
 	}
+	
+	
+	/******************************************************************************************************/
 
 	// 회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
@@ -227,13 +231,13 @@ public class UserController {
 		return "redirect:/";
 	}
 
-	// 스프링 시큐리티로 회원가입폼으로 보내기
+	// 스프링 시큐리티로 회원가입폼으로 보내기 이메일이 고정되서 수정 불가 api로 인증된 사람
 	@RequestMapping(value = "/join", method = RequestMethod.GET)
 	public String join() {
 		return "user/join";
 	}
 
-	// api 사용하시 않고 사티으 내부에서 회원가입
+	// api 사용하시 않고 사티으 내부에서 회원가입 이메일 입력받고 api로는 인증이 안된 사람
 	@RequestMapping(value = "/injoin", method = RequestMethod.GET)
 	public String inJoin() {
 		return "user/injoin";

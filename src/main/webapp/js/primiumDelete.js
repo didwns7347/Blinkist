@@ -6,7 +6,7 @@ $(document).ready(function () {
 
 	      $.ajax({
 	
-		     url : "http://localhost:8080/blinkist/user/primiumDelete",
+		     url : "/blinkist/user/primiumDelete",
 		     type : "post",
 		     success : function(data) {
 

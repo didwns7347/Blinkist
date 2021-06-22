@@ -11,5 +11,4 @@ public class BlinkistApplication {
 		SpringApplication.run(BlinkistApplication.class, args);
 		
 	}
-
 }

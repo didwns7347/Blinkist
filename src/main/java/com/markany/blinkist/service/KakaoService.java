@@ -39,7 +39,7 @@ public class KakaoService {
                 StringBuilder sb = new StringBuilder();
                 sb.append("grant_type=authorization_code");
                 sb.append("&client_id=43af0ecd5ee53917f6ec8b05c026e768");  //본인이 발급받은 key
-                sb.append("&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin");     // 본인이 설정해 놓은 경로
+                sb.append("&redirect_uri=http://3.139.21.42:8080/blinkist/user/kakaoLogin");     // 본인이 설정해 놓은 경로
                 sb.append("&code=" + authorize_code);
                 bw.write(sb.toString());
                 bw.flush();

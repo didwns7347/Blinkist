@@ -67,11 +67,12 @@ public class UserService implements UserDetailsService {
 
 		// 사용자 정보가 없으면 null처리
 		if (vo == null) {
-			System.out.println("널널 널널 널ㄴ런ㄹ널널널너런러너런러너런러널너런러널너런러널너런러 email=" + email);
+			//System.out.println("널널 널널 널ㄴ런ㄹ널널널너런러너런러너런러널너런러널너런러널너런러 email=" + email);
 			return null;
 		}
 		// System.out.println(vo.toString());
 		// System.out.println(vo.toString());
+		//시큐리티 로그인 로직 수행
 		userDetails.setEmail(vo.getEmail());
 		userDetails.setPassword(vo.getPassword());
 		List<String> authorities = new ArrayList<String>();

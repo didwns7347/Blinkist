@@ -1,10 +1,7 @@
 package com.markany.blinkist.controller;
 
 import java.security.Principal;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.google.gson.Gson;
 import com.markany.blinkist.repository.TranslationImpl;
 import com.markany.blinkist.service.ContentService;
 import com.markany.blinkist.service.HilightService;
@@ -48,33 +43,34 @@ public class ContentController {
 		
 		//세션에 저장된 회원의 이메일정보가져오기
 		String email = authUser.getName();
+		
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		
 		LibraryVo libraryVo = new LibraryVo();
 		libraryVo.setUser_no(userVo.getUser_no());
-		
 		libraryVo.setBook_no(book_no);
 		
 		long progress = libraryService.check_progress(libraryVo);
-		
-		List<ContentVo> contentvo = contentService.selectContent(book_no);
+		List<ContentVo> contentvo = contentService.selectContent(book_no);//책 content가져오기
 		
 		for(ContentVo vo : contentvo) {
-			//System.out.println(vo.getContent().replaceAll("\n","<br/>"));
+			
 			vo.setContent(vo.getContent().replaceAll("\\\"","&ldquo;"));
-			//System.out.println(vo.toString());
+			
 		}
 
 		for(ContentVo vo:contentvo) {
+			
 			vo.setContent(vo.getContent().replaceAll("\\\"",""));
+			
 		}
 		
-
 		HilightVo hilightvo = new HilightVo();
 		hilightvo.setBook_no(book_no);
 		hilightvo.setUser_no(userVo.getUser_no());
-		List<HilightVo> hilightContent = hilightService.selectHilightContent(hilightvo);
+		
+		List<HilightVo> hilightContent = hilightService.selectHilightContent(hilightvo);//사용자가 해당책에 저장한 hilight가져오기
 		
         model.addAttribute("Content", contentvo);
 		model.addAttribute("progress", progress);
@@ -96,12 +92,10 @@ public class ContentController {
 		TranslationVo translationvo = new TranslationVo();
 		
 		translationvo.setKorean(chapter);
-	
-	    String english_chapter = translation.getEnglish(chapter);
+	    String english_chapter = translation.getEnglish(chapter);//제목을 영어로 변역
 	    
-
 		translationvo.setKorean(content);
-		String english_content = translation.getEnglish(content);
+		String english_content = translation.getEnglish(content);//내용을 영어로변역
 	
 		ArrayList<String> book = new ArrayList<String>();
 		
@@ -123,10 +117,10 @@ public class ContentController {
 		TranslationVo translationvo = new TranslationVo();
 		
 		translationvo.setEnglish(chapter);
-	    String korea_chapter = translation.getKorean(chapter);
+	    String korea_chapter = translation.getKorean(chapter);//제목을 한국어로 변역
 	    
 		translationvo.setEnglish(content);
-		String korea_content = translation.getKorean(content);
+		String korea_content = translation.getKorean(content);//내용을 한국어로 번역
 		
 		ArrayList<String> book = new ArrayList<String>();
 		

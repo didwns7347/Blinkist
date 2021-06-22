@@ -37,25 +37,137 @@ public class BookController {
 	public String search(Model model, String keyword, Principal authUser) {
 		
 		List<HashMap<String, Object>> list = bookService.findByTitleAuthor(keyword);
+		
 		String email = authUser.getName();
+		
 		List<HashMap<String,Object>> libraryList = libraryService.findNoProgressByAuthUser(email);
 		List<HashMap<String, Object>> lastlist = bookService.libraryCheckSearch(list, libraryList);
 
 		model.addAttribute("list", lastlist);
 		model.addAttribute("keyword", keyword);
+		
 		return "board/searchresult";
+		
+	}
+	
+	
+	// recentrlyadded 보여주기 기능
+	@RequestMapping("/recentlyadded")
+	public String viewRecentBook(Model model, Principal authUser) {
+		
+		List<HashMap<String, Object>> list = bookService.findAllOrderByDate();
+		
+		String email = authUser.getName();
+		List<Long> libraryList = libraryService.findByAuthUser(email);
+		
+		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
+		
+		model.addAttribute("list", lastlist);
+		
+		return "board/recentlyadded";
+		
+	}
+
+	// populartitles 보여주기 기능
+	@RequestMapping("/popular")
+	public String viewPopularBook(Model model, Principal authUser) {
+		
+		String email = authUser.getName();
+		
+		List<Long> libraryList = libraryService.findByAuthUser(email);
+		
+		// 총 조회수 로 6개
+		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount();
+		
+		// 한달동안 가장 많이 읽은순
+		List<HashMap<String, Object>> spotlightList = bookService.findAllOrderBySpotlight();
+		
+		// 최근 추가된 것 중 가장 많이 읽은순
+		List<HashMap<String, Object>> hotList = bookService.findAllOrderByHot();
+
+		model.addAttribute("spotlightList", bookService.libraryCheck(spotlightList, libraryList));
+		model.addAttribute("popularList", bookService.libraryCheck(popularList, libraryList));
+		model.addAttribute("hotList", bookService.libraryCheck(hotList, libraryList));
+		
+		return "board/populartitles";
 		
 	}
 
 	
-	// 책 보여주기 기능 book_no
-	@RequestMapping("/viewbook")
-	public String viewBook( Model model, long no,Principal principal) {
+	// 카테고리 별 책 보여주기 기능
+	@RequestMapping("/category")
+	public String viewPopularBook(Model model, String category, Principal authUser) {
+		
+		String email = authUser.getName();
+		
+		List<HashMap<String, Object>> libraryList = libraryService.findNoProgressByAuthUser(email);
+		
+		//트랜드 
+		List<HashMap<String, Object>> trendList = bookService.findAllCategoryOrderByCount(category);
+		
+		//최신
+		List<HashMap<String, Object>> recentList = bookService.findAllCategoryOrderByDate(category);
+		
+		//오디오 포함된 
+		List<HashMap<String, Object>> audioList = bookService.findAllCategoryIncludeAudio(category);
+		
+		
+		model.addAttribute("trendList",bookService.libraryCheckSearch(trendList, libraryList));
+		model.addAttribute("recentList",bookService.libraryCheckSearch(recentList, libraryList));
+		model.addAttribute("audioList",bookService.libraryCheckSearch(audioList, libraryList));
+		model.addAttribute("category", category);
+		
+		return "board/categorybook";
+		
+	}
+	
+	
+	//해당 카테고리 모든 책 보여주는 페이지로 이동하는 ...
+	@RequestMapping("/allcategorybook")
+	public String viewAllCategoryBook(Model model, String category) {
+		
+		HashMap<String,List<String>> map=bookService.findAllCategoryToDictionary(category);
+		
+		model.addAttribute("map", map);
+		model.addAttribute("category", category);
+		
+		return "board/viewcategoryallbook";
+		
+	}
+	
+	
+	//책 보여주기기능 -> Lead More
+	@RequestMapping("/viewbookinfo")
+	public String viewBook(Model model, String info, String category,Principal authUser) {
+		
 		// 회원의 이메일정보가져오기
-		String email = principal.getName();
+		String email = authUser.getName();
 
 		// 이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
+		
+		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),email);
+		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
+		
+		model.addAttribute("map",map );
+		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
+		model.addAttribute("trandBook", trandBook);
+		return "board/viewbook";
+		
+	}
+	
+
+	// 책 보여주기 기능(상세페이지)
+	@RequestMapping("/viewbook")
+	public String viewBook( Model model, long no,Principal authUser) {
+		
+		// 회원의 이메일정보가져오기
+		String email = authUser.getName();
+
+		// 이메일을 토대로 회원정보가져오기
+		UserVo userVo = userService.findByEmail(email);
+		
 		// 카테고리 가져오기
 		String category = bookService.maxCategory(userVo.getUser_no());
 
@@ -66,78 +178,9 @@ public class BookController {
 		model.addAttribute("map",map );
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		model.addAttribute("trandBook", trandBook);
+		
 		return "board/viewbook";
 
-	}
-	
-	
-	//책 보여주기기능 title,category,ahthor_name
-	@RequestMapping("/viewbookinfo")
-	public String viewBook(Model model, String info, String category,Principal authUser) {
-		String email=authUser.getName();
-		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
-		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),email);
-		model.addAttribute("map",map );
-		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
-		return "board/viewbook";
-		
-	}
-	
-
-	// recentrlyadded 보여주기 기능
-	@RequestMapping("/recentlyadded")
-	public String viewRecentBook(Model model, Principal principal) {
-		
-		List<HashMap<String, Object>> list = bookService.findAllOrderByDate();
-		String email = principal.getName();
-		List<Long> libraryList = libraryService.findByAuthUser(email);
-		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
-		model.addAttribute("list", lastlist);
-		return "board/recentlyadded";
-		
-	}
-
-	// populartitles 보여주기 기능
-	@RequestMapping("/popular")
-	public String viewPopularBook(Model model, Principal principal) {
-		
-		String email = principal.getName();
-		List<Long> libraryList = libraryService.findByAuthUser(email);
-		// 총 조회수 로 6개
-		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount();
-		// 한달동안 가장 많이 읽은순
-		List<HashMap<String, Object>> spotlightList = bookService.findAllOrderBySpotlight();
-		// 최근 추가된 것 중 가장 많이 읽은순
-		List<HashMap<String, Object>> hotList = bookService.findAllOrderByHot();
-
-		model.addAttribute("spotlightList", bookService.libraryCheck(spotlightList, libraryList));
-		model.addAttribute("popularList", bookService.libraryCheck(popularList, libraryList));
-		model.addAttribute("hotList", bookService.libraryCheck(hotList, libraryList));
-		return "board/populartitles";
-		
-	}
-
-	
-	// 카테고리 별 책 보여주기 기능
-	@RequestMapping("/category")
-	public String viewPopularBook(Model model, String category, Principal principal ) {
-		
-		String email = principal.getName();
-		List<HashMap<String, Object>> libraryList = libraryService.findNoProgressByAuthUser(email);
-		//트랜드 
-		List<HashMap<String, Object>> trendList = bookService.findAllCategoryOrderByCount(category);
-		//최신
-		List<HashMap<String, Object>> recentList = bookService.findAllCategoryOrderByDate(category);
-		//오디오 포함된 
-		List<HashMap<String, Object>> audioList = bookService.findAllCategoryIncludeAudio(category);
-		
-		
-		model.addAttribute("trendList",bookService.libraryCheckSearch(trendList, libraryList));
-		model.addAttribute("recentList",bookService.libraryCheckSearch(recentList, libraryList));
-		model.addAttribute("audioList",bookService.libraryCheckSearch(audioList, libraryList));
-		model.addAttribute("category", category);
-		return "board/categorybook";
-		
 	}
 	
 	
@@ -151,20 +194,4 @@ public class BookController {
 		return gson.toJson(array); 
 
 	}
-	
-	
-	//해당 카테고리 모든 책 보여주는 페이지로 이동하는 ...
-	@RequestMapping("/allcategorybook")
-	public String viewAllCategoryBook(Model model, String category) {
-		
-		HashMap<String,List<String>> map=bookService.findAllCategoryToDictionary(category);
-		model.addAttribute("map", map);
-		model.addAttribute("category", category);
-		return "board/viewcategoryallbook";
-		
-	}
-	
-	//그책을 읽은사람들이 다음 도서로 선정된 책을 사용자에게 도서를 추천해주기
-	
-
 }

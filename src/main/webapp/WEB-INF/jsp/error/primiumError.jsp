@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+ <h1>관리자에게 문의하세요 01030217347</h1>
 </body>
 </html>

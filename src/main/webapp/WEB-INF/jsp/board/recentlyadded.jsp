@@ -82,12 +82,13 @@
 										</div>
 									</div>
 								</div>
-								<div class="card-footer">
+								<div>
 									<!-- Blue -->
-									<div class="progress">
-										<div class="progress-bar bg-success" style="width: 10%"></div>
+									<div class="progress" style="height: 50px;">
+										<div class="progress-bar" role="progressbar"
+											aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+											style="width:${list.progress}%; height:50px">${list.progress}%</div>
 									</div>
-
 								</div>
 							</div>
 						</div>

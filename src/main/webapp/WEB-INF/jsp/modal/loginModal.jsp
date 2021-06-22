@@ -15,7 +15,7 @@
 							LOGIN</h1>
 						<div class="social-login">		
 						  	<a
-								href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://localhost:8080/blinkist/user/kakaoLogin&response_type=code">
+								href="https://kauth.kakao.com/oauth/authorize?client_id=43af0ecd5ee53917f6ec8b05c026e768&redirect_uri=http://3.139.21.42:8080/blinkist/user/kakaoLogin&response_type=code">
 								<img class="kakaologin"
 								src="${pageContext.request.contextPath }/assets/images/kakaologin.png" />
 							</a>

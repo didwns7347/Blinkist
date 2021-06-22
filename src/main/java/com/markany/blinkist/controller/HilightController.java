@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,6 +36,7 @@ public class HilightController {
 
 		//세션에 저장된 회원의 이메일정보가져오기
 		String email = authUser.getName();
+		
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 		
@@ -45,12 +45,12 @@ public class HilightController {
 		model.addAttribute("Titlehilight", Titlehilightlist);
 		
 		
-		//사용자의 하이라이트내용들을가져오기
+		List<HashMap<String, Object>> Datehilightlist = new ArrayList<HashMap<String, Object>>();
+		
 		HilightVo hilightvo = new HilightVo();
 		hilightvo.setUser_no(userVo.getUser_no());
 		
-		List<HashMap<String, Object>> Datehilightlist = new ArrayList<HashMap<String, Object>>();
-				
+		//사용자의 하이라이트내용들을가져오기				
 		for (HashMap<String, Object> map : Titlehilightlist) {
 			
 			hilightvo.setReg_date(map.get("reg_date").toString());
@@ -58,7 +58,6 @@ public class HilightController {
 			List<HashMap<String, Object>> datalist = hilightService.selectHilightbyDate(hilightvo);
 			
 			Datehilightlist.addAll(datalist);
-			
 			
 		}
 		
@@ -76,7 +75,6 @@ public class HilightController {
 		}
 		});
 
-						
 		model.addAttribute("Datehilight", Datehilightlist);
 		
 		return "board/hilight";
@@ -87,16 +85,14 @@ public class HilightController {
 	// 하이라이트 추가하기
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/addHilight", method = RequestMethod.POST)
-	public boolean addLibrary(@RequestParam(value="book_no") long book_no,@RequestParam(value="content") String content,
-			@RequestParam(value="content_no") long content_no, Principal authUser )
-	{
+	public boolean addLibrary(@RequestParam(value="book_no") long book_no,@RequestParam(value="content") String content, @RequestParam(value="content_no") long content_no, Principal authUser ){
 
 		String email = authUser.getName();
+		
 		//이메일을 토대로 회원정보가져오기
 		UserVo userVo = userService.findByEmail(email);
 
 		HilightVo hilightvo = new HilightVo();
-
 		hilightvo.setBook_no(book_no);
 		hilightvo.setContent(content);
 		hilightvo.setUser_no(userVo.getUser_no());
@@ -105,6 +101,7 @@ public class HilightController {
 		hilightService.insertHilight(hilightvo);  
 
 		return true;
+		
 	}
 	
 	

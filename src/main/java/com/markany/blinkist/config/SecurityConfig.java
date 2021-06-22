@@ -15,9 +15,11 @@ import com.markany.blinkist.service.UserService;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+	
 	@Autowired
 	private UserService userDetailServiceCustom;
-	private AccessDeniedHandler adh=new CustomAccessDeniedHandler();
+	
+	private AccessDeniedHandler adh = new CustomAccessDeniedHandler();
 	
 	
 	@Override
@@ -39,23 +41,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                .usernameParameter("email")
                .permitAll()
                .and()
-           
            .logout()
            		.logoutSuccessUrl("/")
            		.permitAll();
 
      }
 
+	
+	//시큐리티 로그인 커스텀
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
 		auth.userDetailsService(userDetailServiceCustom).passwordEncoder(passwordEncoder());
+		
 	}
 
-	
-
+	//비밀번호 암호화 로직 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
+		
 		return new BCryptPasswordEncoder();
+		
 	}
-
 }
