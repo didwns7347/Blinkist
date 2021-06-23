@@ -186,7 +186,6 @@ public class BookController {
 	@RequestMapping(value = "/json", method = RequestMethod.GET, produces = "text/plain;charset=UTF-8")
 	@ResponseBody
 	public String json(Locale locale, Model model, String category) {
-		
 		List<HashMap<String,String>> array=bookService.findAllCategory(category);
 		Gson gson = new Gson();
 		return gson.toJson(array); 
