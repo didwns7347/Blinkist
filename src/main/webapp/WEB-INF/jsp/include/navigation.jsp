@@ -160,7 +160,6 @@
 	function openExplore() {
 		document.getElementById("explore").style.height = "424px";
 	}
-
 	function closeExplore() {
 		document.getElementById("explore").style.height = "0%";
 	}

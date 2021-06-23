@@ -212,43 +212,50 @@ public class UserController {
 	}
 	
 	
-	/******************************************************************************************************/
-
+	//회원가입폼으로 보내기 이메일이 고정되서 수정 불가 api로 인증된 사람
+	@RequestMapping(value = "/join", method = RequestMethod.GET)
+	public String join() {
+		
+		return "user/join";
+		
+	}
+	
+	
+	
+	// api 사용하지 않고 내부에서 회원가입
+	@RequestMapping(value = "/injoin", method = RequestMethod.GET)
+	public String inJoin() {
+		
+		return "user/injoin";
+		
+	}
+	
+	
 	// 회원가입
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(UserVo uservo, HttpServletRequest request, RedirectAttributes rttr, Model model) {
-		System.out.println("dkdkdkdkdkdkdkdkkdkdkdkdk");
+		
 		// 회원가입
-		if(userService.selectbyUser(uservo.getEmail())!=null)
-		{
+		if(userService.selectbyUser(uservo.getEmail())!=null){
+			
 			rttr.addFlashAttribute("Fail", "이미존재하는 회원입니다.");
 			return "redirect:"+ request.getHeader("Referer");
+			
 		}
+		
 		userService.insert(uservo);
-
 		rttr.addFlashAttribute("Success", "회원가입을 하였습니다.");
 
 		return "redirect:/";
+		
 	}
 
-	// 스프링 시큐리티로 회원가입폼으로 보내기 이메일이 고정되서 수정 불가 api로 인증된 사람
-	@RequestMapping(value = "/join", method = RequestMethod.GET)
-	public String join() {
-		return "user/join";
-	}
-
-	// api 사용하시 않고 사티으 내부에서 회원가입 이메일 입력받고 api로는 인증이 안된 사람
-	@RequestMapping(value = "/injoin", method = RequestMethod.GET)
-	public String inJoin() {
-		return "user/injoin";
-	}
-	
 	
 	//프리미엄가입
 	@RequestMapping(value = "/upgradepremium", method = RequestMethod.GET)
-	public String getupgradepremium(Principal principal, Model model) {
+	public String getupgradepremium(Principal authUser, Model model) {
 		
-		String email = principal.getName();
+		String email = authUser.getName();
 		
 		model.addAttribute("email", email);
 		
@@ -256,12 +263,14 @@ public class UserController {
 		
 	}
 
+	
 	// 회원정보수정GET
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
-	public String getUpdate(Principal principal, Model model) {
+	public String getUpdate(Principal authUser, Model model) {
+		
 		// 세션에 저장된 회원의 이메일정보가져오기
-		String email = principal.getName();
-		//System.out.println("email=" + email + "\nPrinciple=" + principal.toString());
+		String email = authUser.getName();
+
 		// 이메일을 토대로 회원의 정보가져오기
 		UserVo uservo = userService.selectbyUser(email);
 
@@ -270,25 +279,26 @@ public class UserController {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 		try {
-			System.out.println("???"+uservo.getFinish_date());
 			
 			if((uservo.getFinish_date()!=null)){
+				
 			Date startDate = sdf.parse(uservo.getFinish_date());// 구독끝나는날짜
 			Date EndDate = new Date();// 현재날짜
 
-			// 구독끝나는날짜-현재날짜 /(24*60*60*1000)
+			//환불액 구하는법
+			// 구독끝나는날짜-현재날짜 /(24*60*60*1000) 1일=24*60*60*1000
 			long diffDay = (startDate.getTime() - EndDate.getTime()) / (24 * 60 * 60 * 1000);
-
+			
 			if (uservo.getGrade().equals(Grade.monthP)) {// 월구독자라면
 
-				model.addAttribute("refund", diffDay * 530);
+				model.addAttribute("refund", diffDay * 530); //하루에 530원
 
 			} else if (uservo.getGrade().equals(Grade.yearP)) {// 연간구독자라면
 
-				model.addAttribute("refund", diffDay * 270);
+				model.addAttribute("refund", diffDay * 270);//하루에 270원
 
 			}
-		}} catch (Exception e) {
+		}}catch (Exception e) {
 
 			e.printStackTrace();
 
@@ -298,7 +308,8 @@ public class UserController {
 
 	}
 
-	// 회원정보수정POST
+	
+	// 회원정보수정POST-> 비밀번호변경
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	public String postUpdate(Principal authUser, Model model, HttpServletRequest request, RedirectAttributes rttr) {
 
@@ -314,23 +325,25 @@ public class UserController {
 		boolean result = userService.updatePw(email, oldpassword, newpassword);
 
 		if (result) {
+			
 			rttr.addFlashAttribute("Success", "회원정보를 수정하였습니다.");
 			return "redirect:/";
+			
 
 		} else {
-			//String ref = request.getHeader("Referer");
+			
 			rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
 			return "redirect:/";
 
 		}
 	}
 
-	// 회원등급수정
+	
+	// 결제로인한 회원정보수정POST-> 회원등급변경
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/updateGrade", method = RequestMethod.POST)
-	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade,
-			@RequestParam(value = "payment_method") String payment_method) {
-		System.out.println("upgrade Start     "+email);
+	public void updateGrade(@RequestParam(value = "email") String email, @RequestParam(value = "grade") String grade, @RequestParam(value = "payment_method") String payment_method) {
+		
 		UserVo uservo = new UserVo();
 		uservo.setEmail(email);
 
@@ -347,7 +360,7 @@ public class UserController {
 			uservo.setGrade(Grade.monthP);
 			uservo.setPrimium_date(sdf.format(cal.getTime()));
 
-			cal.add(Calendar.MONTH, 1);
+			cal.add(Calendar.MONTH, 1);//현재시간에서 한달더하기
 
 			uservo.setFinish_date(sdf.format(cal.getTime()));
 
@@ -356,7 +369,7 @@ public class UserController {
 			uservo.setGrade(Grade.yearP);
 			uservo.setPrimium_date(sdf.format(cal.getTime()));
 
-			cal.add(Calendar.YEAR, 1);
+			cal.add(Calendar.YEAR, 1);//현재시간에서 일년더하기
 
 			uservo.setFinish_date(sdf.format(cal.getTime()));
 
@@ -377,6 +390,7 @@ public class UserController {
 
 	}
 
+	
 	// 구독취소
 	@ResponseBody // Ajax사용을 위해 @ResponseBody 선언
 	@RequestMapping(value = "/primiumDelete", method = RequestMethod.POST)
@@ -397,7 +411,6 @@ public class UserController {
 	}
 
 	
-
 	// 회원탈퇴
 	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String postDelete(Principal authUser, Model model, RedirectAttributes rttr) {
@@ -416,16 +429,19 @@ public class UserController {
 
 		// 회원탈퇴
 		boolean deleteCheck=userService.deleteUser(email);
+		
 		if(deleteCheck) {
+			
 			rttr.addFlashAttribute("Success", "회원탈퇴하였습니다.");
 			SecurityContextHolder.clearContext();
 			
 		}
 		else {
+			
 			rttr.addFlashAttribute("Error", "회원탈퇴에 실패했습니다 관리자에게 문의하세요");
+			
 		}
 	
-		
 		return "redirect:/";
 
 	}

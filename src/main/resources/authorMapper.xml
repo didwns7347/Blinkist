@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="com.markany.blinkist.dao.AuthorRepository">
 
 
@@ -25,7 +26,6 @@
 	</select>
 
 
-
 	<!-- 작가이름으로 작가번호 조회 -->
 	<select id="selectAuthor" parameterType="String" resultType="long">
       <![CDATA[
@@ -35,7 +35,4 @@
 		  name=#{name}
 		]]>
 	</select>
-
-
-
 </mapper>

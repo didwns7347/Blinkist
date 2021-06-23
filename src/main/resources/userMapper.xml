@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="userMapper">
 	<!-- 회원가입 -->
 	<insert id="insert" parameterType="uservo">
@@ -14,8 +15,7 @@
 
 
 	<!-- 이메일 중복확인 -->
-	<select id="findByEmail" parameterType="string"
-		resultType="uservo">
+	<select id="findByEmail" parameterType="string" resultType="uservo">
 		<![CDATA[
 			select email,user_no,password,grade,primium_date,finish_date
 			  from user
@@ -25,8 +25,7 @@
 
 
 	<!-- 회원정보가져오기 -->
-	<select id="selectbyUser" parameterType="string"
-		resultType="uservo">
+	<select id="selectbyUser" parameterType="string" resultType="uservo">
 		<![CDATA[
 			select email,grade,primium_date,finish_date,payment_method
 			  from user

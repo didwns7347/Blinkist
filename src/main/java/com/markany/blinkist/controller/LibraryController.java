@@ -79,7 +79,7 @@ public class LibraryController {
 	public String viewLibrary(Model model, String authUser) {
 		
 		UserVo userVo=userService.findByEmail(authUser);
-		List<HashMap<Object,Object>> booklist =libraryService.findByAuthUser(userVo);
+		List<HashMap<Object,Object>> booklist =libraryService.findByAuthUser(userVo);//회원의 라이브러리목록가져오기
 		
 		model.addAttribute("list", booklist);
 		
@@ -135,7 +135,7 @@ public class LibraryController {
 		hilightVo.setBook_no(book_no);
 		hilightVo.setUser_no(userVo.getUser_no());
 		
-		hilightService.deleteLibraryHilihgt(hilightVo);
+		hilightService.deleteLibraryHilihgt(hilightVo);//라이브러리 삭제시 하이라이트도 모두 삭제
 		libraryService.removeLibrary(libraryVo);
 		
 		return "redirect:" + ref;

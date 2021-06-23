@@ -5,6 +5,7 @@ import lombok.Data;
 
 @Data
 public class BookVo {
+	
 	private long book_no;
 	private String category;
 	private String title;
@@ -18,4 +19,5 @@ public class BookVo {
 	private String reg_date;
 	private long author_no;
 	private String subtitle;
+	
 }

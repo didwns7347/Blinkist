@@ -1,6 +1,5 @@
 package com.markany.blinkist.vo;
 
-import java.util.Date;
 
 import lombok.Data;
 

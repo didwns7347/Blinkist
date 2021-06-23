@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserVo {
+	
 	private long user_no;
 	private String email;
 	private String password;
@@ -12,4 +13,5 @@ public class UserVo {
 	private String primium_date;
 	private String finish_date;
 	private Payment_method payment_method = null;
+	
 }

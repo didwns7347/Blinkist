@@ -1,49 +1,71 @@
 @charset "UTF-8";
 
 .letter-book-list:not(:last-child) {
+	
 	padding-bottom: 2.75rem;
 	border-bottom: 0.0625rem solid #BAC8CE;
+	
 }
 
+
 .letter-book-list__item__title {
+	
 	font-family: "CeraPRO-Bold", sans-serif, arial;
 	color: #042330;
 	font-size: 1.5rem;
 	line-height: 2rem;
+	
 }
 
+
 .letter-book-list__letter {
+	
 	font-size: 3.75rem;
 	line-height: 4.5rem;
 	font-family: "CeraPRO-Bold", sans-serif, arial;
 	color: #2CE080;
+	
 }
 
+
 .letter-book-list__count {
+	
 	color: #6D787E;
 	font-size: 1rem;
 	line-height: 1.1875rem;
 	font-family: "CeraPRO-Regular", sans-serif, arial;
+	
 }
+
 
 .letter-book-list__items {
+	
 	margin-top: 1.1875rem;
+	
 }
 
+
 .letter-book-list__item {
+	
 	display: block;
 	font-size: 1.125rem;
 	text-decoration: none;
+	
 }
 
+
 a#mya {
+	
 	font-family: "CeraPRO-Bold", sans-serif, arial;
 	color: #042330;
 	font-weight: inherit;
 	font-size: 1.3rem;
 	line-height: 2rem;
 	text-decoration: none;
+	
 }
 a#mya:hover{
+	
 	 color: #2CE080;
+	 
 }

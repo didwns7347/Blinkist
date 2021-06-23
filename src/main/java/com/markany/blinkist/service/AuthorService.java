@@ -37,6 +37,7 @@ public class AuthorService implements AuthorRepository{
 	
 	@Override// 작가이름으로 작가번호 조회
 	public long selectAuthor(String name) {
+		
 		return authorRepository.selectAuthor(name);
 		
 	}

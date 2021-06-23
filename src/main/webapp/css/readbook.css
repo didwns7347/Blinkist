@@ -2,10 +2,14 @@
 
 
 body {
+	
   font-family: 'Lato', sans-serif;
+  
 }
 
+
 .overlay {
+	
   height: 100%;
   width: 0;
   position: fixed;
@@ -16,48 +20,64 @@ body {
   background-color: rgba(0,0,0, 0.9);
   overflow-x: hidden;
   transition: 0.5s;
+  
 }
 
+
 .overlay-content {
+	
   position: relative;
   top: 15%;
   width: 100%;
   text-align: center;
   margin-top: 30px;
+  
 }
 
+
 .overlay a {
+	
   padding: 8px;
   text-decoration: none;
   font-size: 20px;
   color: #818181;
   display: block;
   transition: 0.3s;
+  
 }
+
 
 .overlay a:hover, .overlay a:focus {
+	
   color: #f1f1f1;
+  
 }
 
+
 .overlay .closebtn {
+	
   position: absolute;
   top: 20px;
   right: 45px;
   font-size: 60px;
+  
 }
 
+
 @media screen and (max-height: 450px) {
+	
   .overlay a {font-size: 20px}
   .overlay .closebtn {
   font-size: 40px;
   top: 15px;
   right: 35px;
+  
   }
 }
 
 
-audio
-{
+audio{
+	
 -webkit-transition:all 0.5s linear;
 -moz-transition:all 0.5s linear;
 -o-transition:all 0.5s linear;
@@ -68,12 +88,13 @@ box-shadow: 2px 2px 4px 0px #006773;
 -moz-border-radius:7px 7px 7px 7px ;
 -webkit-border-radius:7px 7px 7px 7px ;
 border-radius:7px 7px 7px 7px ;
-
 width:100%;
+
 }
 
 
 .contextmenu {
+	
   display: none;
   position: absolute;
   width: 50px;
@@ -87,28 +108,41 @@ width:100%;
     0 5px 15px rgba(0,0,0,0.07);
   overflow: hidden;
   z-index: 999999;
+  
 }
+
 
 .contextmenu li {
+	
   border-left: 3px solid transparent;
   transition: ease .2s;
+  
 }
 
+
 .contextmenu li a {
+	
   display: block;
   padding: 10px;
   color: #B0BEC5;
   text-decoration: none;
   transition: ease .2s;
+  
 }
+
 
 .contextmenu li:hover {
+	
   background: #CE93D8;
   border-left: 3px solid #9C27B0;
+  
 }
 
+
 .contextmenu li:hover a {
+	
   color: #FFFFFF;
+  
 }
 
 
@@ -132,9 +166,11 @@ width:100%;
 }
 
 .reader__container_bottom_bar {
+	
     bottom: 0;
     left: 0;
     position: fixed;
     right: 0;
     z-index: 3;
+    
 }

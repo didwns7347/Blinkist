@@ -15,6 +15,7 @@ import com.markany.blinkist.dao.Translation;
 
 public class TranslationImpl implements Translation{
 
+	
 	@Override//영어로번역
 	public String getEnglish(String content) {
 		
@@ -72,6 +73,7 @@ public class TranslationImpl implements Translation{
 
 		return result;
 	}
+	
 	
 	@Override//한국어로번역
 	public String getKorean(String content) {

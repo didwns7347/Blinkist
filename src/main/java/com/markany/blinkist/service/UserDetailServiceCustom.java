@@ -13,6 +13,7 @@ import com.markany.blinkist.dao.UserRepository;
 import com.markany.blinkist.vo.UserDetailsVo;
 import com.markany.blinkist.vo.UserVo;
 
+
 @Service
 public class UserDetailServiceCustom implements UserDetailsService {
 	@Autowired

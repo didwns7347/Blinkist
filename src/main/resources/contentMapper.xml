@@ -2,25 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+
 <mapper namespace="contentMapper">
 
-    <!-- 책 콘텐츠내용 저장 -->
+	<!-- 책 콘텐츠내용 저장 -->
 	<insert id="insertContent" parameterType="contentvo">
 		<![CDATA[
 		insert into content values(null,#{chapter_title},#{content},#{chapter_no},"test",#{book_no})
 		]]>
 	</insert>
-	
-	
-	<!-- 가장 큰 CHAPTER번호가져오기  -->
+
+
+	<!-- 가장 큰 CHAPTER번호가져오기 -->
 	<select id="selectMaxChapter_no" resultType="int">
 	<![CDATA[
 		SELECT IFNULL(max(chapter_no), 0) FROM content; 
 		]]>
 	</select>
-	
-	
-	<!-- 해당 책번호의 콘텐츠가져오기   -->
+
+
+	<!-- 해당 책번호의 콘텐츠가져오기 -->
 	<select id="selectContent" parameterType="long" resultType="contentvo">
 	<![CDATA[
 		SELECT 
@@ -31,6 +32,4 @@
 		     book_no = #{book_no}
 		]]>
 	</select>
-
-
 </mapper>

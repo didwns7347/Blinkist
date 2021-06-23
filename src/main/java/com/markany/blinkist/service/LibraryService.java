@@ -2,15 +2,12 @@ package com.markany.blinkist.service;
 
 import java.util.HashMap;
 import java.util.List;
-
-import org.apache.tomcat.jni.Library;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
 import com.markany.blinkist.dao.LibraryRepository;
 import com.markany.blinkist.vo.LibraryVo;
 import com.markany.blinkist.vo.UserVo;
+
 
 @Service
 public class LibraryService {
@@ -19,6 +16,7 @@ public class LibraryService {
 	
 	//라이브러리 추가 기능
 	public boolean addLibrary(long book_no, long user_no) {
+		
 		return libraryRepository.insert(book_no,user_no);
 		
 	}
@@ -26,17 +24,23 @@ public class LibraryService {
 	
 	//라이브러리 객체로 추가하기
 	public boolean addLibrary(LibraryVo libraryVo) {
-		// TODO Auto-generated method stub
+		
 		return libraryRepository.insert(libraryVo);
+		
 	}
+	
 	
 	//해당 유저의 라이브러리에 있는 책 가져오기 
 	public List<HashMap<Object, Object>> findByAuthUser(UserVo userVo) {
+		
 		return libraryRepository.selectByAuthUser(userVo);
+		
 	}
 
+	
 	//이메일로 라이브러리 읽어오기
 	public List<Long> findByAuthUser(String email) {
+		
 		return libraryRepository.selectByAuthUser(email);
 		
 	}
@@ -66,7 +70,8 @@ public class LibraryService {
 	}
 
 
-	public boolean removeLibrary(LibraryVo libraryVo) {
+	public boolean removeLibrary(LibraryVo libraryVo) {//라이브러리삭제
+		
 		return libraryRepository.deleteLibrary(libraryVo);
 		
 	}

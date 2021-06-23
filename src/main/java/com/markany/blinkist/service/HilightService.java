@@ -64,6 +64,7 @@ public class HilightService {
 
 	//라이브러리 삭제시 해당 도서 하이라이트 삭제
 	public void deleteLibraryHilihgt(HilightVo hilightVo) {
+		
 		hilightRepository.deleteLibraryHilight(hilightVo);
 		
 	}

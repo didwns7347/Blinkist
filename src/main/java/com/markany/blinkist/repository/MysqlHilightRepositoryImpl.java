@@ -49,8 +49,8 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("hilightMapper.selectHilightbyTitle", user_no);
-		
 		sqlSession.close();
+		
 		return list;
 	}
 	
@@ -61,8 +61,8 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("hilightMapper.selectHilightbyDate", vo);
-		
 		sqlSession.close();
+		
 		return list;
 	}
 	
@@ -73,8 +73,8 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HilightVo> list = sqlSession.selectList("hilightMapper.selectHilightContent", vo);
-		
 		sqlSession.close();
+		
 		return list;
 		
 	}
@@ -86,7 +86,6 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		sqlSession.delete("hilightMapper.deleteHilight", hilight_no);
-		
 		sqlSession.commit();
 		
 	}
@@ -98,7 +97,6 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		sqlSession.delete("hilightMapper.deleteAllHilight", user_no);
-		
 		sqlSession.commit();
 		
 	}
@@ -109,7 +107,6 @@ public class MysqlHilightRepositoryImpl implements HilightRepository{
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		sqlSession.delete("hilightMapper.deleteLibraryHilight", hilightVo);
-		
 		sqlSession.commit();
 		
 	}

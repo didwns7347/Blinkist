@@ -12,12 +12,13 @@ import org.springframework.stereotype.Repository;
 import com.markany.blinkist.dao.UserRepository;
 import com.markany.blinkist.vo.UserVo;
 
+
 @Repository
 public class MysqlUserRepositoryImpl implements UserRepository{
-	//mybatis와 연결
+	
+	// mybatis와 연결
 	private static SqlSessionFactory sqlMapper = null;
 
-	
 	public static SqlSessionFactory getInstance() {
 		if (sqlMapper == null) {
 			try {
@@ -29,17 +30,15 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 				e.printStackTrace();
 			}
 		}
-		
 		return sqlMapper;
-		
 	}
-	
+
 
 	@Override // 이메일 중복확인
 	public UserVo findByEmail(String email) {
+		
 		sqlMapper = getInstance();
 		SqlSession session = sqlMapper.openSession();
-
 		UserVo user = session.selectOne("userMapper.findByEmail", email);
 		session.close();
 
@@ -48,15 +47,13 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 	}
 
 
-	// 회원가입
-	@Override
+	@Override // 회원가입
 	public boolean insert(UserVo uservo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		int count = sqlSession.insert("userMapper.insert", uservo);
 		sqlSession.commit();
-
 		return count==1;
 		
 	}
@@ -67,15 +64,13 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		
 		UserVo uservo = sqlSession.selectOne("userMapper.selectbyUser",email);
 		sqlSession.close();
-		
+	
 		return uservo;
 		
 	}
 
-	
 
 	@Override//비밀번호변경
 	public boolean updatePw(Long user_no,String newpassoword) {
@@ -85,7 +80,6 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		HashMap<String,Object> map = new HashMap<String,Object>();
 		map.put("user_no",user_no);
 		map.put("newpassword", newpassoword);
-		
 		int count=sqlSession.update("userMapper.updatePw", map);
 		sqlSession.commit();
 		
@@ -99,7 +93,6 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		
 		int count=sqlSession.update("userMapper.updategrade", uservo);
 		sqlSession.commit();
 		
@@ -113,7 +106,6 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		
 		int count=sqlSession.update("userMapper.PassPrimium", uservo);
 		sqlSession.commit();
 		
@@ -124,12 +116,14 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 	
 	@Override//회원탈퇴
 	public boolean deleteUser(String email) {
+		
 		int count;
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		
 		count =sqlSession.delete("userMapper.deleteUser", email);
 		sqlSession.commit();
+		
 		return count>=1;
+		
 	}
 }

@@ -3,17 +3,16 @@ package com.markany.blinkist.repository;
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.apache.tomcat.jni.Library;
 import org.springframework.stereotype.Repository;
-
 import com.markany.blinkist.dao.LibraryRepository;
 import com.markany.blinkist.vo.LibraryVo;
 import com.markany.blinkist.vo.UserVo;
+
+
 @Repository
 public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 	
@@ -31,15 +30,13 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 				e.printStackTrace();
 			}
 		}
-
 		return sqlMapper;
-
 	}
 	
 	
-	//라이브러리 추가 코드
-	@Override
+	@Override//라이브러리 추가 코드
 	public boolean insert(long book_no, long user_no) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		HashMap<String, Long> map=new HashMap<String,Long>();
@@ -49,49 +46,46 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlSession.commit();
 
 		return count==1;
+		
 	}
 	
 	
-	//라이브러리 추가 코드
-	@Override
+	@Override//라이브러리 추가 코드
 	public boolean insert(LibraryVo libraryVo) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		int count = sqlSession.insert("libraryMapper.insertVo", libraryVo);
 		sqlSession.commit();
+		
 		return count==1;
+		
 	}
 
 	
-	//유저객체로 라이브러리 가져오기
-	@Override
+	@Override	//해당 유저가 라이브러리에 소유한 책 정보 읽어오기 
 	public List<HashMap<Object, Object>> selectByAuthUser(UserVo userVo) {
+		
 		sqlMapper = getInstance();
-		System.out.println(userVo.toString());
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<Object,Object>> list=sqlSession.selectList("libraryMapper.selectByAuthUser", userVo);
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
 	
-	//email로 라이브러리 책no 가져오기
-	@Override
+	@Override//회원의 이메일로 책번호 가져오기
 	public List<Long> selectByAuthUser(String email) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<Long> list=sqlSession.selectList("libraryMapper.selectByEmail", email);
 		sqlSession.close();
+		
 		return list;
-	}
-	//이메일로 라이브러리책 번호,프로그래스 읽어오기
-	@Override
-	public List<HashMap<String, Object>> selectProgressByAuthUser(String email) {
-		sqlMapper = getInstance();
-		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String, Object>> list=sqlSession.selectList("libraryMapper.selectProgressByAuthUser", email);
-		sqlSession.close();
-		return list;
+		
 	}
 	
 	
@@ -114,6 +108,7 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		SqlSession sqlSession = sqlMapper.openSession();
 		int count = sqlSession.update("libraryMapper.update_progress", libraryVo);
 		sqlSession.commit();
+		
 		return count==1;
 	
 	}
@@ -126,22 +121,39 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		SqlSession sqlSession = sqlMapper.openSession();
 		int count = sqlSession.update("libraryMapper.update_fincheck", libraryVo);
 		sqlSession.commit();
+		
 		return count==1;
 	
 	}
 	
-	//라이브러리 삭제하기
-	@Override
+	
+	@Override//라이브러리 삭제하기
 	public boolean deleteLibrary(LibraryVo libraryVo) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		int count=sqlSession.update("libraryMapper.deleteLibrary", libraryVo);
 		sqlSession.commit();
+		
 		return count==1;
+		
 	}
 
+	
+	@Override//회원의 이메일로 progress, 책번호 가져오기
+	public List<HashMap<String, Object>> selectProgressByAuthUser(String email) {
+		
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		List<HashMap<String, Object>> list=sqlSession.selectList("libraryMapper.selectProgressByAuthUser", email);
+		sqlSession.close();
+		
+		return list;
+		
+	}
+	
 
-	//회원의 모든 라이브러리지우기
+	@Override//회원의 모든 라이브러리지우기
 	public void deleteAllLibrary(long user_no) {
 		
 		sqlMapper = getInstance();
@@ -150,5 +162,4 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlSession.commit();
 				
 	}
-
 }

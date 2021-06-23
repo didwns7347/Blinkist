@@ -116,7 +116,7 @@ public class KakaoService {
                 userInfo.put("email", email);
 
             } catch (IOException e) {
-                // TODO Auto-generated catch block
+                
                 e.printStackTrace();
             }
 

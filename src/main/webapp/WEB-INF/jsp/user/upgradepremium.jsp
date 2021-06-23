@@ -61,7 +61,7 @@
 	<div>
      <section>
          <div>
-           <img style="width:40%;  display: block; margin: 0px auto;" src="${pageContext.request.contextPath }/assets/img/Audiobooks.jpg"/>
+           <img style="width:40%;  display: block; margin: 0px auto;" src="${pageContext.request.contextPath }/assets/images/Audiobooks.jpg"/>
        </div>
      </section>
 

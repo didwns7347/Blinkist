@@ -2,8 +2,6 @@ package com.markany.blinkist.repository;
 
 import java.io.Reader;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +9,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.stereotype.Repository;
 import com.markany.blinkist.dao.ContentRepository;
 import com.markany.blinkist.vo.ContentVo;
+
 
 @Repository
 public class MysqlContentRepositoryImpl implements ContentRepository{
@@ -31,6 +30,7 @@ public class MysqlContentRepositoryImpl implements ContentRepository{
 		return sqlMapper;
 	}
 
+	
 	@Override//책 콘텐츠내용 저장
 	public void insertContent(ContentVo vo) {
 		

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.markany.blinkist.dao.BookRepository;
 import com.markany.blinkist.vo.BookVo;
 
+
 @Repository
 public class MysqlBookRepositoryImpl implements BookRepository {
 
@@ -31,42 +32,31 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		return sqlMapper;
 	}
 
+	
 	@Override // 검색기능 제목,작가
 	public List<HashMap<String, Object>> selectByTitleAuthor(String keyword) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectByTitleAuthor", keyword);
-		// 출력 코드
-		/*
-		for (HashMap<String, Object> map : list) {
-			for (String key : map.keySet()) {
-				System.out.println("키:" + key + " 값:" + map.get(key));
-
-			}
-		}
-		*/
 		sqlSession.close();
+		
 		return list;
+		
 	}
 
-	// 책을 누르면 나오는 페이지에 필요한데이터를 추출
-	@Override
+	
+	@Override // 책을 누르면 나오는 페이지에 필요한데이터를 추출
 	public Map<Object, Object> selectByBook_no(long no) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		Map<Object, Object> map =sqlSession.selectOne("bookMapper.selectByBook_no", no);
 		sqlSession.close();
-		/*
-		System.out.println("---------------------------------------------------------");
-		for (Object key : map.keySet()) {
-			System.out.println("키:" + key + " 값:" + map.get(key));
-
-		}
-		*/
+		
 		return map;
 	}
 
-	
 	
 	@Override//책을 book table에 저장
 	public void insertBook(BookVo vo) {
@@ -79,92 +69,113 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 	}
 	
 	
-	//모든책을 추가된 날짜기준으로 정렬해서 가져오기
-	@Override
+	@Override//모든책을 추가된 날짜기준으로 정렬해서 가져오기
 	public List<HashMap<String, Object>> selectAllOrderByDate() {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate");
 		sqlSession.close();
+		
 		return list;
+		
 	}
 
-	//전체 조회수로 정렬
-	@Override
+	
+	@Override//전체 조회수로 정렬
 	public List<HashMap<String, Object>> selectAllOrderByCount() {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByCount");
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
 	
-	//한달간 가장 많이 읽은 책 6개 고르기
-	@Override
+	@Override//한달간 가장 많이 읽은 책 6개 고르기
 	public List<HashMap<String, Object>> selectOrderBySpotlight() {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderBySpotlight");
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
 	
-	//최근 한달안에 추가된 책중 인기 많은 거 고르기
-	@Override
+	@Override//최근 한달안에 추가된 책중 인기 많은 거 고르기
 	public List<HashMap<String, Object>> selectOrderByHot() {
-		// TODO Auto-generated method stub
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderByRecentlryAddedHot");
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
 	
-	//해당 카테고리에 포함되는 모든책 가져오기
-	@Override
+	@Override//해당 카테고리에 포함되는 모든책 가져오기
 	public List<HashMap<String,String>> selectAllCategory(String category) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String,String>> list = sqlSession.selectList("bookMapper.selectAllCategory", category);
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
-	//트랜드 블링크 책 가져오기
-	@Override
+	
+	@Override//트랜드 블링크 책 가져오기
 	public List<HashMap<String, Object>> selectAllCategoryOrderByCount(String category) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryOrderByCount",category);
 		sqlSession.close();
+		
 		return list;
+		
 	}
-	//카테고리 최신 추가된 책 6권
-	@Override
+	
+	
+	@Override//카테고리 최신 추가된 책 6권
 	public List<HashMap<String, Object>> selectAllCategoryOrderByDate(String category) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryOrderByDate",category);
 		sqlSession.close();
+		
 		return list;
+		
 	}
 	
-	//오디오가 포함된 책 가져오기
-	@Override
+
+	@Override//오디오가 포함된 책 가져오기
 	public List<HashMap<String, Object>> selectAllCategoryIncludeAudio(String category) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllCategoryIncludeAudio",category);
 		sqlSession.close();
+		
 		return list;
+		
 	}
 
-	//작가이름 책제목 카테고리로 가져오기
-	@Override
+	
+	@Override//작가이름 책제목 카테고리로 가져오기
 	public Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category) {
+		
 		HashMap<String,String> map=new HashMap<String,String>();
 		map.put("authorName", authorName);
 		map.put("title", title);
@@ -173,34 +184,39 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		SqlSession sqlSession = sqlMapper.openSession();
 		Map<Object, Object> res=sqlSession.selectOne("bookMapper.selectByTitleAuthorCategory", map);
 		sqlSession.close();
+		
 		return res;
+		
 	}
 
+	
 	@Override
 	public List<HashMap<Object, Object>> selectLibraryLog(String email) {
+		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<Object, Object>> log=sqlSession.selectList("bookMapper.selectLibraryLog",email);
 		sqlSession.close();
+		
 		return log;
+		
 	}
 	
 	
-	//회원이 가장 많이 구독한 카테고리 찾기
-	@Override
+	@Override	//회원이 가장 많이 구독한 카테고리 찾기
 	public String maxCategory(long user_no) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
 		String category = sqlSession.selectOne("bookMapper.maxCategory",user_no);
 		sqlSession.close();
+		
 		return category;
 		
 	}
 	
 	
-	//회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기
-	@Override
+	@Override//회원의 라이브러리에 없는 카테고리 트렌드 책 3개 가져오기
 	public List<HashMap<Object, Object>> customtrandBook(String category,long user_no){
 		
 		HashMap<Object,Object> map=new HashMap<Object,Object>();
@@ -211,9 +227,8 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 		SqlSession sqlSession = sqlMapper.openSession();
 		List<HashMap<Object, Object>> res=sqlSession.selectList("bookMapper.customtrandBook", map);
 		sqlSession.close();
+		
 		return res;
 		
 	}
-	
-
 }
