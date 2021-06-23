@@ -1,37 +1,21 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link href="${pageContext.request.contextPath }/css/blinkist.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/searchbar.css"
-	rel="stylesheet" />
+
+<link href="${pageContext.request.contextPath }/css/searchbar.css" rel="stylesheet" />
+
+
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 
 	<!-- navbar-brand의 content 변경 -->
 	<div class="col-lg-1"></div>
 
-	<a class="navbar-brand" href="${pageContext.request.contextPath }">
-		Blinkist</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath }">Blinkist</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
-		data-target="#navbarResponsive" aria-controls="navbarResponsive"
+		data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 		aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>
@@ -42,7 +26,7 @@
 
 
 		<div class="col-lg-9"></div>
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav naver-inverse">
 				<!-- 로그인을 안했을때 -->
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
@@ -53,7 +37,7 @@
 
 	<s:authorize access="isAuthenticated()">
 		<s:authentication property="principal" var="authUser" />
-		<div class="collapse navbar-collapse" id="navbarResponsive">
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav naver-inverse">
 
 				<!-- 로그인을 했을때 -->

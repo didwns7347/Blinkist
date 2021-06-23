@@ -1,72 +1,45 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html>
 <head>
+
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="" />
 <meta name="author" content="" />
+
 <title>Blinkist: Big ideas in small packages</title>
+
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+<link rel="shortcut icon" href="#">
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
 <!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
 <!-- modal login CSS -->
 <link href="css/loginform.css" rel="stylesheet" />
+
 <!-- SEARCH CSS -->
 <link href="css/search.css" rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/sample.css"
-	rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/sample.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
+
 <body onload="dayFunction()" id="page-top">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<meta name="description" content="" />
-<meta name="author" content="" />
-<title>Blinkist: Big ideas in small packages</title>
-<!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="css/styles.css" rel="stylesheet" />
-<!-- modal login CSS -->
-<link href="css/loginform.css" rel="stylesheet" />
-<!-- SEARCH CSS -->
-<link href="css/search.css" rel="stylesheet" />
-
-</head>
-<body id="page-top">
 
 	<!-- navigation include -->
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
-
 
 	<!-- MAIN SECTION-->
 	<header class="masthead bg-primary text-white text-center">
@@ -480,20 +453,7 @@
 
 
 
-	<!-- Bootstrap core JS-->
-	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
-	<!-- Third party plugin JS-->
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
-
-	<!-- Core theme JS-->
-	<script src="js/scripts.js"></script>
-	<script
-		src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+	
 	<!-- 팝업창  -->
 	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
@@ -520,6 +480,9 @@
 
 			}
 		})
+		
+		
+		
 	</script>
 
 </body>

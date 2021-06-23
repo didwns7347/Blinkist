@@ -1,5 +1,5 @@
 //카카오페이
-$(document).ready(function() {
+$(function() {
  $('#kakaopay').click(function () {
  
       var email = $('input:radio[name="subscribe"]:checked').attr('class');//회원의 이메일
@@ -47,9 +47,7 @@ $(document).ready(function() {
                  });
             } else {//결제실패
 	
-                var message = '결제에 실패하였습니다.';
-                
-                swal("error", message+rsp.error_msg, "error");
+                swal("error", rsp.error_msg, "error");
             
               $('.swal-button').click(function(){//팝업창 ok눌렀을때
             

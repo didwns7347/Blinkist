@@ -1,7 +1,7 @@
 
 
 //책을 라이브러리에 추가하면 버튼을 Read now로 바꾸기 
-$(document).ready(function () {
+$(function () {
 	let test = false;
 
 $('#Add_Library').click(function(){
