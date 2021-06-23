@@ -50,9 +50,8 @@
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${popularList }" var="list" varStatus="status">
-				<!-- 처음 여섯개는 보이게 하기 -->
-				<c:if test="${list.libCheck }">
-
+				<!-- 라이브러리에 있으면 트루 -->
+				<c:if test="${list.user_no eq userNo }">
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<!-- img size 470x470 으로 고정 -->
@@ -73,24 +72,25 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+										<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
+							<div>
 								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
+								<div class="progress" style="height: 50px;">
+									<div class="progress-bar" role="progressbar" aria-valuenow="25"
+										aria-valuemin="0" aria-valuemax="100"
+										style="width:${list.progress}%; height:50px">${list.progress}%</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 
 				</c:if>
-				<c:if test="${not list.libCheck }">
+				<!-- 라이브러리에 없으면 -->
+				<c:if test="${list.user_no ne userNo }">
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
@@ -124,8 +124,8 @@
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${spotlightList }" var="list" varStatus="status">
-				<!-- 처음 여섯개는 보이게 하기 -->
-				<c:if test="${list.libCheck }">
+				<!-- 라이브러리에 있따면 -->
+				<c:if test="${list.user_no eq userNo }">
 
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
@@ -147,24 +147,25 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+										<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
+							<div>
 								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
+								<div class="progress" style="height: 50px;">
+									<div class="progress-bar" role="progressbar" aria-valuenow="25"
+										aria-valuemin="0" aria-valuemax="100"
+										style="width:${list.progress}%; height:50px">${list.progress}%</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 
 				</c:if>
-				<c:if test="${not list.libCheck }">
+				<!-- 라이브러리에 없다면 -->
+				<c:if test="${list.user_no ne userNo }">
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img
@@ -198,8 +199,8 @@
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${hotList }" var="list" varStatus="status">
-				<!-- 처음 여섯개는 보이게 하기 -->
-				<c:if test="${list.libCheck }">
+				<!-- 라이브러리에 있다면 -->
+				<c:if test="${list.user_no eq userNo }">
 
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
@@ -221,24 +222,25 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+										<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
-							<div class="card-footer">
+							<div>
 								<!-- Blue -->
-								<div class="progress">
-									<div class="progress-bar bg-success" style="width: 10%"></div>
+								<div class="progress" style="height: 50px;">
+									<div class="progress-bar" role="progressbar" aria-valuenow="25"
+										aria-valuemin="0" aria-valuemax="100"
+										style="width:${list.progress}%; height:50px">${list.progress}%</div>
 								</div>
-
 							</div>
 						</div>
 					</div>
 
 				</c:if>
-				<c:if test="${not list.libCheck }">
+				<!-- 라이브러리에 없다면 -->
+				<c:if test="${list.user_no ne userNo }">
 					<div class="col-lg-4 col-md-6 mb-4" id="test">
 						<div class="card h-100">
 							<a href="#!" style="background-color: #e2ae5f7a;"><br /> <img

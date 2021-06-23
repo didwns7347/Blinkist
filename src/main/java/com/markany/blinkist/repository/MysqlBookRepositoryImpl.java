@@ -70,11 +70,11 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 	
 	
 	@Override//모든책을 추가된 날짜기준으로 정렬해서 가져오기
-	public List<HashMap<String, Object>> selectAllOrderByDate() {
+	public List<HashMap<String, Object>> selectAllOrderByDate(long userNo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate");
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByDate",userNo);
 		sqlSession.close();
 		
 		return list;
@@ -83,11 +83,11 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 
 	
 	@Override//전체 조회수로 정렬
-	public List<HashMap<String, Object>> selectAllOrderByCount() {
+	public List<HashMap<String, Object>> selectAllOrderByCount(long userNo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByCount");
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectAllOrderByCount",userNo);
 		sqlSession.close();
 		
 		return list;
@@ -96,11 +96,11 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 	
 	
 	@Override//한달간 가장 많이 읽은 책 6개 고르기
-	public List<HashMap<String, Object>> selectOrderBySpotlight() {
+	public List<HashMap<String, Object>> selectOrderBySpotlight(long userNo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderBySpotlight");
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderBySpotlight",userNo);
 		sqlSession.close();
 		
 		return list;
@@ -109,11 +109,11 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 	
 	
 	@Override//최근 한달안에 추가된 책중 인기 많은 거 고르기
-	public List<HashMap<String, Object>> selectOrderByHot() {
+	public List<HashMap<String, Object>> selectOrderByHot(long userNo) {
 		
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderByRecentlryAddedHot");
+		List<HashMap<String, Object>> list = sqlSession.selectList("bookMapper.selectOrderByRecentlryAddedHot",userNo);
 		sqlSession.close();
 		
 		return list;

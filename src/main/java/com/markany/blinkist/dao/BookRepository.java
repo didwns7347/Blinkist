@@ -13,13 +13,13 @@ public interface BookRepository {
 	
 	public void insertBook(BookVo vo); //책을 book table에 저장
 
-	List<HashMap<String, Object>> selectAllOrderByDate();//모든책을 추가된 날짜기준으로 정렬해서 가져오기
+	List<HashMap<String, Object>> selectAllOrderByDate(long userNo);//모든책을 추가된 날짜기준으로 정렬해서 가져오기
 
-	List<HashMap<String, Object>> selectAllOrderByCount();//전체 조회수로 정렬
+	List<HashMap<String, Object>> selectAllOrderByCount(long userNo);//전체 조회수로 정렬
 
-	List<HashMap<String, Object>> selectOrderBySpotlight();//한달간 가장 많이 읽은 책 6개 고르기
+	List<HashMap<String, Object>> selectOrderBySpotlight(long userNo);//한달간 가장 많이 읽은 책 6개 고르기
 
-	List<HashMap<String, Object>> selectOrderByHot();//최근 한달안에 추가된 책중 인기 많은 거 고르기
+	List<HashMap<String, Object>> selectOrderByHot(long userNo);//최근 한달안에 추가된 책중 인기 많은 거 고르기
 
 	List<HashMap<String, String>> selectAllCategory(String category);//해당 카테고리에 포함되는 모든책 가져오기
 

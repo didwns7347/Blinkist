@@ -54,7 +54,7 @@
 				<!-- 처음 여섯개는 보이게 하기 -->
 				<c:if test="${status.index <6 }">
 					<!-- 라이브러리에 있는 책인가???? -> true일경우 있음 -->
-					<c:if test="${list.libCheck }">
+					<c:if test="${list.user_no eq userNo }">
 
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
 							<div class="card h-100">
@@ -65,7 +65,7 @@
 								<div class="card-body">
 									<h6 class="card-title">
 										<a
-											href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
+											href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }${status.index } ${userNo }</a>
 									</h6>
 									<h5>${list.name }</h5>
 									<p class="card-text">
@@ -76,9 +76,8 @@
 										<button type="button" class="btn btn-sm  "
 											data-toggle="dropdown">. . .</button>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="#">Remove from library</a> <a
-												class="dropdown-item" href="#">Buy book</a> <a
-												class="dropdown-item" href="#">Send to Kindle</a>
+											<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+											<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 										</div>
 									</div>
 								</div>
@@ -96,7 +95,7 @@
 					</c:if>
 
 					<!-- 라이브러리에 없는 책일 경우 false -->
-					<c:if test="${not list.libCheck }">
+					<c:if test="${list.user_no ne userNo }">
 
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
 							<div class="card h-100">
@@ -129,17 +128,17 @@
 				<!-- 나중 6개는 read more버튼 클릭시 style display block로 보이게 해나가기 -->
 				<c:if test="${status.index>=6 }">
 					<!-- 라이브러리에 있는 책인가???? -> true일경우 있음 -->
-					<c:if test="${list.libCheck }">
+					<c:if test="${list.user_no eq userNo }">
 						<div class="col-lg-4 col-md-6 mb-4" id="test${status.index}" style="display: none">
 							<div class="card h-100">
 								<!-- img size 470x470 으로 고정 -->
-								<a href="${pageContext.request.contextPath }/content/readbook?no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
+								<a href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
 									class="card-img-top" src="${list.img_path }" width="122"
 									height="180" alt="..." /> <br /> </a>
 								<div class="card-body">
 									<h6 class="card-title">
 										<a
-											href="${pageContext.request.contextPath }/content/readbook?no=${list.book_no}">${list.title }</a>
+											href="${pageContext.request.contextPath }/content/readbook?book_no=${list.book_no}">${list.title }</a>
 									</h6>
 									<h5>${list.name }</h5>
 									<p class="card-text">
@@ -150,18 +149,18 @@
 										<button type="button" class="btn btn-sm  "
 											data-toggle="dropdown">. . .</button>
 										<div class="dropdown-menu">
-											<a class="dropdown-item" href="#">Remove from library</a> <a
-												class="dropdown-item" href="#">Buy book</a> <a
-												class="dropdown-item" href="#">Send to Kindle</a>
+											<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+											<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 										</div>
 									</div>
 								</div>
-								<div class="card-footer">
+								<div>
 									<!-- Blue -->
-									<div class="progress">
-										<div class="progress-bar bg-success" style="width: 10%"></div>
+									<div class="progress" style="height: 50px;">
+										<div class="progress-bar" role="progressbar"
+											aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+											style="width:${list.progress}%; height:50px">${list.progress}%</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -170,7 +169,7 @@
 
 
 					<!-- 라이브러리에 있는 책인가???? -> false일경우 없음 -->
-					<c:if test="${not list.libCheck }">
+					<c:if test="${list.user_no ne userNo }">
 						<div class="col-lg-4 col-md-6 mb-4" id="test${status.index}"
 							style="display: none">
 							<div class="card h-100">

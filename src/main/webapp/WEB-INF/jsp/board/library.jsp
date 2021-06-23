@@ -89,11 +89,8 @@
 													<button type="button" class="btn btn-sm  "
 														data-toggle="dropdown">. . .</button>
 													<div class="dropdown-menu">
-														<a class="dropdown-item"
-															href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">
-															Remove from library</a> <a class="dropdown-item"
-															href="${list.buyLink }">Buy book</a> <a
-															class="dropdown-item" href="#">Send to Kindle</a>
+														<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+														<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 													</div>
 												</div>
 											</div>

@@ -2,6 +2,7 @@ package com.markany.blinkist.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class BookController {
 	private LibraryService libraryService;
 	
 	@Autowired
-	UserService userService;
+	private UserService userService;
 
 	
 	// 책 검색기능 제목,작가
@@ -54,16 +55,13 @@ public class BookController {
 	// recentrlyadded 보여주기 기능
 	@RequestMapping("/recentlyadded")
 	public String viewRecentBook(Model model, Principal authUser) {
-		
-		List<HashMap<String, Object>> list = bookService.findAllOrderByDate();
-		
 		String email = authUser.getName();
-		List<Long> libraryList = libraryService.findByAuthUser(email);
+		UserVo userVo = userService.findByEmail(email);
+		System.out.println(userVo.toString());
+		List<HashMap<String, Object>> list = bookService.findAllOrderByDate(userVo.getUser_no());
 		
-		List<HashMap<String, Object>> lastlist = bookService.libraryCheck(list, libraryList);
-		
-		model.addAttribute("list", lastlist);
-		
+		model.addAttribute("list", list);
+		model.addAttribute("userNo",userVo.getUser_no());
 		return "board/recentlyadded";
 		
 	}
@@ -73,21 +71,21 @@ public class BookController {
 	public String viewPopularBook(Model model, Principal authUser) {
 		
 		String email = authUser.getName();
-		
-		List<Long> libraryList = libraryService.findByAuthUser(email);
+		UserVo uservo = userService.findByEmail(email);
 		
 		// 총 조회수 로 6개
-		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount();
+		List<HashMap<String, Object>> popularList = bookService.findAllOrderByCount(uservo.getUser_no());
 		
 		// 한달동안 가장 많이 읽은순
-		List<HashMap<String, Object>> spotlightList = bookService.findAllOrderBySpotlight();
+		List<HashMap<String, Object>> spotlightList = bookService.findAllOrderBySpotlight(uservo.getUser_no());
 		
 		// 최근 추가된 것 중 가장 많이 읽은순
-		List<HashMap<String, Object>> hotList = bookService.findAllOrderByHot();
+		List<HashMap<String, Object>> hotList = bookService.findAllOrderByHot(uservo.getUser_no());
 
-		model.addAttribute("spotlightList", bookService.libraryCheck(spotlightList, libraryList));
-		model.addAttribute("popularList", bookService.libraryCheck(popularList, libraryList));
-		model.addAttribute("hotList", bookService.libraryCheck(hotList, libraryList));
+		model.addAttribute("spotlightList",spotlightList);
+		model.addAttribute("popularList",popularList);
+		model.addAttribute("hotList",hotList);
+		model.addAttribute("userNo",uservo.getUser_no());
 		
 		return "board/populartitles";
 		

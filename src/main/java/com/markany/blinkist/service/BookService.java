@@ -40,59 +40,36 @@ public class BookService {
 
 	
 	// 책을 추가된 날짜순으로 정렬
-	public List<HashMap<String, Object>> findAllOrderByDate() {
+	public List<HashMap<String, Object>> findAllOrderByDate(long userNo) {
 		
-		return bookRepository.selectAllOrderByDate();
+		return bookRepository.selectAllOrderByDate(userNo);
 		
 	}
 
 	
 	// 총 조회수로 책 골르기
-	public List<HashMap<String, Object>> findAllOrderByCount() {
+	public List<HashMap<String, Object>> findAllOrderByCount(long userNo) {
 		
-		return bookRepository.selectAllOrderByCount();
+		return bookRepository.selectAllOrderByCount(userNo);
 		
 	}
 
 	
-	// 라이브러리 목록 과 비교하여 라이브러리에있는 책이면 true 아니면 false값을 해쉬맵에 추가한다.
-	public List<HashMap<String, Object>> libraryCheck(List<HashMap<String, Object>> list, List<Long> libraryList) {
-		
-		for (HashMap<String, Object> map : list) {
-			// System.out.println(map.get("running_time"));
-			long book_no = (long) map.get("book_no");
-
-			boolean check = false;
-			for (Long libBook_no : libraryList) {
-				if (book_no == libBook_no) {
-					check = true;
-					break;
-				}
-			}
-			if (check) {
-				map.put("libCheck", true);
-			} else {
-				map.put("libCheck", false);
-			}
-		}
-		return list;
-		
-	}
 
 	
 	// spotlight순으로 책가져오기
-	public List<HashMap<String, Object>> findAllOrderBySpotlight() {
+	public List<HashMap<String, Object>> findAllOrderBySpotlight(long userNo) {
 		
-		return bookRepository.selectOrderBySpotlight();
+		return bookRepository.selectOrderBySpotlight(userNo);
 		
 	}
 
 	
 	// 최근 한달안에 추가된 책중 인기많은 거 6개
-	public List<HashMap<String, Object>> findAllOrderByHot() {
+	public List<HashMap<String, Object>> findAllOrderByHot(long userNo) {
 		
 		
-		return bookRepository.selectOrderByHot();
+		return bookRepository.selectOrderByHot(userNo);
 		
 	}
 
