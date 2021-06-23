@@ -54,7 +54,6 @@
 						<label for="email">이메일 주소</label> <input type="text"
 							class="form-control" name="email" id="email"
 							placeholder="이메일을 입력해 주세요" >
-						<button id="sendMail" type="button">인증</button>
 					</div>
 					<div class="form-group">
 						<label for="password">비밀번호</label> <input type="password"
@@ -134,36 +133,7 @@
 			});
 		});
 		
-		//이메일 보내기
-		$("#sendMail").click(function() {// 메일 입력 유효성 검사
-			var mail = $("#email").val(); //사용자의 이메일 입력값. 
-			console.log(mail)
-			if (mail == "") {
-				alert("메일 주소가 입력되지 않았습니다.");
-			} else {
-				$.ajax({
-					type : 'post',
-					url : '/blinkist/user/CheckMail',
-					data : {
-						mail:mail
-						},
-					dataType :'json',
 
-				});
-				alert("인증번호가 전송되었습니다.") 
-				isCertification=true; //추후 인증 여부를 알기위한 값
-			}
-		});
-		
-		//이메일 인증 체크
-		$("#submit").click(function submitCheck(){
-			if(isCertification==false){
-				alert("메일 인증이 완료되지 않았습니다.")
-			}
-			else{
-				true;
-			}
-		});
 	 
 	</script>
 </body>
