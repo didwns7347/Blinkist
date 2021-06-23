@@ -1,14 +1,14 @@
 
 
 //구독취소
-$(document).ready(function () {
+$(function() {
   $('#true').click(function(){
 
-	      $.ajax({
+	  $.ajax({
 	
-		     url : "/blinkist/user/primiumDelete",
-		     type : "post",
-		     success : function(data) {
+		 url : "/blinkist/user/primiumDelete",
+		 type : "post",
+		 success : function(data) {
 
 	          swal("success", "구독취소하였습니다.", "success"); 
 	          
@@ -16,8 +16,8 @@ $(document).ready(function () {
                      
                            window.location.href=data;
 
-                 });
-
-}});
- }); 
- });
+             });
+     }
+   });
+  }); 
+});

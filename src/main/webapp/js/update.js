@@ -1,3 +1,5 @@
+
+
 //회원정보수정모달
    $(document).ready(function() {
       $("#passwordUpdate").click(function() {
@@ -40,4 +42,5 @@ $(function() {
 			$('#submit').fadeTo(100, 0.5); //버튼 투명하게
 
 		}
-	});}); 
+  });
+}); 

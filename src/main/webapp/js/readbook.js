@@ -23,7 +23,6 @@ function closeNav() {
 //책을 처음읽을때의 progress
 $(document).ready(function () {
 
-
    //책의 전체페이지수 구하기
    var chapter_total = $(".page-item").length;
    
@@ -42,11 +41,11 @@ $(document).ready(function () {
    //p_content class값교체 
    $("#p_content").addClass(content_no);
       
-   //첫번째 페이지 active
+   //1. 첫번째 페이지 active
    $('li#1.page-item').addClass('active');
    
    
-   //책을 처음읽을때의 progress(즉 기존의 progress가 0 이면)
+   //2. 책을 처음읽을때의 progress저장(즉 기존의 progress가 0 이면)
    if($('#existing_progress').val()==0){
    
       //progress tag에 값넣기
@@ -56,8 +55,7 @@ $(document).ready(function () {
      var progress =  $('#progress').val();//progress값가져오기
      
      var book_no = $('#book_no').val();//book_no값가져오기
-     
-             
+               
      var allData = { "progress": progress, "book_no" : book_no};
      
      $.ajax({
@@ -65,23 +63,22 @@ $(document).ready(function () {
 	    url : "/blinkist/library/update_progress",
         type : "post",
         data : allData,
-	    success : function(data) {
-
-	}});
+	  
+    });
  }
  });
 
 
 //chapter메뉴에서 chapter선택할때
-$(document).ready(function () {
+$(function() {
    $('.chapter_title').click(function(){
 
-//1.chapter 메뉴에서의 content내용변경
+       //1.chapter 메뉴에서의 content내용변경
 
-     //a태그의 text값가져오기
-     var chapter = $(this).text();
-     //p태그 "chapter_title"값교체
-	 $("#chapter_title").text(chapter);
+       //a태그의 text값가져오기
+       var chapter = $(this).text();
+      //p태그 "chapter_title"값교체
+	  $("#chapter_title").text(chapter);
      
     	
 	 //a태그의 id값(content)가져오기
@@ -187,7 +184,7 @@ $(document).ready(function () {
  
  
 //paging에서 chapter선택할때
- $(document).ready(function () {
+$(function() {
    $('.page-link').click(function(){
 
 //1. 내용변경
@@ -485,7 +482,7 @@ $(document).ready(function(){
 
 
 //hilight저장
-$(document).ready(function(){
+$(function() {
      $('.addHilight').click(function(){
      
           var book_no = $('#book_no').val();//book_no값가져오기
@@ -547,9 +544,7 @@ $.ajax({
 });
 
 
-
 $(function() {
-	
 	//영어로 번역
 	$("#english").click(function(){
 			
@@ -602,7 +597,3 @@ $(function() {
              });
              }); 		
 	});
-	
-	
-
-	
