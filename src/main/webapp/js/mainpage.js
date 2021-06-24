@@ -37,3 +37,18 @@ function dayFunction() {
 	document.getElementById("freeday").innerHTML = free.getMonth() + 1 + "월 " + free.getDate() + "일";
 		
   }
+  
+  
+  //프리미엄구독버튼
+$(document).ready(function () {
+
+    var premium = $('#premiumCheck').val();//premium값확인
+    
+    if(premium!='[basic]'){//이미 프리미엄을 구독했으면 
+    
+          $('#primiumsignup').hide();//태그숨기기
+          $('#premiumInfo').hide();
+          $('#footerPremium').hide();
+       
+    };
+});

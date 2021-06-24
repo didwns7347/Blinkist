@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
 
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 
@@ -15,6 +16,7 @@
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
 <link rel="shortcut icon" href="#">
+
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 
@@ -34,6 +36,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+
+<!-- 팝업창  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 </head>
 
 <body onload="dayFunction()" id="page-top">
@@ -45,8 +51,7 @@
 	<header class="masthead bg-primary text-white text-center">
 		<div class="container d-flex align-items-center flex-column">
 			<!-- Masthead Avatar Image-->
-			<img class="masthead-avatar mb-5" src="assets/images/markany.png"
-				alt="..." />
+			<img class="masthead-avatar mb-5" src="assets/images/markany.png" alt="..." />
 			<!-- Masthead Heading-->
 			<h1 class="masthead-heading text-uppercase mb-0">Start Blinkist</h1>
 			<!-- Icon Divider-->
@@ -58,20 +63,17 @@
 				<div class="divider-custom-line"></div>
 			</div>
 			<!-- Masthead Subheading-->
-			<p class="masthead-subheading font-weight-light mb-0">언제 어디서나
-				블링키스트로 독서해 보세요</p>  
+			<p class="masthead-subheading font-weight-light mb-0">언제 어디서나 블링키스트로 독서해 보세요</p>  
 		</div>
 	</header>
 
 	<!-- SLIDE SECTION -->
 	<div class="slideshow-container">
-		<p>principal : <sec:authentication property="principal" /></p>
-
+		
 		<br /> <br />
 		<h2
 			class="page-section-heading text-center text-uppercase text-secondary mb-0"
 			style="color: white;">카테고리 TOP6</h2>
-
 
 		<!-- Icon Divider-->
 		<div class="divider-custom">
@@ -83,7 +85,6 @@
 		</div>
 		<div class="container">
 			<div class="mySlides">
-
 				<h4 class="masthead-heading text-uppercase mb-0">TOP 6 인문학</h4>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${humanlist }" var="list" varStatus="status">
@@ -110,7 +111,6 @@
 						</div>
 					</c:forEach>
 				</div>
-
 			</div>
 
 			<div class="mySlides">
@@ -196,6 +196,7 @@
 					</c:forEach>
 				</div>
 			</div>
+			
 			<div class="mySlides">
 				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 사회</h2>
 				<div class="row" style="padding: 30px">
@@ -223,6 +224,7 @@
 					</c:forEach>
 				</div>
 			</div>
+			
 			<div class="mySlides">
 				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 청소년</h2>
 				<div class="row" style="padding: 30px">
@@ -250,11 +252,11 @@
 					</c:forEach>
 				</div>
 			</div>
+			
 			<a class="prev" onclick="plusSlides(-1)">❮</a> 
 			<div align="right" style="padding-right:47px">
 			<a class="next" onclick="plusSlides(1)">❯</a>
 			</div>
-
 		</div>
 	</div>
 
@@ -263,10 +265,7 @@
 	<div class="slideshow-container" style="background-color: #babaef">
 		<div class="container">
 			<br />
-			<h2
-				class="page-section-heading text-center text-uppercase text-secondary mb-0"
-				style="color: white;">궁금해? 시작해봐</h2>
-
+			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">궁금해? 시작해봐</h2>
 
 			<!-- Icon Divider-->
 			<div class="divider-custom">
@@ -276,55 +275,69 @@
 				</div>
 				<div class="divider-custom-line"></div>
 			</div>
-			<div class="trial-duration-explanation__timeline">
-				<div class="trial-timeline">
-					<ul class="timeline timeline--default">
-						<li class="timeline__step"><div class="timeline__axis">
-								<div class="timeline__bullet"></div>
-								<div class="timeline__line"></div>
+
+			<div class="container-fluid">
+				<div class="row text-center">
+					<div style="float:none; margin:0 auto">
+						<div class="card">
+							<div class="card-body">
+								<div class="hori-timeline" dir="ltr">
+									<ul class="list-inline events">
+										<li class="list-inline-item event-list mr-5 ml-5">
+											<div class="px-4">
+												<div class="event-date bg-soft-primary text-primary" id="now"></div>
+												<p class="text-muted">깜박임과 쇼의 전체 라이브러리를 즐기기 시작합니다.</p>
+											</div>
+										</li>
+										<li class="list-inline-item event-list mr-5 ml-5">
+											<div class="px-4">
+												<div class="event-date bg-soft-primary text-primary" id="freeday"></div>
+												<p class="text-muted">깜박임과 쇼의 전체 라이브러리를 즐기기 시작합니다.</p>
+											</div>
+										</li>
+										<li class="list-inline-item event-list mr-5 ml-5">
+											<div class="px-4">
+												<div class="event-date bg-soft-primary text-primary">프리미엄</div>
+												<p class="text-muted">블링키스트 함께 계속 배우기!</p>
+											</div>
+										</li>
+									</ul>
+								</div>
 							</div>
-							<h3 class="timeline__label" _msthash="3028714"
-								_msttexthash="12613484" style="color: white" id="now"></h3>
-							<p class="timeline__text" _msthash="2987543"
-								_msttexthash="243250033">깜박임과 쇼의 전체 라이브러리를 즐기기 시작합니다.</p></li>
-						<li
-							class="timeline__step timeline__step--last timeline__step--before-finish"><div
-								class="timeline__axis">
-								<div class="timeline__bullet"></div>
-								<div class="timeline__line"></div>
-							</div>
-							<h3 class="timeline__label" _msthash="3028715"
-								_msttexthash="11943789" id="freeday"></h3>
-							<p class="timeline__text" _msthash="2987544"
-								_msttexthash="82970953">무료 평가판이 종료됩니다.</p></li>
-						<li class="timeline__finish" _msthash="2705131"
-							_msttexthash="107613376">블링키스트와 함께 계속 배우기! <br
-							_istranslated="1"></li>
-					</ul>
+						</div>
+						<!-- end card -->
+					</div>
 				</div>
+
+				<h4 style="color: white" id="premiumInfo">블링키스트는 7일 동안 무료로 이용하실 수 있습니다. 무료 기간 내에 취소하면 요금이 청구되지 않으므로 걱정하지 마십시오.</h4>
+
+				<br />
+
+              <!-- 로그인을 안했을때 무료로 시작하러가기 누르면 로그인화면으로 넘어가기 -->
+              <s:authorize access="isAnonymous()">
+                 <form action="${pageContext.request.contextPath }/user/login">
+					<button id="Noprimiumsignup" type="submit" class="btn btn-outline-success btn-block">무료로 시작하러 가기</button>
+				</form>
+              </s:authorize>
+              
+              <!-- 로그인을 했을때 구독을 안했으면 무료로 시작하기 -->
+              <s:authorize access="isAuthenticated()">
+                 <input type="hidden" id="premiumCheck" value="<sec:authentication property="principal.authorities" />">
+			   	  <form action="${pageContext.request.contextPath }/user/upgradepremium">
+					 <button id="primiumsignup" type="submit" class="btn btn-outline-success btn-block"><i class="fas fa-credit-card mr-2"></i>무료로 시작하러 가기</button>
+				  </form>
+		     </s:authorize>		
+					
+				<br /> <br />
 			</div>
-			<h3 style="color: white">블링키스트는 7일 동안 무료로 이용하실 수 있습니다. 무료 기간 내에
-				취소하면 요금이 청구되지 않으므로 걱정하지 마십시오.</h3>
-			<br />
-
-			<form action="${pageContext.request.contextPath }/user/upgradepremium">
-				<button id="goprimiun" type="submit"
-					class="btn btn-outline-success btn-block">무료로 시작하러 가기</button>
-			</form>
-			<br /> <br />
-
-
 		</div>
 	</div>
+	
 	<!-- 카테고리 사진 섹션 -->
 	<section class="page-section portfolio" id="portfolio">
 		<div class="container">
 			<!-- Portfolio Section Heading-->
-
-
-			<h2
-				class="page-section-heading text-center text-uppercase text-secondary mb-0"
-				style="color: white;">카테고리</h2>
+			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">카테고리</h2>
 
 			<!-- Icon Divider-->
 			<div class="divider-custom">
@@ -334,7 +347,6 @@
 				</div>
 				<div class="divider-custom-line"></div>
 			</div>
-
 
 			<br /> <br />
 
@@ -382,24 +394,21 @@
 				</div>
 				<!-- Portfolio Item 6-->
 				<div class="col-md-6 col-lg-4 category">
-
 					<a
 						href="${pageContext.request.contextPath }/book/category?category=청소년">
 						<br /> <img class="img-fluid" src="assets/images/teenage.jpg"
 						alt="..." /> <br />
 					</a>
-
 				</div>
 			</div>
 		</div>
-
 	</section>
+	
 	<!-- About Section-->
 	<section class="page-section bg-primary text-white mb-0" id="about">
 		<div class="container">
 			<!-- About Section Heading-->
-			<h2
-				class="page-section-heading text-center text-uppercase text-white">About</h2>
+			<h2 class="page-section-heading text-center text-uppercase text-white">About</h2>
 			<!-- Icon Divider-->
 			<div class="divider-custom divider-light">
 				<div class="divider-custom-line"></div>
@@ -431,13 +440,6 @@
 					<p class="lead">직접 고른 추천 제품, 관심 있는 것에 맞춘 컬렉션 등 다양한 도서</p>
 				</div>
 			</div>
-			<!-- About Section Button-->
-			<div class="text-center mt-4">
-				<a class="btn btn-xl btn-outline-light"
-					href="${pageContext.request.contextPath }/user/upgradepremium"> <i
-					class="fas fa-credit-card mr-2"></i>프리미엄 가입하기
-				</a>
-			</div>
 		</div>
 	</section>
 
@@ -450,12 +452,6 @@
 			href="#page-top"><i class="fa fa-chevron-up"></i></a>
 	</div>
 
-
-
-
-	
-	<!-- 팝업창  -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 	<script>
 		$(function() {
 
@@ -465,14 +461,14 @@
 
 			if (SuccessMessage != "") {//메세지가 있으면
 
-			  if(PassPrimium ==''){
-				  
-				swal("success", SuccessMessage, "success");
-				
-			  }else{//primium_date가 현재시간을 지났다면 로그인경고창대신 구독메세지창 띄우기
-				  
-				  swal("info", "primium구독날짜가 지났습니다. 갱신해주세요.", "info");
-			  }
+				if (PassPrimium == '') {
+
+					swal("success", SuccessMessage, "success");
+
+				} else {//primium_date가 현재시간을 지났다면 로그인경고창대신 구독메세지창 띄우기
+
+					swal("info", "primium구독날짜가 지났습니다. 갱신해주세요.", "info");
+				}
 
 			} else if (ErrorMessage != "") {
 
@@ -480,14 +476,9 @@
 
 			}
 		})
-		
-		
+	
 		
 	</script>
-
+	<script src="${pageContext.request.contextPath }/js/mainpage.js"></script>
 </body>
-
-<script src="${pageContext.request.contextPath }/js/mainpage.js"></script>
-
-
 </html>

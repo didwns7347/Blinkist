@@ -12,12 +12,22 @@ function w3_close() {
 
 //chapter 열고 닫기
 function openNav() {
-  document.getElementById("chapter").style.width = "30%";
+  document.getElementById("chapter").style.width = "100%";
 }
 
 function closeNav() {
   document.getElementById("chapter").style.width = "0%";
 }
+
+
+
+
+
+
+
+
+
+
 
 
 //책을 처음읽을때의 progress

@@ -18,18 +18,15 @@ hr{
 }
 
 
-#h5{
+#h4{
 	
 	/* 책 제목 글씨굵기 */
-	font-weight: bolder; 
+	font-weight: bolder;
 	
-	/* 챕터제목과의 간격조정 */
-	margin-bottom:25px;
+	/* 폰트크기 */
+	font-size : 1.5rem; 
 	
-	/* 하이라이트들과 간격조정 */
-	margin-top:35px;
-	
-}
+  }
 
 
 #chapter{
@@ -41,7 +38,7 @@ hr{
 	color: #3366FF;
 	
 	/* 글자크기 */
-	font-size:20px;
+	font-size : 1.5rem; 
 	
 }
 
@@ -49,18 +46,12 @@ hr{
 #chapter_title{
 	
 	/* 글자크기 */
-	font-size:20px;
+	font-size : 1rem; 
 	
 }
 
 
-.card{
-	
-	/*content상자의 크기 */
-	width:400px;
-	
-	
-}
+
 
 
 #Date_title{
@@ -85,11 +76,7 @@ hr{
 	/* 책 제목 글씨굵기 */
 	font-weight: bolder; 
 	
-	/* 챕터제목과의 간격조정 */
-	margin-bottom:25px;
-	
-	/* 하이라이트들과 간격조정 */
-	margin-top:30px;
+
 	
 }
 

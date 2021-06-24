@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.markany.blinkist.service.BookService;
 import com.markany.blinkist.service.NaverLoginService;
+import com.markany.blinkist.vo.UserVo;
 
 
 @Controller // String이나 ModelAndView객체반환
@@ -33,6 +34,8 @@ public class HelloController {
 		model.addAttribute("selfdevlist",bookService.findAllCategoryOrderByCount("자기개발"));
 		model.addAttribute("sociallist",bookService.findAllCategoryOrderByCount("사회"));
 		model.addAttribute("teenagelist",bookService.findAllCategoryOrderByCount("청소년"));
+		
+			
 		model.addAttribute("url", NaverauthURL);
 		
 		return "main/main";

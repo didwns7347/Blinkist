@@ -1,52 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+<meta charset="utf-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Hilight</title>
+
+<title>Blinkist: Big ideas in small packages</title>
+
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+<link rel="shortcut icon" href="#">
+
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
 <!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 
 <!-- jquery -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/hilight.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/hilight.js"></script>
+
 <!-- bootstrap -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/blog-home.css"
-	rel="stylesheet">
-<link href="${pageContext.request.contextPath }/css/hilight.css"
-	rel="stylesheet" type="text/css">
+<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/css/blog-home.css" rel="stylesheet">
+<link href="${pageContext.request.contextPath }/css/hilight.css" rel="stylesheet" type="text/css">
+
 </head>
 
 <body>
@@ -57,36 +48,33 @@
 		<div class="container">
 			<h1>Highlights</h1>
 		</div>
+		
 		<hr />
+		
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item"><a class="nav-link" id="Sort"
-				data-toggle="tab" href="#">Sort</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#Bybook">By book</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#Bydate">By date</a></li>
+			<li class="nav-item"><a class="nav-link" id="Sort" data-toggle="tab" href="#">Sort</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bybook">By book</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bydate">By date</a></li>
 		</ul>
 
 		<!-- Tab panes -->
 		<div class="tab-content mb-5">
 			<div id="Bybook" class="container tab-pane active">
 				<c:forEach var="item" items="${Titlehilight}" varStatus="status">
-
 					<div class="row">
+					
 						<!-- 책이름 -->
-						<div class="col-4">
-							<h5 id="h5">${item.title}</h5>
+						<div class="col-8 mt-5" >
+							<h4 id="h4">${item.title}</h4>
 						</div>
 
 						<!-- 삭제버튼 -->
-						<div class="col-4">
-							<button type="button" class="btn btn-outline-primary"
-								id="Delete_Chapter" name="${item.hilight_no}">Delete</button>
+						<div class="col-4 mt-5">
+							<button type="button" class="btn btn-outline-primary" id="Delete_Chapter" name="${item.hilight_no}">Delete</button>
 						</div>
 					</div>
 
-					<div class="col-4"></div>
 
 					<!-- 챕터제목 -->
 					<span id="chapter">chapter: </span>
