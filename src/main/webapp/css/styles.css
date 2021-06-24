@@ -10486,10 +10486,31 @@ q {font-style: italic;}
 
 @media(max-width: 990px){
 	#explorehidden #exploreA{
-		display:none
+		display:none;
 	}
 }
 
+
+@media(min-width: 990px){
+	#recentli #recenta
+	{
+		display:none;
+	}
+}
+
+@media(min-width: 990px){
+	#pop #popA
+	{
+		display:none;
+	}
+}
+
+@media(min-width: 990px){
+	#categoryli #categorya
+	{
+		display:none;
+	}
+}
 
 .nav-link{
 	/* 메뉴의 글씨굵기 */
@@ -10509,3 +10530,17 @@ q {font-style: italic;}
 .category{
 	text-align:center;
 }
+
+
+ .ui-autocomplete
+    {
+       
+        max-width: 90%;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+   
+

@@ -43,6 +43,21 @@
 				<!-- 로그인을 했을때 -->
 				<li id="explorehidden" class="nav-item"><a id="exploreA"class="nav-link"
 					href="javascript:void(0)" onclick="openExplore()">Explore</a></li>
+				<li id="categoryli" class="nav-item">
+					<a id="categorya" class="nav-link" href="${pageContext.request.contextPath }/book/category?category=인문학">
+						카테고리
+					</a>
+				</li>
+				<li id="recentli" class="nav-item"  >
+					<a id="recenta" class="nav-link" href="${pageContext.request.contextPath }/book/recentlyadded">
+						신작도서 
+					</a>
+				</li>
+				<li id="pop" class="nav-item">
+					<a id="popA" class="nav-link" href="${pageContext.request.contextPath }/book/popular">
+						베스트셀러
+					</a>
+				</li>
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath }/library/view?authUser=${authUser.username}">My
 						Library</a></li>

@@ -59,6 +59,19 @@
 	<s:authentication property="principal" var="authUser" />
 	<div class="container">
 		<h1 id="category">${category}</h1>
+		<form action="${pageContext.request.contextPath }/book/category" style="text-align:right">
+			<select name="category" style="height:28px">
+				<option>====선택====</option>
+				<option>인문</option>
+				<option>건강/생활/요리</option>
+				<option>소설</option>
+				<option>자기개발</option>
+				<option>사회</option>
+				<option>청소년</option>
+				
+			</select>
+			<button type=submit style="font-size:15px">선택</button>
+		</form>
 		<br />
 		<!-- body 부분 -->
 
@@ -92,9 +105,8 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+											<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
@@ -164,9 +176,8 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+										<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
@@ -236,9 +247,8 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item" href="#">Remove from library</a> <a
-											class="dropdown-item" href="#">Buy book</a> <a
-											class="dropdown-item" href="#">Send to Kindle</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> 
+										<a class="dropdown-item" href="${list.buyLink }">Buy book</a> 
 									</div>
 								</div>
 							</div>
@@ -321,6 +331,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
+	
 	var path = "${pageContext.request.contextPath }/book/viewbook?no=";
 
 	$(function() { //화면 다 뜨면 시작
@@ -402,11 +413,11 @@
 							classes : { //잘 모르겠음
 								"ui-autocomplete" : "highlight"
 							},
-							delay : 250, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
+							delay : 0, //검색창에 글자 써지고 나서 autocomplete 창 뜰 때 까지 딜레이 시간(ms)
 							//	disabled: true, //자동완성 기능 끄기
 							position : {
-								my : "right top",
-								at : "right bottom"
+							//my : "right top",
+							//at : "right bottom"
 							}, //잘 모르겠음
 							close : function(event) { //자동완성창 닫아질때 호출
 								console.log(event);
@@ -415,7 +426,7 @@
 				item) { //요 부분이 UI를 마음대로 변경하는 부분
 			return $("<li>") //기본 tag가 li로 되어 있음 
 			.append(
-					"<div>" + "<a href="+path +item.no+">" + item.value
+					"<div>" + "<a style=font-size:1rem href="+path +item.no+">" + item.value
 							+ "</a>" + "</div>") //여기에다가 원하는 모양의 HTML을 만들면 UI가 원하는 모양으로 변함.
 			.appendTo(ul);
 		};
