@@ -10486,10 +10486,31 @@ q {font-style: italic;}
 
 @media(max-width: 990px){
 	#explorehidden #exploreA{
-		display:none
+		display:none;
 	}
 }
 
+
+@media(min-width: 990px){
+	#recentli #recenta
+	{
+		display:none;
+	}
+}
+
+@media(min-width: 990px){
+	#pop #popA
+	{
+		display:none;
+	}
+}
+
+@media(min-width: 990px){
+	#categoryli #categorya
+	{
+		display:none;
+	}
+}
 
 .nav-link{
 	/* 메뉴의 글씨굵기 */
@@ -10511,11 +10532,7 @@ q {font-style: italic;}
 }
 
 
-/* 궁금해 섹션 css */
-.card{
-	
-	
-}
+
 
 
 .hori-timeline .events {
@@ -10588,3 +10605,16 @@ q {font-style: italic;}
     box-shadow: 0 0 13px 0 rgba(236,236,241,.44);
     
 }
+
+ .ui-autocomplete
+    {
+       
+        max-width: 90%;
+        overflow-y: auto; /* prevent horizontal scrollbar */
+        overflow-x: hidden;
+    }
+    /* IE 6 doesn't support max-height
+     * we use height instead, but this forces the menu to always be this tall
+     */
+   
+
