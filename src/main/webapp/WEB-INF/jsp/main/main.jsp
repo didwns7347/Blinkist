@@ -279,7 +279,7 @@
 			<div class="container-fluid">
 				<div class="row text-center">
 					<div style="float:none; margin:0 auto">
-						<div class="card">
+						<div class="cardmain">
 							<div class="card-body">
 								<div class="hori-timeline" dir="ltr">
 									<ul class="list-inline events">

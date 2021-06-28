@@ -8,10 +8,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +29,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.KakaoService;
 import com.markany.blinkist.service.LibraryService;
+import com.markany.blinkist.service.MailSendService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
@@ -48,6 +53,9 @@ public class UserController {
 
 	@Autowired
 	private LibraryService libraryService;
+	
+	@Autowired
+	private MailSendService mss;
 
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
@@ -264,6 +272,9 @@ public class UserController {
 	}
 
 	
+	
+	
+	
 	// 회원정보수정GET
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String getUpdate(Principal authUser, Model model) {
@@ -444,5 +455,21 @@ public class UserController {
 	
 		return "redirect:/";
 
+	}
+	
+	
+	//이메일인증
+	
+	@RequestMapping(value="/mailcheck", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> sendMail(String email) {
+		//인증 이메일 전송
+		System.out.println("이메일 인증 실행");
+		Map<String, Object> map = new HashMap<>();
+		String authKey=mss.sendAuthMail(email);
+		System.out.println("메시지 전송 완료:"+authKey);
+		map.put("key",authKey);
+		return map;
+		
 	}
 }

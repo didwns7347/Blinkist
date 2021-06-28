@@ -57,6 +57,13 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<div class="container">
 		<div class="row">
+			<div class="col-sm-4" id="smallbookimg">
+				<div class="row mb-4">
+					<img class="img-fluid mx-auto d-block img-thumbnail"
+						src="${map.img_path}" alt="Chania" width="460" height="345">
+				</div>
+
+			</div>
 			<div class="col-sm-8">
 				<h1 class="mb-4">${map.title }</h1>
 				<h3 class="mb-4">${map.subtitle }</h3>
@@ -85,10 +92,6 @@
 					<div class="col-sm-3">
 						<a href="${map.buyLink }" class="btn btn-outline-primary"
 							role="button"> Buy Book </a>
-					</div>
-					<div class="col-sm-3">
-						<a href="#" class="btn btn-outline-light text-dark" role="button">Send
-							to kindle</a>
 					</div>
 				</div>
 				<s:authentication property="principal" var="authUser" />
@@ -126,13 +129,11 @@
 				</div>
 
 			</div>
-			<div class="col-sm-4">
+			<div class="col-sm-4" id="bigbookimg">
 				<div class="row mb-4">
 					<img class="img-fluid mx-auto d-block img-thumbnail"
 						src="${map.img_path}" alt="Chania" width="460" height="345">
 				</div>
-
-
 
 			</div>
 		</div>
@@ -169,7 +170,7 @@
 			<c:forEach items="${trandBook }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4" id="test">
 					<div class="card h-100">
-						<a href="#" style="background-color: #e2ae5f7a;"><br /> <img
+						<a href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
 							class="card-img-top" src="${list.img_path }" width="122"
 							height="180" alt="..." /> <br /> </a>
 						<div class="card-body">

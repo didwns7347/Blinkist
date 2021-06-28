@@ -10512,6 +10512,21 @@ q {font-style: italic;}
 	}
 }
 
+@media(min-width: 600px){
+	#smallbookimg
+	{
+		display:none;
+	}
+	
+}
+
+@media(max-width: 600px){
+	#bigbookimg{
+		display:none
+	}
+}
+
+
 .nav-link{
 	/* 메뉴의 글씨굵기 */
 	font-weight: bold; 
@@ -10597,7 +10612,7 @@ q {font-style: italic;}
     
 }
 
-.card {
+.cardmain {
 	
     border: none;
     margin-bottom: 24px;
