@@ -47,7 +47,7 @@ public class MailSendService {
 		//인증메일 보내기
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);
-            sendMail.setSubject("회원가입 이메일 인증");
+            sendMail.setSubject("마크에니블링키스트 이메일 인증");
             sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
             .append("<p>블링키스트 이메일 인증입니다 번호를 확인해주세요.</p>")
             .append(authKey)

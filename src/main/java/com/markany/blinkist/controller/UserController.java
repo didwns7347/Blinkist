@@ -54,8 +54,7 @@ public class UserController {
 	@Autowired
 	private LibraryService libraryService;
 	
-	@Autowired
-	private MailSendService mss;
+	
 
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
@@ -348,6 +347,31 @@ public class UserController {
 
 		}
 	}
+	
+	// 회원정보수정POST-> 비밀번호변경->forgetpassword 비밀번호를 잊음
+		@RequestMapping(value = "/forgetUpdate", method = RequestMethod.POST)
+		public String forgetPostUpdate(String email,String newpassword,Model model,  RedirectAttributes rttr) {
+
+			// 회원의 이메일 가져오기
+			UserVo userVo=userService.findByEmail(email);
+			userVo.setPassword(newpassword);
+
+
+			boolean result = userService.updatePwForget(userVo);
+
+			if (result) {
+				
+				rttr.addFlashAttribute("Success", "회원정보를 수정하였습니다.");
+				return "redirect:/";
+				
+
+			} else {
+				
+				rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
+				return "redirect:/";
+
+			}
+		}
 
 	
 	// 결제로인한 회원정보수정POST-> 회원등급변경
@@ -457,19 +481,28 @@ public class UserController {
 
 	}
 	
-	
-	//이메일인증
-	
-	@RequestMapping(value="/mailcheck", method=RequestMethod.POST)
-	@ResponseBody
-	public Map<String, Object> sendMail(String email) {
-		//인증 이메일 전송
-		System.out.println("이메일 인증 실행");
-		Map<String, Object> map = new HashMap<>();
-		String authKey=mss.sendAuthMail(email);
-		System.out.println("메시지 전송 완료:"+authKey);
-		map.put("key",authKey);
-		return map;
-		
+	@RequestMapping("/forget")
+	public String forgetPassword() {
+		return "user/forgetpw";
 	}
+	
+	@RequestMapping("/joincheck")
+	@ResponseBody
+	//비밀번호 변경시 이메일 체크를 해서 가입여부를 판단한다.
+	public Map<String,Object> joinCheck(String email) {
+		System.out.println("email:"+email);
+		UserVo userVo = userService.findByEmail(email);
+		Map<String, Object> map = new HashMap<>();
+		if (userVo==null) {
+			map.put("email", "");
+			return map;
+		}
+		else {
+		map.put("email", userVo.getEmail());
+		}
+		return map;
+	}
+	
+	
+
 }

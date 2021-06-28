@@ -15,7 +15,8 @@
 
 
 	<!-- 이메일 중복확인 -->
-	<select id="findByEmail" parameterType="string" resultType="uservo">
+	<select id="findByEmail" parameterType="string"
+		resultType="uservo">
 		<![CDATA[
 			select email,user_no,password,grade,primium_date,finish_date
 			  from user
@@ -25,7 +26,8 @@
 
 
 	<!-- 회원정보가져오기 -->
-	<select id="selectbyUser" parameterType="string" resultType="uservo">
+	<select id="selectbyUser" parameterType="string"
+		resultType="uservo">
 		<![CDATA[
 			select email,grade,primium_date,finish_date,payment_method
 			  from user
@@ -46,6 +48,18 @@
 	</update>
 	
 	
+	<!-- 비밀번호변경 -->
+	<update id="updatePwForget" parameterType="uservo">
+		<![CDATA[
+			update user
+			 set 
+			   password=#{password}
+			 where
+			 email=#{email}
+		]]>
+	</update>
+
+
 	<!-- 회원등급수정 -->
 	<update id="updategrade" parameterType="uservo">
 		<![CDATA[
@@ -56,10 +70,10 @@
 			  email=#{email}
 		]]>
 	</update>
-	
-	
+
+
 	<!-- primium날짜가 지났다면 회원의 등급과 premium_date날짜를 바꿔준다. -->
-		<update id="PassPrimium" parameterType="uservo">
+	<update id="PassPrimium" parameterType="uservo">
 		<![CDATA[
 			update user
 			 set 

@@ -62,7 +62,7 @@
 		<form action="${pageContext.request.contextPath }/book/category" style="text-align:right">
 			<select name="category" style="height:28px">
 				<option>====선택====</option>
-				<option>인문</option>
+				<option>인문학</option>
 				<option>건강/생활/요리</option>
 				<option>소설</option>
 				<option>자기개발</option>

@@ -19,4 +19,6 @@ public interface UserRepository {
 	
 	public boolean deleteUser(String email);//회원탈퇴
 
+	public boolean updatePwForget(UserVo userVo);
+
 }

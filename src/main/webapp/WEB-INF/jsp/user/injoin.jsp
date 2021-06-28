@@ -35,6 +35,9 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath }/js/update.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 
 </head>
 <body style="height: 100%; width: 100%;">
@@ -42,46 +45,47 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4"></div>    
+			<div class="col-md-4"></div>
 			<div class="col-md-4">
 				<h2>회원가입</h2>
-				<br/>
+				<br />
 				<c:if test="${not empty Fail}">
 					<div class="alert alert-info">
 						<strong>이미가입된 이메일 입니다.</strong>
 					</div>
 				</c:if>
-				
+
 				<div class="form-group">
-					<label for="email">이메일 주소</label>
-					<div class="form-inline">
-						<input type="text" class="form-control" name="email" id="email"
-							placeholder="이메일을 입력해 주세요" required>
-						<button class="mail_check_button btn-primary">인증</button>
-					</div>
+					<label for="email">이메일 주소</label> <input type="text"
+						class="form-control" name="email" id="email"
+						placeholder="이메일을 입력해 주세요" required>
+					<button class="mail_check_button btn btn-primary" style="float:right">인증</button>
+
 				</div>
 
-				<div class="form-group inline">
-					<label for="authkey">인증번호</label> 
-					<input type="text"
+				<div class="form-group">
+					<label for="authkey">인증번호</label> <input type="text"
 						class="form-control" name="authcode" id="authcode"
 						placeholder="인증번호" required>
-					<p id="compare-text">인증</p>
+						
+					<p id="compare-text" style="text-align:right">인증</p>
+
 				</div>
-				<form role="form" autocomplete="off" onsubmit="return submitCheck();"
+				<form role="form" autocomplete="off"
+					onsubmit="return submitCheck();"
 					action="${pageContext.request.contextPath }/user/join" method=post>
-					
+
 					<input type="hidden" id="authmail" name="email" value="">
-					
+
 					<div class="form-group">
 						<label for="password">비밀번호</label> <input type="password"
 							class="form-control" name="password" id="password"
-							placeholder="비밀번호를 입력해주세요" >
+							placeholder="비밀번호를 입력해주세요">
 					</div>
 					<div class="form-group">
 						<label for="PasswordCheck">비밀번호 확인</label> <input type="password"
 							class="form-control" id="PasswordCheck"
-							placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요" >
+							placeholder="비밀번호 확인을 위해 다시한번 입력 해 주세요">
 					</div>
 
 
@@ -97,7 +101,7 @@
 						<button type="submit" id="submit-btn" class="btn btn-primary">
 							회원가입<i class="fa fa-check spaceLeft"></i>
 						</button>
-						
+
 					</div>
 				</form>
 
@@ -114,56 +118,61 @@
 
 	<script>
 		//join비밀번호 확인
-		var isCertification=false;
-		var key="";
-		var email="";
-		$(".mail_check_button").click(function(){
-			email=$("#email").val();
-			if(email==""){
+		var isCertification = false;
+		var key = "";
+		var email = "";
+		$(".mail_check_button").click(function() {
+			email = $("#email").val();
+			if (email == "") {
 				alert("이메일 주소가 입력되지 않았습니다.")
-			}
-			else{
+			} else {
 				$.ajax({
-					type:"post",
-					url:"/blinkist/user/mailcheck",
-					data:{ "email": email},
-					dataType:'json',
-					success: function(data){
-						key=data["key"];
-						
+					type : "post",
+					url : "/blinkist/email/mailcheck",
+					data : {
+						"email" : email
+					},
+					dataType : 'json',
+					success : function(data) {
+						key = data["key"];
+
 					},
 				});
 				alert("인증번호가 전송되었습니다.");
-				
+
 				console.log(key)
 			}
 		});
-		
-		
-		$("#authcode").on("propertychange change keyup paste input", function() {
-			if ($("#authcode").val() == key) {   //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
-				$("#compare-text").text("인증 성공!").css("color", "black");
-				isCertification = true;  //인증 성공여부 check
-				$("#authmail").attr("value",$("#email").val());
-			} else {
-				$("#compare-text").text("불일치!").css("color", "red");
-				isCertification = false; //인증 실패
-			}
-		});
-		
-		$("#submit-btn").click(function submitCheck(){
-			if(isCertification==false){
+
+		$("#authcode")
+				.on(
+						"propertychange change keyup paste input",
+						function() {
+							if ($("#authcode").val() == key) { //인증 키 값을 비교를 위해 텍스트인풋과 벨류를 비교
+								$("#compare-text").text("인증 성공!").css("color",
+										"black");
+								isCertification = true; //인증 성공여부 check
+								$("#authmail").attr("value", $("#email").val());
+							} else {
+								$("#compare-text").text("불일치!").css("color",
+										"red");
+								isCertification = false; //인증 실패
+							}
+						});
+
+		$("#submit-btn").click(function submitCheck() {
+			if (isCertification == false) {
 				alert("메일 인증이 완료되지 않았습니다.");
 				return false;
-			}else
+			} else
 				true;
 		});
-		
-		function submitCheck(){
-			if(isCertification==false){
+
+		function submitCheck() {
+			if (isCertification == false) {
 				alert("메일 인증이 완료되지 않았습니다.");
 				return false;
-			}else
+			} else
 				true;
 		}
 		$(function() {
@@ -200,7 +209,6 @@
 				}
 			});
 		});
-		
 	</script>
 </body>
 </html>
