@@ -87,6 +87,16 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		
 	}
 	
+	@Override//비번 잊어먹은사람 비밀번호 변경
+	public boolean updatePwForget(UserVo userVo) {
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		int count=sqlSession.update("userMapper.updatePwForget",userVo);
+		sqlSession.commit();
+		return count==1;
+	}
+	
+	
 	
 	@Override//회원등급변경
 	public boolean updategrade(UserVo uservo) {
@@ -126,4 +136,7 @@ public class MysqlUserRepositoryImpl implements UserRepository{
 		return count>=1;
 		
 	}
+
+
+	
 }

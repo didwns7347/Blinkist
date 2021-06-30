@@ -8,10 +8,14 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,6 +29,7 @@ import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.markany.blinkist.service.HilightService;
 import com.markany.blinkist.service.KakaoService;
 import com.markany.blinkist.service.LibraryService;
+import com.markany.blinkist.service.MailSendService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
 import com.markany.blinkist.vo.Grade;
@@ -48,6 +53,8 @@ public class UserController {
 
 	@Autowired
 	private LibraryService libraryService;
+	
+	
 
 	// 카카오톡 로그인 연동
 	@RequestMapping("/kakaoLogin")
@@ -264,6 +271,9 @@ public class UserController {
 	}
 
 	
+	
+	
+	
 	// 회원정보수정GET
 	@RequestMapping(value = "/update", method = RequestMethod.GET)
 	public String getUpdate(Principal authUser, Model model) {
@@ -337,6 +347,31 @@ public class UserController {
 
 		}
 	}
+	
+	// 회원정보수정POST-> 비밀번호변경->forgetpassword 비밀번호를 잊음
+		@RequestMapping(value = "/forgetUpdate", method = RequestMethod.POST)
+		public String forgetPostUpdate(String email,String newpassword,Model model,  RedirectAttributes rttr) {
+
+			// 회원의 이메일 가져오기
+			UserVo userVo=userService.findByEmail(email);
+			userVo.setPassword(newpassword);
+
+
+			boolean result = userService.updatePwForget(userVo);
+
+			if (result) {
+				
+				rttr.addFlashAttribute("Success", "회원정보를 수정하였습니다.");
+				return "redirect:/";
+				
+
+			} else {
+				
+				rttr.addFlashAttribute("Error", "기존비밀번호를 잘못입력하셨습니다. 확인해주세요.");
+				return "redirect:/";
+
+			}
+		}
 
 	
 	// 결제로인한 회원정보수정POST-> 회원등급변경
@@ -445,4 +480,29 @@ public class UserController {
 		return "redirect:/";
 
 	}
+	
+	@RequestMapping("/forget")
+	public String forgetPassword() {
+		return "user/forgetpw";
+	}
+	
+	@RequestMapping("/joincheck")
+	@ResponseBody
+	//비밀번호 변경시 이메일 체크를 해서 가입여부를 판단한다.
+	public Map<String,Object> joinCheck(String email) {
+		System.out.println("email:"+email);
+		UserVo userVo = userService.findByEmail(email);
+		Map<String, Object> map = new HashMap<>();
+		if (userVo==null) {
+			map.put("email", "");
+			return map;
+		}
+		else {
+		map.put("email", userVo.getEmail());
+		}
+		return map;
+	}
+	
+	
+
 }

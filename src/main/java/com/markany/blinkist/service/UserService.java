@@ -116,4 +116,15 @@ public class UserService implements UserDetailsService {
 		return userDAO.PassPrimium(uservo);
 
 	}
+
+
+	
+
+	//비밀번호 잊어버린 사람들 이메일 인증후 비밀 번호 변경
+	public boolean updatePwForget(UserVo userVo) {
+		// 비밀번호 암호화
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		userVo.setPassword(passwordEncoder.encode(userVo.getPassword()));
+		return userDAO.updatePwForget(userVo);
+	}
 }

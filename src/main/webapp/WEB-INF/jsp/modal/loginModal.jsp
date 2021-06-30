@@ -34,7 +34,7 @@
 						<button class="btn btn-success btn-block" type="submit">
 							<i class="fas fa-sign-in-alt"></i> Sign in
 						</button>
-						<a href="#" id="forgot_pswd">Forgot password?</a>
+						<a href="${pageContext.request.contextPath}/user/forget" id="forgot_pswd">Forgot password?</a>
 						<hr>
 						<!-- <p>Don't have an account!</p>  -->
 						<a class="btn btn-primary btn-block" type="button"
