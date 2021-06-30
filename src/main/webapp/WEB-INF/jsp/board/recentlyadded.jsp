@@ -29,8 +29,6 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/css/blog-home.css"
 	rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
 <!-- bootstrap -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -72,7 +70,7 @@
 										<i style='font-size: 20px' class='far'>&#xf017;</i>
 										${list.running_time}분
 									</p>
-									<div class="dropdown float-right">
+									<div class="dropdown float-left">
 										<button type="button" class="btn btn-sm  "
 											data-toggle="dropdown">. . .</button>
 										<div class="dropdown-menu">
@@ -145,7 +143,7 @@
 										<i style='font-size: 20px' class='far'>&#xf017;</i>
 										${list.running_time}분
 									</p>
-									<div class="dropdown float-right">
+									<div class="dropdown float-left">
 										<button type="button" class="btn btn-sm  "
 											data-toggle="dropdown">. . .</button>
 										<div class="dropdown-menu">

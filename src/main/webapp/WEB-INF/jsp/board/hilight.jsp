@@ -15,7 +15,6 @@
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
-<link rel="shortcut icon" href="#">
 
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
@@ -33,11 +32,15 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- 팝업창  -->
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/css/blog-home.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath }/css/hilight.css" rel="stylesheet" type="text/css">
 
+<link rel="icon" href="data:;base64,iVBORw0KGgo=">
 </head>
 
 <body>
@@ -75,7 +78,6 @@
 						</div>
 					</div>
 
-
 					<!-- 챕터제목 -->
 					<span id="chapter">chapter: </span>
 					<span id="chapter_title">${item.chapter_title}</span>
@@ -96,70 +98,53 @@
 			<div id="Bydate" class="container tab-pane fade">
 				<br>
 				<c:forEach var="item" items="${Datehilight}" varStatus="status">
-
-					<!-- 책을 라이브러라에 저장한지 24시간이상 즉 하루이상이면 -->
-					<c:if test="${item.reg_date>=24}">
+                  <c:choose>
+					<c:when test="${item.reg_date>=24}">
 
 						<div class="row">
-							<div class="col-4">
-								<!-- 경과는 일로 나온다. -->
-								<h5 id="h5">
-									<fmt:parseNumber var="Day" value="${item.reg_date/24}"
-										integerOnly="true" />${Day}
-									days ago
-								</h5>
+							<div class="col-8 mt-5">
+								<h4 id="h4">
+									<fmt:parseNumber var="Day" value="${item.reg_date/24}" integerOnly="true" />${Day}days ago
+								</h4>
 							</div>
-							<!-- 삭제버튼 -->
-							<div class="col-4">
+							<div class="col-4 mt-5 mb-5">
 								<button type="button" class="btn btn-outline-primary"
 									id="Delete_Date" name="${item.hilight_no}">Delete</button>
 							</div>
 						</div>
 
-						<div class="col-4"></div>
-
-						<!-- 책의 제목 -->
 						<h6 id="Date_title">${item.title}</h6>
 
-						<!-- 콘텐츠내용 -->
 						<div class="row">
 							<div class="card">
 								<div class="card-body">
-									<h4 class="card-title">${item.content }</h4>
+									<h6 class="card-title">${item.content }</h6>
 
 									<p class="card-text">
 										<span id="chapter">chapter: </span><span id="chapter_title">${item.chapter_title}</span>
 									</p>
-
 								</div>
 							</div>
 						</div>
+					</c:when>
 
-					</c:if>
-
-					<!-- 책을 라이브러라에 저장한지 24시간이하 즉 오늘저장한거면면 -->
+                    <c:otherwise>
 					<div class="row">
-						<div class="col-4">
-							<!-- 경과는 일로 나온다. -->
-							<h5 id="h5">about ${item.reg_date} hours</h5>
+						<div class="col-8 mt-5 mb-5">
+							<h4 id="h4">${item.reg_date}hours ago</h4>
 						</div>
-						<!-- 삭제버튼 -->
-						<div class="col-4">
+						<div class="col-4 mt-5">
 							<button type="button" class="btn btn-outline-primary"
 								id="Delete_Date" name="${item.hilight_no}">Delete</button>
 						</div>
 					</div>
-
-					<div class="col-4"></div>
-
-					<!-- 책의 제목 -->
+					
 					<h6 id="Date_title">${item.title}</h6>
 
-					<!-- 콘텐츠내용 -->
 					<div class="row">
 						<div class="card">
 							<div class="card-body">
-								<h4 class="card-title">${item.content }</h4>
+								<h6 class="card-title">${item.content }</h6>
 
 								<p class="card-text">
 									<span id="chapter">chapter: </span><span id="chapter_title">${item.chapter_title}</span>
@@ -168,6 +153,8 @@
 							</div>
 						</div>
 					</div>
+					</c:otherwise>
+					</c:choose>
 				</c:forEach>
 			</div>
 		</div>
@@ -175,7 +162,5 @@
 
 	<!-- navigation include -->
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	<!-- 팝업창  -->
-	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </body>
 </html>

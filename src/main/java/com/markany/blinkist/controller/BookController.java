@@ -2,7 +2,6 @@ package com.markany.blinkist.controller;
 
 import java.security.Principal;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;

@@ -51,45 +51,30 @@ hr{
 }
 
 
+#Delete_Chapter{
+	
+	/*  글씨굵기 */
+	font-weight: bolder; 
+	
 
+	
+}
 
 
 #Date_title{
 	
 	/* 폰트컬러 */
 	color: #999999;
-	
-	/* 챕터번호 굵기 */
-	font-weight: bolder; 
-	
-    /* 챕터제목과의 간격조정 */
-	margin-bottom:15px;
-	
-	/* 하이라이트들과 간격조정 */
-	margin-top:30px;
-	
-}
-
-
-#Delete_Chapter{
-	
-	/* 책 제목 글씨굵기 */
-	font-weight: bolder; 
-	
-
+		
+    /* 글자크기 */
+	font-size : 1rem; 
 	
 }
 
 
 #Delete_Date{
 	
-	/* 책 제목 글씨굵기 */
+	/*  글씨굵기 */
 	font-weight: bolder; 
-	
-	/* 챕터제목과의 간격조정 */
-	margin-bottom:25px;
-	
-	/* 하이라이트들과 간격조정 */
-	margin-top:30px;
 	
 }
