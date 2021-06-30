@@ -42,10 +42,6 @@
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item"><a class="nav-link active"
 				data-toggle="tab" href="#update">회원정보수정</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#menu1">Menu 1</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab"
-				href="#menu2">Menu 2</a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -137,16 +133,6 @@
 							data-toggle="modal" data-target="#delete" disabled='disabled'>회원탈퇴</button>
 					</c:otherwise>
 				</c:choose>
-			</div>
-
-
-			<div id="menu1" class="container tab-pane fade">
-				<br>
-				<h3>Menu 1</h3>
-			</div>
-			<div id="menu2" class="container tab-pane fade">
-				<br>
-				<h3>Menu 2</h3>
 			</div>
 		</div>
 	</div>

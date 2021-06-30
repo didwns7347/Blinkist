@@ -20,10 +20,7 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 
-
-
 	<s:authorize access="isAnonymous()">
-
 
 		<div class="col-lg-9"></div>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -80,12 +77,10 @@
 					</form>
 				</li>
 			</ul>
-		</div>
-		<div class="collapse navbar-collapse   " id="navbarResponsive"></div>
-		<div class="collapse navbar-collapse   " id="navbarResponsive">
+			
+			<div class="collapse navbar-collapse   " id="navbarResponsive"></div>
 
-			<ul class="navbar-nav naver-inverse">
-
+			<ul class="navbar-nav naver-inverse mr-5">
 				<li class="nav-item"></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${pageContext.request.contextPath}/user/update">Upgrade
@@ -104,13 +99,11 @@
 					</div>
 				</li>
 			</ul>
-
-		</div>
+		</div>		    
 	</s:authorize>
-
-
-
 </nav>
+
+
 <s:authorize access="isAuthenticated()">
 	<s:authentication property="principal" var="authUser"/> 
 	<div id="explore" class="overlay">

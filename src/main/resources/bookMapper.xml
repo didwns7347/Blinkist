@@ -43,7 +43,7 @@
 	<select id="selectAllCategoryOrderByCount"
 		parameterType="string" resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name ,count(library.user_no) as cnt
+		SELECT book.title, book.book_no, book.img_path, book.buyLink ,book.running_time, author.name ,count(library.user_no) as cnt
 		FROM book JOIN library
 		ON library.book_no=book.book_no
 		JOIN author
@@ -58,7 +58,7 @@
 	<select id="selectAllCategoryOrderByDate" parameterType="string"
 		resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
+		SELECT book.title, book.book_no, book.img_path, book.buyLink ,book.running_time, author.name 
 		FROM book JOIN author
 		ON author.author_no=book.author_no
 		WHERE book.category=#{category}
@@ -71,7 +71,7 @@
 	<select id="selectAllCategoryIncludeAudio"
 		parameterType="string" resultType="HashMap">
 		<![CDATA[
-		SELECT book.title, book.book_no, book.img_path, book.running_time, author.name 
+		SELECT book.title, book.book_no, book.buyLink ,book.img_path, book.running_time, author.name 
 		FROM book JOIN author
 		ON author.author_no=book.author_no
 		WHERE book.category=#{category} and Audio_check=0

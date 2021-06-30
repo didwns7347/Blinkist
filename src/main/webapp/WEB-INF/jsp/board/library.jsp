@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
@@ -8,8 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
 <title>Blinkist: Big ideas in small packages</title>
@@ -29,8 +27,6 @@
 	rel="stylesheet" />
 <link href="${pageContext.request.contextPath }/css/blog-home.css"
 	rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script
@@ -85,7 +81,7 @@
 													<i style='font-size: 20px' class='far'>&#xf017;</i>
 													${list.running_time}분
 												</p>
-												<div class="dropdown float-right">
+												<div class="dropdown float-left">
 													<button type="button" class="btn btn-sm  "
 														data-toggle="dropdown">. . .</button>
 													<div class="dropdown-menu">
@@ -134,7 +130,7 @@
 													<i style='font-size: 20px' class='far'>&#xf017;</i>
 													${list.running_time}분
 												</p>
-												<div class="dropdown float-right">
+												<div class="dropdown float-left">
 													<button type="button" class="btn btn-sm  "
 														data-toggle="dropdown">. . .</button>
 													<div class="dropdown-menu">
@@ -148,10 +144,10 @@
 											</div>
 											<div>
 												<!-- Blue -->
-												<div class="progress">
+												<div class="progress" style="height: 50px;">
 													<div class="progress-bar" role="progressbar"
 														aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
-														style="width:${list.progress}%">${list.progress}%</div>
+														style="width:${list.progress}%; height:50px">${list.progress}%</div>
 												</div>
 											</div>
 										</div>
@@ -167,16 +163,5 @@
 	</div>
 
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-	<script type="text/javascript">
-		var cnt = 1;
-		document.getElementById("loadMore").addEventListener("click",
-				DisplayDate);
-		function DisplayDate() {
-			cnt += 1
-			for (i = (cnt) * 15 + 1; i <= (cnt + 1) * 15; i++)
-				document.getElementById("test" + i).style.display = "block";
-		}
-	</script>
-
 </body>
 </html>

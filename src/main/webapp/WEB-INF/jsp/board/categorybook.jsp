@@ -4,55 +4,44 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
+
 <title>Blinkist: Big ideas in small packages</title>
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
 
 <!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
 <!-- 설정 드랍 다운에 필요한 스크립트 코드임 -->
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	
 <!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
-
-
-<link href="${pageContext.request.contextPath }/css/blog-home.css"
-	rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath }/css/blog-home.css" rel="stylesheet">
 
 <!-- 검색어 자동완성 에 필요한 jquery ,css -->
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<!-- 아이콘  -->
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
+<!-- 아이콘 -->
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"></script>
 
 <!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css"
-	rel="stylesheet" />
-<!-- bootstrap -->
+<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/update.js"></script>
+<!-- bootstrap -->
+<script type="text/javascript" src="${pageContext.request.contextPath }/js/update.js"></script>
+
 </head>
 <body>
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
@@ -70,7 +59,7 @@
 				<option>청소년</option>
 				
 			</select>
-			<button type=submit style="font-size:15px">선택</button>
+			<button type=submit class="btn btn-outline-primary" style="font-size:15px">선택</button>
 		</form>
 		<br />
 		<!-- body 부분 -->
@@ -101,7 +90,7 @@
 									<i style='font-size: 20px' class='far'>&#xf017;</i>
 									${list.running_time}분
 								</p>
-								<div class="dropdown float-right">
+								<div class="dropdown float-left">
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
@@ -172,7 +161,7 @@
 									<i style='font-size: 20px' class='far'>&#xf017;</i>
 									${list.running_time}분
 								</p>
-								<div class="dropdown float-right">
+								<div class="dropdown float-left">
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
@@ -243,7 +232,7 @@
 									<i style='font-size: 20px' class='far'>&#xf017;</i>
 									${list.running_time}분
 								</p>
-								<div class="dropdown float-right">
+								<div class="dropdown float-left">
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">

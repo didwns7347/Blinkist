@@ -8,7 +8,7 @@ body {
 }
 
 
-.overlay {
+.overlay_chapter {
 	
   height: 100%;
   width: 0;
@@ -26,17 +26,20 @@ body {
 
 .overlay-content {
 	
-  /*position: relative;*/
+  position: relative;
+  top: 15%;
   width: 100%;
-
+  text-align: center;
+  margin-top: 30px;
+  
 }
 
 
-.overlay a {
+.overlay_chapter a {
 	
   padding: 8px;
   text-decoration: none;
-  font-size: 1rem;
+  font-size: 20px;
   color: #818181;
   display: block;
   transition: 0.3s;
@@ -44,14 +47,14 @@ body {
 }
 
 
-.overlay a:hover, .overlay a:focus {
+.overlay_chapter a:hover, .overlay_chapter a:focus {
 	
   color: #f1f1f1;
   
 }
 
 
-.overlay .closebtn {
+.overlay_chapter .closebtn {
 	
   position: absolute;
   top: 20px;
@@ -159,15 +162,15 @@ width:100%;
 	-khtml-user-select: none; 
 	-webkit-user-select: none; 
 	user-select: none;
-
+    	
 }
 
-.reader__container_bottom_bar {
-	
-    bottom: 0;
-    left: 0;
-    position: fixed;
-    right: 0;
-    z-index: 3;
-    
+.reader-audio {
+
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    height: 4rem;
+    padding: .5rem 1rem;
+  
 }

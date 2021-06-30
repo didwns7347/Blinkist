@@ -74,6 +74,7 @@ public class HilightController {
 			return reg_date1.compareTo(reg_date2);
 		}
 		});
+		
 
 		model.addAttribute("Datehilight", Datehilightlist);
 		

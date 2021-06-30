@@ -1,5 +1,3 @@
-
-
 //사이드바 열고 닫기 
 function w3_open() {
     document.getElementById("Sidebar").style.display = "block";
@@ -18,16 +16,6 @@ function openNav() {
 function closeNav() {
   document.getElementById("chapter").style.width = "0%";
 }
-
-
-
-
-
-
-
-
-
-
 
 
 //책을 처음읽을때의 progress
