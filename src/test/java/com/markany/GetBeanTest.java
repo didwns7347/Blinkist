@@ -39,6 +39,16 @@ public class GetBeanTest {
 		 */
 
 	}
+	
+	@Test
+	@DisplayName("레코멘드 테스트")
+	void recomTest() {
+		BookService bookService = ac.getBean(BookService.class);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(83, 33);
+		System.out.println(recommendBooksByLog.isEmpty());
+		
+				
+	}
 
 	@Test
 	@DisplayName("자바 한글 포함 검사 테스트")

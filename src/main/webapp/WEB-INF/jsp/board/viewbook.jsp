@@ -12,45 +12,31 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta name="description" content="" />
 <meta name="author" content="" />
-<title>Blinkist: Big ideas in small packages</title>
+<title>View Book</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/img/favicon.ico" />
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
-<!-- Core theme CSS (includes Bootstrap)-->
-<link href="${pageContext.request.contextPath }/css/styles.css"
-	rel="stylesheet" />
-<link href="${pageContext.request.contextPath }/css/blog-home.css"
-	rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'
-	crossorigin='anonymous'></script>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- Font Awesome icons (free version)-->
-<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js"
-	crossorigin="anonymous"></script>
-<!-- Google fonts-->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
-	rel="stylesheet" type="text/css" />
-<link
-	href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic"
-	rel="stylesheet" type="text/css" />
+<link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
+<link rel="shortcut icon" href="#">
 
-<script type="text/javascript"
-	src="${pageContext.request.contextPath }/js/viewbook.js"></script>
+<!-- Font Awesome icons (free version)-->
+<script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
+
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+
+<!-- Core theme CSS (includes Bootstrap)-->
+<link href="${pageContext.request.contextPath }/css/styles.css" rel="stylesheet" />
+<!-- modal login CSS -->
+<link href="${pageContext.request.contextPath }/css/loginform.css" rel="stylesheet" />
+
+<!-- SEARCH CSS -->
+<link href="css/search.css" rel="stylesheet" />
+<link href="${pageContext.request.contextPath }/css/sample.css" rel="stylesheet">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath }/js/viewbook.js"></script>
 </head>
 <body>
 	<!-- navigation include -->
@@ -139,7 +125,7 @@
 		</div>
 		<div class="row mb-4">
 			<div class="col-sm-12">
-				<h2 class="mb-4">이책을본 사람들이 많이 본 책</h2>
+				<h2 class="mb-4">추천도서1</h2>
 			</div>
 			<c:forEach items="${recommendBooksByLog }" var="list"
 				varStatus="status">
@@ -161,16 +147,23 @@
 								${list.running_time}분
 							</p>
 						</div>
+						<div class="card-footer text-center">
+							<a name="cardfooter"
+								href="${pageContext.request.contextPath }/library/addlibrary?book_no=${list.book_no}&authUser=${authUser.username}">+
+								Add Library</a>
+						</div>
 					</div>
 				</div>
 			</c:forEach>
 			<div class="col-sm-12">
-				<h2 class="mb-4">회원이 가장 많이 라이브러리에 추가한 카테고리에 따른 추천작</h2>
+				<h2 class="mb-4">추천도서2</h2>
 			</div>
 			<c:forEach items="${trandBook }" var="list" varStatus="status">
 				<div class="col-lg-4 col-md-6 mb-4" id="test">
 					<div class="card h-100">
-						<a href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}" style="background-color: #e2ae5f7a;"><br /> <img
+						<a
+							href="${pageContext.request.contextPath }/book/viewbook?no=${list.book_no}"
+							style="background-color: #e2ae5f7a;"><br /> <img
 							class="card-img-top" src="${list.img_path }" width="122"
 							height="180" alt="..." /> <br /> </a>
 						<div class="card-body">

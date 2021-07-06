@@ -31,7 +31,7 @@ public interface BookRepository {
 
 	Map<Object, Object> selectByTitleAuthorCategory(String title, String authorName, String category);//작가이름 책제목 카테고리로 가져오기
 
-	public List<HashMap<Object, Object>> selectLibraryLog(String email);
+	public List<HashMap<Object, Object>> selectLibraryLog(long bookNo, long userNo);
 
 	public String maxCategory(long user_no);//회원이 가장 많이 구독한 카테고리 찾기
 	

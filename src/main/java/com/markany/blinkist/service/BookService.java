@@ -213,33 +213,39 @@ public class BookService {
 
 	
 	// 라이브러리를 분석해 사용자가 다음으로 읽을책 3권 추천해주기
-	public List<HashMap<Object, Object>> recommendBooks(long no, String email) {
+	public List<HashMap<Object, Object>> recommendBooks(long book_no, long userNo) {
+		//System.out.println("로그 시작 :"+userNo);
 		Long idx = 0l;
 		Long checkIdx = 0l;
+		Long user_no = null;
 		HashMap<Long, Long> count = new HashMap<Long, Long>();
-		List<HashMap<Object, Object>> logList = bookRepository.selectLibraryLog(email);
+		List<HashMap<Object, Object>> logList = bookRepository.selectLibraryLog(book_no,userNo);
 		for (HashMap<Object, Object> log : logList) {
-			Long user_no = null;
-			if (checkIdx + 1 == idx && user_no == (Long) log.get("user_no")) {
-				if (count.containsKey((Long) log.get("book_no")))
+
+			if (checkIdx == idx && user_no == (Long) log.get("user_no")) {
+				if (count.containsKey((Long) log.get("book_no"))) {
 					count.put((Long) log.get("book_no"), count.get((Long) log.get("book_no")) + 1);
+					user_no=null;
+				}
 				else {
 					count.put((Long) log.get("book_no"), 1l);
+					user_no=null;
 				}
 			}
 
-			if ((Long) log.get("book_no") == no) {
+			if ((Long) log.get("book_no") == book_no) {
 				user_no = (Long) log.get("user_no");
-				checkIdx = idx;
+				checkIdx = idx+1;
 			}
 			idx += 1l;
 		}
 		List<Long> keySetList = new ArrayList<>(count.keySet());
 		Collections.sort(keySetList, (o1, o2) -> (count.get(o2).compareTo(count.get(o1))));
 		List<HashMap<Object, Object>> res = new ArrayList<HashMap<Object, Object>>();
+		
 		int cnt = 0;
 		for (Long key : keySetList) {
-			System.out.println("key:" + key + " / value: " + count.get(key));
+			
 			if (cnt == 3) {
 				break;
 			}

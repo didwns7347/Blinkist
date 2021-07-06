@@ -95,7 +95,7 @@
 					<br /> <br />
 					<div class="form-group text-center">
 						<button type="submit" id="submit-btn" class="btn btn-primary">
-							회원가입<i class="fa fa-check spaceLeft"></i>
+							비밀번호수정<i class="fa fa-check spaceLeft"></i>
 						</button>
 
 					</div>

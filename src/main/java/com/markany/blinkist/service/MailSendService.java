@@ -43,7 +43,8 @@ public class MailSendService {
 	public String sendAuthMail(String email) {
 		//6자리 난수 인증번호 생성
 		String authKey= getKey(6);
-		
+	
+
 		//인증메일 보내기
 		try {
 			MailUtils sendMail = new MailUtils(mailSender);

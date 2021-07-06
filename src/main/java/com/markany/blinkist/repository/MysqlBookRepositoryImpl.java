@@ -190,12 +190,14 @@ public class MysqlBookRepositoryImpl implements BookRepository {
 	}
 
 	
-	@Override
-	public List<HashMap<Object, Object>> selectLibraryLog(String email) {
-		
+	@Override //도서 추천 라이브러리 기록을 기반으로 3권
+	public List<HashMap<Object, Object>> selectLibraryLog(long bookNo,long userNo) {
 		sqlMapper = getInstance();
 		SqlSession sqlSession = sqlMapper.openSession();
-		List<HashMap<Object, Object>> log=sqlSession.selectList("bookMapper.selectLibraryLog",email);
+		HashMap<String,Long> input=new HashMap<String, Long>();
+		input.put("bookNo", bookNo);
+		input.put("userNo", userNo);
+		List<HashMap<Object, Object>> log=sqlSession.selectList("bookMapper.selectLibraryLog",input);
 		sqlSession.close();
 		
 		return log;

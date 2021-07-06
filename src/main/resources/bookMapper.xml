@@ -10,9 +10,9 @@
 		resultType="HashMap">
 	  <![CDATA[
 		select book.book_no, book.title, book.img_path, book.running_time, author.name 
-		from book, author
-		where book.author_no = author.author_no and 
-		book.title  LIKE concat( '%', #{keyword},'%') or 
+		from book join author
+		on book.author_no = author.author_no 
+		where book.title  LIKE concat( '%', #{keyword},'%') or 
 		author.name LIKE concat('%', #{keyword} ,'%');
 	  ]]>
 	</select>
@@ -172,7 +172,7 @@
 
 
 	<!-- 라이브러리 기록 가져오기 selectLibraryLog -->
-	<select id="selectLibraryLog" parameterType="string"
+	<select id="selectLibraryLog" parameterType="HashMap"
 		resultType="HashMap">
 		<![CDATA[
 			select library.user_no, book.title,  library.book_no, book.img_path, book.running_time, author.name
@@ -180,7 +180,7 @@
 			where book.author_no=author.author_no and
 			user.user_no=library.user_no and
 			book.book_no=library.book_no and 
-			book.book_no not in (select book_no from library where email=#{email})
+			book.book_no not in (select book_no from library where user_no=#{user_no} and book_no!=#{bookNo})
 			order by library.user_no, library.reg_date;  
 		]]>
 	</select>

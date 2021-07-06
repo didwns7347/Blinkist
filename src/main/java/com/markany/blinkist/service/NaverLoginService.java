@@ -2,9 +2,11 @@ package com.markany.blinkist.service;
 
 import java.io.IOException;
 import java.util.UUID;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.util.StringUtils;
+import org.apache.ibatis.logging.LogFactory;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -18,8 +20,11 @@ import com.github.scribejava.core.model.Verb;
 import com.github.scribejava.core.oauth.OAuth20Service;
 import com.markany.blinkist.api.NaverLoginApi;
 
+import lombok.extern.slf4j.Slf4j;
+
 
 @Service
+@Slf4j
 public class NaverLoginService {
 	/* 인증 요청문을 구성하는 파라미터 */
 	// client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
@@ -33,7 +38,7 @@ public class NaverLoginService {
 	private final static String SESSION_STATE = "oauth_state";
 	/* 프로필 조회 API URL */
 	private final static String PROFILE_API_URL = "https://openapi.naver.com/v1/nid/me";
-
+	
 	/* 네이버 아이디로 인증 URL 생성 Method */
 	public String getAuthorizationUrl(HttpSession session) {
 
@@ -57,14 +62,18 @@ public class NaverLoginService {
 	public OAuth2AccessToken getAccessToken(HttpSession session, String code, String state) throws IOException {
 
 		/* Callback으로 전달받은 세선검증용 난수값과 세션에 저장되어있는 값이 일치하는지 확인 */
-		String sessionState = getSession(session);
+		String sessionState = state;
+		log.info("아니시발왜안됨???????"+sessionState);
+		log.info("시발시발시발="+state);
+		log.info("boolean value="+StringUtils.pathEquals(sessionState, state));
 		if (StringUtils.pathEquals(sessionState, state)) {
-
+			log.info("아니아니아니아니왜안되냐??????");
 			OAuth20Service oauthService = new ServiceBuilder().apiKey(CLIENT_ID).apiSecret(CLIENT_SECRET)
 					.callback(REDIRECT_URI).state(state).build(NaverLoginApi.instance());
 
 			/* Scribe에서 제공하는 AccessToken 획득 기능으로 네아로 Access Token을 획득 */
 			OAuth2AccessToken accessToken = oauthService.getAccessToken(code);
+			log.info("엑세스 토큰 잘하자="+accessToken.toString());
 			return accessToken;
 		}
 		return null;

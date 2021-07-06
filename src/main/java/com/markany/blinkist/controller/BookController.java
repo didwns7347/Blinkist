@@ -144,7 +144,7 @@ public class BookController {
 		UserVo userVo = userService.findByEmail(email);
 		
 		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
-		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),email);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),userVo.getUser_no());
 		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
 		
 		model.addAttribute("map",map );
@@ -169,7 +169,7 @@ public class BookController {
 		String category = bookService.maxCategory(userVo.getUser_no());
 
 		Map<Object, Object> map = bookService.findByNo(no);
-		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(no,email);
+		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(no,userVo.getUser_no());
 		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
 		
 		model.addAttribute("map",map );
