@@ -489,8 +489,10 @@ $(function() {
           
           var content_no = $('#p_content').attr('class');//content번호가져오기
           
+          //해당 content가 있는 page-item찾기
+          var page =$('li[name='+content_no+']').attr('id');
           
-       
+         
       if(content.length==0){//hilight에 저장할 텍스트가 없으면
  
 		    swal("Error", "저장할 텍스트를 선택해주세요.", "error");
@@ -531,13 +533,37 @@ $.ajax({
                     swal("success", "Hilight에 추가하였습니다.", "success");
                     
                      $('.swal-button').click(function(){//팝업창의 ok버튼을 클릭할시
-                               
-                               document.location.reload();
-                                              
+                     
+                     
+                       //책의 전체페이지수 구하기
+                       var chapter_total = $(".page-item").length;
+
+                      //해당페이지번호 가져오기 -> page
+
+                      //progress 구하기
+                      var page_read = parseInt(page/chapter_total*100);
+     
+                     //progress tag에 값넣기
+                    $('#progress').val(page_read);
+        	
+     
+                    var progress = $('#progress').val(); //progress값가져오기
+                
+                    var allData = { "progress": progress, "book_no" : book_no};
+         
+                    $.ajax({
+	
+	                       url : "/blinkist/library/update_progress",
+                          type : "post",
+                          data : allData,
+	                     success : function(data) {
+
+                                document.location.reload();
+
+	                   }});    
                      });                                             
 	}
-	});
-	      
+	});	   
 });
 });
 
