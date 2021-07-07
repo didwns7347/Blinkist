@@ -15,7 +15,7 @@ $('#Add_Library').click(function(){
         var allData = { "book_no": book_no};
 	    $.ajax({
 	
-		   url : "http://localhost:8080/blinkist/library/button_addlibrary",
+		   url : "/blinkist/library/button_addlibrary",
 		   type : "post",
 		   data : allData,
 		   success : function(data) {

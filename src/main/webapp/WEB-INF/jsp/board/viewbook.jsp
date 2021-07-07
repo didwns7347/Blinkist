@@ -38,9 +38,10 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="${pageContext.request.contextPath }/js/viewbook.js"></script>
 </head>
-<body>
+<body  id="page-top">
 	<!-- navigation include -->
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
+	<br/><br/><br/><br/><br/>
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-4" id="smallbookimg">
@@ -72,8 +73,14 @@
 
 				<div class="row mb-4">
 					<div class="col-sm-3">
+				<c:if test="${libCheck eq true}">
+						<a href="${pageContext.request.contextPath }/content/readbook?book_no=${map.book_no }" class="btn btn-outline-success"
+							role="button" >Read now</a>
+				</c:if>
+				<c:if test="${libCheck eq false}">
 						<a href="javascript:void(0)" class="btn btn-outline-success"
 							role="button" id="Add_Library">Add to library</a>
+				</c:if>
 					</div>
 					<div class="col-sm-3">
 						<a href="${map.buyLink }" class="btn btn-outline-primary"

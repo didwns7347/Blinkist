@@ -90,4 +90,10 @@ public class LibraryService {
 		libraryRepository.deleteAllLibrary(user_no);
 		
 	}
+
+
+	public boolean libCheck(Long bookNo, long userNo) {
+		// TODO Auto-generated method stub
+		return libraryRepository.libCheck(bookNo,userNo);
+	}
 }

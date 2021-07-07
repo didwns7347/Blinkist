@@ -146,8 +146,10 @@ public class BookController {
 		Map<Object,Object> map=bookService.findByTitleAuthorCategory(info,category);
 		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks((Long)map.get("book_no"),userVo.getUser_no());
 		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
-		
+		boolean libCheck=libraryService.libCheck((Long)map.get("book_no"),userVo.getUser_no());
+		System.out.println("lib===="+libCheck);
 		model.addAttribute("map",map );
+		model.addAttribute("libCheck",libCheck );
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		model.addAttribute("trandBook", trandBook);
 		return "board/viewbook";
@@ -169,10 +171,15 @@ public class BookController {
 		String category = bookService.maxCategory(userVo.getUser_no());
 
 		Map<Object, Object> map = bookService.findByNo(no);
+		
 		List<HashMap<Object,Object>> recommendBooksByLog=bookService.recommendBooks(no,userVo.getUser_no());
 		List<HashMap<Object, Object>> trandBook = bookService.customtrandBook(category, userVo.getUser_no());
+		boolean libCheck=libraryService.libCheck((Long)map.get("book_no"),userVo.getUser_no());
 		
+		
+		System.out.println("lib===="+libCheck);
 		model.addAttribute("map",map );
+		model.addAttribute("libCheck",libCheck );
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		model.addAttribute("trandBook", trandBook);
 		

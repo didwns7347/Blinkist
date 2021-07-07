@@ -162,4 +162,24 @@ public class MysqlLibraryRepositoryImpl implements LibraryRepository {
 		sqlSession.commit();
 				
 	}
+
+
+	@Override
+	public boolean libCheck(Long bookNo, Long userNo) {
+		// TODO Auto-generated method stub
+		sqlMapper = getInstance();
+		SqlSession sqlSession = sqlMapper.openSession();
+		HashMap<String , Long> map = new HashMap<String, Long>();
+		map.put("bookNo",bookNo);
+		map.put("userNo",userNo);
+	
+		List<Object> arr=sqlSession.selectList("libraryMapper.libCheck",map);
+		for(Object obj : arr) {
+			System.out.println((Long)obj);
+		}
+		int count=arr.size();
+		sqlSession.close();
+		System.out.println("count="+count+"userno"+userNo+"bookNo"+bookNo);
+		return count==1;
+	}
 }

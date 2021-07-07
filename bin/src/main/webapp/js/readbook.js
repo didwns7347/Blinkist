@@ -90,7 +90,7 @@ $(document).ready(function () {
      var allData = { "progress": progress, "book_no" : book_no};
      $.ajax({
 	
-	    url : "http://localhost:8080/blinkist/library/update_progress",
+	    url : "/blinkist/library/update_progress",
         type : "post",
         data : allData,
 	    success : function(data) {
@@ -126,7 +126,7 @@ $(document).ready(function () {
    var allData = { "progress": progress, "book_no" : book_no};
    $.ajax({
 	
-	  url : "http://localhost:8080/blinkist/library/update_progress",
+	  url : "/blinkist/library/update_progress",
       type : "post",
       data : allData,
 	  success : function(data) {

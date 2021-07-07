@@ -73,7 +73,15 @@
 	      where user_no = #{user_no} and book_no =#{book_no}
 	   ]]>
 	</select>
-
+	
+	<!-- 도서라이브러리에 있는지 체크 libCheck -->
+	<select id="libCheck" parameterType="HashMap" resultType="long">
+	   <![CDATA[
+	      select book_no
+	      from library
+	      where user_no = #{userNo} and book_no =#{bookNo}
+	   ]]>
+	</select>
 
 	<!-- progress업데이트 -->
 	<update id="update_progress" parameterType="libraryvo">

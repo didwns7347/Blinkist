@@ -25,6 +25,6 @@ $('#Add_Library').click(function(){
         
     }
     else
-	    $("#Add_Library").attr("href", "http://3.139.21.42:8080/blinkist/content/readbook?book_no="+$('#book_no').val());//하이퍼링크 활성화
+	    $("#Add_Library").attr("href", "http://3.139.21.42/blinkist/content/readbook?book_no="+$('#book_no').val());//하이퍼링크 활성화
  }); 
  });

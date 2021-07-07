@@ -27,5 +27,7 @@ public interface LibraryRepository {
 	List<HashMap<String, Object>> selectProgressByAuthUser(String email);//회원의 이메일로 progress, 책번호 가져오기
 	
 	public void deleteAllLibrary(long user_no);//회원의 모든 라이브러리지우기
+
+	boolean libCheck(Long bookNo, Long userNo);
 	
 }
