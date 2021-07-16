@@ -133,8 +133,8 @@
 		<!-- audio -->
 		<div class="reader-audio mt-5">
 			<audio controls preload="metadata">
-				<source src="https://www.w3schools.com/html/horse.ogg"
-					type="audio/ogg">
+				<source src="${pageContext.request.contextPath }/assets/audio/sample.mp3"
+					type="audio/mpeg">
 			</audio>
 		</div>
 	</div>
