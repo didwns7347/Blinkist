@@ -9,7 +9,7 @@
 	<select id="selectByTitleAuthor" parameterType="string"
 		resultType="HashMap">
 	  <![CDATA[
-		select book.book_no, book.title, book.img_path, book.running_time, author.name 
+		select book.book_no, book.title, book.img_path, book.running_time, author.name , book.buyLink
 		from book join author
 		on book.author_no = author.author_no 
 		where book.title  LIKE concat( '%', #{keyword},'%') or 
