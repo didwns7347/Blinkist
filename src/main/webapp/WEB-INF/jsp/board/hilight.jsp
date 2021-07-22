@@ -118,8 +118,12 @@
 								</h4>
 							</div>
 							<div class="col-4 mt-5 mb-5">
-								<button type="button" class="btn btn-outline-primary"
-									id="Delete_Date" name="${item.hilight_no}">Delete</button>
+								<button type="button" class="btn btn-outline-primary" id="Delete_Date" name="${item.hilight_no}">Delete</button>
+				                <!-- 공유버튼 -->
+						        <button type="button" class="btn btn-outline-secondary"  id="${item.content }" name="${item.title}" value="${item.book_no}">share
+						              <input type="hidden"  class="share" name="${item.book_no}" id="${item.img_path}"/>
+						        </button>		
+									
 							</div>
 						</div>
 

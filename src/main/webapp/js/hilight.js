@@ -69,23 +69,23 @@ $('button.btn.btn-outline-secondary').click(function(){
         description: hilight,
         imageUrl: book_img,
         link: {
-          mobileWebUrl: '/blinkist/book/sharebook?no='+no,
-          webUrl: '/blinkist/book/sharebook?no='+no
+          mobileWebUrl: '/blinkist/book/shahttp://3.139.21.42/blinkist/book/sharebook?no='+no,
+          webUrl: 'http://3.139.21.42/blinkist/book/sharebook?no='+no
         }
       },
       buttons: [
         {
           title: '웹으로 보기',
           link: {
-            mobileWebUrl: '/blinkist/book/sharebook?no='+no,
-            webUrl: '/blinkist/book/sharebook?no='+no
+            mobileWebUrl: 'http://3.139.21.42/blinkist/book/sharebook?no='+no,
+            webUrl: 'http://3.139.21.42/blinkist/book/sharebook?no='+no
           }
         },
         {
           title: '앱으로 보기',
           link: {
-            mobileWebUrl: '/blinkist/book/sharebook?no='+no,
-            webUrl: '/blinkist/book/sharebook?no='+no
+            mobileWebUrl: 'http://3.139.21.42/blinkist/book/sharebook?no='+no,
+            webUrl: 'http://3.139.21.42/blinkist/book/sharebook?no='+no
           }
         }
       ]
