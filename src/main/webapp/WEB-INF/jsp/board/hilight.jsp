@@ -53,16 +53,16 @@
 
 	<div class="container">
 		<div class="container">
-			<h1>Highlights</h1>
+			<h1>${langDict.hilights }</h1>
 		</div>
 		
 		<hr />
 		
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="nav-item"><a class="nav-link" id="Sort" data-toggle="tab" href="#">Sort</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bybook">By book</a></li>
-			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bydate">By date</a></li>
+			<li class="nav-item"><a class="nav-link" id="Sort" data-toggle="tab" href="#">${langDict.sort }</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bybook">${langDict.titleSort }</a></li>
+			<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Bydate">${langDict.dateSort }</a></li>
 		</ul>
 
 		<!-- Tab panes -->

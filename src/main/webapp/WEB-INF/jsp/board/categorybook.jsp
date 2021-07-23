@@ -50,14 +50,13 @@
 		<h1 id="category">${category}</h1>
 		<form action="${pageContext.request.contextPath }/book/category" style="text-align:right">
 			<select name="category" style="height:28px">
-				<option>====선택====</option>
-				<option>인문학</option>
-				<option>건강/생활/요리</option>
-				<option>소설</option>
-				<option>자기개발</option>
-				<option>사회</option>
-				<option>청소년</option>
-				
+				<option>====${langDict.select}====</option>
+				<option>${langDict.human }</option>
+				<option>${langDict.life }</option>
+				<option>${langDict.novel }</option>
+				<option>${langDict.selfDev }</option>
+				<option>${langDict.social }</option>
+				<option>${langDict.teenage }</option>
 			</select>
 			<button type=submit class="btn btn-outline-primary" style="font-size:15px">선택</button>
 		</form>
@@ -67,7 +66,7 @@
 		<input class="form-control" id="searchInput" type="search"
 			name="${category }" placeholder="Search.."> <br /> <br />
 
-		<h3>트렌드</h3>
+		<h3>${langDict.trend }</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${trendList }" var="list" varStatus="status">
@@ -138,7 +137,7 @@
 			</c:forEach>
 		</div>
 		<br />
-		<h3>최근 추가순</h3>
+		<h3>${langDict.recentlyadded }</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${recentList }" var="list" varStatus="status">
@@ -209,7 +208,7 @@
 			</c:forEach>
 		</div>
 		<br />
-		<h3>오디오 포함</h3>
+		<h3>${langDict.audioAvilable }</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${audioList }" var="list" varStatus="status">
@@ -289,8 +288,7 @@
 					action="${pageContext.request.contextPath }/book/allcategorybook">
 					<input type="hidden" value="${category}" name="category" />
 					<button id="loadMore" type="submit"
-						class="btn btn-outline-success btn-block">카테고리에 포함된 모든 책
-						보기</button>
+						class="btn btn-outline-success btn-block">${langDict.viewAllBook }</button>
 				</form>
 			</div>
 			<div class="col-md-4 mb-5"></div>

@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import com.markany.blinkist.service.BookService;
 import com.markany.blinkist.service.NaverLoginService;
+import com.markany.blinkist.vo.KorVo;
 import com.markany.blinkist.vo.UserVo;
 
 
@@ -27,7 +28,9 @@ public class HelloController {
 	public String hello(Model model, HttpSession session,HttpServletRequest request) throws UnsupportedEncodingException {
 		
 		String NaverauthURL=naverLoginService.getAuthorizationUrl(session);
-		
+		if(session.getAttribute("langDict")==null) {
+			session.setAttribute("langDict", new KorVo());
+		}
 		model.addAttribute("humanlist",bookService.findAllCategoryOrderByCount("인문학"));
 		model.addAttribute("lifelist",bookService.findAllCategoryOrderByCount("건강/생활/요리"));
 		model.addAttribute("novellist",bookService.findAllCategoryOrderByCount("소설"));
