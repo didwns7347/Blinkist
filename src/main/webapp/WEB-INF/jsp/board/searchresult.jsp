@@ -45,7 +45,7 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<s:authentication property="principal" var="authUser"/> 
 	<div class="container ">
-		<h3>${keyword }에대한검색결과</h3>
+		<h3>${keyword }${langDict.searchResult }</h3>
 		<br />
 		<div class="row" id="demo">
 
@@ -75,11 +75,9 @@
 									<button type="button" class="btn btn-sm  "
 										data-toggle="dropdown">. . .</button>
 									<div class="dropdown-menu">
-										<a class="dropdown-item"
-											href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove
-											from library</a>
-											 <a class="dropdown-item" href="${list.buyLink }">Buy
-											book</a>
+										<a class="dropdown-item" href="${pageContext.request.contextPath }/library/removelibrary?authUser=${authUser.username}&book_no=${list.book_no}">Remove from library</a> <a
+											class="dropdown-item" href="${list.buyLink }">Buy book</a> 	
+
 									</div>
 								</div>
 							</div>

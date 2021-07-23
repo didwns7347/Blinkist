@@ -41,7 +41,7 @@
 	<div class="container">
 
 		<div class="mb-5">
-			<h3>My Library</h3>
+			<h3>${langDict.myLibrary }</h3>
 			<br />
 
 		</div>
@@ -49,9 +49,9 @@
 			<div class="container">
 				<ul class="nav nav-pills" role="tablist">
 					<li class="nav-item"><a class="nav-link active"
-						data-toggle="pill" href="#menu1">Currently reading</a></li>
+						data-toggle="pill" href="#menu1">${langDict.currentlyReading }</a></li>
 					<li class="nav-item"><a class="nav-link" data-toggle="pill"
-						href="#menu2"> Finished </a></li>
+						href="#menu2"> ${langDict.finished } </a></li>
 
 				</ul>
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="s"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,17 +32,17 @@
 <!-- navigation include -->
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 <br>
-
+	<s:authentication property="principal" var="authUser"/> 
 	<div class="container">
 		<div class="container">
-			<h2>설정</h2>
+			<h2>${langDict.setting }</h2>
 		</div>
 		<br>
 
 		<!-- Nav tabs -->
 		<ul class="nav nav-tabs" role="tablist">
 			<li class="nav-item"><a class="nav-link active"
-				data-toggle="tab" href="#update">회원정보수정</a></li>
+				data-toggle="tab" href="#update">${langDict.userInfo }</a></li>
 		</ul>
 
 		<!-- Tab panes -->
@@ -49,40 +50,37 @@
 			<div id="update" class="container tab-pane active">
 				<br>
 				<!-- 등급업데이트 -->
-				<h3 class="mb-5" id="grade">회원님의 등급: ${uservo.grade}</h3>
+				<h3 class="mb-5" id="grade">${langDict.langSelect}: ${uservo.grade}</h3>
 
 				<c:choose>
 					<c:when test="${uservo.grade eq 'basic'}">
 
-						<h4 class="mb-4" style="color: blue;">Choose the plan that
-							fits you</h4>
+						<h4 class="mb-4" style="color: blue;">${langDict.chooseplan }</h4>
 						<label class="radio-inline"><input type="radio"
 							class="${uservo.email}" name="subscribe" id="16000"
 							value="monthP" checked><strong style="font-size: 20px;">
-								Premium Monthly 16,000₩/month</strong></label>
+								${langDict.mcost }</strong></label>
 
 						<br />
 						<br />
 
 						<label class="radio-inline"><input type="radio"
 							class="${uservo.email}" name="subscribe" id="98550" value="yearP"><strong
-							style="font-size: 20px;"> Premium Yearly
-								98,550₩/annually</strong></label>
+							style="font-size: 20px;">${langDict.ycost }</strong></label>
 
 						<br />
 						<br />
 
 						<button type="button" class="btn btn-outline-success"
-							data-toggle="modal" data-target="#gradeUpdate">Upgrade
-							to Premium</button>
+							data-toggle="modal" data-target="#gradeUpdate">${langDict.upgradePrimium }</button>
 					</c:when>
 
 
 					<c:otherwise>
-                        <p class="finish_date" id="${uservo.finish_date}">Your subscription will renew on ${uservo.finish_date}</p>
+                        <p class="finish_date" id="${uservo.finish_date}">${langDict.renew} ${uservo.finish_date}</p>
 						<button type="button" class="btn btn-outline-success"
 							data-toggle="modal" data-target="#primiumDeleteModal">
-							<strong>구독관리</strong>
+							<strong>${langDict.submanage }</strong>
 						</button>
 					</c:otherwise>
 
@@ -91,17 +89,34 @@
 				<br />
 				<br />
 				<hr />
+				
 
 				<!-- 회원정보수정 -->
 				<br />
 				<br />
-
-				<h4>회원님의 정보</h4>
-				Email : ${uservo.email} <br />
+				<h3 class="mb-5" id="grade">${langDict.langSelect }</h3>
+				<br />
+				
+				<!-- Button trigger modal -->
+				<form action="${pageContext.request.contextPath }/user/changeLanguage">
+				${langDict.language }
+				<select name="language" style="height: 28px">
+					<option>${langDict.select }</option>
+					<option>KOR</option>
+					<option>ENG</option>
+				</select>
+				<br/><br/>
+				<button type="submit" class="btn btn-outline-success">${langDict.select }</button>
+				</form>
+				<br />
+				<hr>
+				<br/>
+				<h4>${langDict.userInfo }</h4>
+				Email : ${authUser.username} <br />
 				<br />
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-outline-success"
-					id="passwordUpdate" data-toggle="modal" data-target="#password">비밀번호수정</button>
+					id="passwordUpdate" data-toggle="modal" data-target="#password">${langDict.passwordUpdate }</button>
 
 				${message} <br />
 				<br />
@@ -111,26 +126,25 @@
 				<br />
 				<br />
 
-				<h4>회원탈퇴</h4>
+				<h4>${langDict.leave }</h4>
 				<br />
 				<br />
 
-				<p>계정을 삭제하면 모든 콘텐츠가 삭제되고 계정과 관련된 모든 데이터가 삭제됩니다. 구매한 구독은 종료되지
-					않습니다.</p>
-				<p>계정을 삭제하려면 먼저 구독을 취소해야 합니다.</p>
-
+				<p>${langDict.leaveText }</p>
+				<p>${langDict.leaveText2 }</p>
+				
 				<br />
 				<br />
 
 				<c:choose>
 					<c:when test="${uservo.grade eq 'basic'}">
 						<button type="submit" class="btn btn-outline-success"
-							data-toggle="modal" data-target="#delete">회원탈퇴</button>
+							data-toggle="modal" data-target="#delete">${langDict.leave }</button>
 					</c:when>
 
 					<c:otherwise>
 						<button type="submit" class="btn btn-outline-success"
-							data-toggle="modal" data-target="#delete" disabled='disabled'>회원탈퇴</button>
+							data-toggle="modal" data-target="#delete" disabled='disabled'>${langDict.leave }</button>
 					</c:otherwise>
 				</c:choose>
 			</div>

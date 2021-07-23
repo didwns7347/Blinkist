@@ -32,7 +32,9 @@ import com.markany.blinkist.service.LibraryService;
 import com.markany.blinkist.service.MailSendService;
 import com.markany.blinkist.service.NaverLoginService;
 import com.markany.blinkist.service.UserService;
+import com.markany.blinkist.vo.EngVo;
 import com.markany.blinkist.vo.Grade;
+import com.markany.blinkist.vo.KorVo;
 import com.markany.blinkist.vo.Payment_method;
 import com.markany.blinkist.vo.UserVo;
 import org.springframework.security.core.userdetails.User;
@@ -444,6 +446,21 @@ public class UserController {
 		return "/blinkist/logout";
 
 	}
+	
+	//회원언어 설정 변경하기
+	@RequestMapping(value="/changeLanguage")
+	public String changeLanguage(String language,Model model,HttpSession session) {
+		System.out.println(language);
+		//session.getAttribute(language)
+		if(("KOR").equals(language)) {
+			session.setAttribute("langDict", new KorVo());
+			
+		}	
+		else {
+			session.setAttribute("langDict", new EngVo());
+		}
+		return "user/update";
+	}
 
 	
 	// 회원탈퇴
@@ -502,6 +519,7 @@ public class UserController {
 		}
 		return map;
 	}
+	
 	
 	
 

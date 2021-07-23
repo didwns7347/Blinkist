@@ -11,7 +11,7 @@
 <meta name="description" content="" />
 <meta name="author" content="" />
 
-<title>Blinkist: Big ideas in small packages</title>
+<title>Blinkist: Big ideas in small packages </title>
 
 <!-- Favicon-->
 <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico" />
@@ -53,7 +53,7 @@
 			<!-- Masthead Avatar Image-->
 			<img class="masthead-avatar mb-5" src="assets/images/markany.png" alt="..." />
 			<!-- Masthead Heading-->
-			<h1 class="masthead-heading text-uppercase mb-0">Start Blinkist</h1>
+			<h1 class="masthead-heading text-uppercase mb-0">${langDict.startBlinkist}</h1>
 			<!-- Icon Divider-->
 			<div class="divider-custom divider-light">
 				<div class="divider-custom-line"></div>
@@ -63,7 +63,7 @@
 				<div class="divider-custom-line"></div>
 			</div>
 			<!-- Masthead Subheading-->
-			<p class="masthead-subheading font-weight-light mb-0">언제 어디서나 블링키스트로 독서해 보세요</p>  
+			<p class="masthead-subheading font-weight-light mb-0">${langDict.wheneverBlinkist }</p>  
 		</div>
 	</header>
 
@@ -73,7 +73,7 @@
 		<br /> <br />
 		<h2
 			class="page-section-heading text-center text-uppercase text-secondary mb-0"
-			style="color: white;">카테고리 TOP6</h2>
+			style="color: white;">${langDict.category } TOP6</h2>
 
 		<!-- Icon Divider-->
 		<div class="divider-custom">
@@ -85,7 +85,7 @@
 		</div>
 		<div class="container">
 			<div class="mySlides">
-				<h4 class="masthead-heading text-uppercase mb-0">TOP 6 인문학</h4>
+				<h4 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.human }</h4>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${humanlist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -114,7 +114,7 @@
 			</div>
 
 			<div class="mySlides">
-				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 건강/생활/요리</h2>
+				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.life } </h2>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${lifelist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -142,7 +142,7 @@
 			</div>
 
 			<div class="mySlides">
-				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 소설</h2>
+				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.novel }</h2>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${novellist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -170,7 +170,7 @@
 			</div>
 
 			<div class="mySlides">
-				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 자기개발</h2>
+				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.selfDev }</h2>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${selfdevlist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -198,7 +198,7 @@
 			</div>
 			
 			<div class="mySlides">
-				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 사회</h2>
+				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.social }</h2>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${sociallist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -226,7 +226,7 @@
 			</div>
 			
 			<div class="mySlides">
-				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 청소년</h2>
+				<h2 class="masthead-heading text-uppercase mb-0">TOP 6 ${langDict.teenage }</h2>
 				<div class="row" style="padding: 30px">
 					<c:forEach items="${teenagelist }" var="list" varStatus="status">
 						<div class="col-lg-4 col-md-6 mb-4" id="test">
@@ -265,7 +265,7 @@
 	<div class="slideshow-container" style="background-color: #babaef">
 		<div class="container">
 			<br />
-			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">궁금해? 시작해봐</h2>
+			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">${langDict.wander}</h2>
 
 			<!-- Icon Divider-->
 			<div class="divider-custom">
@@ -286,19 +286,19 @@
 										<li class="list-inline-item event-list mr-5 ml-5">
 											<div class="px-4">
 												<div class="event-date bg-soft-primary text-primary" id="now"></div>
-												<p class="text-muted">깜박임과 쇼의 전체 라이브러리를 즐기기 시작합니다.</p>
+												<p class="text-muted">${langDict.start }</p>
 											</div>
 										</li>
 										<li class="list-inline-item event-list mr-5 ml-5">
 											<div class="px-4">
 												<div class="event-date bg-soft-primary text-primary" id="freeday"></div>
-												<p class="text-muted">깜박임과 쇼의 전체 라이브러리를 즐기기 시작합니다.</p>
+												<p class="text-muted">${langDict.enjoy }</p>
 											</div>
 										</li>
 										<li class="list-inline-item event-list mr-5 ml-5">
 											<div class="px-4">
 												<div class="event-date bg-soft-primary text-primary">프리미엄</div>
-												<p class="text-muted">블링키스트 함께 계속 배우기!</p>
+												<p class="text-muted">${langDict.bcontinue }</p>
 											</div>
 										</li>
 									</ul>
@@ -309,14 +309,14 @@
 					</div>
 				</div>
 
-				<h4 style="color: white" id="premiumInfo">블링키스트는 7일 동안 무료로 이용하실 수 있습니다. 무료 기간 내에 취소하면 요금이 청구되지 않으므로 걱정하지 마십시오.</h4>
+				<h4 style="color: white" id="premiumInfo">${langDict.advertiese }</h4>
 
 				<br />
 
               <!-- 로그인을 안했을때 무료로 시작하러가기 누르면 로그인화면으로 넘어가기 -->
               <s:authorize access="isAnonymous()">
                  <form action="${pageContext.request.contextPath }/user/login">
-					<button id="Noprimiumsignup" type="submit" class="btn btn-outline-success btn-block">무료로 시작하러 가기</button>
+					<button id="Noprimiumsignup" type="submit" class="btn btn-outline-success btn-block">${langDict.startBlinkist }</button>
 				</form>
               </s:authorize>
               
@@ -324,7 +324,7 @@
               <s:authorize access="isAuthenticated()">
                  <input type="hidden" id="premiumCheck" value="<sec:authentication property="principal.authorities" />">
 			   	  <form action="${pageContext.request.contextPath }/user/upgradepremium">
-					 <button id="primiumsignup" type="submit" class="btn btn-outline-success btn-block"><i class="fas fa-credit-card mr-2"></i>무료로 시작하러 가기</button>
+					 <button id="primiumsignup" type="submit" class="btn btn-outline-success btn-block"><i class="fas fa-credit-card mr-2"></i>${langDict.startBlinkist }</button>
 				  </form>
 		     </s:authorize>		
 					
@@ -337,7 +337,7 @@
 	<section class="page-section portfolio" id="portfolio">
 		<div class="container">
 			<!-- Portfolio Section Heading-->
-			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">카테고리</h2>
+			<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0" style="color: white;">${langDict.category }</h2>
 
 			<!-- Icon Divider-->
 			<div class="divider-custom">
@@ -423,21 +423,21 @@
 					<img class="mx-auto d-block mb-5"
 						src="assets/images/easy-to-use.png" width="300px" height="200px"
 						alt="..." />
-					<h4>편리성</h4>
-					<p class="lead">시간과 장소에 구애받지 않고 책 내용을 들을 수 있습니다.</p>
+					<h4>${langDict.useful }</h4>
+					<p class="lead">${langDict.usefultext }</p>
 				</div>
 				<div class="col-lg-4 mr-auto">
 					<img class="mx-auto d-block mb-5"
 						src="assets/images/audio-book.png" width="300px" height="200px"
 						alt="..." />
-					<h4>요약</h4>
-					<p class="lead">15분 이내에 베스트셀러 도서의 주요 아이디어를 읽거나 들어보십시오.</p>
+					<h4>${langDict.summary }</h4>
+					<p class="lead">${langDict.summaryText }</p>
 				</div>
 				<div class="col-lg-4 mr-auto">
 					<img class="mx-auto d-block mb-5" src="assets/images/diversify.png"
 						width="300px" height="200px" alt="..." />
-					<h4>다양한 컨텐츠</h4>
-					<p class="lead">직접 고른 추천 제품, 관심 있는 것에 맞춘 컬렉션 등 다양한 도서</p>
+					<h4>${langDict.variety }</h4>
+					<p class="lead">${langDict.varietyText }</p>
 				</div>
 			</div>
 		</div>

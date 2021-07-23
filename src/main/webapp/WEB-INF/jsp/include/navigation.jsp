@@ -12,7 +12,7 @@
 	<!-- navbar-brand의 content 변경 -->
 	<div class="col-lg-1"></div>
 
-	<a class="navbar-brand" href="${pageContext.request.contextPath }">Blinkist</a>
+	<a class="navbar-brand" href="${pageContext.request.contextPath }">${langDict.blinkist }</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -27,7 +27,7 @@
 			<ul class="navbar-nav naver-inverse">
 				<!-- 로그인을 안했을때 -->
 				<li class="nav-item"><a class="nav-link" data-toggle="modal"
-					href="#myModal">로그인</a></li>
+					href="#myModal">${langDict.login}</a></li>
 			</ul>
 		</div>
 	</s:authorize>
@@ -39,27 +39,27 @@
 
 				<!-- 로그인을 했을때 -->
 				<li id="explorehidden" class="nav-item"><a id="exploreA"class="nav-link"
-					href="javascript:void(0)" onclick="openExplore()">Explore</a></li>
+					href="javascript:void(0)" onclick="openExplore()">${langDict.explore}</a></li>
 				<li id="categoryli" class="nav-item">
 					<a id="categorya" class="nav-link" href="${pageContext.request.contextPath }/book/category?category=인문학">
-						카테고리
+						${langDict.category }
 					</a>
 				</li>
 				<li id="recentli" class="nav-item"  >
 					<a id="recenta" class="nav-link" href="${pageContext.request.contextPath }/book/recentlyadded">
-						신작도서 
+						${langDict.seerecently } 
 					</a>
 				</li>
 				<li id="pop" class="nav-item">
 					<a id="popA" class="nav-link" href="${pageContext.request.contextPath }/book/popular">
-						베스트셀러
+						${langDict.seepopular } 
 					</a>
 				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath }/library/view?authUser=${authUser.username}">My
-						Library</a></li>
+					href="${pageContext.request.contextPath }/library/view?authUser=${authUser.username}">
+						${langDict.myLibrary } </a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath }/hilight/hilight?authUser=${authUser.username}">Highlights</a></li>
+					href="${pageContext.request.contextPath }/hilight/hilight?authUser=${authUser.username}">${langDict.highlights}</a></li>
 
 				<!-- 검색 -->
 				<li class="nav-item">
@@ -83,17 +83,16 @@
 			<ul class="navbar-nav naver-inverse mr-5">
 				<li class="nav-item"></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${pageContext.request.contextPath}/user/update">Upgrade
-						to Premium</a></li>
+					href="${pageContext.request.contextPath}/user/update">${langDict.upgradePrimium}</a></li>
 				<li class="dropdown">
 					<button type="button" class="btn dropdown-toggle"
-						data-toggle="dropdown">Account</button>
+						data-toggle="dropdown">${langDict.account }</button>
 					<div class="dropdown-menu">
 						<a class="dropdown-item"
-							href="${pageContext.request.contextPath}/user/update">설정</a>
+							href="${pageContext.request.contextPath}/user/update">${langDict.setting }</a>
 						<form action="${pageContext.request.contextPath}/logout"
 							method="post">
-							<button class="dropdown-item" data-toggle="modal" type="submit">로그아웃
+							<button class="dropdown-item" data-toggle="modal" type="submit">${langDict.logout }
 							</button>
 						</form>
 					</div>
@@ -110,14 +109,14 @@
 		
 		<div class="overlay-content container" id="olcontainer">
 			<div class="discover-menu__header">
-				<h4 class=discover-menu__headline>Explore by category</h4>
+				<h4 class=discover-menu__headline>${langDict.explorecate }</h4>
 				<ul class="discover-menu__header-links">
 					<li><a
 						href="${pageContext.request.contextPath }/book/recentlyadded"
-						class="discover-menuheader-link">See recently added titles</a></li>
+						class="discover-menuheader-link">${langDict.seerecently }</a></li>
 					<li><a
 						href="${pageContext.request.contextPath }/book/popular"
-						class="discover-menu__header-link">See popular titles</a></li>
+						class="discover-menu__header-link">${langDict.seepopular }</a></li>
 					
 						
 				</ul>
@@ -127,22 +126,22 @@
 			<ul class="discover-menu__categories">
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=인문학"
-					class="discover-menu__category-link"> 인문학 </a></li>
+					class="discover-menu__category-link"> ${langDict.human } </a></li>
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=건강/생활/요리"
-					class="discover-menu__category-link"> 건강/생활/요리 </a></li>
+					class="discover-menu__category-link"> ${langDict.life } </a></li>
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=소설"
-					class="discover-menu__category-link"> 소설 </a></li>
+					class="discover-menu__category-link"> ${langDict.novel } </a></li>
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=자기개발"
-					class="discover-menu__category-link"> 자기개발 </a></li>
+					class="discover-menu__category-link"> ${langDict.selfDev } </a></li>
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=사회"
-					class="discover-menu__category-link"> 사회 </a></li>
+					class="discover-menu__category-link"> ${langDict.social } </a></li>
 				<li class="discover-menu__category"><a
 					href="${pageContext.request.contextPath }/book/category?category=청소년"
-					class="discover-menu__category-link"> 청소년 </a></li>
+					class="discover-menu__category-link"> ${langDict.teenage } </a></li>
 			</ul>
 		</div>
 

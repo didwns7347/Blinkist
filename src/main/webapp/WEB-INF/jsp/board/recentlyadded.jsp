@@ -45,7 +45,7 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<s:authentication property="principal" var="authUser"/> 
 	<div class="container">
-		<h3>Recently Added</h3>
+		<h3>${langDict.recentlyadded }</h3>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${list }" var="list" varStatus="status">
@@ -202,7 +202,7 @@
 			<div class="col-md-4 mb-5"></div>
 			<div class="col-md-4 mb-5">
 				<button id="loadMore" type="button"
-					class="btn btn-outline-success btn-block">Load More</button>
+					class="btn btn-outline-success btn-block">${langDict.loadMore }</button>
 			</div>
 			<div class="col-md-4 mb-5"></div>
 		</div>

@@ -43,8 +43,8 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<s:authentication property="principal" var="authUser"/> 
 	<div class="container">
-		<h3>Popular Books</h3>
-		<p>The community's most read titles</p>
+		<h3>${langDict.popularBook}</h3>
+		<p>${langDict.mostRead}</p>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${popularList }" var="list" varStatus="status">
@@ -117,8 +117,8 @@
 			</c:forEach>
 		</div>
 
-		<h3>Spotlight</h3>
-		<p>Our handpiced favorites this month</p>
+		<h3>${langDict.spotlight}</h3>
+		<p>${langDict.favoritMonth}</p>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${spotlightList }" var="list" varStatus="status">
@@ -192,8 +192,8 @@
 			</c:forEach>
 		</div>
 
-		<h3>Recently added</h3>
-		<p>Hot off the press</p>
+		<h3>${langDict.hot}</h3>
+		<p>${langDict.hotoff}</p>
 		<br />
 		<div class="row" id="demo">
 			<c:forEach items="${hotList }" var="list" varStatus="status">

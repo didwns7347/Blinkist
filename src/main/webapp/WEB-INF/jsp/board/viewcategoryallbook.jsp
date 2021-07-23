@@ -54,7 +54,7 @@
 	<c:import url="/WEB-INF/jsp/include/navigation.jsp" />
 	<div class=container>
 		<h1>${category }</h1>
-		<h3>All Books</h3>
+		<h3>${langDict.allBook }</h3>
 		<br /> <br /> <input class="form-control" id="myInput" type="search"
 			placeholder="Search.."> <br /> <br />
 		<c:forEach items="${map}" var="map" varStatus="status">
