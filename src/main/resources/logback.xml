@@ -8,8 +8,10 @@
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
 
+
         <file>/var/lib/tomcat9/logs/catalina.log</file>
         <!--  <file>C:/Users/BIT/Desktop/logs/catalina.log</file>-->
+
         <!--file>C:/Users/MyCom/Desktop/logex/access.log</file>-->
 
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">

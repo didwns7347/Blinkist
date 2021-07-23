@@ -153,7 +153,6 @@ public class BookController {
 		model.addAttribute("recommendBooksByLog",recommendBooksByLog);
 		model.addAttribute("trandBook", trandBook);
 		return "board/viewbook";
-		
 	}
 	
 
@@ -184,6 +183,21 @@ public class BookController {
 		model.addAttribute("trandBook", trandBook);
 		
 		return "board/viewbook";
+
+	}
+	
+	
+	// sharebook페이지
+	@RequestMapping("/sharebook")
+	public String viewBook( Model model, long no) {
+		
+		
+		Map<Object, Object> map = bookService.findByNo(no);
+		
+
+		model.addAttribute("map",map );
+	
+		return "board/sharebook";
 
 	}
 	

@@ -17,7 +17,7 @@
 	<!-- 사용자의 하이라이트내용들을 제목정렬순으로가져오기 -->
 	<select id="selectHilightbyTitle" parameterType="long" resultType="HashMap">
 	  <![CDATA[
-	    select book.title,hilight.content,DATE_FORMAT(hilight.reg_date,'%Y-%m-%d %H:%i:%s') as reg_date,content.chapter_title,content.chapter_no,hilight.hilight_no
+	    select book.title,hilight.content,DATE_FORMAT(hilight.reg_date,'%Y-%m-%d %H:%i:%s') as reg_date,content.chapter_title,content.chapter_no,hilight.hilight_no,book.img_path,book.book_no
         from book,hilight,content
         where book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no
         order by book.title asc
@@ -28,7 +28,7 @@
 	<!-- 사용자의 하이라이트내용들을 날짜정렬으로가져오기 -->
 	<select id="selectHilightbyDate" parameterType="hilightvo" resultType="HashMap">
 	  <![CDATA[
-	          select book.title,hilight.content,TIMESTAMPDIFF(HOUR, #{reg_date}, now()) as reg_date ,content.chapter_title,content.chapter_no,hilight.hilight_no
+	          select book.title,hilight.content,TIMESTAMPDIFF(HOUR, #{reg_date}, now()) as reg_date ,content.chapter_title,content.chapter_no,hilight.hilight_no,book.img_path,book.book_no
 	          from book,hilight,content
 	          where user_no=#{user_no} and book.book_no=hilight.book_no and hilight.user_no=#{user_no} and hilight.content_no=content.content_no  and hilight.reg_date=#{reg_date}
 	  ]]>

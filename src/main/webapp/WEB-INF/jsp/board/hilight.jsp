@@ -32,6 +32,9 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
+<!-- 카카오톡공유 -->
+<script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+
 <!-- 팝업창  -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
@@ -41,6 +44,7 @@
 <link href="${pageContext.request.contextPath }/css/hilight.css" rel="stylesheet" type="text/css">
 
 <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
 </head>
 
 <body>
@@ -75,6 +79,12 @@
 						<!-- 삭제버튼 -->
 						<div class="col-4 mt-5">
 							<button type="button" class="btn btn-outline-primary" id="Delete_Chapter" name="${item.hilight_no}">Delete</button>
+							
+						    <!-- 공유버튼 -->
+						    <button type="button" class="btn btn-outline-secondary"  id="${item.content }" name="${item.title}" value="${item.book_no}">share
+						              <input type="hidden"  class="share" name="${item.book_no}" id="${item.img_path}"/>
+						    </button>					
+					       
 						</div>
 					</div>
 
@@ -108,8 +118,12 @@
 								</h4>
 							</div>
 							<div class="col-4 mt-5 mb-5">
-								<button type="button" class="btn btn-outline-primary"
-									id="Delete_Date" name="${item.hilight_no}">Delete</button>
+								<button type="button" class="btn btn-outline-primary" id="Delete_Date" name="${item.hilight_no}">Delete</button>
+				                <!-- 공유버튼 -->
+						        <button type="button" class="btn btn-outline-secondary"  id="${item.content }" name="${item.title}" value="${item.book_no}">share
+						              <input type="hidden"  class="share" name="${item.book_no}" id="${item.img_path}"/>
+						        </button>		
+									
 							</div>
 						</div>
 
