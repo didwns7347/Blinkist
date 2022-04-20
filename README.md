@@ -24,3 +24,4 @@
 ![마크애니_발표 0713 (1) 022](https://user-images.githubusercontent.com/50623193/155834631-a2505551-a991-4396-af78-1a9efc6cacc3.jpeg)
 ![마크애니_발표 0713 (1) 023](https://user-images.githubusercontent.com/50623193/155834633-69931682-2563-48ce-ba0c-7aa6d11cadaf.jpeg)
 
+ 서비스 URL http://3.139.21.42/blinkist/
